@@ -149,3 +149,66 @@ add_action( 'save_post',     'jkl_category_transient_flusher' );
     }
     return $output;
 }
+
+/**
+ * Attempting to split the main nav menu with the logo
+ * @link: Courtesy: http://pateason.com/horizontal-split-nav/
+ */
+function split_main_nav() {
+    
+    // Get menu 
+    $menu_name = 'primary';
+    
+    // Check if the menu exists and is set
+    if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+        
+        $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+        $menu_items = wp_get_nav_menu_items( $menu->term_id );
+        
+        // Create new array with only top level objects
+        $newMenu = array();
+        foreach( $menu_items as $item ) {
+            if( $item->menu_item_parent != 0 ) continue;
+            array_push( $newMenu, $item );
+        }
+        
+        // Split menu array in half
+        $len = count( $newMenu );
+        $firstThis = array_slice( $newMenu, 0, $len / 2 );
+        $thenThat = array_slice( $newMenu, $len / 2 );
+        
+        // Create left menu
+        echo '<div id="main-nav-left"><ul>';
+        foreach( $firstThis as $item ) {
+            echo '<li><a href="' . $item->url . '">' . $item->title . '</a></li>';
+        }
+        echo '</ul></div>';
+        
+        // Add logo (site icon)
+        echo '<div class="site-logo">';
+        $site_title = get_bloginfo( 'name' ); ?>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+            <div class="screen-reader-text">
+                <?php printf( esc_html( 'Go to the homepage of %1$s', 'jkl' ), $site_title ); ?>
+            </div>
+            <?php
+            $site_icon = esc_url( get_site_icon_url( 150 ) ); ?>
+            <img class="site-icon" src="<?php echo $site_icon; ?>" alt="">
+        </a>
+        
+        <?php
+        // Create right menu
+        echo '<div id="main-nav-right"><ul>';
+        foreach( $thenThat as $item ) {
+            echo '<li><a href="' . $item->url . '">' . $item->title . '</a></li>';
+        }
+        echo '</ul></div>';
+    }
+    
+    else {
+        
+        echo '<em>Please select a menu for your primary navigation.</em>';
+        
+    }
+    
+}

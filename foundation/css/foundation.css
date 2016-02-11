@@ -3336,28 +3336,28 @@ body {
         -ms-transform: translateX(-50%);
             transform: translateX(-50%); }
 
-.sticky-container {
+.foundation-sticky-container {
   position: relative; }
 
-.sticky {
+.foundation-sticky {
   position: absolute;
   z-index: 0;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0); }
 
-.sticky.is-stuck {
+.foundation-sticky.is-stuck {
   position: fixed;
   z-index: 5; }
-  .sticky.is-stuck.is-at-top {
+  .foundation-sticky.is-stuck.is-at-top {
     top: 0; }
-  .sticky.is-stuck.is-at-bottom {
+  .foundation-sticky.is-stuck.is-at-bottom {
     bottom: 0; }
 
-.sticky.is-anchored {
+.foundation-sticky.is-anchored {
   position: absolute;
   left: auto;
   right: auto; }
-  .sticky.is-anchored.is-at-bottom {
+  .foundation-sticky.is-anchored.is-at-bottom {
     bottom: 0; }
 
 body.is-reveal-open {
