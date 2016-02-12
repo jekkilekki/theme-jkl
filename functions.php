@@ -156,7 +156,7 @@ function jkl_scripts() {
         /* Toggle Main Search script */ //@Todo - decide if we want this
         
         /* Add dynamic back to top button */
-        wp_enqueue_script( 'jkl-topbutton', get_template_directory_uri() . '/js/topbutton.js', array( 'jquery' ), '20160211', true );        
+        wp_enqueue_script( 'jkl-topbutton', get_template_directory_uri() . '/js/topbutton-and-search.js', array( 'jquery' ), '20160211', true );        
         
         
         /* Custom stylesheets for custom Page templates */

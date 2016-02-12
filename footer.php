@@ -12,7 +12,9 @@
 ?>
 
 	</div><!-- #content -->
-
+        
+        <a href="#topbutton" class="topbutton"></a>
+        
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'jkl' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'jkl' ), 'WordPress' ); ?></a>

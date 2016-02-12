@@ -21,4 +21,10 @@ jQuery( document ).ready( function( $ ){
       $( 'html, body' ).animate( { scrollTop:0 }, speed);
       return false;
    });
+   
+   $( '.search-toggle' ).click( function() {
+       $( '#site-search-container' ).slideToggle( 'slow', function() {
+           $( '.search-toggle' ).toggleClass( 'active' );
+       });
+   });
 });

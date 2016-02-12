@@ -156,8 +156,10 @@
             
             if ( $(this).scrollTop() >= fixMenuHeight ) {
                 $( '.top-bar' ).addClass( 'thin-bar' );
+                $( '#site-search-container' ).addClass( 'thin-bar' );
             } else {
                 $( '.top-bar' ).removeClass( 'thin-bar' );
+                $( '#site-search-container' ).removeClass( 'thin-bar' );
             }
             
         } );
