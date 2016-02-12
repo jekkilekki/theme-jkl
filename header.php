@@ -27,7 +27,7 @@
 	<header id="masthead" class="site-header" role="banner">
             <div class="top-bar">
                 <div class="row">
-                    <div class="site-branding top-bar-title medium-6 large-3 columns">
+                    <div class="site-branding top-bar-title small-6 medium-3 large-2 columns">
                             <?php
                             if ( is_front_page() && is_home() ) : ?>
                                     <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
@@ -42,27 +42,55 @@
                             <?php
                             endif; ?>
                     </div><!-- .site-branding -->
-
-                    <?php 
-                    if ( has_site_icon() ) {
-                        
-                            // Display logo in the center of the menu 
-                            // split_main_nav();
-                        
-                    } else { ?>
                     
-                            <div class="top-bar-right medium-6 large-9 columns">
-                                <nav id="site-navigation" class="main-navigation" role="navigation">
-                                        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'jkl' ); ?></button>
-                                        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-                                </nav><!-- #site-navigation -->
+                    <div class="search-toggle">
+                        <i class="fa fa-search"></i>
+                        <a href="#search-container" class="screen-reader-text"><?php _e( 'Search this site', 'jkl' ); ?></a>
+                    </div>
+                    
+                    <div id="primary-nav-bar">
+                        
+                            <div class="small-4 medium-6 large-8 columns">
+                                    <nav id="site-navigation" class="main-navigation" role="navigation">
+                                            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'jkl' ); ?></button>
+
+                                            <?php 
+                                            if ( has_site_icon() ) {
+
+                                                // Display logo in the center of the menu 
+                                                jkl_split_main_nav();
+
+                                            } else {
+
+                                                wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'menu_class' => 'nav-menu' ) );
+
+
+                                            } ?>
+
+                                    </nav><!-- #site-navigation -->
+                            </div><!-- .top-bar-center NON-Foundation -->
+
+                            <div class="small-8 medium-3 large-2 columns">
+                                    <nav id="social-menu-container" class="social-menu">
+                                        <?php jkl_social_menu(); ?>
+                                    </nav>
                             </div><!-- .top-bar-right Foundation -->
                             
-                    <?php } ?>
+                    </div><!-- #primary-nav-bar -->
                 
                 </div><!-- .row Foundation -->
             </div><!-- .top-bar Foundation -->
             
+            
+            
+            <div id="site-search-container" class="search-box-wrapper clear">
+                <div class="site-search clear">
+                    <?php get_search_form(); ?>
+                </div><!-- .site-search -->
+            </div><!-- #site-search-container -->
+            
+                    
+                    
             <?php if ( get_header_image() ) : ?>
             <div class="row site-header-image">
                 <div class="small-12 columns" style="background-image: url(<?php header_image(); ?>)"></div><!-- .site-header-image -->

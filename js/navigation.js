@@ -4,7 +4,7 @@
  * Handles toggling the navigation menu for small screens and enables tab
  * support for dropdown menus.
  */
-( function() {
+( function( $ ) {
 	var container, button, menu, links, subMenus;
 
 	container = document.getElementById( 'site-navigation' );
@@ -78,4 +78,88 @@
 			self = self.parentElement;
 		}
 	}
-} )();
+        
+        function initMainNavigation( container ) {
+		// Add dropdown toggle that display child menu items.
+		container.find( '.menu-item-has-children > a, .page_item_has_children > a' ).after( '<button class="dropdown-toggle" aria-expanded="false">' + screenReaderText.expand + '</button>' );
+
+		// Toggle buttons and submenu items with active children menu items.
+		container.find( '.current-menu-ancestor > button' ).addClass( 'toggle-on' );
+		container.find( '.current-menu-ancestor > .sub-menu' ).addClass( 'toggled-on' );
+
+		container.find( '.dropdown-toggle' ).click( function( e ) {
+			var _this = $( this );
+			e.preventDefault();
+			_this.toggleClass( 'toggle-on' );
+			_this.next( '.children, .sub-menu' ).toggleClass( 'toggled-on' );
+			_this.attr( 'aria-expanded', _this.attr( 'aria-expanded' ) === 'false' ? 'true' : 'false' );
+			_this.html( _this.html() === screenReaderText.expand ? screenReaderText.collapse : screenReaderText.expand );
+		} );
+	}
+	initMainNavigation( $( '.main-navigation' ) );
+
+	// Re-initialize the main navigation when it is updated, persisting any existing submenu expanded states.
+	$( document ).on( 'customize-preview-menu-refreshed', function( e, params ) {
+		if ( 'primary' === params.wpNavMenuArgs.theme_location ) {
+			initMainNavigation( params.newContainer );
+
+			// Re-sync expanded states from oldContainer.
+			params.oldContainer.find( '.dropdown-toggle.toggle-on' ).each(function() {
+				var containerId = $( this ).parent().prop( 'id' );
+				$( params.newContainer ).find( '#' + containerId + ' > .dropdown-toggle' ).triggerHandler( 'click' );
+			});
+		}
+	});
+        
+        // Hide/show toggle button on scroll
+        
+        var position, direction, previous;
+        
+        $( window ).scroll( function() {
+            var winWidth = $( window ).width();
+
+            if ( $(this).scrollTop() >= position && winWidth < 600 && !( $( '#site-navigation' ).hasClass( 'toggled' ) ) ) {
+                direction = 'down';
+                if ( direction !== previous ) {
+                    $( '#primary-nav-bar' ).addClass( 'hide' );
+
+                    previous = direction;
+                }
+            } else {
+                direction = 'up';
+                if ( direction !== previous ) {
+                    $( '#primary-nav-bar' ).removeClass( 'hide' );
+
+                    previous = direction;
+                }
+            }
+            position = $(this).scrollTop();
+        } );
+        
+        $( window ).resize( function() {
+            if ( $( window ).width() > 600 ) {
+                $( '#primary-nav-bar' ).removeClass( 'hide' );
+                $( '.top-bar' ).removeClass( 'hide' );
+            } else if ( $( window ).width() <= 600 && !( $( '#primary-nav-bar' ).hasClass( 'hide' ) ) ) {
+                $( '#primary-nav-bar' ).removeClass( 'hide' );
+                $( '.top-bar' ).removeClass( 'hide' );
+            } else {
+                $( '#primary-nav-bar' ).addClass( 'hide' );
+                $( '.top-bar' ).addClass( 'hide' );
+            }
+        } );
+        
+        // Change and fix the main nav menu on scroll down
+        $( window ).scroll( function() {
+          
+            var fixMenuHeight = 300;
+            
+            if ( $(this).scrollTop() >= fixMenuHeight ) {
+                $( '.top-bar' ).addClass( 'thin-bar' );
+            } else {
+                $( '.top-bar' ).removeClass( 'thin-bar' );
+            }
+            
+        } );
+        
+} )( jQuery );

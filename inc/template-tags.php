@@ -154,7 +154,7 @@ add_action( 'save_post',     'jkl_category_transient_flusher' );
  * Attempting to split the main nav menu with the logo
  * @link: Courtesy: http://pateason.com/horizontal-split-nav/
  */
-function split_main_nav() {
+function jkl_split_main_nav() {
     
     // Get menu 
     $menu_name = 'primary';
@@ -178,7 +178,7 @@ function split_main_nav() {
         $thenThat = array_slice( $newMenu, $len / 2 );
         
         // Create left menu
-        echo '<div id="main-nav-left"><ul>';
+        echo '<div id="main-nav-left" class="medium-6 columns"><ul>';
         foreach( $firstThis as $item ) {
             echo '<li><a href="' . $item->url . '">' . $item->title . '</a></li>';
         }
@@ -195,10 +195,11 @@ function split_main_nav() {
             $site_icon = esc_url( get_site_icon_url( 150 ) ); ?>
             <img class="site-icon" src="<?php echo $site_icon; ?>" alt="">
         </a>
+        <?php echo '</div>'; ?>
         
         <?php
         // Create right menu
-        echo '<div id="main-nav-right"><ul>';
+        echo '<div id="main-nav-right" class="medium-6 columns"><ul>';
         foreach( $thenThat as $item ) {
             echo '<li><a href="' . $item->url . '">' . $item->title . '</a></li>';
         }
@@ -209,6 +210,30 @@ function split_main_nav() {
         
         echo '<em>Please select a menu for your primary navigation.</em>';
         
+    }
+    
+}
+
+/**
+ * Social Menu
+ */
+function jkl_social_menu() {
+    
+    if ( has_nav_menu( 'social' ) ) {
+        wp_nav_menu(
+                array(
+                    'theme_location'    => 'social',
+                    'container'         => 'div',
+                    'container_id'      => 'menu-social-container',
+                    'container_class'   => 'menu-social',
+                    'menu_id'           => 'menu-social-items',
+                    'menu_class'        => 'menu-items',
+                    'depth'             => 1,
+                    'link_before'       => '<span class="screen-reader-text">',
+                    'link_after'        => '</span>',
+                    'fallback_cb'       => '',
+                )
+        );
     }
     
 }
