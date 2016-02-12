@@ -27,7 +27,24 @@
 	<header id="masthead" class="site-header" role="banner">
             <div class="top-bar">
                 <div class="row">
-                    <div class="site-branding top-bar-title small-6 medium-3 large-2 columns">
+                    <div class="site-branding top-bar-title small-6 medium-12 large-2 columns <?php echo has_site_icon() ? 'with-icon' : ''; ?> ">
+                            <?php 
+                            if ( has_site_icon() ) :
+                                // Add logo (site icon) 
+                                $site_title = get_bloginfo( 'name' ); 
+                                $site_icon = esc_url( get_site_icon_url( 150 ) ); ?>
+                                
+                                <div class="site-logo">
+                                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                                    <div class="screen-reader-text">
+                                        <?php printf( esc_html( 'Go to the homepage of %1$s', 'jkl' ), $site_title ); ?>
+                                    </div>
+                                    <img class="site-icon" src="<?php echo $site_icon; ?>" alt="">
+                                    </a>
+                                </div>
+                            <?php
+                            endif; ?>
+                        
                             <?php
                             if ( is_front_page() && is_home() ) : ?>
                                     <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
@@ -50,27 +67,27 @@
                     
                     <div id="primary-nav-bar">
                         
-                            <div class="small-4 medium-6 large-8 columns">
+                            <div class="small-4 medium-2 medium-push-10 large-8 columns">
                                     <nav id="site-navigation" class="main-navigation" role="navigation">
                                             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'jkl' ); ?></button>
 
                                             <?php 
-                                            if ( has_site_icon() ) {
+                                            //if ( has_site_icon() ) {
 
                                                 // Display logo in the center of the menu 
-                                                jkl_split_main_nav();
+                                                //jkl_split_main_nav();
 
-                                            } else {
+                                            //} else {
 
                                                 wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'menu_class' => 'nav-menu' ) );
 
 
-                                            } ?>
+                                            //} ?>
 
                                     </nav><!-- #site-navigation -->
                             </div><!-- .top-bar-center NON-Foundation -->
 
-                            <div class="small-8 medium-3 large-2 columns">
+                            <div class="small-8 medium-6 hide-for-medium large-2 columns">
                                     <nav id="social-menu-container" class="social-menu">
                                         <?php jkl_social_menu(); ?>
                                     </nav>

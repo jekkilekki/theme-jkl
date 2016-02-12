@@ -5,7 +5,7 @@
  */
 
 jQuery( document ).ready( function( $ ){
-   var offset = 100;
+   var offset = 300;
    var speed = 250;
    var duration = 500;
    

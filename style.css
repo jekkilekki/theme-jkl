@@ -464,7 +464,7 @@ input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
 	border-color: #000;
-	color: #fff;
+	color: #000;
 }
 
 button:focus,
@@ -476,7 +476,7 @@ input[type="button"]:active,
 input[type="reset"]:active,
 input[type="submit"]:active {
 	border-color: #000;
-	color: #fff;
+	color: #000;
 }
 
 input[type="text"],
@@ -635,7 +635,12 @@ a:active:after {
 
 .main-navigation li {
 	border-top: 1px solid #eaeaea;
-	border-top: 1px solid rgba(51, 51, 51, 0.1);
+	border-top: 1px solid rgba(51, 51, 51, 0.2);
+	position: relative;
+}
+.main-navigation ul ul li {
+	border-top: 1px solid #eaeaea;
+	border-top: 1px solid rgba(51, 51, 51, 0.5);
 	position: relative;
 }
 .main-navigation li:hover {
@@ -673,45 +678,54 @@ a:active:after {
 
 .dropdown-toggle {
 	background-color: transparent;
-	border: 0;
+	border: 1px solid white;
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	content: "";
-	height: 42px;
+	height: 32px;
 	padding: 0;
 	position: absolute;
 	text-transform: lowercase; /* Stop screen readers to read the text as capital letters */
-	top: 3px;
-	right: 0;
-	width: 42px;
+	top: 8px;
+	right: 2em;
+	width: 32px;
 }
 
 .dropdown-toggle:after {
-	color: #333;
+	color: white;
         font-family: "FontAwesome";
-	content: "\f078";
+	content: "\f107";
 	font-size: 24px;
-	line-height: 42px;
+	line-height: 32px;
 	position: relative;
 	top: 0;
 	left: 1px;
-	width: 42px;
+	width: 32px;
 }
 
 .dropdown-toggle:hover,
 .dropdown-toggle:focus {
-	background-color: #eaeaea;
-	background-color: rgba(51, 51, 51, 0.1);
+	background-color: white;
+        border-color: #ccc;
 }
 
 .dropdown-toggle:focus {
 	outline: 1px solid #c1c1c1;
-	outline: 1px solid rgba(51, 51, 51, 0.3);
+	outline: 1px solid rgba(51, 51, 51, 0.8);
 }
 
+.dropdown-toggle:focus:after,
+.dropdown-toggle:hover:after {
+        color: black;  
+}
+.dropdown-toggle.toggle-on {
+        background-color: white;
+        border-color: #ccc;
+}
 .dropdown-toggle.toggle-on:after {
-	content: "\f077";
+	content: "\f106";
+        color: black;
 }
 
 /* Small menu. */
@@ -742,9 +756,7 @@ a:active:after {
 #primary-nav-bar.hide {
     height: 0;
 }
-.toggled #primary-nav-bar.hide {
-    height: auto;
-}
+
 .menu-toggle {
     background: transparent;
     border: none;
@@ -763,9 +775,14 @@ a:active:after {
     content: "\f0c9";
     margin-right: 8px;
 }
-.menu-toggle:active,
 .menu-toggle:focus,
-.menu-toggle:hover {
+.menu-toggle:active {
+    color: black;
+    outline: 0;
+    text-shadow: none;
+    box-shadow: none;
+}
+.main-navigation.toggled .menu-toggle {
     background: black;
     color: white;
     outline: 0;
@@ -773,9 +790,11 @@ a:active:after {
     box-shadow: none;
 }
 
-@media screen and (min-width: 37.5em) {
+@media screen and (min-width: 40em) {
     .menu-toggle {
-        position: relative;
+        position: absolute;
+        bottom: 0;
+        left: 0;
     }
         #primary-nav-bar {
             position: relative;
@@ -812,16 +831,18 @@ a:active:after {
 }
 .main-navigation.toggled li {
     margin-left: -0.5em;
-    margin-right: -0.5em;
+    margin-right: -1em;
     padding-left: 0.5em;
-    padding-right: 0.5em;
+    padding-right: 0em;
 }
+/*
 .main-navigation.toggled li:hover {
     background: white;
 }
 .main-navigation.toggled li:hover a {
     color: black;
 }
+*/
 .main-navigation.toggled ul ul {
     display: none;
 }
@@ -1084,6 +1105,9 @@ a:active:after {
 .top-bar-title {
     margin-right: 0;
 }
+.thin-bar .with-icon {
+    margin-left: 3.5em;
+}
 
 .site-header-image {
     max-width: 1600px;
@@ -1126,40 +1150,47 @@ a:active:after {
     margin-bottom: 0.5em;
 }
 
+.site-logo {
+    z-index: 2;
+    width: 7em;
+    padding: 10px;
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+}
+.site-logo:after {
+    z-index: 0;
+    border: 3px solid black;
+    margin: -3px;
+    background: black;
+}
+.site-icon {
+    border-radius: 50%;
+}
+
+.thin-bar .site-logo {
+    width: 3em;
+    background: black;
+    padding: 5px;
+    top: 0.25em;
+    left: 1em;
+}
+
 @media screen and (max-width: 30em) {
     .site-title {
         font-size: 1.4em;
     }
-}
-
-#site-logo-background {
-    z-index: 2;
-    border: 3px solid #000;
-    height: 150px;
-    width: 150px;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin: 75px 0 0 -75px;
-    border-radius: 50%;
-    background: white;
+    .site-logo {
+        width: 4em;
+        padding: 5px;
+        top: 0.8em;
+    }
 }
 .top-bar {
     z-index: 3;
     position: relative;
 }
-.site-logo img {
-    padding: 15px;
-    z-index: 10;
-    height: 146px;
-    width: 146px;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin: 78px 0 0 -73px;
-    border-radius: 50%;
-    background: white;
-}
+
 
 /* Thin bar on scroll */
 .top-bar.thin-bar {
@@ -1188,11 +1219,12 @@ a:active:after {
 .search-toggle {
     position: absolute;
     right: 1em;
-    top: 2em;
+    top: 2.5em;
     color: #bbb;
     text-align: center;
     cursor: pointer;
     font-size: 1.2em;
+    z-index: 500;
 }
 .search-toggle:hover,
 .search-toggle:active {
@@ -1263,17 +1295,20 @@ input[type="search"] {
     bottom: 1em;
     width: 30px;
     height: 30px;
-    background: rgba(0,0,0,0.8);
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 2px #ccc;
+    border-radius: 50%;
     left: 50%;
     margin-left: -15px;
-    opacity: 0.25;
+    display: none;
 }
 .topbutton:after {
     font-family: "FontAwesome";
-    content: "\f077";
+    content: "\f106";
 	font-size: 1.2em;
-        color: #ccc;
-        padding-left: 6px;
+        color: #000;
+        padding-left: 8px;
 }
 .topbutton:hover {
     opacity: 1;
