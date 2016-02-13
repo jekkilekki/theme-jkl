@@ -855,7 +855,8 @@ a:active:after {
     .menu-toggle {
         position: absolute;
         bottom: 0;
-        left: 0;
+        left: -2em;
+        border: 1px solid white;
     }
         #primary-nav-bar {
             position: relative;
@@ -865,13 +866,41 @@ a:active:after {
             padding: 0;
             height: auto;
         }
-        .thin-bar #primary-nav-bar {
+        #primary-nav-bar {
             position: absolute;
             bottom: 4px;
         }
-        .thin-bar #primary-nav-bar button {
+        .thin-bar .main-navigation .menu-toggle {
+            color: white;
+            border-color: black;
+            border-bottom: none;
+            border-left: none;
+            border-right: none;
+        }
+        .main-navigation.toggled .menu-toggle {
+            border-color: black;
+            background: white;
+            color: black;
+        }
+        .thin-bar .main-navigation.toggled .menu-toggle {
+            border-color: white;
+            border-bottom: none;
+            border-left: none;
+            border-right: none;
+            background: black;
             color: white;
         }
+        .main-navigation.toggled {
+            position: absolute;
+            top: 0;
+        }
+        .main-navigation.toggled .nav-menu {
+            position: fixed;
+            margin-top: 7px;
+            width: 60%;
+            right: 2em;
+        }
+        
 }
 @media screen and (min-width: 50em) {
     .menu-toggle {
@@ -1241,6 +1270,7 @@ a:active:after {
 .top-bar {
     z-index: 3;
     position: relative;
+    height: 93px;
 }
 
 
@@ -1384,10 +1414,13 @@ input[type="search"] {
         font-size: 1em;
     }
 }
-@media screen and ( min-width: 62.5em ) {
+@media screen and ( min-width: 50em ) {
     .site-main {
-        max-width: 42.5em;
-        margin: 2.236em auto;
+        max-width: 40em;
+        margin: 2.5em auto;
+    }
+    #site-search-container {
+        padding-left: 50%;
     }
 }
 
