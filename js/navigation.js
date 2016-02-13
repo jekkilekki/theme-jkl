@@ -118,7 +118,7 @@
         $( window ).scroll( function() {
             var winWidth = $( window ).width();
 
-            if ( $(this).scrollTop() >= position && winWidth < 600 && !( $( '#site-navigation' ).hasClass( 'toggled' ) ) ) {
+            if ( $(this).scrollTop() >= position && winWidth < 640 && !( $( '#site-navigation' ).hasClass( 'toggled' ) ) ) {
                 direction = 'down';
                 if ( direction !== previous ) {
                     $( '#primary-nav-bar' ).addClass( 'hide' );
@@ -134,34 +134,36 @@
                 }
             }
             position = $(this).scrollTop();
+            
+            
+            // Change and fix the main nav menu on scroll down
+            var fixMenuHeight = 300;
+            
+            if ( $(this).scrollTop() >= fixMenuHeight ) {
+                $( '.top-bar' ).addClass( 'thin-bar' );
+                $( '#site-search-container' ).addClass( 'thin-bar' );
+                if ( !$( '.search-toggle' ).hasClass( 'active' ) ) {
+                    $( '#site-search-container' ).css( "display", "none" );
+                }
+            } else {
+                $( '.top-bar' ).removeClass( 'thin-bar' );
+                $( '#site-search-container' ).removeClass( 'thin-bar' );
+                $( '#site-search-container' ).css( "display", "block" );
+            }
+            
         } );
         
         $( window ).resize( function() {
-            if ( $( window ).width() > 600 ) {
+            if ( $( window ).width() > 640 ) {
                 $( '#primary-nav-bar' ).removeClass( 'hide' );
                 $( '.top-bar' ).removeClass( 'hide' );
-            } else if ( $( window ).width() <= 600 && !( $( '#primary-nav-bar' ).hasClass( 'hide' ) ) ) {
+            } else if ( $( window ).width() <= 640 && !( $( '#primary-nav-bar' ).hasClass( 'hide' ) ) ) {
                 $( '#primary-nav-bar' ).removeClass( 'hide' );
                 $( '.top-bar' ).removeClass( 'hide' );
             } else {
                 $( '#primary-nav-bar' ).addClass( 'hide' );
                 $( '.top-bar' ).addClass( 'hide' );
             }
-        } );
-        
-        // Change and fix the main nav menu on scroll down
-        $( window ).scroll( function() {
-          
-            var fixMenuHeight = 300;
-            
-            if ( $(this).scrollTop() >= fixMenuHeight ) {
-                $( '.top-bar' ).addClass( 'thin-bar' );
-                $( '#site-search-container' ).addClass( 'thin-bar' );
-            } else {
-                $( '.top-bar' ).removeClass( 'thin-bar' );
-                $( '#site-search-container' ).removeClass( 'thin-bar' );
-            }
-            
         } );
         
 } )( jQuery );

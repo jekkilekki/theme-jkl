@@ -67,7 +67,7 @@
                     
                     <div id="primary-nav-bar">
                         
-                            <div class="small-4 medium-2 medium-push-10 large-8 columns">
+                            <div id="main-nav-division" class="small-4 medium-2 medium-push-10 large-8 columns">
                                     <nav id="site-navigation" class="main-navigation" role="navigation">
                                             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'jkl' ); ?></button>
 
@@ -87,7 +87,7 @@
                                     </nav><!-- #site-navigation -->
                             </div><!-- .top-bar-center NON-Foundation -->
 
-                            <div class="small-8 medium-6 hide-for-medium large-2 columns">
+                            <div id="social-links-division" class="small-8 medium-6 hide-for-medium large-2 columns">
                                     <nav id="social-menu-container" class="social-menu">
                                         <?php jkl_social_menu(); ?>
                                     </nav>
@@ -97,22 +97,18 @@
                 
                 </div><!-- .row Foundation -->
             </div><!-- .top-bar Foundation -->
-            
-            
-            
-            <div id="site-search-container" class="search-box-wrapper clear">
-                <div class="site-search clear">
-                    <?php get_search_form(); ?>
-                </div><!-- .site-search -->
-            </div><!-- #site-search-container -->
-            
-                    
-                    
+               
             <?php if ( get_header_image() ) : ?>
             <div class="row site-header-image">
                 <div class="small-12 columns" style="background-image: url(<?php header_image(); ?>)"></div><!-- .site-header-image -->
             </div>
             <?php endif; // End header image check. ?>
 	</header><!-- #masthead -->
+        
+        <div id="site-search-container" class="search-box-wrapper clear">
+            <div class="site-search clear">
+                <?php get_search_form(); ?>
+            </div><!-- .site-search -->
+        </div><!-- #site-search-container -->
 
 	<div id="content" class="site-content">
