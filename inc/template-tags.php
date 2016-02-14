@@ -178,15 +178,15 @@ function jkl_split_main_nav() {
         $thenThat = array_slice( $newMenu, $len / 2 );
         
         // Create left menu
-        echo '<div id="main-nav-left" class="medium-6 columns"><ul>';
+        echo '<div id="main-nav-left" class="medium-6"><ul class="nav-menu">';
         foreach( $firstThis as $item ) {
             echo '<li><a href="' . $item->url . '">' . $item->title . '</a></li>';
         }
         echo '</ul></div>';
         
         // Add logo (site icon)
-        echo '<div class="site-logo">';
-        $site_title = get_bloginfo( 'name' ); ?>
+        echo '<div class="site-logo-space">';
+        /*$site_title = get_bloginfo( 'name' ); ?>
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
             <div class="screen-reader-text">
                 <?php printf( esc_html( 'Go to the homepage of %1$s', 'jkl' ), $site_title ); ?>
@@ -194,12 +194,12 @@ function jkl_split_main_nav() {
             <?php
             $site_icon = esc_url( get_site_icon_url( 150 ) ); ?>
             <img class="site-icon" src="<?php echo $site_icon; ?>" alt="">
-        </a>
+        </a>*/ ?>
         <?php echo '</div>'; ?>
         
         <?php
         // Create right menu
-        echo '<div id="main-nav-right" class="medium-6 columns"><ul>';
+        echo '<div id="main-nav-right" class="medium-6"><ul class="nav-menu">';
         foreach( $thenThat as $item ) {
             echo '<li><a href="' . $item->url . '">' . $item->title . '</a></li>';
         }
