@@ -197,26 +197,39 @@ function jkl_split_main_nav( $menu_name = null, $raw = false ) {
             $menuMarkup .= '<div id="main-nav-left" class="medium-6">
                             <ul class="nav-menu">';
             
-                        foreach( $firstThis as $item ) {
+                    foreach( $firstThis as $item ) {
 
-                            // Add subnav if there is one
-                            if( $item->subnav ) {
-                                $menuMarkup .= '<li class="menu-item-has-children">
-                                                <a href="' .$item->url . '">' . $item->title . '</a>';
-                                
-                                        $menuMarkup .= '<ul>';
-                                            foreach( $item->subnav as $item ) {
-                                                $menuMarkup .= '<li><a href="' . $item->url .'">' . $item->title . '</a></li>';
+                        // Add subnav if there is one
+                        if( $item->subnav ) {
+                            $menuMarkup .= '<li class="menu-item-has-children">
+                                            <a href="' .$item->url . '">' . $item->title . '</a>';
+
+                                    $menuMarkup .= '<ul class="sub-menu">';
+                                        foreach( $item->subnav as $subitem ) {
+
+                                            // Add SECOND LEVEL subnav if there is one (deepest possible level)
+                                            if( $subitem->subnav ) {
+                                                $menuMarkup .= '<li class="menu-item-has-children">
+                                                                <a href="' . $subitem->url . '">' . $subitem->title . '</a>';
+
+                                                $menuMarkup .= '<ul class="sub-menu">';
+                                                foreach( $subitem->subnav as $subsubitem ) {
+                                                    $menuMarkup .= '<li><a href="' . $subsubitem->url . '">' . $subsubitem->title . '</a></li>';
+                                                }
+                                                $menuMarkup .= '</ul>';
+
+                                            } else {
+                                                $menuMarkup .= '<li><a href="' . $subitem->url .'">' . $subitem->title . '</a></li>';
                                             }
-                                        $menuMarkup .= '</ul>';
-                                
-                            } else {
-                                $menuMarkup .= '<li>
-                                                <a href="' .$item->url . '">' . $item->title . '</a>';
-                            }
-                            $menuMarkup .= '</li>';
-                            
+                                        }
+                                    $menuMarkup .= '</ul>';
+
+                        } else {
+                            $menuMarkup .= '<li><a href="' .$item->url . '">' . $item->title . '</a>';
                         }
+                        $menuMarkup .= '</li>';
+
+                    }
                         
             $menuMarkup .= '</ul>
                             </div>';
@@ -229,26 +242,39 @@ function jkl_split_main_nav( $menu_name = null, $raw = false ) {
             $menuMarkup .= '<div id="main-nav-right" class="medium-6">
                             <ul class="nav-menu">';
             
-                        foreach( $thenThat as $item ) {
+                    foreach( $thenThat as $item ) {
 
-                            // Add subnav if there is one
-                            if( $item->subnav ) {
-                                $menuMarkup .= '<li class="menu-item-has-children">
-                                                <a href="' .$item->url . '">' . $item->title . '</a>';
-                                
-                                        $menuMarkup .= '<ul>';
-                                            foreach( $item->subnav as $item ) {
-                                                $menuMarkup .= '<li><a href="' . $item->url .'">' . $item->title . '</a></li>';
+                        // Add subnav if there is one
+                        if( $item->subnav ) {
+                            $menuMarkup .= '<li class="menu-item-has-children">
+                                            <a href="' .$item->url . '">' . $item->title . '</a>';
+
+                                    $menuMarkup .= '<ul class="sub-menu">';
+                                        foreach( $item->subnav as $subitem ) {
+
+                                            // Add SECOND LEVEL subnav if there is one (deepest possible level)
+                                            if( $subitem->subnav ) {
+                                                $menuMarkup .= '<li class="menu-item-has-children">
+                                                                <a href="' . $subitem->url . '">' . $subitem->title . '</a>';
+
+                                                $menuMarkup .= '<ul class="sub-menu">';
+                                                foreach( $subitem->subnav as $subsubitem ) {
+                                                    $menuMarkup .= '<li><a href="' . $subsubitem->url . '">' . $subsubitem->title . '</a></li>';
+                                                }
+                                                $menuMarkup .= '</ul>';
+
+                                            } else {
+                                                $menuMarkup .= '<li class="no-subitem-i-guess"><a href="' . $subitem->url .'">' . $subitem->title . '</a></li>';
                                             }
-                                        $menuMarkup .= '</ul>';
-                                
-                            } else {
-                                $menuMarkup .= '<li>
-                                                <a href="' .$item->url . '">' . $item->title . '</a>';
-                            }
-                            $menuMarkup .= '</li>';
-                            
+                                        }
+                                    $menuMarkup .= '</ul>';
+
+                        } else {
+                            $menuMarkup .= '<li><a href="' .$item->url . '">' . $item->title . '</a>';
                         }
+                        $menuMarkup .= '</li>';
+
+                    }
                         
             $menuMarkup .= '</ul>
                             </div>';

@@ -916,12 +916,44 @@ a:active:after {
     .main-navigation .nav-menu {
         background: transparent;
     }
+    .main-navigation.toggled .nav-menu {
+        position: relative;
+        margin-top: 0;
+        width: auto;
+        right: 0;
+    }
     .main-navigation li {
         display: inline-block;
         border: none;
     }
+    .main-navigation.toggled li {
+        margin: 0;
+        padding: 0;
+    }
     .main-navigation li a {
-        color: black;
+        color: white;
+    }
+    .main-navigation .menu-item-has-children > a {
+        padding-right: 40px;
+    }
+    .main-navigation ul ul {
+        position: absolute;
+        background: black;
+        padding: 0.5em 1em;
+        width: calc(100% + 50%);
+        margin-left: -50%;
+        top: 45px;
+    }
+    .dropdown-toggle {
+        height: 28px;
+        width: 28px;
+        top: 6px;
+        right: 0.25em;
+    }
+    .dropdown-toggle:after {
+        width: 28px;
+        line-height: 28px;
+        left: 0;
     }
 }
 
@@ -930,33 +962,38 @@ a:active:after {
 --------------------------------------------------------------*/
 #main-nav-left {
     float: left;
-    padding-right: 75px;
     text-align: left;
 }
 #main-nav-right {
     float: right;
-    padding-left: 75px;
     text-align: right;
+}
+#main-nav-right ul ul {
+    text-align: left;
 }
 #main-nav-left li,
 #main-nav-right li {
     display: inline-block;
 }
+#main-nav-left ul ul li,
+#main-nav-right ul ul li {
+    display: block;
+}
 #main-nav-left li {
-    margin-right: 10px;
+    margin-right: 5%;
 }
 #main-nav-right li {
-    margin-left: 10px;
+    margin-left: 5%;
 }
 #main-nav-left li a,
 #main-nav-right li a {
-    color: #000;
+    color: white;
 }
 .thin-bar #main-nav-left {
-    padding-right: 30px;
+
 }
 .thin-bar #main-nav-right {
-    padding-left: 30px;
+
 }
 
 
