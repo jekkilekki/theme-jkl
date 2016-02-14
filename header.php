@@ -80,7 +80,11 @@
                                             <?php 
                                             // This is the split menu, only showing up on larger screens - custom menu output ?>
                                             <div class="split-navigation-menu show-for-large-up hide-for-medium-down">
-                                                <?php jkl_split_main_nav(); ?>
+                                                <?php 
+                                                $split_nav = jkl_split_main_nav( 'primary', false ); 
+                                                echo $split_nav->left_menu;
+                                                echo $split_nav->right_menu;
+                                                ?>
                                             </div>
                                             
                                             <?php

@@ -154,10 +154,12 @@ add_action( 'save_post',     'jkl_category_transient_flusher' );
  * Attempting to split the main nav menu with the logo
  * @link: Courtesy: http://pateason.com/horizontal-split-nav/
  */
-function jkl_split_main_nav() {
+function jkl_split_main_nav( $menu_name = null, $raw = false ) {
     
-    // Get menu 
-    $menu_name = 'primary';
+    if ( $menu_name == null || !is_string( $menu_name ) ) {
+        return false;
+    }
+    $output = new stdClass();
     
     // Check if the menu exists and is set
     if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
@@ -169,6 +171,13 @@ function jkl_split_main_nav() {
         $newMenu = array();
         foreach( $menu_items as $item ) {
             if( $item->menu_item_parent != 0 ) continue;
+            
+            // get subnav
+            $parentID = $item->ID;
+            $item->subnav = array_filter( $menu_items, function( $v ) use ( $parentID ) {
+                if ( $v->menu_item_parent == $parentID ) return $v; 
+            });
+            
             array_push( $newMenu, $item );
         }
         
@@ -177,33 +186,78 @@ function jkl_split_main_nav() {
         $firstThis = array_slice( $newMenu, 0, $len / 2 );
         $thenThat = array_slice( $newMenu, $len / 2 );
         
-        // Create left menu
-        echo '<div id="main-nav-left" class="medium-6"><ul class="nav-menu">';
-        foreach( $firstThis as $item ) {
-            echo '<li><a href="' . $item->url . '">' . $item->title . '</a></li>';
-        }
-        echo '</ul></div>';
         
-        // Add logo (site icon)
-        echo '<div class="site-logo-space">';
-        /*$site_title = get_bloginfo( 'name' ); ?>
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-            <div class="screen-reader-text">
-                <?php printf( esc_html( 'Go to the homepage of %1$s', 'jkl' ), $site_title ); ?>
-            </div>
-            <?php
-            $site_icon = esc_url( get_site_icon_url( 150 ) ); ?>
-            <img class="site-icon" src="<?php echo $site_icon; ?>" alt="">
-        </a>*/ ?>
-        <?php echo '</div>'; ?>
-        
-        <?php
-        // Create right menu
-        echo '<div id="main-nav-right" class="medium-6"><ul class="nav-menu">';
-        foreach( $thenThat as $item ) {
-            echo '<li><a href="' . $item->url . '">' . $item->title . '</a></li>';
+        if( $raw==true ) {
+            $output->left_menu = $firstThis;
+            $output->right_menu = $thenThat;
+        } else {
+            
+            // Create LEFT menu
+            $menuMarkup = '';
+            $menuMarkup .= '<div id="main-nav-left" class="medium-6">
+                            <ul class="nav-menu">';
+            
+                        foreach( $firstThis as $item ) {
+
+                            // Add subnav if there is one
+                            if( $item->subnav ) {
+                                $menuMarkup .= '<li class="menu-item-has-children">
+                                                <a href="' .$item->url . '">' . $item->title . '</a>';
+                                
+                                        $menuMarkup .= '<ul>';
+                                            foreach( $item->subnav as $item ) {
+                                                $menuMarkup .= '<li><a href="' . $item->url .'">' . $item->title . '</a></li>';
+                                            }
+                                        $menuMarkup .= '</ul>';
+                                
+                            } else {
+                                $menuMarkup .= '<li>
+                                                <a href="' .$item->url . '">' . $item->title . '</a>';
+                            }
+                            $menuMarkup .= '</li>';
+                            
+                        }
+                        
+            $menuMarkup .= '</ul>
+                            </div>';
+            
+            $output->left_menu = $menuMarkup;
+            
+            
+            // Create RIGHT menu
+            $menuMarkup = '';
+            $menuMarkup .= '<div id="main-nav-right" class="medium-6">
+                            <ul class="nav-menu">';
+            
+                        foreach( $thenThat as $item ) {
+
+                            // Add subnav if there is one
+                            if( $item->subnav ) {
+                                $menuMarkup .= '<li class="menu-item-has-children">
+                                                <a href="' .$item->url . '">' . $item->title . '</a>';
+                                
+                                        $menuMarkup .= '<ul>';
+                                            foreach( $item->subnav as $item ) {
+                                                $menuMarkup .= '<li><a href="' . $item->url .'">' . $item->title . '</a></li>';
+                                            }
+                                        $menuMarkup .= '</ul>';
+                                
+                            } else {
+                                $menuMarkup .= '<li>
+                                                <a href="' .$item->url . '">' . $item->title . '</a>';
+                            }
+                            $menuMarkup .= '</li>';
+                            
+                        }
+                        
+            $menuMarkup .= '</ul>
+                            </div>';
+            
+            $output->right_menu = $menuMarkup;
         }
-        echo '</ul></div>';
+        
+        return $output;
+        
     }
     
     else {
