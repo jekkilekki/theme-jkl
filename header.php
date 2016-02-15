@@ -27,11 +27,11 @@
 	<header id="masthead" class="site-header" role="banner">
             <div class="top-bar">
                 <div class="row">
-                    <div class="site-branding top-bar-title small-6 medium-12 large-2 columns <?php echo has_site_icon() ? 'with-icon' : ''; ?> ">
+                    <div class="site-branding top-bar-title small-6 medium-12 large-12 columns <?php echo has_site_icon() ? 'with-icon' : ''; ?> ">
                             <?php 
                             // Add logo (site icon) 
                             $site_title = get_bloginfo( 'name' ); 
-                            $site_icon = esc_url( get_site_icon_url( 150 ) ); ?>
+                            $site_icon = esc_url( get_site_icon_url( 200 ) ); ?>
 
                             <div class="site-logo">
                                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
@@ -71,15 +71,17 @@
                         <a href="#search-container" class="screen-reader-text"><?php _e( 'Search this site', 'jkl' ); ?></a>
                     </div>
                     
-                    <div id="primary-nav-bar">
-                        
+                </div><!-- .row Foundation -->
+                    
+                <div id="primary-nav-bar">
+                        <div class="row">
                             <div id="main-nav-division" class="small-4 medium-2 medium-push-10 large-8 columns">
                                     <nav id="site-navigation" class="main-navigation" role="navigation">
                                             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'jkl' ); ?></button>
                                             
                                             <?php 
                                             // This is the split menu, only showing up on larger screens - custom menu output ?>
-                                            <div class="split-navigation-menu show-for-large-up hide-for-medium-down">
+                                            <div class="split-navigation-menu show-for-large">
                                                 <?php 
                                                 $split_nav = jkl_split_main_nav( 'primary', false ); 
                                                 echo $split_nav->left_menu;
@@ -96,15 +98,14 @@
                                     </nav><!-- #site-navigation -->
                             </div><!-- .top-bar-center NON-Foundation -->
 
-                            <div id="social-links-division" class="small-8 medium-6 hide-for-medium large-2 columns">
+                            <div id="social-links-division" class="small-8 medium-6 hide-for-medium large-6 columns">
                                     <nav id="social-menu-container" class="social-menu">
                                         <?php jkl_social_menu(); ?>
                                     </nav>
                             </div><!-- .top-bar-right Foundation -->
-                            
-                    </div><!-- #primary-nav-bar -->
+                        </div><!-- .row Foundation -->        
+                </div><!-- #primary-nav-bar -->
                 
-                </div><!-- .row Foundation -->
             </div><!-- .top-bar Foundation -->
                
             <?php if ( get_header_image() ) : ?>
@@ -114,8 +115,8 @@
             <?php endif; // End header image check. ?>
 	</header><!-- #masthead -->
         
-        <div id="site-search-container" class="search-box-wrapper clear">
-            <div class="site-search clear">
+        <div id="site-search-container" class="search-box-wrapper clear row">
+            <div class="site-search clear large-12 columns">
                 <?php get_search_form(); ?>
             </div><!-- .site-search -->
         </div><!-- #site-search-container -->

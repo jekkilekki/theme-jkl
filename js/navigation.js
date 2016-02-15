@@ -111,8 +111,7 @@
 		}
 	});
         
-        // Hide/show toggle button on scroll
-        
+        // Hide/show toggle menu on scroll (mobile)
         var position, direction, previous;
         
         $( window ).scroll( function() {
@@ -137,7 +136,7 @@
             
             
             // Change and fix the main nav menu on scroll down
-            var fixMenuHeight = 300;
+            var fixMenuHeight = 400;
             
             if ( $(this).scrollTop() >= fixMenuHeight ) {
                 $( '.top-bar' ).addClass( 'thin-bar' );
@@ -164,6 +163,33 @@
                 $( '#primary-nav-bar' ).addClass( 'hide' );
                 $( '.top-bar' ).addClass( 'hide' );
             }
+        } );
+        
+        // Hide/show site menu on scroll (medium to large screens)
+        var position2, direction2, previous2;
+        
+        $( window ).scroll( function() {
+            var winWidth2 = $( window ).width();
+
+            if( $(this).scrollTop() <= 300 ) {
+                $( '.thin-bar #primary-nav-bar' ).removeClass( 'show' );
+            }
+            else if ( $(this).scrollTop() <= position2 && winWidth2 > 800 ) {
+                direction2 = 'down';
+                if ( direction2 !== previous2 ) {
+                    $( '.thin-bar #primary-nav-bar' ).addClass( 'show' );
+
+                    previous2 = direction2;
+                }
+            } else {
+                direction2 = 'up';
+                if ( direction2 !== previous2 ) {
+                    $( '.thin-bar #primary-nav-bar' ).removeClass( 'show' );
+
+                    previous2 = direction2;
+                }
+            }
+            position2 = $(this).scrollTop();
         } );
         
 } )( jQuery );

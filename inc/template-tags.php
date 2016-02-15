@@ -25,17 +25,42 @@ function jkl_posted_on() {
 	);
 
 	$posted_on = sprintf(
-		esc_html_x( 'Posted on %s', 'post date', 'jkl' ),
+		esc_html_x( '%s', 'post date', 'jkl' ),
 		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 	);
 
 	$byline = sprintf(
-		esc_html_x( 'by %s', 'post author', 'jkl' ),
+		esc_html_x( '%s', 'post author', 'jkl' ),
 		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
+        
+        // Display the author avatar if the author has a Gravatar
+        $author_id = get_the_author_meta( 'ID' );
+        // if( jkl_validate_gravatar( $author_id ) ) {
+            echo '<div class="meta-content has-avatar">';
+            echo '<div class="author-avatar">' . get_avatar( $author_id ) . '</div>';
+        // } else {
+            // echo '<div class="meta-content">';
 
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+	echo '<span class="byline">By ' . $byline . '</span><span class="posted-on">Published ' . $posted_on . '</span>'; // WPCS: XSS OK.
 
+        // Add Category list below
+        if ( 'post' === get_post_type() ) {
+		/* translators: used between list items, there is a space after the comma */
+		$categories_list = get_the_category_list( esc_html__( '</li><li>', 'jkl' ) );
+		if ( $categories_list && jkl_categorized_blog() ) {
+			printf( '<ul class="cat-links"><li>' . esc_html__( '%1$s', 'jkl' ) . '</li></ul>', $categories_list ); // WPCS: XSS OK.
+		}
+        }
+        
+        // Add Comments Link
+        if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+                echo '<span class="comments-link">';
+                comments_popup_link( esc_html__( 'Leave a comment', 'jkl' ), esc_html__( '1 Comment', 'jkl' ), esc_html__( '% Comments', 'jkl' ) );
+                echo '</span>';
+        } 
+        
+        echo '</div><!-- .meta-content -->';
 }
 endif;
 
@@ -316,4 +341,63 @@ function jkl_social_menu() {
         );
     }
     
+}
+
+/*
+ * Validate Gravatar
+ * @link: original: https://gist.github.com/justinph/5197810
+ * @link: WP.org: http://codex.wordpress.org/Using_Gravatars#Checking_for_the_Existence_of_a_Gravatar
+ */
+
+/**
+ * Utility function to check if a gravatar exists for a given email or id
+ * @param int|string|object $id_or_email A user ID,  email address, or comment object
+ * @return bool if the gravatar exists or not
+ */
+
+function jkl_validate_gravatar($id_or_email) {
+  //id or email code borrowed from wp-includes/pluggable.php
+	$email = '';
+	if ( is_numeric($id_or_email) ) {
+		$id = (int) $id_or_email;
+		$user = get_userdata($id);
+		if ( $user )
+			$email = $user->user_email;
+	} elseif ( is_object($id_or_email) ) {
+		// No avatar for pingbacks or trackbacks
+		$allowed_comment_types = apply_filters( 'get_avatar_comment_types', array( 'comment' ) );
+		if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) )
+			return false;
+
+		if ( !empty($id_or_email->user_id) ) {
+			$id = (int) $id_or_email->user_id;
+			$user = get_userdata($id);
+			if ( $user)
+				$email = $user->user_email;
+		} elseif ( !empty($id_or_email->comment_author_email) ) {
+			$email = $id_or_email->comment_author_email;
+		}
+	} else {
+		$email = $id_or_email;
+	}
+
+	$hashkey = md5(strtolower(trim($email)));
+	$uri = 'http://www.gravatar.com/avatar/' . $hashkey . '?d=404';
+
+	$data = wp_cache_get($hashkey);
+	if (false === $data) {
+		$response = wp_remote_head($uri);
+		if( is_wp_error($response) ) {
+			$data = 'not200';
+		} else {
+			$data = $response['response']['code'];
+		}
+	    wp_cache_set($hashkey, $data, $group = '', $expire = 60*5);
+
+	}		
+	if ($data == '200'){
+		return true;
+	} else {
+		return false;
+	}
 }
