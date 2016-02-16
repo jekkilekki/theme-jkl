@@ -159,7 +159,7 @@ svg:not(:root) {
 }
 
 figure {
-	margin: 1em 40px;
+	margin: 0;
 }
 
 hr {
@@ -266,6 +266,19 @@ table {
 	border-spacing: 0;
 }
 
+table thead,
+table tfoot {
+    background: #f1f1f1;
+}
+table thead, 
+table tbody, 
+table tfoot {
+    border-color: gainsboro;
+}
+table tbody tr:nth-child(even) {
+    background: whitesmoke;
+}
+
 td,
 th {
 	padding: 0;
@@ -332,7 +345,7 @@ address {
 
 pre {
 	background: #eee;
-	font-family: "Courier 10 Pitch", Courier, monospace;
+	font-family: "Source Code Pro", "Courier 10 Pitch", Courier, monospace;
 	font-size: 15px;
 	font-size: 0.9375rem;
 	line-height: 1.6;
@@ -394,6 +407,31 @@ q:after {
 blockquote,
 q {
 	quotes: "" "";
+}
+
+blockquote {
+    quotes: "" "";
+    margin: 1.5em -0.5em;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 0;
+    padding: 4px 0.5em;
+    position: relative;
+    font-family: "Volkhov", serif;
+    font-style: italic;
+}
+blockquote p {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-bottom: 0;
+    padding: 1.5em;
+    color: #404040;
+    font-size: 1.1em;
+    line-height: 1.7em;
+}
+
+cite {
+    font-family: "Volkhov", serif;
 }
 
 hr {
@@ -1297,6 +1335,15 @@ a:active:after {
 .top-bar.thin-bar .site-description {
     display: none;
 }
+@media screen and (max-width: 300px) {
+    .site-description,
+    .thin-bar .site-logo {
+        display: none!important;
+    }
+    .thin-bar .with-icon {
+        margin-left: 0!important;
+    } 
+}
 
 @media screen and (max-width: 400px) {
     .site-logo {
@@ -1595,12 +1642,55 @@ input[type="search"] {
 /*--------------------------------------------------------------
 ## Posts and pages
 --------------------------------------------------------------*/
+.entry-content a,
+.entry-summary a {
+    text-decoration: none;
+    border-bottom: 2px solid #c3c3c3;
+}
+.entry-content a:hover,
+.entry-content a:focus,
+.entry-summary a:hover,
+.entry-summary a:focus {
+    border-bottom: 3px solid #c3c3c3;
+    /* box-shadow: inset 0 -3px 0 #c3c3c3; */
+}
+.entry-meta a:hover,
+.entry-meta a:focus,
+.entry-footer a:hover,
+.entry-footer a:focus {
+    border-bottom: 2px solid #000;
+}
+
+
 .sticky {
 	display: block;
 }
 
 .hentry {
 	margin: 0 0 1.5em;
+}
+.entry-title {
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 2.6em;
+}
+
+/* Lead in */
+.lead-in {
+    margin: 1em -1.5em;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 4px 0.5em;
+}
+.lead-in p {
+    font-size: 1.2em;
+    font-weight: 600;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 1em 0;
+    margin-bottom: 0;
 }
 
 .byline,
@@ -1622,12 +1712,18 @@ input[type="search"] {
     background: whitesmoke;
     padding: 1em 2.10526315789em;
     margin: 0 -2.10526315789em;
+    color: #777;
+    text-align: center;
+    position: relative;
+}
+.entry-meta a {
+    /* color: #404040; */
 }
 
 .has-avatar {
     display: inline-block;
     text-align: left;
-    width: 100%;
+    max-width: 20em;
 }
 .author-avatar {
     height: 50px;
@@ -1637,6 +1733,7 @@ input[type="search"] {
     border: 1px solid silver;
     padding: 3px;
     margin-right: 1em;
+    margin-top: 0.75em;
 }
 .author-avatar img {
     border-radius: 50%;
@@ -1644,28 +1741,32 @@ input[type="search"] {
 
 .byline, 
 .posted-on,
+.entry-meta .cat-links,
 .entry-meta .comments-link {
     display: inline-block;
     padding: 0;
 }
-.byline {
-    margin-right: 1em;
-}
+.byline, 
 .entry-meta .cat-links {
-    list-style: none;
-    border-top: 1px solid gainsboro;
-    width: 100%;
-    margin: 0 2em 0 4.2em;
+    margin-right: 1em;
 }
 .entry-meta .cat-links:before {
     font-family: "FontAwesome";
     content: '\f101';
     margin-right: 0.5em;
-    float: left;
     color: silver;
 }
+.entry-meta .cat-links {
+    margin-right: 2em;
+}
 .entry-meta .comments-link {
-    float: right;
+    padding: 0px 12px;
+    background: gainsboro;
+    font-size: 70%;
+    text-transform: uppercase;
+}
+.entry-meta .comments-link a {
+    color: #777;
 }
 
 .page-content,
@@ -1678,11 +1779,68 @@ input[type="search"] {
 	clear: both;
 	margin: 0 0 1.5em;
 }
-
-@media screen and (min-width: 30em) {
+@media screen and (max-width: 300px) {
+    .has-avatar {
+        text-align: center;
+    }
+    .author-avatar {
+        margin: 0 auto;
+        float: none;
+    }
+    .byline,
+    .posted-on,
+    .entry-meta .cat-links {
+        display: block;
+        clear: both;
+        width: 100%;
+    }
+    .byline {
+        padding-top: 0.5em;
+    }
+    .entry-meta .comments-link {
+        display: block;
+        float: none;
+        margin-top: 1em;
+    }
+}
+@media screen and (min-width: 300px) {
+    .posted-on {
+        max-width: 70%;
+    }
+}
+@media screen and (min-width: 400px) {
     .entry-meta {
         padding: 2em 2.63157894737em;
         margin: 2em -2.63157894737em;
+    }
+    .posted-on {
+        max-width: 100%;
+    }
+}
+@media screen and (min-width: 30em) {
+    .entry-meta {
+
+    }
+    .has-avatar {
+        max-width: 30em;
+    }
+    .author-avatar {
+        margin-top: 0;
+    }
+}
+@media screen and (min-width: 42.5em) {
+    .entry-meta {
+        text-align: left;
+    }
+    .author-avatar {
+        margin-top: 3px;
+    }
+    .entry-meta .comments-link {
+        position: absolute;
+        top: 3.5em;
+        right: 4em;
+        font-size: 75%;
+        padding: 3px 23px;
     }
 }
 @media screen and (min-width: 50em) {
@@ -1698,6 +1856,7 @@ input[type="search"] {
     .author-avatar {
         width: 70px;
         height: 70px;
+        margin-top: -0.5em;
     }
 }
 @media screen and (min-width: 64em) {
@@ -1709,10 +1868,13 @@ input[type="search"] {
         padding-left: 1em;
         padding-right: 1em;
         margin-top: -1em;
+        padding-bottom: 1.5em;
+        background: transparent;
     }
     .has-avatar {
         text-align: right;
         display: block;
+        width: 100%;
     }
     .author-avatar {
         display: block;
@@ -1720,25 +1882,35 @@ input[type="search"] {
         float: right;
         margin-right: 0.5em;
     }
-    .author:before {
-        content: "By";
-        margin-right: 5px;
-    }
     .byline,
     .posted-on,
-    .entry-meta .comments-link {
+    .entry-meta .cat-links {
         display: inline-block;
         text-align: right;
         margin-right: 0.5em;
         padding-right: 0;
+    }
+    .entry-meta .comments-link {
+        position: relative;
+        display: inline-block;
+        margin-top: 1em;
+        top: 0;
+        right: 0;
+        width: auto;
+        margin-left: -1.5em;
+        clear: both;
+        background: gainsboro;
+    }
+    .entry-meta .cat-links,
+    .entry-meta .comments-link {
         float: right;
     }
-
 }
 @media screen and (min-width: 75em) {
     .entry-meta {
         width: 215px;
-        left: calc(-215px + 1em);
+        left: -215px;
+        /* left: calc(-215px + 1em); */
     }
 }
 
@@ -1795,6 +1967,50 @@ object {
 }
 
 /*--------------------------------------------------------------
+# Images
+--------------------------------------------------------------*/
+img.aligncenter {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+img.alignright,
+img.alignleft {
+    margin-bottom: 1.5em;
+}
+
+@media screen and (min-width: 50em) {
+    img.alignright,
+    .wp-caption.alignright {
+        margin-right: -1.5em;
+    }
+    img.alignleft,
+    .wp-caption.alignleft {
+        margin-left: -1.5em;
+    }
+}
+@media screen and (min-width: 75em) {
+    img.alignright,
+    .wp-caption.alignright {
+        margin-right: -3em;
+    }
+    img.alignrleft,
+    .wp-caption.alignleft {
+        margin-left: -3em;
+    }
+}
+
+.centered-image {
+    max-width: calc(100% + 5em);
+    margin: 2em -2.5em;
+}
+@media screen and (min-width: 50em) {
+    .centered-image {
+        max-width: calc(100vw);
+        /* margin-left: calc(-100vw - 50em); */
+    }
+}
+
+/*--------------------------------------------------------------
 ## Captions
 --------------------------------------------------------------*/
 .wp-caption {
@@ -1814,6 +2030,18 @@ object {
 
 .wp-caption-text {
 	text-align: center;
+}
+.wp-caption {
+    margin-bottom: 2em;
+    padding-bottom: 4px;
+    border-bottom: 2px solid black;
+}
+.wp-caption .wp-caption-text {
+    margin: 0 0.5em;
+    color: #404040;
+    font-size: 85%;
+    border-bottom: 1px solid black;
+    padding: 0.5em;
 }
 
 /*--------------------------------------------------------------

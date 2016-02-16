@@ -17,6 +17,13 @@
 			} else {
 				the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 			}
+                        
+                        // Add a Lead-in (from the Excerpt) if there is one
+                        if ( is_single() && 'post' === get_post_type() && has_excerpt( $post->ID ) ) {
+                            echo '<div class="lead-in">';
+                            echo '<p>' . get_the_excerpt() . '</p>';
+                            echo '</div><!-- .lead-in -->';
+                        }
 
 		if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta">

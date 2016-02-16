@@ -42,14 +42,14 @@ function jkl_posted_on() {
         // } else {
             // echo '<div class="meta-content">';
 
-	echo '<span class="byline">By ' . $byline . '</span><span class="posted-on">Published ' . $posted_on . '</span>'; // WPCS: XSS OK.
+	echo '<span class="byline">by ' . $byline . '</span><span class="posted-on">on ' . $posted_on . '</span>'; // WPCS: XSS OK.
 
         // Add Category list below
         if ( 'post' === get_post_type() ) {
 		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( '</li><li>', 'jkl' ) );
+		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
 		if ( $categories_list && jkl_categorized_blog() ) {
-			printf( '<ul class="cat-links"><li>' . esc_html__( '%1$s', 'jkl' ) . '</li></ul>', $categories_list ); // WPCS: XSS OK.
+			printf( '<br><span class="cat-links">' . esc_html__( '%1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 		}
         }
         

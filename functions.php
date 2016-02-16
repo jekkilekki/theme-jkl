@@ -144,7 +144,7 @@ function jkl_scripts() {
         wp_enqueue_script( 'foundation-js', get_template_directory_uri() . '/foundation/js/foundation.min.js', array( 'jquery' ), '20160211', true );
         
         /* @Todo - Add Custom Fonts */
-        wp_enqueue_style( 'gfonts', 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Serif+Pro:400,400italic,300,300italic,700,700italic|Volkhov' );
+        wp_enqueue_style( 'gfonts', 'https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,400italic,300,300italic,700,700italic|Volkhov|Source+Code+Pro' );
         // wp_enqueue_style( 'jkl-local-fonts', get_template_directory_uri() . '/fonts/custom-fonts.css' );
         wp_enqueue_style( 'fawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' );  
         
@@ -156,7 +156,7 @@ function jkl_scripts() {
         /* Toggle Main Search script */ //@Todo - decide if we want this
         
         /* Add dynamic back to top button */
-        wp_enqueue_script( 'jkl-topbutton', get_template_directory_uri() . '/js/topbutton-and-search.js', array( 'jquery' ), '20160211', true );        
+        wp_enqueue_script( 'jkl-topbutton', get_template_directory_uri() . '/js/topbutton-search-imgs.js', array( 'jquery' ), '20160211', true );        
         
         
         /* Custom stylesheets for custom Page templates */
