@@ -1128,6 +1128,73 @@ a:active:after {
 }
 
 /*--------------------------------------------------------------
+## Other Navigation (Post nav)
+--------------------------------------------------------------*/
+.post-navigation {
+    padding: 2em 0;
+    text-align: left;
+    overflow: hidden;
+}
+@media screen and (min-width: 50em) {
+    .post-navigation {
+        padding: 2em 2em;
+    }
+}
+.nav-links {
+    max-width: 40em;
+    margin: 0 auto;
+    padding: 0 .4em;
+}
+.post-navigation a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    padding: 1em;
+    border: 1px solid #c3c3c3;
+}
+.post-navigation a:hover,
+.post-navigation a:focus {
+    border-color: black;
+}
+.post-navigation .post-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    display: block;
+}
+.post-navigation a:hover .post-title,
+.post-navigation a:focus .post-title {
+    text-decoration: underline;
+}
+.nav-previous {
+    padding-bottom: 1em;
+}
+
+@media screen and (min-width: 30em) {
+    .nav-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        padding: 0;
+    }
+    .post-navigation .nav-previous {
+        display: flex;
+        align-items: stretch;
+        float: left;
+        width: 48%;
+    }
+    .nav-previous {
+        padding-bottom: 0;
+    }
+    .post-navigation .nav-next {
+        display: flex;
+        align-items: stretch;
+        float: right;
+        text-align: right;
+        width: 48%;
+    }
+}
+
+/*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
 /* Text meant only for screen readers. */
@@ -1880,7 +1947,7 @@ input[type="search"] {
         display: block;
         margin-bottom: 1em;
         float: right;
-        margin-right: 0.5em;
+        margin-right: 0;
     }
     .byline,
     .posted-on,
@@ -1889,6 +1956,7 @@ input[type="search"] {
         text-align: right;
         margin-right: 0.5em;
         padding-right: 0;
+        width: 100%;
     }
     .entry-meta .comments-link {
         position: relative;
@@ -1897,11 +1965,10 @@ input[type="search"] {
         top: 0;
         right: 0;
         width: auto;
-        margin-left: -1.5em;
+        /* margin-left: -1.5em; */
         clear: both;
         background: gainsboro;
     }
-    .entry-meta .cat-links,
     .entry-meta .comments-link {
         float: right;
     }
@@ -2042,6 +2109,7 @@ img.alignleft {
     font-size: 85%;
     border-bottom: 1px solid black;
     padding: 0.5em;
+    line-height: 1.6em;
 }
 
 /*--------------------------------------------------------------
@@ -2056,6 +2124,31 @@ img.alignleft {
 	text-align: center;
 	vertical-align: top;
 	width: 100%;
+}
+
+.gallery-item img {
+    padding: 5px;
+    border: 1px solid black;
+    box-sizing: content-box;
+}
+
+.gallery-item a {
+    border: none;
+}
+
+.gallery-item {
+    margin-bottom: 2em;
+    padding-bottom: 36px;
+    border-bottom: 2px solid black;
+}
+
+.gallery-item .wp-caption-text {
+    margin: 0 0.5em -32px 0;
+    color: #404040;
+    font-size: 85%;
+    border-bottom: 1px solid black;
+    padding: 0.5em;
+    line-height: 1.6em;
 }
 
 .gallery-columns-2 .gallery-item {

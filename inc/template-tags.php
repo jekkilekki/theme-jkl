@@ -401,3 +401,84 @@ function jkl_validate_gravatar($id_or_email) {
 		return false;
 	}
 }
+
+
+
+if ( ! function_exists( 'jkl_post_nav' ) ) :
+/**
+ * Display navigation to next/previous post when applicable.
+ * 
+ * Improve the post_nav() with post thumbnails. Help from this
+ * @link: http://www.measureddesigns.com/adding-previous-next-post-wordpress-post/
+ * @link: http://wpsites.net/web-design/add-featured-images-to-previous-next-post-nav-links/
+ */
+function jkl_post_nav() {
+	// Don't print empty markup if there's nowhere to navigate.
+	$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
+	$next     = get_adjacent_post( false, '', false );
+        $prevID   = $previous ? $previous->ID : '';
+        $nextID   = $next ? $next->ID : '';
+
+	if ( ! $next && ! $previous ) {
+		return;
+	}
+	?>
+	<nav class="navigation post-navigation clear" role="navigation">
+		<h2 class="screen-reader-text"><?php _e( 'Post navigation', 'jkl' ); ?></h2>
+                
+                <div class="nav-links">
+                    <?php // My custom code below FIRST, then _s code
+                    
+                    // PREVIOUS POST LINK
+                    if ( ! empty( $previous ) ) { ?>
+                    <div class="nav-previous">
+                        <a href="<?php echo get_permalink( $prevID ); ?>" rel="prev">
+                    
+                            <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) || ( has_post_thumbnail( $prevID ) && empty( $next ) ) ) { ?>
+                                    <div class="post-nav-thumb">
+                                        <?php $prev_thumb = get_the_post_thumbnail( $prevID, 'medium', array( 'class' => 'img-responsive' ) );
+                                        echo $prev_thumb ? $prev_thumb : '<img src="http://localhost:8080/wordpress/wp-content/uploads/2012/08/cropped-keytokorean-logo2.png" />';
+                                        ?>
+                                    </div>
+                            <?php } ?>
+                    
+                            <span class="meta-nav" aria-hidden="true"><?php _e( 'Previously', 'jkl' ); ?></span>
+                            <span class="screen-reader-text"><?php _e( 'Previous Post', 'jkl' ); ?></span>
+                            <span class="post-title"><?php echo $previous->post_title; ?></span>
+                            
+                        </a>
+                    </div>
+                    <?php } 
+                    
+                    // NEXT POST LINK
+                    if ( ! empty( $next ) ) { ?>
+                    <div class="nav-next">
+                        <a href="<?php echo get_permalink( $nextID ); ?>" rel="next">
+                    
+                            <?php if ( get_the_post_thumbnail( $nextID ) && get_the_post_thumbnail( $nextID ) ) { ?>
+                                    <div class="post-nav-thumb">
+                                        <?php $next_thumb = get_the_post_thumbnail( $nextID, 'medium', array( 'class' => 'img-responsive' ) );
+                                        echo $next_thumb ? $next_thumb : '<img src="http://localhost:8080/wordpress/wp-content/uploads/2012/08/cropped-keytokorean-logo2.png" />';
+                                        ?>
+                                    </div>
+                            <?php } ?>
+                    
+                            <span class="meta-nav" aria-hidden="true"><?php _e( 'Next time', 'jkl' ); ?></span>
+                            <span class="screen-reader-text"><?php _e( 'Next Post', 'jkl' ); ?></span>
+                            <span class="post-title"><?php echo $next->post_title; ?></span>
+                            
+                        </a>
+                    </div>
+                    <?php } ?>
+                    
+                </div><!-- .nav-links -->
+                    
+                        <?php /*
+				previous_post_link( '<div class="nav-previous large-6 columns">%link</div>', _x( '<span class="meta-nav">&larr;</span>&nbsp;%title', 'Previous post link', 'gojoseon' ) );
+				next_post_link( '<div class="nav-next large-6 columns">%link</div>', _x( '%title&nbsp;<span class="meta-nav">&rarr;</span>', 'Next post link', 'gojoseon' ) );
+			*/ ?>
+                
+	</nav><!-- .navigation -->
+	<?php
+}
+endif;
