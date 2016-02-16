@@ -49,6 +49,8 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
+            <div class="footer-content group">
 		<?php jkl_entry_footer(); ?>
+            </div>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->
