@@ -141,10 +141,12 @@
             </div>
 	</header><!-- #masthead -->
         
-        <div id="site-search-container" class="search-box-wrapper clear row">
-            <div class="site-search clear large-12 columns">
-                <?php get_search_form(); ?>
-            </div><!-- .site-search -->
-        </div><!-- #site-search-container -->
+        <?php if ( !is_404() && !is_search() ) : ?>
+                <div id="site-search-container" class="search-box-wrapper clear row">
+                    <div class="site-search clear large-12 columns">
+                        <?php get_search_form(); ?>
+                    </div><!-- .site-search -->
+                </div><!-- #site-search-container -->
+        <?php endif; ?>
 
 	<div id="content" class="site-content">
