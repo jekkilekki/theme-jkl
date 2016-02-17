@@ -10,14 +10,20 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <div class="hentry-index">
-	<header class="entry-header index-header">
+	<header class="entry-header">
 		<?php
 			if ( is_single() ) {
 				the_title( '<h1 class="entry-title">', '</h1>' );
 			} else {
 				the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 			}
+                        
+                        // Add a Lead-in (from the Excerpt) if there is one
+                        if ( is_single() && 'post' === get_post_type() && has_excerpt( $post->ID ) ) {
+                            echo '<div class="lead-in">';
+                            echo '<p>' . get_the_excerpt() . '</p>';
+                            echo '</div><!-- .lead-in -->';
+                        }
                         
                         // Add Featured Image after the Lead-in (if there is one)
                         if ( has_post_thumbnail() ) { ?>
@@ -27,31 +33,31 @@
                         <?php }
 
 		if ( 'post' === get_post_type() ) : ?>
-		<div class="entry-meta index-meta">
-			<?php jkl_index_posted_on(); ?>
+		<div class="entry-meta">
+			<?php jkl_posted_on(); ?>
 		</div><!-- .entry-meta -->
 		<?php
 		endif; ?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content index-content">
+	<div class="entry-content">
 		<?php
-			the_excerpt();
-                
-                        printf(
+			the_content( sprintf(
 				/* translators: %s: Name of current post. */
-				wp_kses( __( 'Continue … %s', 'jkl' ), array( 'span' => array( 'class' => array() ) ) ),
+				wp_kses( __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'jkl' ), array( 'span' => array( 'class' => array() ) ) ),
 				the_title( '<span class="screen-reader-text">"', '"</span>', false )
-                        );
+			) );
 
-			/*
-                         * wp_link_pages( array(
+			wp_link_pages( array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'jkl' ),
 				'after'  => '</div>',
 			) );
-                         * 
-                         */
 		?>
 	</div><!-- .entry-content -->
-    </div><!-- .hentry-index -->
+
+	<footer class="entry-footer">
+            <div class="footer-content group">
+		<?php jkl_entry_footer(); ?>
+            </div>
+	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->

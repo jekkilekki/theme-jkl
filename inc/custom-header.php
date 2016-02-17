@@ -25,7 +25,7 @@ function jkl_custom_header_setup() {
 		'default-image'          => '',
 		'default-text-color'     => '000000',
 		'width'                  => 1600,
-		'height'                 => 400,
+		'height'                 => 600,
 		'flex-height'            => true,
 		'wp-head-callback'       => 'jkl_header_style',
 	) ) );

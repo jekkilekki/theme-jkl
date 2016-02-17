@@ -482,3 +482,44 @@ function jkl_post_nav() {
 	<?php
 }
 endif;
+
+
+/*
+ * Customize the read-more indicator for excerpts
+ */
+function jkl_excerpt_more( $more ) {
+    return " …";
+}
+add_filter( 'excerpt_more', 'jkl_excerpt_more' );
+
+
+/*
+ * Special Index Posted On Meta info for Index pages only
+ */
+if ( ! function_exists( 'jkl_index_posted_on' ) ) :
+/**
+ * Prints HTML with meta information for the current post-date/time and author.
+ */
+function jkl_index_posted_on() {
+	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+	}
+
+	$time_string = sprintf( $time_string,
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() ),
+		esc_attr( get_the_modified_date( 'c' ) ),
+		esc_html( get_the_modified_date() )
+	);
+
+	$posted_on = sprintf(
+		esc_html_x( '%s', 'post date', 'jkl' ),
+		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+	);
+
+        echo '<div class="meta-content-index">';
+	echo '<span class="posted-on">Date: ' . $posted_on . '</span>'; // WPCS: XSS OK. 
+        echo '</div><!-- .meta-content-index -->';
+}
+endif;
