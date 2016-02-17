@@ -2158,11 +2158,10 @@ input[type="search"] {
     margin-bottom: 4em;
 }
 .hentry-index:after {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #c3c3c3;
     content: "";
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
-    position: relative;
     display: block;
 }
 .index-header {
@@ -2173,7 +2172,7 @@ input[type="search"] {
 }
 .index-header .entry-title {
     text-align: left;
-    margin: 0;
+    margin: 0 7em 0 0;
     padding: 0;
     font-size: 1.6em;
     padding-bottom: 5px;
@@ -2185,7 +2184,7 @@ input[type="search"] {
     padding: 0.5em 1em 0.75em;
     position: absolute;
     right: 0;
-    top: 1px;
+    bottom: -6px;
     border-left: 1px solid black;
     font-family: "Volkhov", serif;
     font-size: 90%;
@@ -2194,6 +2193,9 @@ input[type="search"] {
     border-top: 2px solid black;
     margin: 4px 0;
     padding: 2em 0;
+}
+.index-content p {
+    margin-bottom: 0;
 }
 
 /*--------------------------------------------------------------
@@ -2278,13 +2280,20 @@ input[type="search"] {
     margin-bottom: 2em;
     margin-top: -1.5em;
 }
-.comment-reply-link {
+.comment-reply-link a, 
+.continue-reading a {
     background: white;
-    padding: 0.5em 1.5em;
+    padding: 0.25em 1em;
     font-size: 80%;
     text-transform: uppercase;
     color: #777;
     border: 1px solid #c3c3c3;
+    display: inline-block;
+}
+.continue-reading {
+    text-align: center;
+    margin-bottom: 2em;
+    margin-top: -1em;
 }
 .comment-content a {
 	word-wrap: break-word;

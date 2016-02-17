@@ -37,12 +37,6 @@
 	<div class="entry-content index-content">
 		<?php
 			the_excerpt();
-                
-                        printf(
-				/* translators: %s: Name of current post. */
-				wp_kses( __( 'Continue … %s', 'jkl' ), array( 'span' => array( 'class' => array() ) ) ),
-				the_title( '<span class="screen-reader-text">"', '"</span>', false )
-                        );
 
 			/*
                          * wp_link_pages( array(
@@ -53,5 +47,18 @@
                          */
 		?>
 	</div><!-- .entry-content -->
+        
+        <div class="continue-reading">
+            <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+                <?php
+                    printf(
+				/* translators: %s: Name of current post. */
+				wp_kses( __( 'Continue … %s', 'jkl' ), array( 'span' => array( 'class' => array() ) ) ),
+				the_title( '<span class="screen-reader-text">"', '"</span>', false )
+                        );
+                ?>
+            </a>
+        </div><!-- .continue-reading -->
+        
     </div><!-- .hentry-index -->
 </article><!-- #post-## -->
