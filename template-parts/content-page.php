@@ -16,6 +16,21 @@
 
 	<div class="entry-content">
 		<?php
+                
+                        // Add a Lead-in (from the Excerpt) if there is one
+                        if ( has_excerpt( $post->ID ) ) {
+                            echo '<div class="lead-in">';
+                            echo '<p>' . get_the_excerpt() . '</p>';
+                            echo '</div><!-- .lead-in -->';
+                        }
+                
+                        // Add Featured Image after the Lead-in (if there is one)
+                        if ( has_post_thumbnail() ) { ?>
+                            <figure class="featured-image">
+                                <?php the_post_thumbnail(); ?>
+                            </figure>
+                        <?php }
+                
 			the_content();
 
 			wp_link_pages( array(

@@ -111,7 +111,8 @@ add_action( 'after_setup_theme', 'jkl_content_width', 0 );
  */
 function jkl_widgets_init() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'jkl' ),
+		'name'          => esc_html__( 'Widget Area', 'jkl' ),
+                'description'   => esc_html__( 'Widgets appearing in the main widget area.', 'jkl' ),
 		'id'            => 'sidebar-1',
 		'description'   => '',
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
@@ -121,7 +122,7 @@ function jkl_widgets_init() {
 	) );
         
         register_sidebar( array(
-                'name'          => esc_html__( 'Footer', 'jkl' ),
+                'name'          => esc_html__( 'Footer Widgets', 'jkl' ),
                 'description'   => esc_html__( 'Widgets appearing in the footer of the site.', 'jkl' ),
                 'id'            => 'sidebar-footer',
                 'before_widget' => '<aside id="%1$s" class="widget small-6 medium-4 large-3 %2$s">', // @Todo - check Foundation width for footer widgets
@@ -206,3 +207,16 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+
+/*
+ * My Custom Functions here
+ */
+
+/*
+ * Add Excerpts to Pages
+ */
+function jkl_add_excerpt_to_pages() {
+    add_post_type_support( 'page', 'excerpt' );
+}
+add_action( 'init', 'jkl_add_excerpt_to_pages' );

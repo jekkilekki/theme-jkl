@@ -432,6 +432,7 @@ blockquote p {
 
 cite {
     font-family: "Volkhov", serif;
+    padding: 0.3em 0;
 }
 
 hr {
@@ -1773,13 +1774,44 @@ input[type="search"] {
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
+/* 
+ * Widget Title = Page Title - find it there 
+ * Widget-area = Site-main - find it there
+ */
+
 .widget {
 	margin: 0 0 1.5em;
+}
+
+@media screen and (min-width: 42.5em) {
+    #secondary {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 2em 2.5em;
+    }
+    .widget {
+        float: left;
+        width: 250px;
+        margin: 0 1em 2em;
+    }
 }
 
 /* Make sure select elements fit in widgets. */
 .widget select {
 	max-width: 100%;
+}
+
+.widget ul,
+.widget ol {
+    padding: 0.7em 0 0;
+    margin: 0;
+    list-style-type: none;
+    font-family: "Source Sans Pro", sans-serif;
+}
+.site-content .widget li {
+    display: block;
+    padding: 0.3em 0;
 }
 
 /*--------------------------------------------------------------
@@ -1818,24 +1850,28 @@ input[type="search"] {
     opacity: 1;
 }
 
-.site-main {
+.site-main,
+.widget-area {
     font-size: 0.9em;
     line-height: 1.6em;
     margin: 2em;
 }
 
 @media screen and ( min-width: 30em ) {
-    .site-main {
+    .site-main,
+    .widget-area {
         margin: 2em 2.5em;
     }
 }
 @media screen and ( min-width: 42.5em ) {
-    .site-main {
+    .site-main,
+    .widget-area {
         font-size: 1em;
     }
 }
 @media screen and ( min-width: 50em ) {
-    .site-main {
+    .site-main,
+    .widget-area {
         max-width: 40em;
         margin: 2.5em auto;
     }
@@ -1844,7 +1880,8 @@ input[type="search"] {
     }
 }
 
-.page-title {
+.page-title,
+.widget-title {
     font-size: 1em;
     font-family: "Source Sans Pro", sans-serif;
     text-transform: uppercase;
