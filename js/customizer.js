@@ -37,4 +37,30 @@
 			}
 		} );
 	} );
+        
+        // Custom Customizer Functions
+        // Menu color and Menu text color
+        wp.customize( 'menu_color', function( value ) {
+		value.bind( function( to ) {
+			$( '#primary-nav-bar' ).css( {
+                            'background-color': to 
+                        } );
+		} );
+	} );
+        wp.customize( 'menu_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( '#main-nav-left li a, #main-nav-right li a' ).css( {
+                            'color': to 
+                        } );
+		} );
+	} );
+        
+        
+        // Custome Layout (Sidebar) Options
+        wp.customize( 'layout_setting', function( value ) {
+		value.bind( function( to ) {
+			$( '#page' ).removeClass( 'no-sidebar sidebar-right sidebar-left' ); 
+                        $( '#page' ).addClass( to );
+		} );
+	} );
 } )( jQuery );

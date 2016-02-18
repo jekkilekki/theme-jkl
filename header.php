@@ -21,10 +21,11 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="site">
+<div id="page" class="site <?php echo get_theme_mod( 'layout_setting', 'no-sidebar' ); ?>">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'jkl' ); ?></a>
 
 	<header id="masthead" class="site-header" role="banner">
+            <div class="site-logo-shadow"></div>
             <div class="top-bar">
                 <div class="row">
                     <div class="site-branding top-bar-title small-6 medium-12 large-12 columns <?php echo has_site_icon() ? 'with-icon' : ''; ?> ">
@@ -97,14 +98,14 @@
 
                                     </nav><!-- #site-navigation -->
                             </div><!-- .top-bar-center NON-Foundation -->
-
-                            <div id="social-links-division" class="small-8 medium-6 hide-for-medium large-6 columns">
+                        </div><!-- .row Foundation -->        
+                </div><!-- #primary-nav-bar -->
+                
+                <div id="social-links-division" class="small-8 medium-6 hide-for-medium large-6 columns">
                                     <nav id="social-menu-container" class="social-menu">
                                         <?php jkl_social_menu(); ?>
                                     </nav>
                             </div><!-- .top-bar-right Foundation -->
-                        </div><!-- .row Foundation -->        
-                </div><!-- #primary-nav-bar -->
                 
             </div><!-- .top-bar Foundation -->
                
@@ -140,13 +141,13 @@
                 <?php endif; // End header image check. ?>
             </div>
 	</header><!-- #masthead -->
-        
-        <?php if ( !is_404() && !is_search() ) : ?>
+
+	<div id="content" class="site-content">
+            
+            <?php if ( !is_404() && !is_search() ) : ?>
                 <div id="site-search-container" class="search-box-wrapper clear row">
                     <div class="site-search clear large-12 columns">
                         <?php get_search_form(); ?>
                     </div><!-- .site-search -->
                 </div><!-- #site-search-container -->
-        <?php endif; ?>
-
-	<div id="content" class="site-content">
+            <?php endif; ?>
