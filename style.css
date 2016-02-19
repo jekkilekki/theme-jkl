@@ -424,6 +424,7 @@ blockquote p {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     margin-bottom: 0;
+    margin-top: 0;
     padding: 1.5em;
     color: #404040;
     font-size: 1.1em;
@@ -892,15 +893,12 @@ a:active:after {
         border: 1px solid white;
     }
         #primary-nav-bar {
-            position: relative;
+            position: absolute;
+            bottom: 3px;
             background: transparent;
-            border-top: none;
+            border: none;
             padding: 0;
             height: auto;
-        }
-        #primary-nav-bar {
-            position: absolute;
-            bottom: 4px;
         }
         .thin-bar .main-navigation .menu-toggle {
             color: white;
@@ -1378,15 +1376,53 @@ a:active:after {
 --------------------------------------------------------------*/
 .top-bar {
     background-color: white;
-    /* position: fixed; */
+    position: fixed;
     border-bottom: 3px solid #000;
     transition: all 300ms ease; /* Top-bar height transition */
+    height: 93px;
+    width: 100%;
+    z-index: 10;
 }
-
-@media screen and (max-width: 39.9375em) {
-
-    height: 100px;
+/*.top-bar:before {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    background: white;
+    content: "";
+    border: 3px solid black;
+    z-index: -11;
+    box-sizing: content-box;
 }
+.top-bar:after {
+    position: absolute;
+    top: 0;
+    left: 13px;
+    width: 121px;
+    height: 90px;
+    content: "";
+    background: white;
+}
+.thin-bar.top-bar:before,
+.thin-bar.top-bar:after {
+    display: none;
+}
+@media screen and (max-width: 30em) {
+    .top-bar:before,
+    .top-bar:after {
+        display: none;
+    }
+}
+@media screen and (min-width: 40em) {
+    .top-bar:before {
+        left: 20px;
+    }
+    .top-bar:after {
+        left: 18px;
+    }
+}*/
 
 .top-bar-title {
     margin-right: 0;
@@ -1399,6 +1435,7 @@ a:active:after {
     max-width: 1600px;
     margin: 0 auto;
     height: 0;
+    margin-top: 93px;
 }
 .site-header-image div {
     background-size: 100%;
@@ -1439,18 +1476,46 @@ a:active:after {
 }
 
 .site-logo {
-    z-index: 101;
+    z-index: 11;
     width: 7em;
     padding: 10px;
     position: absolute;
     border-radius: 50%;
     background: white;
 }
-.site-logo:after {
-    z-index: 0;
+.site-logo-shadow {
+    z-index: 10;
+    width: 110px;
+    position: fixed;
+    border-radius: 50%;
+    background: white;
+    top: 51px;
+    height: 7em;
+    left: 16px;
+    box-sizing: content-box;
     border: 3px solid black;
-    margin: -3px;
-    background: black;
+}
+.thin-bar .site-logo-shadow {
+    display: none;
+}
+@media screen and (max-width: 30em) {
+    .site-logo-shadow {
+        display: none;
+    }
+}
+@media screen and (min-width: 40em) {
+    .site-logo-shadow {
+        left: 21px;
+    }
+}
+@media screen and (min-width: 50em) {
+    .site-logo-shadow {
+        width: 140px;
+        height: 140px;
+        top: 41px;
+        left: 50%;
+        margin-left: -73px;
+    }
 }
 .site-icon {
     border-radius: 50%;
@@ -1463,14 +1528,6 @@ a:active:after {
     top: 0.25em;
     left: 1em;
 }
-
-
-.top-bar {
-    z-index: 3;
-    position: relative;
-    height: 93px;
-}
-
 
 /* Thin bar on scroll */
 .top-bar.thin-bar {
@@ -1569,7 +1626,7 @@ a:active:after {
         margin-left: 0;
     }
     .site-header-image {
-        margin-top: 42px;
+        margin-top: 138px;
     }
     .thin-bar .search-toggle {
         top: 0.5em;
@@ -1581,6 +1638,7 @@ a:active:after {
         height: 48px;
         /* top: 82px; */
         border-bottom: 3px solid black;
+        border-top: 1px solid gainsboro;
         margin-left: -1em;
         width: calc(100% + 2em);
     }
@@ -1782,6 +1840,15 @@ input[type="search"] {
 .widget {
 	margin: 0 0 1.5em;
 }
+.widget-title:after {
+    margin-bottom: 1.5em!important;
+}
+.widget-area {
+    max-width: 100%!important;
+    background: #343E47;
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 @media screen and (min-width: 42.5em) {
     #secondary {
@@ -1800,11 +1867,11 @@ input[type="search"] {
 /* Make sure select elements fit in widgets. */
 .widget select {
 	max-width: 100%;
+        margin-top: 0.5em;
 }
 
 .widget ul,
 .widget ol {
-    padding: 0.7em 0 0;
     margin: 0;
     list-style-type: none;
     font-family: "Source Sans Pro", sans-serif;
@@ -1812,6 +1879,100 @@ input[type="search"] {
 .site-content .widget li {
     display: block;
     padding: 0.3em 0;
+}
+
+/* Archive and Categories widgets */
+.widget_archive li {
+    color: #404040;
+}
+.widget_categories .children {
+    padding-top: 0;
+    padding-bottom: 0.5em;
+}
+
+/* Search widget */
+.widget_search .search-submit {
+    display: none;
+}
+
+/* Pages and Menu widgets */
+.widget_pages .children,
+.widget_nav_menu .sub-menu {
+    padding-top: 0;
+    padding-bottom: 0.5em;
+}
+.widget_pages a,
+.widget_nav_menu a {
+    display: block;
+    padding: 1em 0;
+    border-bottom: 1px solid #c3c3c3;
+}
+
+.site-content .widget_pages li:last-child,
+.site-content .widget_nav_menu li:last-child {
+    margin-bottom: 0.5em;
+}
+
+/* Meta Widget */
+.site-content .widget_meta li {
+    padding: 0.3em;
+}
+
+/* RSS widget */
+.widget_rss li {
+    margin-bottom: 1.5em;
+}
+.widget li a.rsswidget {
+    padding-right: 0.5em;
+    font-size: 1em;
+    line-height: 1.4em;
+}
+.rss-date,
+.widget_rss cite {
+    color: #777;
+    font-size: 0.8em;
+}
+.rssSummary {
+    padding: 0.5em 0;
+    font-size: 0.9em;
+    line-height: 1.4em;
+}
+
+/* Calendar widget */
+.widget_calendar {
+    
+}
+.widget_calendar caption {
+    padding: 0.5em 0;
+    font-size: 1em;
+    font-weight: 700;
+    text-align: left;
+}
+.widget_calendar thead {
+    background: #333;
+    color: #fff;
+}
+.widget_calendar thead th {
+    border-bottom-width: 2px;
+}
+.widget_calendar td {
+    padding: 0.2em;
+    font-size: 0.8em;
+    text-align: center;
+    background: #d6d6d6;
+    border: 3px solid white;
+}
+.widget_calendar th {
+    border: none;
+}
+.widget_calendar .pad {
+    background: #eaeaea;
+}
+
+/* Text widget */
+.textwidget {
+    font-size: 0.8em;
+    line-height: 1.6em;
 }
 
 /*--------------------------------------------------------------
@@ -1823,6 +1984,63 @@ input[type="search"] {
 /* Necessary rule IF .entry-meta were spanning the entire width at every size */
 .content-area {
     overflow-x: hidden;
+}
+
+/* Rules for sidebar left and sidebar right. */
+@media screen and (min-width: 64em) {
+    
+    /* Sidebar Right Layouts */
+    .sidebar-right .content-area {
+        float: left;
+        width: calc(100% - 306px);
+    }
+    .sidebar-right #secondary {
+        margin: 0;
+    }
+    .sidebar-right .site-content .widget-area {
+        float: right;
+        overflow: hidden;
+        width: 17em;
+        padding: 0 1.5em;
+        border-left: 1px solid #ededed;
+    }
+    
+    /* Sidebar Left Layouts */
+    .sidebar-left .content-area {
+        float: right;
+        width: calc(100% - 306px);
+    }
+    .sidebar-left #secondary {
+        margin: 0;
+    }
+    .sidebar-left .site-content .widget-area {
+        float: left;
+        overflow: hidden;
+        width: 17em;
+        padding: 0 1.5em;
+        border-right: 1px solid #ededed;
+    }
+    
+    /* Unified styles */
+    .sidebar-right #secondary,
+    .sidebar-left #secondary {
+        background-color: white;
+        padding: 2em 0 0;
+        margin: 0;
+    }
+    .sidebar-right .widget,
+    .sidebar-left .widget {
+        padding: 0 2em;
+        margin-bottom: 0;
+    }
+    .sidebar-right .widget:after,
+    .sidebar-left .widget:after {
+        display: block;
+        width: 33%;
+        margin: 4em auto;
+        conent: "";
+        border-bottom: 1px solid #c3c3c3;
+    }
 }
 
 .topbutton {
@@ -1895,11 +2113,12 @@ input[type="search"] {
     margin-bottom: 4em;
 }
 .page-header:after,
-.secondary-title:before {
+.secondary-title:before,
+.widget-title:after {
     content: "";
     display: block;
     border-bottom: 1px solid #c3c3c3;
-    width: 30%;
+    width: 33%;
     margin: 0 auto;
     padding-top: 1.5em;
 }
@@ -2247,12 +2466,14 @@ input[type="search"] {
         margin-top: -0.5em;
     }
 }
-@media screen and (min-width: 64em) {
+@media screen and (min-width: 75em) {
     .entry-meta {
         position: absolute;
+        width: 215px;
+        left: -215px;
         top: 0;
         text-align: right;
-        width: calc(50vw - 22.5em);
+        /*width: calc(50vw - 22.5em);*/
         padding-left: 1em;
         padding-right: 1em;
         margin-top: -1em;
@@ -2292,13 +2513,6 @@ input[type="search"] {
     }
     .entry-meta .comments-link {
         float: right;
-    }
-}
-@media screen and (min-width: 75em) {
-    .entry-meta {
-        width: 215px;
-        left: -215px;
-        /* left: calc(-215px + 1em); */
     }
 }
 
@@ -2615,11 +2829,14 @@ input[type="search"] {
 .comment-respond .required {
     color: maroon;
 }
+.submit,
 .comment-respond .submit {
     margin-top: 1em;
     border-color: #c3c3c3;
     padding: 1.125em;
 }
+.submit:hover,
+.submit:focus,
 .comment-respond .submit:hover,
 .comment-respond .submit:focus {
     border-color: black;
@@ -2821,6 +3038,16 @@ img.alignleft {
 
 .gallery-caption {
 	display: block;
+}
+
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.site-footer {
+    background: black;
+    color: #777;
+    padding: 2.5em;
 }
 
 

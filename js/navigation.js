@@ -139,12 +139,14 @@
             var fixMenuHeight = 400;
             
             if ( $(this).scrollTop() >= fixMenuHeight ) {
+                $( '.site-header' ).addClass( 'thin-bar' );
                 $( '.top-bar' ).addClass( 'thin-bar' );
                 $( '#site-search-container' ).addClass( 'thin-bar' );
                 if ( !$( '.search-toggle' ).hasClass( 'active' ) ) {
                     $( '#site-search-container' ).css( "display", "none" );
                 }
             } else {
+                $( '.site-header' ).removeClass( 'thin-bar' );
                 $( '.top-bar' ).removeClass( 'thin-bar' );
                 $( '#site-search-container' ).removeClass( 'thin-bar' );
                 $( '#site-search-container' ).css( "display", "block" );

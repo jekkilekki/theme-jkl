@@ -88,6 +88,17 @@ function jkl_setup() {
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
+        
+        /**
+         * Add editor styles
+         */
+        add_editor_style( array( 
+            'foundation/css/foundation.css',
+            'inc/editor-style.css', 
+            'https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,400italic,300,300italic,700,700italic|Volkhov|Source+Code+Pro',
+            'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+            ) 
+        );
 }
 endif;
 add_action( 'after_setup_theme', 'jkl_setup' );

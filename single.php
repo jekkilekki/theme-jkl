@@ -10,6 +10,19 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area">
+            
+            
+            <?php jkl_breadcrumbs(); ?>
+            
+            <?php if ( !is_404() && !is_search() ) : ?>
+                <div id="site-search-container" class="search-box-wrapper clear row">
+                    <div class="site-search clear large-12 columns">
+                        <?php get_search_form(); ?>
+                    </div><!-- .site-search -->
+                </div><!-- #site-search-container -->
+            <?php endif; ?>
+            
+            
 		<main id="main" class="site-main" role="main">
 
 		<?php
