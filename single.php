@@ -12,7 +12,7 @@ get_header(); ?>
 	<div id="primary" class="content-area">
             
                 
-                <div id="breadcrumbs-container" class="small-12 large-6 large-pull-6 columns">
+                <div id="breadcrumbs-container" class="small-12 columns">
                     <?php jkl_breadcrumbs(); ?>
                 </div>
 

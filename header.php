@@ -23,17 +23,20 @@
 <body <?php body_class(); ?>>
 <div id="page" class="site <?php echo get_theme_mod( 'layout_setting', 'no-sidebar' ); ?>">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'jkl' ); ?></a>
-
-        <div id="site-search-container" class="search-box-wrapper clear">
-            <div class="site-search clear small-12 columns">
-                <?php get_search_form(); ?>
-            </div><!-- .site-search -->
-        </div><!-- #site-search-container -->
         
 	<header id="masthead" class="site-header" role="banner">
-            <div class="site-logo-shadow"></div>
+            
+            <!-- Site Search over EVERYTHING else - pushes site down if opened -->
+            <div id="site-search-container" class="search-box-wrapper clear">
+                <div class="site-search clear small-12 columns">
+                    <?php get_search_form(); ?>
+                </div><!-- .site-search -->
+            </div><!-- #site-search-container -->
+            
             <div class="top-bar">
                 <div class="row">
+                <div class="site-logo-shadow"></div>
+                <div class="site-logo-housing">
                     <div class="site-branding top-bar-title small-6 medium-12 large-12 columns <?php echo has_site_icon() ? 'with-icon' : ''; ?> ">
                             <?php 
                             // Add logo (site icon) 
@@ -78,6 +81,7 @@
                         <a href="#search-container" class="screen-reader-text"><?php _e( 'Search this site', 'jkl' ); ?></a>
                     </div>
                     
+                </div><!-- .site-logo-housing -->    
                 </div><!-- .row Foundation -->
                     
                 <div id="primary-nav-bar">
@@ -115,7 +119,9 @@
                 
             </div><!-- .top-bar Foundation -->
                
-            <div class="row site-header-image">
+	</header><!-- #masthead -->
+        
+        <div class="row site-header-image">
                 <?php if ( get_header_image() && !has_post_thumbnail() ) : ?>
                     <div class="small-12 columns" style="background-image: url(<?php header_image(); ?>)"></div><!-- .site-header-image -->
                         
@@ -146,6 +152,5 @@
                     <div class="small-12 columns" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post, 'featured' ); ?>)"></div><!-- .site-header-image .featured-image -->
                 <?php endif; // End header image check. ?>
             </div>
-	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

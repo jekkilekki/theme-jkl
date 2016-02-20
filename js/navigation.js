@@ -175,21 +175,19 @@
         $( window ).scroll( function() {
             var winWidth2 = $( window ).width();
 
-            if( $(this).scrollTop() <= 300 ) {
-                $( '.thin-bar #primary-nav-bar' ).removeClass( 'show' );
+            if( $(this).scrollTop() <= 150 ) {
+                $( '.thin-bar #primary-nav-bar' ).css( 'top', '92px' );
             }
             else if ( $(this).scrollTop() <= position2 && winWidth2 > 800 ) {
                 direction2 = 'down';
                 if ( direction2 !== previous2 ) {
-                    $( '.thin-bar #primary-nav-bar' ).addClass( 'show' );
-
+                    $( '.thin-bar #primary-nav-bar' ).css( 'top', '50px' );
                     previous2 = direction2;
                 }
             } else {
                 direction2 = 'up';
                 if ( direction2 !== previous2 ) {
-                    $( '.thin-bar #primary-nav-bar' ).removeClass( 'show' );
-
+                    $( '.thin-bar #primary-nav-bar' ).css( 'top', '0px' );
                     previous2 = direction2;
                 }
             }
