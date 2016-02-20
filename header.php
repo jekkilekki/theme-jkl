@@ -24,6 +24,12 @@
 <div id="page" class="site <?php echo get_theme_mod( 'layout_setting', 'no-sidebar' ); ?>">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'jkl' ); ?></a>
 
+        <div id="site-search-container" class="search-box-wrapper clear">
+            <div class="site-search clear small-12 columns">
+                <?php get_search_form(); ?>
+            </div><!-- .site-search -->
+        </div><!-- #site-search-container -->
+        
 	<header id="masthead" class="site-header" role="banner">
             <div class="site-logo-shadow"></div>
             <div class="top-bar">
@@ -76,13 +82,13 @@
                     
                 <div id="primary-nav-bar">
                         <div class="row">
-                            <div id="main-nav-division" class="small-4 medium-2 medium-push-10 large-8 columns">
+                            <div id="main-nav-division" class="small-4 medium-2 medium-push-10 large-8">
                                     <nav id="site-navigation" class="main-navigation" role="navigation">
                                             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'jkl' ); ?></button>
                                             
                                             <?php 
                                             // This is the split menu, only showing up on larger screens - custom menu output ?>
-                                            <div class="split-navigation-menu show-for-large">
+                                            <div class="split-navigation-menu show-for-large columns">
                                                 <?php 
                                                 $split_nav = jkl_split_main_nav( 'primary', false ); 
                                                 echo $split_nav->left_menu;

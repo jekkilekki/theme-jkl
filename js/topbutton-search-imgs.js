@@ -23,10 +23,10 @@ jQuery( document ).ready( function( $ ){
    });
    
    $( '.search-toggle' ).click( function() {
-       var isShowing = $( '.thin-bar #primary-nav-bar' ).hasClass( 'show' );
+       /*var isShowing = $( '.thin-bar #primary-nav-bar' ).hasClass( 'show' );
        if ( isShowing ) {
            $( '.thin-bar #primary-nav-bar' ).removeClass( 'show' );
-       }
+       }*/
        $( '#site-search-container' ).slideToggle( 'slow', function() {
            $( '.search-toggle' ).toggleClass( 'active' );
        });

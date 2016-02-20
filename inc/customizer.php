@@ -120,11 +120,11 @@ function jkl_customizer_css() {
     
     ?>
     <style>
-        #primary-nav-bar {
+        .split-navigation-menu {
             background: <?php echo $menu_color; ?>
         }
-        #main-nav-left > li a,
-        #main-nav-right > li a {
+        #main-nav-left li a,
+        #main-nav-right li a {
             color: <?php echo $menu_text_color; ?>
         }
     </style>

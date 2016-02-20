@@ -42,7 +42,7 @@
         // Menu color and Menu text color
         wp.customize( 'menu_color', function( value ) {
 		value.bind( function( to ) {
-			$( '#primary-nav-bar' ).css( {
+			$( '.split-navigation-menu' ).css( {
                             'background-color': to 
                         } );
 		} );

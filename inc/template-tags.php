@@ -593,6 +593,33 @@ if ( ! function_exists( 'jkl_breadcrumbs' ) ) :
  */
 function jkl_breadcrumbs() {
     
+    if (!is_home()) {
+        
+        // Settings
+        $separator          = '<span class="breadcrumb-separator">&raquo;</span>';
+        $breadcrumb_id      = 'breadcrumbs';
+        $breadcrumb_class   = 'breadcrumbs';
+        
+        // Build the breadcrumbs
+        echo "<div aria-label='You are here:' id='$breadcrumb_id' class='$breadcrumb_class'>";
+		echo '<a aria-label="Home" title="Home" class="breadcrumb-home" href="';
+		echo get_option('home');
+		echo '"><span class="screen-reader-text">';
+		bloginfo('name');
+		echo "</span></a>$separator";
+		if (is_category() || is_single()) {
+			the_category('title_li=');
+                        if (is_single()) {
+				echo "$separator";
+				// the_title();
+			}
+		} elseif (is_page()) {
+			// echo the_title();
+		}
+        echo '</div>';
+    }
+
+    /*
     // Settings
     $separator          = '/';
     $breadcrumb_id      = 'breadcrumbs';
@@ -638,7 +665,7 @@ function jkl_breadcrumbs() {
             // Get post category info
             $category = get_the_category();
             
-            if( !empty( $category ) ) {
+            if( !empty( $category ) || empty( $category ) ) {
                 
                 // Get last category post is in
                 $last_category = end( array_values( $category ) );
@@ -798,7 +825,7 @@ function jkl_breadcrumbs() {
        
         echo '</ul></nav>';
            
-    }
+    }*/
        
 }
 endif;
