@@ -1421,6 +1421,7 @@ a:active:after {
     z-index: 2;
 }
 .top-bar {
+<<<<<<< HEAD
     position: absolute;
     width: 100%;
     /*background-color: white;
@@ -1497,6 +1498,20 @@ a:active:after {
 }
 .site-icon {
     border-radius: 50%;
+}
+@media screen and (max-width: 30em) {
+    .top-bar:before,
+    .top-bar:after {
+        display: none;
+    }
+}
+@media screen and (min-width: 40em) {
+    .top-bar:before {
+        left: 20px;
+    }
+    .top-bar:after {
+        left: 18px;
+    }
 }
 
 .thin-bar .site-logo {
@@ -2638,13 +2653,13 @@ input[type="search"] {
         top: 0;
         right: 0;
         width: auto;
-        /* margin-left: -1.5em; */
+        /* margin-left: -1.5em;
         clear: both;
         background: gainsboro;
     }
     .entry-meta .comments-link {
         float: right;
-    }
+    }*/
 }
 
 /*--------------------------------------------------------------
@@ -3186,11 +3201,11 @@ img.alignleft {
 /**
  *  FIXES for Foundation and WordPress
  */
-@media screen and (max-width: 600px) {
+//@media screen and (max-width: 600px) {
     #wpadminbar {
         position: fixed;
     }
-}
+//}
 /* Foundation RESET */
 .menu > li {
     display: block; // instead of table-cell - which made it overflow
