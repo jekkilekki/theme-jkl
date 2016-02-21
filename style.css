@@ -894,7 +894,7 @@ a:active:after {
 @media screen and (min-width: 40em) {
     .menu-toggle {
         position: absolute;
-        bottom: 0;
+        bottom: -5em;
         left: -2em;
         border: 1px solid white;
     }
@@ -1421,8 +1421,7 @@ a:active:after {
     z-index: 2;
 }
 .top-bar {
-<<<<<<< HEAD
-    position: absolute;
+    position: relative;
     width: 100%;
     /*background-color: white;
     position: fixed;
@@ -1578,7 +1577,7 @@ a:active:after {
 .site-header-image div {
     background-size: 100%;
     padding-top: 37%;
-    margin-bottom: 2em;
+    /*margin-bottom: 2em;*/
 }
 
 .site-branding {
@@ -2293,7 +2292,7 @@ input[type="search"] {
 	display: block;
         background: whitesmoke;
         padding: 3em 2em 1em;
-        margin: 0 -2em 4em!important;
+        margin: -2em -2em 4em!important;
         position: relative;
 }
 .sticky .hentry-index {
@@ -2653,13 +2652,13 @@ input[type="search"] {
         top: 0;
         right: 0;
         width: auto;
-        /* margin-left: -1.5em;
+        /* margin-left: -1.5em;*/
         clear: both;
         background: gainsboro;
     }
     .entry-meta .comments-link {
         float: right;
-    }*/
+    }
 }
 
 /*--------------------------------------------------------------
@@ -2708,11 +2707,11 @@ input[type="search"] {
 }
 .continue-reading a {
     background: white;
-    padding: 0.25em 1em;
+    padding: 0.5em 1.5em;
     font-size: 80%;
     text-transform: uppercase;
     color: #777;
-    border: 1px solid #c3c3c3;
+    border: 3px solid #dcdcdc;
     display: inline-block;
 }
 .continue-reading {
