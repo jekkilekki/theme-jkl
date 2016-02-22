@@ -85,14 +85,14 @@
                 </div><!-- .row Foundation -->
                     
                 <div id="primary-nav-bar">
-                        <div class="row">
+                        <div class="columns">
                             <div id="main-nav-division" class="small-4 medium-2 medium-push-10 large-8">
                                     <nav id="site-navigation" class="main-navigation" role="navigation">
                                             <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'jkl' ); ?></button>
                                             
                                             <?php 
                                             // This is the split menu, only showing up on larger screens - custom menu output ?>
-                                            <div class="split-navigation-menu show-for-large columns">
+                                            <div class="split-navigation-menu show-for-large">
                                                 <?php 
                                                 $split_nav = jkl_split_main_nav( 'primary', false ); 
                                                 echo $split_nav->left_menu;

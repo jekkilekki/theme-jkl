@@ -901,12 +901,19 @@ a:active {
             padding: 0;
             height: auto;
         }
+        #primary-nav-bar.hide {
+            display: block!important;
+        }
+        .thin-bar #primary-nav-bar {
+            bottom: 50px;
+            z-index: 1000;
+        }
         .thin-bar .main-navigation .menu-toggle {
             color: white;
             border-color: black;
-            border-bottom: none;
+/*            border-bottom: none;
             border-left: none;
-            border-right: none;
+            border-right: none;*/
         }
         .main-navigation.toggled .menu-toggle {
             border-color: black;
@@ -915,9 +922,9 @@ a:active {
         }
         .thin-bar .main-navigation.toggled .menu-toggle {
             border-color: white;
-            border-bottom: none;
+/*            border-bottom: none;
             border-left: none;
-            border-right: none;
+            border-right: none;*/
             background: black;
             color: white;
         }
@@ -927,9 +934,9 @@ a:active {
         }
         .main-navigation.toggled .nav-menu {
             position: fixed;
-            margin-top: 7px;
+            margin-top: 87px;
             width: 60%;
-            right: 2em;
+            right: 2.5em;
         }
         
 }
@@ -1690,6 +1697,8 @@ a:active {
     }
     .site-branding {
         margin-top: 10px;
+        padding-left: 1.9375em;
+        padding-right: 1.9375em;
     }
     .thin-bar .site-branding {
         margin-top: 0;
@@ -1716,8 +1725,9 @@ a:active {
         font-size: 1.6rem;
         margin-top: 1.4em;
     }
-    .top-bar.thin-bar .site-title {
+    .thin-bar .site-title {
         font-size: 1.2em;
+        margin-left: 0;
     }
     .site-description {
         text-align: right;
@@ -1732,7 +1742,7 @@ a:active {
     }
     #primary-nav-bar {
         /*position: relative;*/
-        z-index: 1;
+        z-index: 1!important;
         height: 45px;
          top: 92px; 
         border-bottom: 3px solid transparent;
@@ -1761,6 +1771,8 @@ a:active {
         display: block!important;
         background: #dcdcdc;
         height: 45px;
+        padding-left: 1em;
+        padding-right: 1em;
     }
     #social-links-division {
         display: block!important;
@@ -1815,6 +1827,35 @@ a:active {
     }
     .thin-bar #main-nav-division {
         /* bottom: 33px; */ 
+    }
+}
+@media screen and (min-width: 75em) {
+    #site-search-container {
+        padding: 1.5em calc((100vw - 82.5em) / 2);
+    }
+    .top-bar {
+        padding: 0 calc((100vw - 82.5em) / 2);
+    }
+    .site-logo-housing
+    {
+        padding: 0 calc((100vw - 84.5em) / 2);
+    }
+    #social-links-division {
+        position: relative!important;
+    }
+}
+@media screen and (min-width: 82.5em) {
+    .search-toggle {
+        position: relative!important;
+        margin-left: 67.75em;
+    }
+    .search-toggle i {
+        position: absolute;
+        right: 8px;
+        top: 10px;
+    }
+    .split-navigation-menu {
+        padding: 0 calc((100vw - 80.5em) / 2);
     }
 }
 
@@ -1892,6 +1933,8 @@ a:active {
     padding: 4px 8px 6px;
     border-radius: 0 0 5px 5px;
     background: steelblue;
+    width: 34px;
+    height: 38px;
 }
 .search-box-wrapper {
     padding: 1.5em 2em;
