@@ -15,6 +15,11 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area">
+            
+                <div id="breadcrumbs-container" class="small-12 columns">
+                    <?php jkl_breadcrumbs(); ?>
+                </div>
+            
 		<main id="main" class="site-main" role="main">
 
 			<?php

@@ -608,7 +608,7 @@ function jkl_breadcrumbs() {
 		bloginfo('name');
 		echo "</span></a>$separator";
 		if (is_category() || is_single()) {
-			the_category('title_li=');
+			the_category('<span class="breadcrumb-separator">&raquo;</span>');
                         if (is_single()) {
 				echo "$separator";
 				// the_title();

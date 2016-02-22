@@ -597,12 +597,11 @@ a {
         position: relative;
         padding-bottom: 2px;
         text-decoration: none;
-        font-style: italic;
         
 }
 
 a:visited {
-	color: purple;
+	color: steelblue;
 }
 
 a:hover,
@@ -618,21 +617,6 @@ a:focus {
 a:hover,
 a:active {
 	outline: 0;
-}
-
-// Thank you CSS-Tricks gradients: https://css-tricks.com/snippets/css/gradient-underlines/
-a:hover:after,
-a:focus:after,
-a:active:after {
-    content: "";
-    position: absolute;
-    display: block;
-    bottom: 2px;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    background: #444;
-    background: linear-gradient(left, transparent 0%,#444 50%,transparent 100%);
 }
 
 /*--------------------------------------------------------------
@@ -791,11 +775,8 @@ a:active:after {
     width: 100%;
     height: 60px;
     padding: 1em;
+    transition: all 300ms ease;
 }
-/*.thin-bar #primary-nav-bar.show {
-    display: block!important;
-}*/
-
 .menu-toggle {
     background: transparent;
     border: none;
@@ -807,6 +788,20 @@ a:active:after {
     bottom: 0.6em;
     left: 1em;
     padding: 10px 16px;
+    transition: all 300ms ease;
+}
+@media screen and (max-width: 40em) {
+    #primary-nav-bar.hide {
+        bottom: -60px;
+        display: block!important;
+    }
+    #primary-nav-bar.hide .menu-toggle {
+        bottom: -70px;
+    }
+    #social-links-division.hide {
+        bottom: -70px!important;
+        display: block!important;
+    }
 }
 .menu-toggle:before {
     font-family: "FontAwesome";
@@ -1175,7 +1170,7 @@ a:active:after {
 .post-navigation {
     text-align: left;
     overflow: hidden;
-    background: whitesmoke;
+    background: #efefef;
     padding: 2em 2.5em;
     margin: 3em -2.5em;
 }
@@ -1190,7 +1185,7 @@ a:active:after {
     margin: 0 auto;
     padding: 0;
 }
-.comment-pagination {
+/*.comment-pagination {
     text-align: center;
     padding: 5px;
 }
@@ -1209,7 +1204,7 @@ a:active:after {
 }
 .comment-pagination .current {
     background: white;
-}
+}*/
 @media screen and (min-width: 50em) {
     .paging-navigation,
     .comment-navigation,
@@ -1231,6 +1226,7 @@ a:active:after {
     }
 }
 .paging-navigation a,
+.comment-pagination a,
 .comment-navigation a,
 .post-navigation a {
     display: block;
@@ -1242,6 +1238,8 @@ a:active:after {
 }
 .paging-navigation a:hover,
 .paging-navigation a:focus,
+.comment-pagination a:hover,
+.comment-pagination a:focus,
 .comment-navigation a:hover,
 .comment-navigation a:focus,
 .post-navigation a:hover,
@@ -1275,6 +1273,7 @@ a:active:after {
 
 @media screen and (min-width: 30em) {
     .paging-navigation .nav-links,
+    .comment-pagination .nav-links,
     .post-navigation .nav-links,
     .comment-navigation .nav-links {
         display: flex;
@@ -1283,6 +1282,7 @@ a:active:after {
         padding: 0;
     }
     .paging-navigation .nav-previous,
+    .comment-pagination .nav-previous,
     .comment-navigation .nav-previous,
     .post-navigation .nav-previous {
         display: flex;
@@ -1294,6 +1294,7 @@ a:active:after {
         padding-bottom: 0;
     }
     .paging-navigation .nav-next,
+    .comment-pagination .nav-next,
     .comment-navigation .nav-next,
     .post-navigation .nav-next {
         display: flex;
@@ -1304,8 +1305,9 @@ a:active:after {
     }
 }
 
-.paging-navigation {
-    margin-top: -2em;
+.paging-navigation,
+.comment-pagination {
+    /*margin-top: -2em;*/
     text-align: center;
 }
 .paging-navigation ul {
@@ -1317,10 +1319,12 @@ a:active:after {
 .paging-navigation li {
     display: inline-block;
 }
-.paging-navigation li a {
+.paging-navigation li a,
+.comment-pagination a {
     padding: 0.3em 1.4em;
 }
-.paging-navigation .current {
+.paging-navigation .current,
+.comment-pagination .current {
     padding: 0.8em 1.1em;
 }
 
@@ -1709,8 +1713,8 @@ a:active:after {
     }
     .site-title {
         text-align: left;
-        font-size: 1.5rem;
-        margin-top: 0.9em;
+        font-size: 1.6rem;
+        margin-top: 1.4em;
     }
     .top-bar.thin-bar .site-title {
         font-size: 1.2em;
@@ -1718,7 +1722,7 @@ a:active:after {
     .site-description {
         text-align: right;
         position: relative;
-        top: -2em;
+        top: -1.5em;
     }
     .thin-bar .top-bar-title {
         margin-left: 0;
@@ -1729,7 +1733,6 @@ a:active:after {
     #primary-nav-bar {
         /*position: relative;*/
         z-index: 1;
-        background: gainsboro;
         height: 45px;
          top: 92px; 
         border-bottom: 3px solid transparent;
@@ -1741,10 +1744,11 @@ a:active:after {
     .thin-bar #primary-nav-bar {
         /*display: none;*/
         /*border-bottom: none;*/
-        top: 0px;
-    }
-    .thin-bar #primary-nav-bar.show {
         top: 50px;
+    }
+    .thin-bar #primary-nav-bar.hide {
+        top: 0px;
+        display: block!important;
     }
     
     .main-navigation .nav-menu li {
@@ -1756,22 +1760,28 @@ a:active:after {
     .split-navigation-menu {
         display: block!important;
         background: #dcdcdc;
+        height: 45px;
     }
     #social-links-division {
         display: block!important;
-        position: absolute;
-        right: 1em;
-        top: -1em;
+        position: absolute!important;
+        right: 44px!important;
+        top: 0;
         background: transparent;
         width: auto;
-        margin-top: -2.25em;
+        margin: 0;
+        border: 1px solid gainsboro;
+        border-top: none;
+        border-radius: 0 0 0 5px;
+        padding: 5px 10px;
+        height: 38px;
     }
-    #social-links-division a:after {
+    /*#social-links-division a:after {
         color: gainsboro;
     }
     .thin-bar #social-links-division {
         right: 2.5em;
-    }
+    }*/
     #main-nav-division {
         width: 100%;
         left: 0;
@@ -1813,6 +1823,7 @@ a:active:after {
     bottom: 0.85em;
     right: 0;
     z-index: 101;
+    transition: all 300ms ease;
 }
 #menu-social-items {
     margin-bottom: 0;
@@ -1871,49 +1882,41 @@ a:active:after {
 --------------------------------------------------------------*/
 .search-toggle {
     position: absolute;
-    right: 1em;
-    bottom: 0.3em;
-    color: #ccc;
+    right: 12px;
+    top: 0;
+    color: white;
     text-align: center;
     cursor: pointer;
     font-size: 1.2em;
     z-index: 500;
+    padding: 4px 8px 6px;
+    border-radius: 0 0 5px 5px;
+    background: steelblue;
 }
 .search-box-wrapper {
     padding: 1.5em 2em;
-    background: gainsboro;
+    background: steelblue;
     display: none;
-    border-bottom: 1px solid #c3c3c3;
     height: 86px;
 }
-/*.thin-bar .search-toggle {
+.thin-bar .search-toggle {
     display: block;
+    /*color: black;
+    background: white;
+    bottom: 10px;*/
 }
 .search-toggle:hover,
 .search-toggle:active {
     
 }
-
-input[type="search"] {
-    width: 100%;
-}
-.search-box-wrapper {
-    width: 100%;
-    display: none;
-}
-.site-search {
-    padding: 2em 2em 1em;
-    background: transparent;
-    margin-bottom: 0;
-}*/
 .site-search .search-field {
     max-width: 100%;
     padding: 1rem 1.25rem;
     font-size: 1.2rem;
     background-color: transparent;
-    border: 1px solid #aaa;
+    border: 1px solid white;
     margin-bottom: 0;
-    color: #777;
+    color: white;
 }
 .site-search input[type="search"] {
     color: #777;
@@ -1940,7 +1943,7 @@ input[type="search"] {
 }
 .widget-area {
     max-width: 100%!important;
-    background: #343E47;
+    background: #efefef;
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -2084,6 +2087,7 @@ input[type="search"] {
 /* Necessary rule IF .entry-meta were spanning the entire width at every size */
 .content-area {
     overflow-x: hidden;
+    margin-top: 2em;
 }
 
 /* Rules for sidebar left and sidebar right. */
@@ -2210,7 +2214,7 @@ input[type="search"] {
     letter-spacing: 2px;
 }
 .page-header {
-    margin-bottom: 4em;
+    margin-bottom: 2em;
 }
 .page-header:after,
 .secondary-title:before,
@@ -2226,17 +2230,17 @@ input[type="search"] {
     margin-bottom: 1.5em;
 }
 .taxonomy-description {
-    margin: 1em auto;
+    margin: 1.5em auto 1em;
     text-align: center;
     font-style: italic;
-    background: whitesmoke;
+    background: #efefef;
     padding: 5px;
     max-width: 30em;
 }
 .taxonomy-description p {
     margin-bottom: 0;
     padding: 1em;
-    border: 3px solid white;
+    border: 2px solid white;
 }
 
 /*--------------------------------------------------------------
@@ -2272,6 +2276,21 @@ input[type="search"] {
 .entry-summary a {
     text-decoration: none;
     border-bottom: 2px solid #c3c3c3;
+    font-style: italic;
+    color: steelblue;
+}
+// Thank you CSS-Tricks gradients: https://css-tricks.com/snippets/css/gradient-underlines/
+.entry-content a:after,
+.entry-summary a:after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: 2px;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: #444;
+    background: linear-gradient(left, transparent 0%,#444 50%,transparent 100%);
 }
 .entry-content a:hover,
 .entry-content a:focus,
@@ -2863,7 +2882,8 @@ input[type="search"] {
     margin-bottom: 2em;
     margin-top: -1.5em;
 }
-.comment-reply-link a {
+.comment-reply-link a,
+.reply a.comment-reply-link {
     background: white;
     padding: 0.25em 1em;
     font-size: 80%;

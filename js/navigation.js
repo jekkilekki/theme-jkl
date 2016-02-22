@@ -111,51 +111,76 @@
 		}
 	});
         
-        // Hide/show toggle menu on scroll (mobile)
+        /**
+         *  Scrolling funtions
+         *  1. Make the header "thin" on scroll
+         *  2. Show/hide the menu toggle on smaller screens
+         *  2. Show/hide the menu bar on larger screens
+         */
         var position, direction, previous;
         
         $( window ).scroll( function() {
-            var winWidth = $( window ).width();
-
-            if ( $(this).scrollTop() >= position && winWidth < 640 && !( $( '#site-navigation' ).hasClass( 'toggled' ) ) ) {
-                direction = 'down';
-                if ( direction !== previous ) {
-                    $( '#primary-nav-bar' ).addClass( 'hide' );
-                    $( '#social-links-division' ).addClass( 'hide' );
-
-                    previous = direction;
-                }
-            } else {
-                direction = 'up';
-                if ( direction !== previous ) {
-                    $( '#primary-nav-bar' ).removeClass( 'hide' );
-                    $( '#social-links-division' ).removeClass( 'hide' );
-
-                    previous = direction;
-                }
-            }
-            position = $(this).scrollTop();
             
-            
-            // Change and fix the main nav menu on scroll down
+            // Make the header "thin" on scroll
             var fixMenuHeight = 400;
             
             if ( $(this).scrollTop() >= fixMenuHeight ) {
                 $( '.site-header' ).addClass( 'thin-bar' );
                 $( '.top-bar' ).addClass( 'thin-bar' );
-                /*$( '#site-search-container' ).addClass( 'thin-bar' );
-                if ( !$( '.search-toggle' ).hasClass( 'active' ) ) {
-                    $( '#site-search-container' ).css( "display", "none" );
-                }*/
             } else {
                 $( '.site-header' ).removeClass( 'thin-bar' );
                 $( '.top-bar' ).removeClass( 'thin-bar' );
-                /*$( '#site-search-container' ).removeClass( 'thin-bar' );
-                $( '#site-search-container' ).css( "display", "block" );*/
             }
+            
+            
+            var winWidth = $( window ).width();
+            
+            // Show/hide the menu toggle on smaller screens
+            if ( winWidth < 800 ) {
+                if ( $(this).scrollTop() >= position && !( $( '#site-navigation' ).hasClass( 'toggled' ) ) ) {
+                    direction = 'down';
+                    if ( direction !== previous ) {
+                        $( '#primary-nav-bar' ).addClass( 'hide' );
+                        $( '#social-links-division' ).addClass( 'hide' );
+
+                        previous = direction;
+                    }
+                } else {
+                    direction = 'up';
+                    if ( direction !== previous ) {
+                        $( '#primary-nav-bar' ).removeClass( 'hide' );
+                        $( '#social-links-division' ).removeClass( 'hide' );
+
+                        previous = direction;
+                    }
+                }
+            }
+            // Show/hide the menu bar on larger screens
+            else {
+                if ( $(this).scrollTop() >= position && $(this).scrollTop() >= fixMenuHeight ) {
+                    direction = 'down';
+                    if ( direction !== previous ) {
+                        $( '.thin-bar #primary-nav-bar' ).addClass( 'hide' );
+
+                        previous = direction;
+                    }
+                } else {
+                    direction = 'up';
+                    if ( direction !== previous ) {
+                        $( '.thin-bar #primary-nav-bar' ).removeClass( 'hide' );
+
+                        previous = direction;
+                    }
+                }
+            }
+            position = $(this).scrollTop();
+            
+            
+            
             
         } );
         
+        // Appropriately resize the window 
         $( window ).resize( function() {
             if ( $( window ).width() > 640 ) {
                 $( '#primary-nav-bar' ).removeClass( 'hide' );
@@ -170,28 +195,32 @@
         } );
         
         // Hide/show site menu on scroll (medium to large screens)
-        var position2, direction2, previous2;
+        /*var position2, direction2, previous2;
         
         $( window ).scroll( function() {
             var winWidth2 = $( window ).width();
 
+            // If the nav-menu bar is showing
+            if( winWidth2 > 800 ) {
+                
+            }
             if( $(this).scrollTop() <= 150 ) {
-                $( '.thin-bar #primary-nav-bar' ).css( 'top', '92px' );
+                $( '#primary-nav-bar' ).css( 'top', '92px' );
             }
             else if ( $(this).scrollTop() <= position2 && winWidth2 > 800 ) {
                 direction2 = 'down';
                 if ( direction2 !== previous2 ) {
-                    $( '.thin-bar #primary-nav-bar' ).css( 'top', '50px' );
+                    $( '#primary-nav-bar' ).css( 'top', '50px' );
                     previous2 = direction2;
                 }
             } else {
                 direction2 = 'up';
                 if ( direction2 !== previous2 ) {
-                    $( '.thin-bar #primary-nav-bar' ).css( 'top', '0px' );
+                    $( '#primary-nav-bar' ).css( 'top', '0px' );
                     previous2 = direction2;
                 }
             }
             position2 = $(this).scrollTop();
-        } );
+        } );*/
         
 } )( jQuery );

@@ -20,7 +20,9 @@ function jkl_customize_register( $wp_customize ) {
          * #1: Settings, #2: Controls
          */
         
-        /* Menu Background Color */
+        /* 
+         * Menu Background Color 
+         */
         // Menu Color Setting
         $wp_customize->add_setting( 'menu_color', array(
             'default'           => '#dcdcdc',
@@ -40,7 +42,9 @@ function jkl_customize_register( $wp_customize ) {
                         )
         ) );
         
-        /* Menu Text Color */
+        /* 
+         * Menu Text Color 
+         */
         // Menu Text Color Setting
         $wp_customize->add_setting( 'menu_text_color', array(
             'default'           => '#777777',
@@ -60,7 +64,31 @@ function jkl_customize_register( $wp_customize ) {
                         )
         ) );
         
-        /* Select Sidebar Layout */
+        /*
+         * Highlight Color
+         */
+        // Highlight Color Setting
+        $wp_customize->add_setting( 'highlight_color', array(
+            'default'           => '#4682B4', // steelblue
+            'type'              => 'theme_mod',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'transport'         => 'postMessage'
+        ) );
+        
+        // Highligh Color Control
+        $wp_customize->add_control(
+                new WP_Customize_Color_Control(
+                        $wp_customize,
+                        'highlight_color', array(
+                            'label'         => __( 'Highlight Color', 'jkl' ),
+                            'description'   => __( 'Change the color of site highlights, inluding links.', 'jkl' ),
+                            'section'       => 'colors',
+                        )
+        ) );
+        
+        /* 
+         * Select Sidebar Layout 
+         */
         // Add Sidebar Layout Section
         $wp_customize->add_section( 'jkl-options', array(
             'title'         => __( 'Theme Options', 'jkl' ),
@@ -117,6 +145,7 @@ function jkl_sanitize_layout ( $value ) {
 function jkl_customizer_css() {
     $menu_color = get_theme_mod( 'menu_color' );
     $menu_text_color = get_theme_mod( 'menu_text_color' );
+    $highlight_color = get_theme_mod( 'highlight_color' );
     
     ?>
     <style>
@@ -126,6 +155,10 @@ function jkl_customizer_css() {
         #main-nav-left li a,
         #main-nav-right li a {
             color: <?php echo $menu_text_color; ?>
+        }
+        .entry-content a,
+        .entry-summary a {
+            color: <?php echo $highlight_color; ?>
         }
     </style>
     <?php
