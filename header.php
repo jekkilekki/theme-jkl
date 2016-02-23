@@ -120,7 +120,7 @@
                                             <?php
                                             // This is the full navigation menu, original from Underscores, using TwentyFifteen toggles - shown on tablets and mobile devices ?>
                                             <div class="full-navigation-menu show-for-medium-down hide-for-large-up">
-                                                <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'menu_class' => 'nav-menu' ) ); ?>
+                                                <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
                                             </div>
 
                                     </nav><!-- #site-navigation -->
