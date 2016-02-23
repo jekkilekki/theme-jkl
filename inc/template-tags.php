@@ -313,7 +313,7 @@ function jkl_split_main_nav( $menu_name = null, $raw = false ) {
     
     else {
         
-        echo '<em>Please select a menu for your primary navigation.</em>';
+        echo '<em>' . __( 'Please select a menu for your primary navigation.', 'jkl') . '</em>';
         
     }
     

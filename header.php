@@ -35,31 +35,44 @@
             
             <div class="top-bar">
                 <div class="row">
-                <div class="site-logo-shadow"></div>
+                
+                <?php 
+                // Only create a shadow (outline) for the site icon IF there is an icon
+                if ( has_site_icon() ) { ?>
+                    <div class="site-logo-shadow"></div>
+                <?php } ?>
+                    
+                    
                 <div class="site-logo-housing">
                     <div class="site-branding top-bar-title small-6 medium-12 large-12 columns <?php echo has_site_icon() ? 'with-icon' : ''; ?> ">
-                            <?php 
-                            // Add logo (site icon) 
-                            $site_title = get_bloginfo( 'name' ); 
-                            $site_icon = esc_url( get_site_icon_url( 200 ) ); ?>
 
-                            <div class="site-logo">
-                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                                    <div class="screen-reader-text">
-                                        <?php printf( esc_html( 'Go to the homepage of %1$s', 'jkl' ), $site_title ); ?>
-                                    </div>
-                                    <div class="site-icon-title">
-                                        <?php 
-                                        if ( has_site_icon() ) : ?>
-                                            <img class="site-icon" src="<?php echo $site_icon; ?>" alt="">
-                                        <?php
-                                        else : ?>
-                                            <p><?php echo $site_title; ?></p>
-                                        <?php
-                                        endif; ?>
-                                    </div>
-                                </a>
-                            </div>
+                            <?php 
+                            // Add logo (site icon)
+                            // BUT only show the site icon IF there is one, otherwise, show nothing
+                            if ( has_site_icon() ) : 
+                                $site_title = get_bloginfo( 'name' );
+                                $site_icon = esc_url( get_site_icon_url( 200 ) ); ?>
+                            
+                                <div class="site-logo">
+                                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                                        <div class="screen-reader-text">
+                                            <?php printf( esc_html( 'Go to the homepage of %1$s', 'jkl' ), $site_title ); ?>
+                                        </div>
+                                        <div class="site-icon-title">
+                                            <?php 
+                                            /* if ( has_site_icon() ) : */ ?>
+                                                <img class="site-icon" src="<?php echo $site_icon; ?>" alt="">
+                                            <?php
+                                            /* else : // We could use this LATER in v.2 if we want to the site title in place of the icon - styles exist EXCEPT for thin-bar and responsive ?>
+                                                <p><?php echo $site_title; ?></p>
+                                            <?php
+                                            endif; */ ?>
+                                        </div>
+                                    </a>
+                                </div>
+                        
+                            <?php endif; ?>
+                        
                         
                             <?php
                             if ( is_front_page() && is_home() ) : ?>
@@ -94,9 +107,13 @@
                                             // This is the split menu, only showing up on larger screens - custom menu output ?>
                                             <div class="split-navigation-menu show-for-large">
                                                 <?php 
-                                                $split_nav = jkl_split_main_nav( 'primary', false ); 
-                                                echo $split_nav->left_menu;
-                                                echo $split_nav->right_menu;
+                                                if ( has_nav_menu( 'primary' ) ) {
+                                                    $split_nav = jkl_split_main_nav( 'primary', false ); 
+                                                    echo $split_nav->left_menu;
+                                                    echo $split_nav->right_menu;
+                                                } else {
+                                                    echo '<em class="menu-warning">' . __( 'Please select a menu for your primary navigation.', 'jkl') . '</em>';
+                                                }
                                                 ?>
                                             </div>
                                             
@@ -123,7 +140,7 @@
         
         <div class="row site-header-image">
                 <?php if ( get_header_image() && !has_post_thumbnail() ) : ?>
-                    <div class="small-12 columns" style="background-image: url(<?php header_image(); ?>)"></div><!-- .site-header-image -->
+                    <div class="site-header-img small-12 columns" style="background-image: url(<?php header_image(); ?>)"></div><!-- .site-header-image -->
                         
                         <?php if ( !is_single() && !is_page() ) : ?>
                         <div class="site-main-title-box">

@@ -994,6 +994,12 @@ a:active {
 /*--------------------------------------------------------------
 ## Split Navigation
 --------------------------------------------------------------*/
+.menu-warning {
+    color: maroon;
+    padding-top: 10px;
+    display: block;
+}
+
 #main-nav-left {
     float: left;
     text-align: left;
@@ -1509,6 +1515,22 @@ a:active {
 .site-icon {
     border-radius: 50%;
 }
+.site-icon-title {
+    font-family: "Volkhov", serif;
+    font-style: italic;
+    background: steelblue;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    padding-top: 1.9em;
+    font-size: 1.4em;
+    color: white;
+    box-shadow: inset 0px -5px 25px midnightblue;
+}
+.site-icon-title p {
+    line-height: 1.2;
+    word-break: break-word;
+}
 @media screen and (max-width: 30em) {
     .top-bar:before,
     .top-bar:after {
@@ -1585,7 +1607,7 @@ a:active {
     height: 0;
     padding-top: 100px;
 }
-.site-header-image div {
+.site-header-img {
     background-size: 100%;
     padding-top: 37%;
     /*margin-bottom: 2em;*/
