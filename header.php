@@ -97,13 +97,19 @@
                 </div><!-- .site-logo-housing -->    
                 </div><!-- .row Foundation -->
                     
-                <div id="primary-nav-bar">
-                        <div class="columns">
-                            <div id="main-nav-division" class="small-4 medium-2 medium-push-10 large-8">
-                                    <nav id="site-navigation" class="main-navigation" role="navigation">
-                                            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'jkl' ); ?></button>
-                                            
-                                            <?php 
+                <div id="primary-nav-bar" class="columns">
+                    <div id="main-nav-division" class="small-4 medium-2 medium-push-10 large-8">
+                            <nav id="site-navigation" class="main-navigation" role="navigation">
+                                    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'jkl' ); ?></button>
+
+                                    <?php 
+                                    $use_split_menu = false;
+
+                                    // If the primary menu is set, and there's a site icon, obviously split the menu
+                                    if ( has_nav_menu( 'primary' ) && has_site_icon() ) :
+
+                                            $use_split_menu = true;
+
                                             // This is the split menu, only showing up on larger screens - custom menu output ?>
                                             <div class="split-navigation-menu show-for-large">
                                                 <?php 
@@ -116,23 +122,29 @@
                                                 }
                                                 ?>
                                             </div>
-                                            
-                                            <?php
-                                            // This is the full navigation menu, original from Underscores, using TwentyFifteen toggles - shown on tablets and mobile devices ?>
-                                            <div class="full-navigation-menu show-for-medium-down hide-for-large-up">
-                                                <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-                                            </div>
 
-                                    </nav><!-- #site-navigation -->
-                            </div><!-- .top-bar-center NON-Foundation -->
-                        </div><!-- .row Foundation -->        
+                                    <?php
+                                    endif; 
+
+                                    // This is the full navigation menu, original from Underscores, using TwentyFifteen toggles - shown on tablets and mobile devices ?>
+                                    <div class="<?php if ( $use_split_menu ) { echo 'full-navigation-menu show-for-medium-down hide-for-large-up'; } else { echo 'full-navigation-menu split-navigation-menu columns'; } ?>">
+                                        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
+                                    </div>
+
+
+                            </nav><!-- #site-navigation -->
+                    </div><!-- .top-bar-center NON-Foundation -->      
                 </div><!-- #primary-nav-bar -->
                 
-                <div id="social-links-division" class="small-8 medium-6 hide-for-medium large-6 columns">
-                                    <nav id="social-menu-container" class="social-menu">
-                                        <?php jkl_social_menu(); ?>
-                                    </nav>
-                            </div><!-- .top-bar-right Foundation -->
+                <?php
+                if ( has_nav_menu( 'social' ) ) : ?>
+                        <div id="social-links-division" class="small-8 medium-6 hide-for-medium large-6 columns">
+                                <nav id="social-menu-container" class="social-menu">
+                                    <?php jkl_social_menu(); ?>
+                                </nav>
+                        </div><!-- #social-links-division -->
+                <?php 
+                endif; ?>
                 
             </div><!-- .top-bar Foundation -->
                

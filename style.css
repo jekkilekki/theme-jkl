@@ -1520,7 +1520,7 @@ a:active {
 .site-icon {
     border-radius: 50%;
 }
-.site-icon-title {
+/* .site-icon-title {
     font-family: "Volkhov", serif;
     font-style: italic;
     background: steelblue;
@@ -1535,7 +1535,7 @@ a:active {
 .site-icon-title p {
     line-height: 1.2;
     word-break: break-word;
-}
+}*/
 @media screen and (max-width: 30em) {
     .top-bar:before,
     .top-bar:after {
@@ -1760,6 +1760,8 @@ a:active {
         text-align: right;
         position: relative;
         top: -1.5em;
+        float: right;
+        max-width: 50%;
     }
     .thin-bar .top-bar-title {
         margin-left: 0;
@@ -1792,7 +1794,25 @@ a:active {
         line-height: 1em;
     }
     .full-navigation-menu {
-        display: none!important;
+        /*display: none!important;*/
+        background: #dcdcdc;
+        height: 45px;
+        overflow-y: hidden;
+    }
+    .full-navigation-menu ul {
+        padding: 0 1.9375em!important;
+    }
+    .full-navigation-menu li {
+        display: inline-block;
+        margin-right: 2.5%;
+        line-height: 1;
+    }
+    .full-navigation-menu li a {
+        color: #777;
+    }
+    .full-navigation-menu li a:hover,
+    .full-navigation-menu li a:focus {
+        color: black;
     }
     .split-navigation-menu {
         display: block!important;
@@ -1884,6 +1904,9 @@ a:active {
     .split-navigation-menu {
         padding: 0 calc((100vw - 80.5em) / 2);
     }
+    .full-navigation-menu ul {
+        padding: 0 1em!important;
+    }
 }
 
 #social-links-division {
@@ -1923,6 +1946,8 @@ a:active {
     text-align: center;
     top: 0;
     margin: 0.25em 0 0;
+    float: none;
+    max-width: 100%;
 }
 @media screen and (max-width: 40em) {
     .site-main-title-box {
@@ -2011,6 +2036,7 @@ a:active {
 
 .widget {
 	margin: 0 0 1.5em;
+        font-size: 95%;
 }
 .widget-title:after {
     margin-bottom: 1.5em!important;
@@ -2055,7 +2081,8 @@ a:active {
 }
 .site-content .widget li {
     display: block;
-    padding: 0.3em 0;
+    /*padding: 0.3em 0;*/
+    line-height: 2.2em;
 }
 
 /* Archive and Categories widgets */
@@ -2063,8 +2090,11 @@ a:active {
     color: #404040;
 }
 .widget_categories .children {
-    padding-top: 0;
-    padding-bottom: 0.5em;
+    padding-top: 0.3em;
+    margin-bottom: -0.3em;
+}
+.widget_categories .children li {
+    padding-left: 0.6em;
 }
 
 /* Search widget */
@@ -2076,13 +2106,13 @@ a:active {
 .widget_pages .children,
 .widget_nav_menu .sub-menu {
     padding-top: 0;
-    padding-bottom: 0.5em;
+    padding-left: 0.6em;
 }
 .widget_pages a,
 .widget_nav_menu a {
     display: block;
-    padding: 1em 0;
-    border-bottom: 1px solid #c3c3c3;
+    padding: 0.3em 0;
+    border-bottom: 1px dotted gainsboro;
 }
 
 .site-content .widget_pages li:last-child,
@@ -2099,10 +2129,10 @@ a:active {
 .widget_rss li {
     margin-bottom: 1.5em;
 }
-.widget li a.rsswidget {
+.widget_rss li {
     padding-right: 0.5em;
     font-size: 1em;
-    line-height: 1.4em;
+    line-height: 1.4em!important;
 }
 .rss-date,
 .widget_rss cite {
@@ -2148,7 +2178,7 @@ a:active {
 
 /* Text widget */
 .textwidget {
-    font-size: 0.8em;
+    font-size: 0.9em;
     line-height: 1.6em;
 }
 
@@ -2213,7 +2243,7 @@ a:active {
     }
     .sidebar-right .widget,
     .sidebar-left .widget {
-        padding: 0 2em;
+        padding: 0 2em 2em;
         margin-bottom: 0;
     }
     .sidebar-right .widget:after,
@@ -2324,6 +2354,10 @@ a:active {
 /*--------------------------------------------------------------
 ## Posts and pages
 --------------------------------------------------------------*/
+#breadcrumbs-container {
+    position: relative;
+    z-index: 2;
+}
 .breadcrumbs {
     margin-bottom: 1em;
     margin-top: 3em;
@@ -2802,6 +2836,11 @@ a:active {
 .index-content p {
     margin-bottom: 0;
 }
+.continue-reading {
+    text-align: center;
+    margin-bottom: 1.5em;
+    margin-top: -0.5em;
+}
 .continue-reading a {
     background: white;
     padding: 0.5em 1.5em;
@@ -2811,10 +2850,9 @@ a:active {
     border: 3px solid #dcdcdc;
     display: inline-block;
 }
-.continue-reading {
-    text-align: center;
-    margin-bottom: 1.5em;
-    margin-top: -0.5em;
+.continue-reading a:hover,
+.continue-reading a:focus {
+    border-color: black;
 }
 @media screen and (min-width: 40em) {
     .index-header {
@@ -3289,8 +3327,27 @@ img.alignleft {
 --------------------------------------------------------------*/
 .site-footer {
     background: black;
-    color: #777;
+    color: #aaa;
     padding: 2.5em;
+}
+.site-footer .nav-menu,
+.site-footer .nav-menu ul,
+.site-footer .nav-menu ul ul {
+    margin: 0;
+    padding: 0;
+}
+.site-footer .nav-menu li,
+.site-footer .nav-menu li li {
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 2.5%;
+}
+.site-footer .nav-menu li a {
+    color: #777;
+}
+.site-footer .nav-menu li a:hover,
+.site-footer .nav-menu li a:focus {
+    color: white;
 }
 
 

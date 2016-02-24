@@ -157,7 +157,7 @@ add_action( 'save_post',     'jkl_category_transient_flusher' );
 /**
  * DYNAMIC Copyright for the footer
  */
- function dynamic_copyright() {
+ function jkl_dynamic_copyright() {
 
     global $wpdb;
 
@@ -313,7 +313,7 @@ function jkl_split_main_nav( $menu_name = null, $raw = false ) {
     
     else {
         
-        echo '<em>' . __( 'Please select a menu for your primary navigation.', 'jkl') . '</em>';
+        echo '<em>' . __( 'Please select a menu for your Split navigation.', 'jkl') . '</em>';
         
     }
     
@@ -599,7 +599,9 @@ function jkl_breadcrumbs() {
         $separator          = '<span class="breadcrumb-separator">&raquo;</span>';
         $breadcrumb_id      = 'breadcrumbs';
         $breadcrumb_class   = 'breadcrumbs';
+        $post               = get_post();
         
+        if( is_category() || is_single() || ( is_page() && $post->post_parent ) ) {
         // Build the breadcrumbs
         echo "<div aria-label='You are here:' id='$breadcrumb_id' class='$breadcrumb_class'>";
 		echo '<a aria-label="Home" title="Home" class="breadcrumb-home" href="';
@@ -607,16 +609,17 @@ function jkl_breadcrumbs() {
 		echo '"><span class="screen-reader-text">';
 		bloginfo('name');
 		echo "</span></a>$separator";
-		if (is_category() || is_single()) {
+		//if ( (is_category() || is_single()) ) {
 			the_category('<span class="breadcrumb-separator">&raquo;</span>');
                         if (is_single()) {
 				echo "$separator";
 				// the_title();
 			}
-		} elseif (is_page()) {
+		//} elseif (is_page()) {
 			// echo the_title();
-		}
+		//}
         echo '</div>';
+        }
     }
 
     /*
