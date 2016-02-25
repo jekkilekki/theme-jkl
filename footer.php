@@ -15,14 +15,17 @@
         
         <a href="#topbutton" class="topbutton"></a>
         
-	<footer id="colophon" class="site-footer" role="contentinfo">
-            <div class="row">
+	<footer id="colophon" class="site-footer row" role="contentinfo">
 
                 <?php get_sidebar( 'footer' ); ?>
                 
-                <div class="footer-navigation large-12 columns">
-                    <?php wp_nav_menu( array( 'theme_location' => 'footer', 'menu_id' => 'footer-menu', 'menu_class' => 'nav-menu' ) ); ?>
-                </div>
+                <?php 
+                if ( has_nav_menu( 'footer' ) ) : ?>
+                    <div class="footer-navigation large-12 columns">
+                        <?php wp_nav_menu( array( 'theme_location' => 'footer', 'menu_id' => 'footer-menu', 'menu_class' => 'nav-menu' ) ); ?>
+                    </div>
+                <?php
+                endif; ?>
                 
 		<div class="site-info">
                     <div class="small-12 medium-6 columns copyright">
@@ -34,7 +37,7 @@
 			<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'jkl' ), 'jkl', '<a href="http://www.aaronsnowberger.com" rel="designer">Aaron Snowberger</a>' ); ?>
                     </div>
                 </div><!-- .site-info -->
-            </div>
+                
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 

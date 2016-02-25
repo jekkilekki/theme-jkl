@@ -890,7 +890,7 @@ a:active {
     .menu-toggle {
         position: absolute;
         bottom: -5em;
-        left: -2em;
+        left: initial;
         border: 1px solid white;
     }
         #primary-nav-bar {
@@ -911,6 +911,7 @@ a:active {
         .thin-bar .main-navigation .menu-toggle {
             color: white;
             border-color: black;
+            left: -3em;
 /*            border-bottom: none;
             border-left: none;
             border-right: none;*/
@@ -936,6 +937,9 @@ a:active {
             position: fixed;
             margin-top: 87px;
             width: 60%;
+            right: -0.5em;
+        }
+        .thin-bar .main-navigation.toggled .nav-menu {
             right: 2.5em;
         }
         
@@ -1271,7 +1275,7 @@ a:active {
 }
 .post-navigation a:hover .post-title,
 .post-navigation a:focus .post-title {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 .nav-previous {
     padding-bottom: 1em;
@@ -1628,7 +1632,7 @@ a:active {
     margin: 1em 0 0;
     font-family: "Volkhov", serif;
     font-weight: bold;
-    font-style: italic;
+    /*font-style: italic;*/
     line-height: 1.3em;
     color: #000;
     word-break: break-word;
@@ -1988,6 +1992,11 @@ a:active {
     width: 34px;
     height: 38px;
 }
+@media screen and (min-width: 50em) {
+    .search-toggle {
+        right: 28px;
+    }
+}
 .search-box-wrapper {
     padding: 1.5em 2em;
     background: steelblue;
@@ -2000,9 +2009,8 @@ a:active {
     background: white;
     bottom: 10px;*/
 }
-.search-toggle:hover,
-.search-toggle:active {
-    
+.search-toggle:hover {
+   
 }
 .site-search .search-field {
     max-width: 100%;
@@ -2356,13 +2364,13 @@ a:active {
 --------------------------------------------------------------*/
 #breadcrumbs-container {
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 .breadcrumbs {
-    margin-bottom: 1em;
-    margin-top: 3em;
+    margin: 3em auto 1em;
     font-size: 80%;
     text-align: center;
+    max-width: 80%;
 }
 .breadcrumbs a {
     color: #aaa;
@@ -2381,6 +2389,7 @@ a:active {
 }
 .breadcrumb-separator {
     padding: 0 5px;
+    display: inline-block;
 }
 
 

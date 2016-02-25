@@ -40,7 +40,7 @@ function jkl_posted_on() {
             echo '<div class="meta-content has-avatar">';
             echo '<div class="author-avatar">' . get_avatar( $author_id ) . '</div>';
         // } else {
-            // echo '<div class="meta-content">';
+            echo '<div class="meta-content-text">';
 
 	echo '<span class="byline">by ' . $byline . '</span><span class="posted-on">on ' . $posted_on . '</span>'; // WPCS: XSS OK.
 
@@ -61,6 +61,7 @@ function jkl_posted_on() {
         } 
         
         echo '</div><!-- .meta-content -->';
+        echo '</div><!-- .meta-content-text -->';
 }
 endif;
 
@@ -610,11 +611,25 @@ function jkl_breadcrumbs() {
 		bloginfo('name');
 		echo "</span></a>$separator";
 		//if ( (is_category() || is_single()) ) {
-			the_category('<span class="breadcrumb-separator">&raquo;</span>');
-                        if (is_single()) {
-				echo "$separator";
+                
+                $categories = get_categories( array(
+                    'orderby' => 'name',
+                    'parent'  => 0
+                ) );
+                //$categories = array_slice( $categories, 0, 5 );
+                
+                foreach ( $categories as $category ) {
+                    printf( '<a href="%1$s">%2$s</a>',
+                        esc_url( get_category_link( $category->term_id ) ),
+                        esc_html( $category->name )
+                    );
+                    echo $separator;
+                }
+			// the_category('<span class="breadcrumb-separator">&raquo;</span>');
+                        //if (is_single()) {
+			//	echo "$separator";
 				// the_title();
-			}
+			//}
 		//} elseif (is_page()) {
 			// echo the_title();
 		//}
