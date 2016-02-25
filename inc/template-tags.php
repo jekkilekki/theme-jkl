@@ -612,11 +612,11 @@ function jkl_breadcrumbs() {
 		echo "</span></a>$separator";
 		//if ( (is_category() || is_single()) ) {
                 
-                $categories = get_categories( array(
+                $categories = get_the_category(/* array(
                     'orderby' => 'name',
                     'parent'  => 0
-                ) );
-                //$categories = array_slice( $categories, 0, 5 );
+                ) */);
+                $categories = array_slice( $categories, 0, 10 );
                 
                 foreach ( $categories as $category ) {
                     printf( '<a href="%1$s">%2$s</a>',

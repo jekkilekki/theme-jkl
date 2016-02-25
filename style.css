@@ -353,6 +353,8 @@ pre {
 	max-width: 100%;
 	overflow: auto;
 	padding: 1.6em;
+            color: white;
+        background: #1d1f21;
 }
 
 code,
@@ -362,6 +364,26 @@ var {
 	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 	font-size: 15px;
 	font-size: 0.9375rem;
+        
+        /* from CSS-Tricks.com */
+        background: #eee;
+        padding: 0 5px 2px;
+        border-radius: 4px;
+        position: relative;
+        top: -1px;
+        margin: 0 3px 0 1px;
+        font-size: 90%;
+        border: none;
+}
+
+pre code {
+    font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
+    font-size: 0.9em;
+    background: none;
+    padding: 15px;
+    white-space: pre;
+    overflow: auto;
+    display: block;
 }
 
 abbr,
@@ -1194,7 +1216,7 @@ a:active {
     overflow: hidden;
     background: #efefef;
     padding: 2em 2.5em;
-    margin: 3em -2.5em;
+    margin: 4em -2.5em;
 }
 .comment-navigation {
     background: transparent;
@@ -1268,6 +1290,14 @@ a:active {
 .post-navigation a:focus {
     border-color: black;
 }
+
+.post-nav-thumb {
+    margin: -1em -1em 1em;
+}
+.post-nav-thumb img {
+    width: 100%;
+}
+
 .post-navigation .post-title {
     font-size: 1.1em;
     font-weight: 700;
@@ -1632,7 +1662,7 @@ a:active {
     margin: 1em 0 0;
     font-family: "Volkhov", serif;
     font-weight: bold;
-    /*font-style: italic;*/
+    font-style: italic;
     line-height: 1.3em;
     color: #000;
     word-break: break-word;
@@ -2210,6 +2240,13 @@ a:active {
 /* Rules for sidebar left and sidebar right. */
 @media screen and (min-width: 64em) {
     
+    .sidebar-left .site-main,
+    .sidebar-right .site-main,
+    .sidebar-right .nav-links,
+    .sidebar-left .nav-links {
+        max-width: 35em;
+    }
+    
     /* Sidebar Right Layouts */
     .sidebar-right .content-area {
         float: left;
@@ -2241,6 +2278,13 @@ a:active {
         padding: 0 1.5em;
         border-right: 1px solid #ededed;
     }
+    .sidebar-left .paging-navigation,
+    .sidebar-left .comment-navigation,
+    .sidebar-left .comment-pagination,
+    .sidebar-left .post-navigation {
+        width: calc( 100vw - 306px );
+        left: calc(( -100vw + 57em ) / 2 );
+    }
     
     /* Unified styles */
     .sidebar-right #secondary,
@@ -2261,6 +2305,21 @@ a:active {
         margin: 4em auto;
         conent: "";
         border-bottom: 1px solid #c3c3c3;
+    }
+}
+@media screen and (min-width: 75em) {
+    .sidebar-left .site-main,
+    .sidebar-right .site-main,
+    .sidebar-left .nav-links,
+    .sidebar-right .nav-links {
+        max-width: 40em;
+    }
+    .sidebar-left .paging-navigation,
+    .sidebar-left .comment-navigation,
+    .sidebar-left .comment-pagination,
+    .sidebar-left .post-navigation {
+        width: calc( 100vw - 306px );
+        left: calc(( -100vw + 62em ) / 2 );
     }
 }
 
@@ -2431,6 +2490,7 @@ a:active {
 .sticky {
 	display: block;
         background: whitesmoke;
+        background: #efefef;
         padding: 3em 2em 1em;
         margin: -2em -2em 4em!important;
         position: relative;
@@ -2535,6 +2595,7 @@ a:active {
     font-size: 95%;
     text-align: left;
     background: whitesmoke;
+    background: #efefef;
     padding: 1em 2.10526315789em;
     margin: 0 -2.10526315789em;
     color: #777;
@@ -2752,7 +2813,7 @@ a:active {
     }
 }
 @media screen and (min-width: 75em) {
-    .entry-meta {
+    .no-sidebar .entry-meta {
         position: absolute;
         width: 215px;
         left: -215px;
@@ -2765,27 +2826,27 @@ a:active {
         padding-bottom: 1.5em;
         background: transparent;
     }
-    .has-avatar {
+    .no-sidebar .has-avatar {
         text-align: right;
         display: block;
         width: 100%;
     }
-    .author-avatar {
+    .no-sidebar .author-avatar {
         display: block;
         margin-bottom: 1em;
         float: right;
         margin-right: 0;
     }
-    .byline,
-    .posted-on,
-    .entry-meta .cat-links {
+    .no-sidebar .byline,
+    .no-sidebar .posted-on,
+    .no-sidebar .entry-meta .cat-links {
         display: inline-block;
         text-align: right;
         margin-right: 0.5em;
         padding-right: 0;
         width: 100%;
     }
-    .entry-meta .comments-link {
+    .no-sidebar .entry-meta .comments-link {
         position: relative;
         display: inline-block;
         margin-top: 1em;
@@ -2796,7 +2857,7 @@ a:active {
         clear: both;
         background: gainsboro;
     }
-    .entry-meta .comments-link {
+    .no-sidebar .entry-meta .comments-link {
         float: right;
     }
 }
@@ -3123,7 +3184,8 @@ a:active {
 .comment-respond .submit {
     margin-top: 1em;
     border-color: #c3c3c3;
-    padding: 1.125em;
+    padding: 1.125em 1.5em;
+    font-size: 0.9em;
 }
 .submit:hover,
 .submit:focus,
@@ -3338,6 +3400,13 @@ img.alignleft {
     background: black;
     color: #aaa;
     padding: 2.5em;
+}
+.site-footer a {
+    color: #777;
+}
+.site-footer a:hover,
+.site-footer a:focus {
+    color: white;
 }
 .site-footer .nav-menu,
 .site-footer .nav-menu ul,
