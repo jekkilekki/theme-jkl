@@ -84,6 +84,8 @@ pre {
 	max-width: 100%;
 	overflow: auto;
 	padding: 1.6em;
+            color: white;
+        background: #1d1f21;
 }
 
 code,
@@ -93,11 +95,44 @@ var {
 	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 	font-size: 15px;
 	font-size: 0.9375rem;
+        
+        /* from CSS-Tricks.com */
+        background: #efefef;
+        padding: 2px 5px;
+        border-radius: 4px;
+        position: relative;
+        top: -1px;
+        margin: 0 1px;
+        border: none;
 }
 
+pre code {
+    font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
+    font-size: 0.9em;
+    background: none;
+    padding: 15px;
+    white-space: pre;
+    overflow: auto;
+    display: block;
+    color: white;
+}
+
+var {
+    background: none;
+    border-bottom: 1px dotted black;
+    border-radius: 0;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+tt, kbd {
+/*    border: 1px solid #c3c3c3;
+    border-radius: 0;*/
+    color: #777;
+}
 abbr,
 acronym {
-	border-bottom: 1px dotted #666;
+	border-bottom: 1px dotted black;
 	cursor: help;
 }
 
@@ -140,6 +175,34 @@ q {
 	quotes: "" "";
 }
 
+q {
+    font-family: "Volkhov", serif;
+    color: #565656;
+    font-style: italic;
+    margin-right: 2em;
+    position: relative;
+}
+q:before {
+    content: "\f10d";
+    font-family: "FontAwesome";
+    font-style: normal;
+    color: gainsboro;
+    position: absolute;
+    top: -0.5em;
+    left: -1.5em;
+    font-size: 1em;
+}
+q:after {
+    content: "\f10e";
+    font-family: "FontAwesome";
+    font-style: normal;
+    color: gainsboro;
+    position: absolute;
+    top: -0.5em;
+    right: -1.5em;
+    font-size: 1em;
+}
+
 blockquote {
     quotes: "" "";
     margin: 1.5em -0.5em;
@@ -150,6 +213,7 @@ blockquote {
     position: relative;
     font-family: "Volkhov", serif;
     font-style: italic;
+    color: #404040;
 }
 blockquote p {
     border-top: 1px solid black;
@@ -161,10 +225,39 @@ blockquote p {
     font-size: 1.1em;
     line-height: 1.7em;
 }
+blockquote:before {
+    content: "\f10d";
+    font-family: "FontAwesome";
+    font-style: normal;
+    color: gainsboro;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    font-size: 1em;
+}
+blockquote:after {
+    content: "\f10e";
+    font-family: "FontAwesome";
+    font-style: normal;
+    color: gainsboro;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 1em;
+}
 
 cite {
     font-family: "Volkhov", serif;
     padding: 0.3em 0;
+    font-size: 0.825em;
+}
+blockquote a,
+blockquote a:hover,
+q a,
+q a:hover,
+cite a,
+cite a:hover {
+    border: none!important;
 }
 
 hr {
@@ -214,20 +307,21 @@ table {
 ## Links
 --------------------------------------------------------------*/
 a {
-	color: royalblue;
+	color: black;
         position: relative;
         padding-bottom: 2px;
         text-decoration: none;
+        
 }
 
 a:visited {
-	color: purple;
+	color: steelblue;
 }
 
 a:hover,
 a:focus,
 a:active {
-	color: midnightblue;
+	color: steelblue;
 }
 
 a:focus {
@@ -251,6 +345,62 @@ a:active:after {
     width: 100%;
     background: #444;
     background: linear-gradient(left, transparent 0%,#444 50%,transparent 100%);
+}
+.entry-content a,
+.entry-summary a {
+    text-decoration: none;
+    border-bottom: 2px solid #c3c3c3;
+    font-style: italic;
+    color: steelblue;
+}
+// Thank you CSS-Tricks gradients: https://css-tricks.com/snippets/css/gradient-underlines/
+.entry-content a:after,
+.entry-summary a:after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: 2px;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: #444;
+    background: linear-gradient(left, transparent 0%,#444 50%,transparent 100%);
+}
+.entry-content a:hover,
+.entry-content a:focus,
+.entry-summary a:hover,
+.entry-summary a:focus {
+    border-bottom: 3px solid #c3c3c3;
+    /* box-shadow: inset 0 -3px 0 #c3c3c3; */
+}
+
+/* Lead in */
+.lead,
+.lead-in {
+    margin: 2.5em -1.5em;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 4px 0.5em;
+}
+.lead p,
+.lead-in p {
+    font-size: 1.2em;
+    font-weight: 600;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 1em 0;
+    margin-bottom: 0;
+    /* New styles */
+    padding: 2em;
+    font-style: italic;
+    font-weight: 300;
+    font-family: "Volkhov", serif;
+}
+.lead {
+    padding: 1em 1.5em;
+    font-style: italic;
+    font-weight: 300;
+    font-family: "Volkhov", serif;
 }
 /*--------------------------------------------------------------
 # Alignments
@@ -276,6 +426,14 @@ a:active:after {
 /*--------------------------------------------------------------
 # Images
 --------------------------------------------------------------*/
+.entry-content a > img {
+    border: 1px dotted black;
+    background: white;
+}
+.entry-content a:hover > img {
+    border: 1px solid black;
+}
+
 img.aligncenter {
     margin-top: 2em;
     margin-bottom: 2em;
@@ -309,6 +467,25 @@ img.alignleft {
         margin-left: -3em;
     }
 }
+
+.featured-image,
+.centered-image {
+    max-width: calc(100% + 5em);
+    margin: 2em -2.5em;
+}
+@media screen and (min-width: 50em) {
+    .featured-image,
+    .centered-image {
+        max-width: calc(100vw);
+        /* margin-left: calc(-100vw - 50em); */
+    }
+}
+
+.index-featured {
+    margin: 0 0 1.5em;
+    max-width: 100%;
+}
+
 /*--------------------------------------------------------------
 ## Captions
 --------------------------------------------------------------*/
@@ -334,6 +511,7 @@ img.alignleft {
     margin-bottom: 2em;
     padding-bottom: 4px;
     border-bottom: 2px solid black;
+    background: #efefef;
 }
 .wp-caption .wp-caption-text {
     margin: 0 0.5em;
@@ -375,7 +553,7 @@ img.alignleft {
 }
 
 .gallery-item .wp-caption-text {
-    margin: 0 0.5em -32px 0;
+    margin: 0 0.5em -32px 0.5em;
     color: #404040;
     font-size: 85%;
     border-bottom: 1px solid black;
@@ -417,4 +595,23 @@ img.alignleft {
 
 .gallery-caption {
 	display: block;
+}
+
+/*--------------------------------------------------------------
+## Chats
+--------------------------------------------------------------*/
+.format-chat p {
+    padding: 0.5em 1em;
+    margin: 0 -1em 2em;
+}
+.format-chat p:nth-child(even) {
+    background: whitesmoke;
+    margin-left: 33%;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+}
+.format-chat p:nth-child(odd) {
+    margin-right: 33%;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
 }

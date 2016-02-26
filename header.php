@@ -176,7 +176,7 @@
                         <?php endif; ?>
                        
                 <?php elseif ( has_post_thumbnail() ) : ?>
-                    <div class="small-12 columns" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post, 'featured' ); ?>)"></div><!-- .site-header-image .featured-image -->
+                    <div class="site-header-img small-12 columns" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post, 'featured' ); ?>)"></div><!-- .site-header-image .featured-image -->
                 <?php endif; // End header image check. ?>
             </div>
 

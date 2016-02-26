@@ -12,8 +12,6 @@ if ( ! is_active_sidebar( 'sidebar-footer' ) ) {
 }
 ?>
 
-<aside id="secondary-footer" class="footer-widget-area large-12 columns" role="complementary">
-    <div class="row">
+<aside id="secondary-footer" class="footer-widget-area group" role="complementary">
 	<?php dynamic_sidebar( 'sidebar-footer' ); ?>
-    </div>
 </aside><!-- #secondary-footer -->

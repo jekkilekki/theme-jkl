@@ -1,14 +1,14 @@
 /*
 Theme Name: jkl
-Theme URI: http://underscores.me/
+Theme URI: https://github.com/jekkilekki/theme-jkl
 Author: Aaron Snowberger
 Author URI: http://www.aaronsnowberger.com
-Description: A simple black and white minimalist modern(ish) blog theme with some custom page templates. <!-- Can put in HTML here -->
+Description: A simple black and white modern blog theme with some sidebar options, a centered logo with split navigation, and some custom page templates. <!-- Can put in HTML here -->
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: jkl
-Tags:
+Tags: black, white, light, one-column, two-columns, left-sidebar, right-sidebar, responsive-layout, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, sticky-post, theme-options, threaded-comments, translation-ready
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -383,6 +383,7 @@ pre code {
     white-space: pre;
     overflow: auto;
     display: block;
+    color: white;
 }
 
 var {
@@ -699,7 +700,6 @@ a:hover,
 a:focus,
 a:active {
 	color: steelblue;
-        border-bottom: 3px solid #c3c3c3;
 }
 
 a:focus {
@@ -885,11 +885,11 @@ a:active {
 }
 @media screen and (max-width: 40em) {
     #primary-nav-bar.hide {
-        bottom: -60px;
+        /*bottom: -60px;*/
         display: block!important;
     }
     #primary-nav-bar.hide .menu-toggle {
-        bottom: -70px;
+        /*bottom: -70px;*/
     }
     #social-links-division.hide {
         bottom: -70px!important;
@@ -2148,21 +2148,20 @@ a:active {
 }
 @media screen and (min-width: 40em) {
     #secondary-footer .widget {
-        width: 45%;
-        padding: 0 2.5% 2em;
+        width: 50%;
+        padding: 0 2.5% 5%;
+        padding-bottom: 2em;
+        float: left;
     }
 }
 @media screen and (min-width: 50em) {
     #secondary-footer .widget {
-        float: left;
-        width: 30%;
-        margin: 0 1.5% 2em;
+        width: 33.33333333%;
     }
 }
 @media screen and (min-width: 75em) {
     #secondary-footer .widget {
-        width: 21%;
-        margin: 0 2% 2em;
+        width: 25%;
     }
 }
 
@@ -2182,8 +2181,9 @@ a:active {
 @media screen and (min-width: 40em) {
     #secondary .widget {
         float: left;
-        width: 45%;
-        margin: 0 2.5% 2em;
+        width: 50%;
+        padding: 0 2.5% 2em;
+        margin: 0;
     }
 }
 @media screen and (max-width: 42.475em) {
@@ -2218,10 +2218,11 @@ a:active {
     list-style-type: none;
     font-family: "Source Sans Pro", sans-serif;
 }
-.site-content .widget li {
+.site-content .widget li,
+#secondary-footer .widget li {
     display: block;
     /*padding: 0.3em 0;*/
-    line-height: 2.2em;
+    line-height: 2.2em!important;
 }
 
 /* Archive and Categories widgets */
@@ -2265,7 +2266,7 @@ a:active {
 
 /* Meta Widget */
 .site-content .widget_meta li {
-    padding: 0.3em;
+    padding: 0 0 0.3em;
 }
 
 /* RSS widget */
@@ -2394,10 +2395,10 @@ a:active {
         padding: 2em 0 0;
         margin: 0;
     }
-    .sidebar-right .widget,
-    .sidebar-left .widget {
+    .sidebar-right #secondary .widget,
+    .sidebar-left #secondary .widget {
         padding: 0 2em 2em;
-        margin-bottom: 0;
+        margin: 0;
     }
     .sidebar-right .widget:after,
     .sidebar-left .widget:after {
@@ -2609,6 +2610,16 @@ a:active {
         margin: -2em -2em 4em!important;
         position: relative;
 }
+.sticky:before {
+    content: "Featured";
+    background: #1d1f21;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    position: absolute;
+    top: 0;
+}
 .sticky .hentry-index {
     margin-bottom: 0;
 }
@@ -2741,6 +2752,7 @@ a:active {
 }
 .has-avatar .meta-content-text {
     padding-left: 66px;
+    position: relative;
 }
 
 .byline, 
@@ -2944,8 +2956,8 @@ a:active {
     }
     .entry-meta .comments-link {
         position: absolute;
-        top: 3.5em;
-        right: 4em;
+        top: -1em;
+        right: 0;
         font-size: 75%;
         padding: 3px 23px;
     }
@@ -2970,7 +2982,18 @@ a:active {
         padding-left: 86px;
     }
 }
+@media screen and (min-width: 64em) {
+    .sidebar-left .entry-meta,
+    .sidebar-right .entry-meta {
+        left: calc((-100vw + 42.4em) / 2);
+    }
+}
 @media screen and (min-width: 75em) {
+    .sidebar-left .entry-meta,
+    .sidebar-right .entry-meta {
+        left: calc((-100vw + 47.4em) / 2);
+    }
+    
     .no-sidebar .entry-meta {
         position: absolute;
         width: 215px;
@@ -3598,6 +3621,7 @@ img.alignleft {
 }
 #secondary-footer {
     padding-bottom: 2em;
+    max-width: 100%;
 }
 .site-footer a {
     color: #777;
@@ -3618,7 +3642,7 @@ img.alignleft {
     display: inline-block;
     margin-right: 1em;
     text-transform: uppercase;
-    font-size: 0.8em;
+    font-size: 0.9em;
     letter-spacing: 1px;
     font-weight: bold;
 }
@@ -3636,6 +3660,9 @@ img.alignleft {
     color: #555;
 }
 @media screen and (max-width: 40em) {
+    #secondary-footer {
+
+    }
     .site-info {
         padding-bottom: 4em;
     }
@@ -3660,7 +3687,7 @@ a.wporg-link {
 .wporg-link:focus {
     border: none;
 }
-@media screen and (max-width: 40em) {
+@media screen and (max-width: 39.975em) {
     .copyright,
     .publisher {
         text-align: center;

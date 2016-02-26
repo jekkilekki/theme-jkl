@@ -607,7 +607,7 @@ function jkl_breadcrumbs() {
         // Build the breadcrumbs
         echo "<div aria-label='You are here:' id='$breadcrumb_id' class='$breadcrumb_class'>";
 		echo '<a aria-label="Home" title="Home" class="breadcrumb-home" href="';
-		echo get_option('home');
+		echo home_url();
 		echo '"><span class="screen-reader-text">';
 		bloginfo('name');
 		echo "</span></a>$separator";

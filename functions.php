@@ -95,8 +95,8 @@ function jkl_setup() {
         add_editor_style( array( 
             'foundation/css/foundation.css',
             'inc/editor-style.css', 
-            'https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,400italic,300,300italic,700,700italic|Volkhov|Source+Code+Pro',
-            'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+            'fonts/custom-fonts.css',
+            'fonts/font-awesome.css',
             ) 
         );
 }
@@ -159,16 +159,14 @@ function jkl_scripts() {
         /* @Todo - Add Custom Fonts */
         // wp_enqueue_style( 'gfonts', 'https://fonts.googleapis.com/css?family=Volkhov' );
         wp_enqueue_style( 'jkl-local-fonts', get_template_directory_uri() . '/fonts/custom-fonts.css' );
-        wp_enqueue_style( 'fawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' );  
+        wp_enqueue_style( 'jkl-fawesome', get_template_directory_uri() . '/fonts/font-awesome.css' );  
         
         
         /* Run Foundation */
         wp_enqueue_script( 'foundation-init', get_template_directory_uri() . '/js/foundation.js', array( 'jquery' ), '20160211', true );
         
-        /* Masonry settings for Footer widgets */ // @Todo - decide if we want these
-        wp_enqueue_script( 'jkl-masonry', get_template_directory_uri() . '/js/masonry-settings.js', array( 'masonry' ), '20160226', true );
-        
-        /* Toggle Main Search script */ //@Todo - decide if we want this
+        /* Masonry settings for Footer widgets */ // @TODO - not quite working - overflows 1-2em on the right and doesn't resize properly
+        // wp_enqueue_script( 'jkl-masonry', get_template_directory_uri() . '/js/masonry-settings.js', array( 'masonry' ), '20160226', true );
         
         /* Add dynamic back to top button */
         wp_enqueue_script( 'jkl-topbutton', get_template_directory_uri() . '/js/topbutton-search-imgs.js', array( 'jquery' ), '20160211', true );        
