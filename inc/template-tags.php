@@ -435,10 +435,11 @@ function jkl_post_nav() {
                     <div class="nav-previous">
                         <a href="<?php echo get_permalink( $prevID ); ?>" rel="prev">
                     
-                            <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) || ( has_post_thumbnail( $prevID ) && empty( $next ) ) ) { ?>
+                            <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) /* || ( has_post_thumbnail( $prevID ) && empty( $next ) )*/ ) { ?>
                                     <div class="post-nav-thumb">
-                                        <?php $prev_thumb = get_the_post_thumbnail( $prevID, 'medium', array( 'class' => 'img-responsive' ) );
-                                        echo $prev_thumb ? $prev_thumb : '<img src="http://localhost:8080/wordpress/wp-content/uploads/2012/08/cropped-keytokorean-logo2.png" />';
+                                        <?php 
+                                        $prev_thumb = get_the_post_thumbnail( $prevID, 'medium', array( 'class' => 'img-responsive' ) );
+                                        echo $prev_thumb ? $prev_thumb : '<img src="' . get_header_image() . '" />';
                                         ?>
                                     </div>
                             <?php } ?>
@@ -456,10 +457,10 @@ function jkl_post_nav() {
                     <div class="nav-next">
                         <a href="<?php echo get_permalink( $nextID ); ?>" rel="next">
                     
-                            <?php if ( get_the_post_thumbnail( $nextID ) && get_the_post_thumbnail( $nextID ) ) { ?>
+                            <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) ) { ?>
                                     <div class="post-nav-thumb">
                                         <?php $next_thumb = get_the_post_thumbnail( $nextID, 'medium', array( 'class' => 'img-responsive' ) );
-                                        echo $next_thumb ? $next_thumb : '<img src="http://localhost:8080/wordpress/wp-content/uploads/2012/08/cropped-keytokorean-logo2.png" />';
+                                        echo $next_thumb ? $next_thumb : '<img src="' . get_header_image() . '" />';
                                         ?>
                                     </div>
                             <?php } ?>
@@ -616,7 +617,7 @@ function jkl_breadcrumbs() {
                     'orderby' => 'name',
                     'parent'  => 0
                 ) */);
-                $categories = array_slice( $categories, 0, 10 );
+                $categories = array_slice( $categories, 0, 5 );
                 
                 foreach ( $categories as $category ) {
                     printf( '<a href="%1$s">%2$s</a>',

@@ -366,13 +366,12 @@ var {
 	font-size: 0.9375rem;
         
         /* from CSS-Tricks.com */
-        background: #eee;
-        padding: 0 5px 2px;
+        background: #efefef;
+        padding: 2px 5px;
         border-radius: 4px;
         position: relative;
         top: -1px;
-        margin: 0 3px 0 1px;
-        font-size: 90%;
+        margin: 0 1px;
         border: none;
 }
 
@@ -386,9 +385,22 @@ pre code {
     display: block;
 }
 
+var {
+    background: none;
+    border-bottom: 1px dotted black;
+    border-radius: 0;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+tt, kbd {
+/*    border: 1px solid #c3c3c3;
+    border-radius: 0;*/
+    color: #777;
+}
 abbr,
 acronym {
-	border-bottom: 1px dotted #666;
+	border-bottom: 1px dotted black;
 	cursor: help;
 }
 
@@ -431,6 +443,34 @@ q {
 	quotes: "" "";
 }
 
+q {
+    font-family: "Volkhov", serif;
+    color: #565656;
+    font-style: italic;
+    margin-right: 2em;
+    position: relative;
+}
+q:before {
+    content: "\f10d";
+    font-family: "FontAwesome";
+    font-style: normal;
+    color: gainsboro;
+    position: absolute;
+    top: -0.5em;
+    left: -1.5em;
+    font-size: 1em;
+}
+q:after {
+    content: "\f10e";
+    font-family: "FontAwesome";
+    font-style: normal;
+    color: gainsboro;
+    position: absolute;
+    top: -0.5em;
+    right: -1.5em;
+    font-size: 1em;
+}
+
 blockquote {
     quotes: "" "";
     margin: 1.5em -0.5em;
@@ -441,6 +481,7 @@ blockquote {
     position: relative;
     font-family: "Volkhov", serif;
     font-style: italic;
+    color: #404040;
 }
 blockquote p {
     border-top: 1px solid black;
@@ -452,10 +493,39 @@ blockquote p {
     font-size: 1.1em;
     line-height: 1.7em;
 }
+blockquote:before {
+    content: "\f10d";
+    font-family: "FontAwesome";
+    font-style: normal;
+    color: gainsboro;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    font-size: 1em;
+}
+blockquote:after {
+    content: "\f10e";
+    font-family: "FontAwesome";
+    font-style: normal;
+    color: gainsboro;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 1em;
+}
 
 cite {
     font-family: "Volkhov", serif;
     padding: 0.3em 0;
+    font-size: 0.825em;
+}
+blockquote a,
+blockquote a:hover,
+q a,
+q a:hover,
+cite a,
+cite a:hover {
+    border: none!important;
 }
 
 hr {
@@ -510,15 +580,14 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"] {
 	border: 3px solid;
-	border-color: #000;
+	border-color: #c3c3c3;
 	border-radius: 0;
 	background: #fff;
 	color: #000;
-        font-family: "Source Sans Pro", sans-serif;
-	font-size: 12px;
-	font-size: 0.75rem;
+        font-family: "Volkhov", serif;
+        font-size: 0.9em;
 	line-height: 1;
-	padding: .6em 1em .4em;
+	padding: 0.5em 1em;
 }
 
 button:hover,
@@ -629,7 +698,8 @@ a:visited {
 a:hover,
 a:focus,
 a:active {
-	color: midnightblue;
+	color: steelblue;
+        border-bottom: 3px solid #c3c3c3;
 }
 
 a:focus {
@@ -1209,7 +1279,6 @@ a:active {
 ## Other Navigation (Post nav)
 --------------------------------------------------------------*/
 .paging-navigation,
-.comment-pagination,
 .comment-navigation,
 .post-navigation {
     text-align: left;
@@ -1229,26 +1298,23 @@ a:active {
     margin: 0 auto;
     padding: 0;
 }
-/*.comment-pagination {
+.comment-pagination {
     text-align: center;
-    padding: 5px;
+    padding: 2em;
+    background: #efefef;
 }
 .comment-pagination .nav-links {
-    border: 3px solid white;
-    padding: 0.5em;
+    
 }
 .comment-pagination a {
     color: #404040;
 }
-.comment-pagination .page-numbers {
-    padding: 0 10px;
-}
 .comment-pagination .page-numbers:last-child {
-    border: none;
+    /*border: none;*/
 }
 .comment-pagination .current {
-    background: white;
-}*/
+    
+}
 @media screen and (min-width: 50em) {
     .paging-navigation,
     .comment-navigation,
@@ -1270,7 +1336,6 @@ a:active {
     }
 }
 .paging-navigation a,
-.comment-pagination a,
 .comment-navigation a,
 .post-navigation a {
     display: block;
@@ -1293,6 +1358,9 @@ a:active {
 
 .post-nav-thumb {
     margin: -1em -1em 1em;
+    max-height: 120px;
+    overflow: hidden;
+    position: relative;
 }
 .post-nav-thumb img {
     width: 100%;
@@ -1302,6 +1370,8 @@ a:active {
     font-size: 1.1em;
     font-weight: 700;
     display: block;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
 }
 .post-navigation a:hover .post-title,
 .post-navigation a:focus .post-title {
@@ -1325,7 +1395,6 @@ a:active {
 
 @media screen and (min-width: 30em) {
     .paging-navigation .nav-links,
-    .comment-pagination .nav-links,
     .post-navigation .nav-links,
     .comment-navigation .nav-links {
         display: flex;
@@ -1334,7 +1403,6 @@ a:active {
         padding: 0;
     }
     .paging-navigation .nav-previous,
-    .comment-pagination .nav-previous,
     .comment-navigation .nav-previous,
     .post-navigation .nav-previous {
         display: flex;
@@ -1346,7 +1414,6 @@ a:active {
         padding-bottom: 0;
     }
     .paging-navigation .nav-next,
-    .comment-pagination .nav-next,
     .comment-navigation .nav-next,
     .post-navigation .nav-next {
         display: flex;
@@ -1374,6 +1441,9 @@ a:active {
 .paging-navigation li a,
 .comment-pagination a {
     padding: 0.3em 1.4em;
+}
+.comment-pagination a {
+    border: 2px solid white;
 }
 .paging-navigation .current,
 .comment-pagination .current {
@@ -1665,7 +1735,8 @@ a:active {
     font-style: italic;
     line-height: 1.3em;
     color: #000;
-    word-break: break-word;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
     -webkit-font-smoothing: antialiased;
     text-shadow: rgba(0,0,0,.01) 0 0 1px;
     transition: all 300ms ease;
@@ -2280,7 +2351,6 @@ a:active {
     }
     .sidebar-left .paging-navigation,
     .sidebar-left .comment-navigation,
-    .sidebar-left .comment-pagination,
     .sidebar-left .post-navigation {
         width: calc( 100vw - 306px );
         left: calc(( -100vw + 57em ) / 2 );
@@ -2316,7 +2386,6 @@ a:active {
     }
     .sidebar-left .paging-navigation,
     .sidebar-left .comment-navigation,
-    .sidebar-left .comment-pagination,
     .sidebar-left .post-navigation {
         width: calc( 100vw - 306px );
         left: calc(( -100vw + 62em ) / 2 );
@@ -2408,14 +2477,16 @@ a:active {
     margin: 1.5em auto 1em;
     text-align: center;
     font-style: italic;
-    background: #efefef;
+    background: white;
     padding: 5px;
-    max-width: 30em;
+    max-width: 80%;
+    border: 2px solid black;
 }
 .taxonomy-description p {
     margin-bottom: 0;
     padding: 1em;
-    border: 2px solid white;
+    border: 1px solid black;
+    color: #777;
 }
 
 /*--------------------------------------------------------------
@@ -2545,6 +2616,7 @@ a:active {
     margin-right: -0.5em;
     margin-bottom: 0.75em;
     text-align: center;
+    -ms-word-wrap: break-word;
     word-wrap: break-word;
     font-size: 2.6em;
 }
@@ -2609,7 +2681,7 @@ a:active {
 .has-avatar {
     display: inline-block;
     text-align: left;
-    max-width: 20em;
+    /*max-width: 20em;*/
 }
 .author-avatar {
     height: 50px;
@@ -2624,13 +2696,18 @@ a:active {
 .author-avatar img {
     border-radius: 50%;
 }
+.has-avatar .meta-content-text {
+    padding-left: 66px;
+}
 
 .byline, 
 .posted-on,
-.entry-meta .cat-links,
 .entry-meta .comments-link {
     display: inline-block;
     padding: 0;
+}
+.entry-meta .cat-links {
+    display: block;
 }
 .byline, 
 .entry-meta .cat-links {
@@ -2674,7 +2751,19 @@ a:active {
 
 .page-links {
 	clear: both;
-	margin: 0 0 1.5em;
+	margin: 0 -0.125em 1.5em;
+        text-align: right;
+}
+.page-links a {
+    padding: 0.25em 0.75em;
+    margin: 0.125em;
+    font-style: normal;
+    color: black;
+    border: 2px solid #c3c3c3;
+}
+.page-links a:hover,
+.page-links a:focus {
+    border: 2px solid black;
 }
 .entry-footer {
     margin: 3em -1em;
@@ -2682,6 +2771,9 @@ a:active {
     border-bottom: 2px solid black;
     color: #404040;
     font-size: 95%;
+}
+.entry-footer a {
+    font-style: italic;
 }
 .entry-footer .footer-content {
     margin: 4px 0.5em;
@@ -2699,11 +2791,22 @@ a:active {
     margin-bottom: -5px;
     padding: 1.5em 1em;
 }
+.entry-footer .tags-links {
+    width: 66.6666666666%;
+    border-right: none;
+}
 .entry-footer .comments-link,
 .entry-footer .edit-link {
     padding: 1.5em 1em;
     margin-top: -5px;
     margin-bottom: -5px;
+    font-style: normal;
+}
+.entry-footer .edit-link {
+    border-left: 1px solid black;
+}
+.post-edit-link {
+    font-style: normal!important;
 }
 
 @media screen and (max-width: 30em) {
@@ -2719,6 +2822,9 @@ a:active {
 @media screen and (max-width: 300px) {
     .has-avatar {
         text-align: center;
+    }
+    .has-avatar .meta-content-text {
+        padding-left: 0;
     }
     .author-avatar {
         margin: 0 auto;
@@ -2772,7 +2878,7 @@ a:active {
 
     }
     .has-avatar {
-        max-width: 30em;
+        /*max-width: 30em;*/
     }
     .author-avatar {
         margin-top: 0;
@@ -2805,11 +2911,15 @@ a:active {
         left: calc((-100vw + 47.4em) / 2);
         overflow: hidden;
         padding-left: calc( 50vw - 50% );
+        padding-right: calc( 50vw - 50% );
     }
     .author-avatar {
         width: 70px;
         height: 70px;
         margin-top: -0.5em;
+    }
+    .has-avatar .meta-content-text {
+        padding-left: 86px;
     }
 }
 @media screen and (min-width: 75em) {
@@ -2888,6 +2998,8 @@ a:active {
     padding: 0;
     font-size: 1.6em;
     padding-bottom: 5px;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
 }
 .index-header .entry-meta {
     text-align: left;
@@ -2993,10 +3105,32 @@ a:active {
 .archive .format-aside .entry-title {
 	display: none;
 }
+/*--------------------------------------------------------------
+## Chats
+--------------------------------------------------------------*/
+.format-chat p {
+    padding: 0.5em 1em;
+    margin: 0 -1em 2em;
+}
+.format-chat p:nth-child(even) {
+    background: whitesmoke;
+    margin-left: 33%;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+}
+.format-chat p:nth-child(odd) {
+    margin-right: 33%;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+}
 
 /*--------------------------------------------------------------
 ## Comments
 --------------------------------------------------------------*/
+.no-comments {
+    margin-top: 2em;
+}
+
 .comments-area {
     margin: 4em 0;
 }
@@ -3230,6 +3364,14 @@ object {
 /*--------------------------------------------------------------
 # Images
 --------------------------------------------------------------*/
+.entry-content a > img {
+    border: 1px dotted black;
+    background: white;
+}
+.entry-content a:hover > img {
+    border: 1px solid black;
+}
+
 img.aligncenter {
     margin-top: 2em;
     margin-bottom: 2em;
@@ -3307,6 +3449,7 @@ img.alignleft {
     margin-bottom: 2em;
     padding-bottom: 4px;
     border-bottom: 2px solid black;
+    background: #efefef;
 }
 .wp-caption .wp-caption-text {
     margin: 0 0.5em;
@@ -3348,7 +3491,7 @@ img.alignleft {
 }
 
 .gallery-item .wp-caption-text {
-    margin: 0 0.5em -32px 0;
+    margin: 0 0.5em -32px 0.5em;
     color: #404040;
     font-size: 85%;
     border-bottom: 1px solid black;
@@ -3397,7 +3540,7 @@ img.alignleft {
 # Footer
 --------------------------------------------------------------*/
 .site-footer {
-    background: black;
+    background: #1d1f21;
     color: #aaa;
     padding: 2.5em;
 }
@@ -3426,6 +3569,12 @@ img.alignleft {
 .site-footer .nav-menu li a:hover,
 .site-footer .nav-menu li a:focus {
     color: white;
+}
+
+.site-info {
+    background: black;
+    padding: 1em;
+    color: #aaa;
 }
 
 
