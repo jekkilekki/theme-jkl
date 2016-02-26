@@ -2146,6 +2146,25 @@ a:active {
 #secondary-footer .widget {
     width: 100%;
 }
+@media screen and (min-width: 40em) {
+    #secondary-footer .widget {
+        width: 45%;
+        padding: 0 2.5% 2em;
+    }
+}
+@media screen and (min-width: 50em) {
+    #secondary-footer .widget {
+        float: left;
+        width: 30%;
+        margin: 0 1.5% 2em;
+    }
+}
+@media screen and (min-width: 75em) {
+    #secondary-footer .widget {
+        width: 21%;
+        margin: 0 2% 2em;
+    }
+}
 
 .widget {
 	margin: 0 0 1.5em;
@@ -2161,7 +2180,7 @@ a:active {
     margin-bottom: 0;
 }
 @media screen and (min-width: 40em) {
-    .no-sidebar #secondary .widget {
+    #secondary .widget {
         float: left;
         width: 45%;
         margin: 0 2.5% 2em;
@@ -2179,10 +2198,11 @@ a:active {
         justify-content: center;
         padding: 2em 2.5em;
     }
-    #secondary-footer .widget {
-        float: left;
-        width: 30%;
-        margin: 0 1.5% 2em;
+}
+@media screen and (min-width: 64em) {
+    .sidebar-left #secondary .widget,
+    .sidebar-right #secondary .widget {
+        width: 100%!important;
     }
 }
 
@@ -2291,6 +2311,9 @@ a:active {
     text-align: center;
     background: #d6d6d6;
     border: 3px solid white;
+}
+#secondary-footer .widget_calendar td {
+    padding: 0.5em;
 }
 .widget_calendar th {
     border: none;
@@ -2839,7 +2862,7 @@ a:active {
     }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 400px) {
     .has-avatar {
         text-align: center;
     }
@@ -2865,7 +2888,6 @@ a:active {
         float: none;
         margin-top: 1em;
     }
-    
     .entry-footer .footer-content {
         display: block;
     }
@@ -2878,8 +2900,11 @@ a:active {
         border-top: 1px solid black;
         margin-top: 5px;
     }
+    .entry-footer .edit-link {
+        border: none;
+    }
 }
-@media screen and (min-width: 300px) {
+@media screen and (min-width: 400px) {
     .posted-on {
         max-width: 70%;
     }
@@ -3615,15 +3640,18 @@ img.alignleft {
         padding-bottom: 4em;
     }
 }
+.copyright {
+    font-size: 0.9em;
+}
 .publisher {
-    font-size: 0.85em;
+    font-size: 0.8em;
 }
 a.wporg-link {
     font-family: "FontAwesome";
     content: '\f19a';
     display: inline-block;
     color: #aaa;
-    font-size: 1.4em;
+    font-size: 1em;
     position: relative;
     margin-top: -0.5em;
     margin-right: 0.25em;
