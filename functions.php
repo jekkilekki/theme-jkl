@@ -166,6 +166,8 @@ function jkl_scripts() {
         wp_enqueue_script( 'foundation-init', get_template_directory_uri() . '/js/foundation.js', array( 'jquery' ), '20160211', true );
         
         /* Masonry settings for Footer widgets */ // @Todo - decide if we want these
+        wp_enqueue_script( 'jkl-masonry', get_template_directory_uri() . '/js/masonry-settings.js', array( 'masonry' ), '20160226', true );
+        
         /* Toggle Main Search script */ //@Todo - decide if we want this
         
         /* Add dynamic back to top button */

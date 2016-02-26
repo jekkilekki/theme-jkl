@@ -875,6 +875,7 @@ a:active {
     text-transform: uppercase;
     color: #000;
     font-size: 1em;
+    font-family: "Source Sans Pro", sans-serif;
     box-shadow: none;
     position: fixed;
     bottom: 0.6em;
@@ -2142,6 +2143,9 @@ a:active {
 #secondary {
     margin: 0;
 }
+#secondary-footer .widget {
+    width: 100%;
+}
 
 .widget {
 	margin: 0 0 1.5em;
@@ -2156,7 +2160,13 @@ a:active {
     margin-top: 0;
     margin-bottom: 0;
 }
-
+@media screen and (min-width: 40em) {
+    .no-sidebar #secondary .widget {
+        float: left;
+        width: 45%;
+        margin: 0 2.5% 2em;
+    }
+}
 @media screen and (max-width: 42.475em) {
     #secondary {
         padding: 2em 2.5em;
@@ -2169,10 +2179,10 @@ a:active {
         justify-content: center;
         padding: 2em 2.5em;
     }
-    .widget {
+    #secondary-footer .widget {
         float: left;
-        width: 250px;
-        margin: 0 1em 2em;
+        width: 30%;
+        margin: 0 1.5% 2em;
     }
 }
 
@@ -2222,6 +2232,10 @@ a:active {
     display: block;
     padding: 0.3em 0;
     border-bottom: 1px dotted gainsboro;
+}
+#secondary-footer .widget_pages a,
+#secondary-footer .widget_nav_menu a {
+    border-color: #333;
 }
 
 .site-content .widget_pages li:last-child,
@@ -2349,12 +2363,6 @@ a:active {
         padding: 0 1.5em;
         border-right: 1px solid #ededed;
     }
-    .sidebar-left .paging-navigation,
-    .sidebar-left .comment-navigation,
-    .sidebar-left .post-navigation {
-        width: calc( 100vw - 306px );
-        left: calc(( -100vw + 57em ) / 2 );
-    }
     
     /* Unified styles */
     .sidebar-right #secondary,
@@ -2376,6 +2384,15 @@ a:active {
         conent: "";
         border-bottom: 1px solid #c3c3c3;
     }
+    .sidebar-left .paging-navigation,
+    .sidebar-left .comment-navigation,
+    .sidebar-left .post-navigation,
+    .sidebar-right .paging-navigation,
+    .sidebar-right .comment-navigation,
+    .sidebar-right .post-navigation {
+        width: calc( 100vw - 306px );
+        left: calc(( -100vw + 57em ) / 2 );
+    }
 }
 @media screen and (min-width: 75em) {
     .sidebar-left .site-main,
@@ -2386,7 +2403,10 @@ a:active {
     }
     .sidebar-left .paging-navigation,
     .sidebar-left .comment-navigation,
-    .sidebar-left .post-navigation {
+    .sidebar-left .post-navigation,
+    .sidebar-right .paging-navigation,
+    .sidebar-right .comment-navigation,
+    .sidebar-right .post-navigation {
         width: calc( 100vw - 306px );
         left: calc(( -100vw + 62em ) / 2 );
     }
@@ -2887,6 +2907,9 @@ a:active {
 @media screen and (min-width: 42.5em) {
     .entry-meta {
         text-align: left;
+    }
+    .has-avatar {
+        width: 100%;
     }
     .author-avatar {
         margin-top: 3px;
@@ -3539,10 +3562,17 @@ img.alignleft {
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-.site-footer {
+.site-footer-content {
     background: #1d1f21;
     color: #aaa;
-    padding: 2.5em;
+    padding: 1em 2.5em;
+}
+.site-footer-content.has-footer-menu .footer-widget-area {
+    border-bottom: 1px solid #333;
+    margin-bottom: 1em;
+}
+#secondary-footer {
+    padding-bottom: 2em;
 }
 .site-footer a {
     color: #777;
@@ -3561,7 +3591,11 @@ img.alignleft {
 .site-footer .nav-menu li li {
     list-style-type: none;
     display: inline-block;
-    margin-right: 2.5%;
+    margin-right: 1em;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    font-weight: bold;
 }
 .site-footer .nav-menu li a {
     color: #777;
@@ -3574,9 +3608,47 @@ img.alignleft {
 .site-info {
     background: black;
     padding: 1em;
-    color: #aaa;
+    color: #555;
 }
-
+@media screen and (max-width: 40em) {
+    .site-info {
+        padding-bottom: 4em;
+    }
+}
+.publisher {
+    font-size: 0.85em;
+}
+a.wporg-link {
+    font-family: "FontAwesome";
+    content: '\f19a';
+    display: inline-block;
+    color: #aaa;
+    font-size: 1.4em;
+    position: relative;
+    margin-top: -0.5em;
+    margin-right: 0.25em;
+}
+.wporg-link:hover,
+.wporg-link:focus {
+    border: none;
+}
+@media screen and (max-width: 40em) {
+    .copyright,
+    .publisher {
+        text-align: center;
+    }
+    .publisher {
+        
+    }
+    .publisher:before {
+        content: "";
+        display: block;
+        width: 33%;
+        margin: 1em auto;
+        border-bottom: 1px solid #222;
+        text-align: center;
+    }
+}
 
 
 /**

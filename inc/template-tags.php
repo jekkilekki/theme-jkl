@@ -49,7 +49,7 @@ function jkl_posted_on() {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
 		if ( $categories_list && jkl_categorized_blog() ) {
-			printf( '<br><span class="cat-links">' . esc_html__( '%1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+			printf( '<span class="cat-links">' . esc_html__( '%1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 		}
         }
         

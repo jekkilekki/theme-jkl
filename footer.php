@@ -16,9 +16,13 @@
         <a href="#topbutton" class="topbutton"></a>
         
 	<footer id="colophon" class="site-footer" role="contentinfo">
-
+            
+            <?php
+            if ( has_nav_menu( 'footer' ) || is_active_sidebar( 'footer' ) ) : ?>
+            <div class="site-footer-content <?php echo has_nav_menu( 'footer' ) ? 'has-footer-menu' : ''; ?>">
+                <div class="row">
                 <?php get_sidebar( 'footer' ); ?>
-                
+               
                 <?php 
                 if ( has_nav_menu( 'footer' ) ) : ?>
                     <div class="footer-navigation large-12 columns">
@@ -31,20 +35,27 @@
                     </div>
                 <?php
                 endif; ?>
-                
+                </div><!-- .row -->
+            </div><!-- .site-footer-content -->
+            <?php 
+            endif; ?>
+            
+            <div class="site-info">
+                <div class="row columns">
+                <div class="small-12 medium-6 columns copyright">
+                    <?php echo jkl_dynamic_copyright(); ?>
+                </div>
+                <div class="small-12 medium-6 columns publisher text-right">
+                    <?php printf( 
+                            esc_html__( '%1$s %2$s Theme by %3$s.', 'jkl' ),  
+                                    '<a class="wporg-link" href="https://wordpress.org/"><i class="fa fa-wordpress"></i><span class="screen-reader-text">WordPress</span></a>', 
+                                    'jkl',
+                                    '<a href="http://www.aaronsnowberger.com" rel="designer">Aaron Snowberger</a>' 
+                            ); ?>
+                </div>
+                </div><!-- .row -->
+            </div><!-- .site-info -->
 	</footer><!-- #colophon -->
-        <div class="site-info">
-            <div class="row">
-            <div class="small-12 medium-6 columns copyright">
-                <?php echo jkl_dynamic_copyright(); ?>
-            </div>
-            <div class="small-12 medium-6 columns publisher text-right">
-                <a href="<?php echo esc_url( __( 'https://wordpress.org/', 'jkl' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'jkl' ), 'WordPress' ); ?></a>
-                <span class="sep"> | </span>
-                <?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'jkl' ), 'jkl', '<a href="http://www.aaronsnowberger.com" rel="designer">Aaron Snowberger</a>' ); ?>
-            </div>
-            </div><!-- .row -->
-        </div><!-- .site-info -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
