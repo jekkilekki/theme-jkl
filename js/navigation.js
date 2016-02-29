@@ -160,7 +160,9 @@
                 if ( $(this).scrollTop() >= position && $(this).scrollTop() >= fixMenuHeight ) {
                     direction = 'down';
                     if ( direction !== previous ) {
-                        $( '.thin-bar #primary-nav-bar' ).addClass( 'hide' );
+                        if ( !$( '.dropdown-toggle' ).hasClass( 'toggle-on' ) ) {
+                            $( '.thin-bar #primary-nav-bar' ).addClass( 'hide' );
+                        }
 
                         previous = direction;
                     }

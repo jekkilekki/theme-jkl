@@ -103,7 +103,6 @@
                                     <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'jkl' ); ?></button>
 
                                     <?php 
-                                    $use_split_menu = false;
 
                                     // If the primary menu is set, and there's a site icon, obviously split the menu
                                     if ( has_nav_menu( 'primary' ) && has_site_icon() ) :
@@ -125,8 +124,12 @@
                                     endif; 
                                     // The next menu is the FULL navigation menu, original from Underscores, using TwentyFifteen toggles - shown on tablets and mobile devices 
                                     ?>
-                                    <div class="<?php if ( $use_split_menu ) { echo 'full-navigation-menu show-for-medium-down hide-for-large-up'; } else { echo 'full-navigation-menu split-navigation-menu columns'; } ?>">
-                                        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'menu-class' => 'nav-menu' ) ); ?>
+                                    <div class="full-navigation-menu show-for-medium-down hide-for-large">
+                                        <?php wp_nav_menu( array( 
+                                                    'theme_location' => 'primary', 
+                                                    'menu_id' => 'primary-menu', 
+                                                    'menu_class' => 'nav-menu', 
+                                            ) ); ?>
                                     </div>
 
 

@@ -150,15 +150,24 @@ function jkl_customizer_css() {
     ?>
     <style>
         .split-navigation-menu {
-            background: <?php echo $menu_color; ?>
+            background: <?php echo $menu_color; ?>;
         }
         #main-nav-left li a,
         #main-nav-right li a {
-            color: <?php echo $menu_text_color; ?>
+            color: <?php echo $menu_text_color; ?>;
         }
+        a,
+        a:visited,
+        a:hover,
+        a:focus,
+        a:active,
         .entry-content a,
         .entry-summary a {
-            color: <?php echo $highlight_color; ?>
+            color: <?php echo $highlight_color; ?>;
+        }
+        .search-toggle,
+        .search-box-wrapper {
+            background-color: <?php echo $highlight_color; ?>;
         }
     </style>
     <?php

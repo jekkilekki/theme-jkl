@@ -55,6 +55,18 @@
 		} );
 	} );
         
+        // Highlight colors
+        wp.customize( 'highlight_color', function( value ) {
+		value.bind( function( to ) {
+			$( 'a:visited, a:hover, a:focus, a:active, .entry-content a, .entry-summary a' ).css( {
+                            'color': to 
+                        } );
+                        $( '.search-toggle, .search-box-wrapper' ).css( {
+                            'background-color': to
+                        } );
+		} );
+	} );
+        
         
         // Custome Layout (Sidebar) Options
         wp.customize( 'layout_setting', function( value ) {

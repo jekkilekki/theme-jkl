@@ -3,7 +3,7 @@ Theme Name: jkl
 Theme URI: https://github.com/jekkilekki/theme-jkl
 Author: Aaron Snowberger
 Author URI: http://www.aaronsnowberger.com
-Description: A simple black and white modern blog theme with some sidebar options, a centered logo with split navigation, and some custom page templates. <!-- Can put in HTML here -->
+Description: A simple black and white modern blog theme with left, right, or no sidebar options, a centered logo with split navigation, and some custom page templates.<!-- Can put in HTML here --> Template is fully responsive.
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -1070,7 +1070,7 @@ a:active {
         padding: 0.5em 1em;
         width: calc(100% + 50%);
         margin-left: -50%;
-        top: 46px;
+        top: 45px;
     }
     .dropdown-toggle {
         height: 28px;
@@ -1882,7 +1882,7 @@ a:active {
         margin-left: -1em;
         width: calc(100% + 2em);
         transition: all 300ms ease;
-        overflow: hidden;
+        /*overflow: hidden;*/
         padding: 0 0.9375em;
     }
     .thin-bar #primary-nav-bar {
@@ -1997,9 +1997,14 @@ a:active {
     }
 }
 @media screen and (min-width: 82.5em) {
+    .site-branding {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
     .search-toggle {
         position: relative!important;
         margin-left: 67.75em;
+        right: blah; /* Incorrect value to "reset" right and make it fit properly */
     }
     .search-toggle i {
         position: absolute;
@@ -2011,6 +2016,21 @@ a:active {
     }
     .full-navigation-menu ul {
         padding: 0 1em!important;
+    }
+    #social-links-division {
+        right: 46px!important;
+    }
+}
+@media screen and (min-width: 84.375em) {
+    .site-branding {
+        padding-left: 1.9375em;
+        padding-right: 1.9375em;
+    }
+    .search-toggle {
+        right: 12px!important;
+    }
+    #social-links-division {
+        right: 44px!important;
     }
 }
 
