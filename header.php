@@ -105,7 +105,7 @@
                                     <?php 
 
                                     // If the primary menu is set, and there's a site icon, obviously split the menu
-                                    if ( has_nav_menu( 'primary' ) && has_site_icon() ) :
+                                    if ( has_site_icon() ) :
 
                                             // This is the split menu, only showing up on larger screens - custom menu output ?>
                                             <div class="split-navigation-menu show-for-large">
@@ -124,11 +124,12 @@
                                     endif; 
                                     // The next menu is the FULL navigation menu, original from Underscores, using TwentyFifteen toggles - shown on tablets and mobile devices 
                                     ?>
-                                    <div class="full-navigation-menu show-for-medium-down hide-for-large">
+
+                                    <div class="full-navigation-menu <?php echo has_site_icon() ? 'hide-for-large' : 'split-navigation-menu'; ?>">
                                         <?php wp_nav_menu( array( 
                                                     'theme_location' => 'primary', 
                                                     'menu_id' => 'primary-menu', 
-                                                    'menu_class' => 'nav-menu', 
+                                                    'menu_class' => 'nav-menu' 
                                             ) ); ?>
                                     </div>
 
