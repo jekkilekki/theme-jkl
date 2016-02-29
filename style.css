@@ -1901,7 +1901,7 @@ a:active {
         line-height: 1em;
     }
     .full-navigation-menu {
-        /*display: none!important;*/
+        display: none!important;
         background: #dcdcdc;
         height: 45px;
         overflow-y: hidden;
@@ -2050,14 +2050,18 @@ a:active {
 /*--------------------------------------------------------------
 # Front Page Title Box
 --------------------------------------------------------------*/
-.site-main-title-box {
+.site-main-title-container {
     position: absolute;
-    padding: 5px!important;
-    background: white;
+    top: 100px;
+    width: 300px;
     left: 50%;
     margin-left: -150px;
-    width: 300px;
-    top: 9em;
+}
+.site-main-title-box {
+    /*position: absolute;*/
+    padding: 5px!important;
+    background: white;
+    margin-top: 3.5em;
 }
 .site-main-title-box hgroup {
     border: 1px solid black;
@@ -2077,23 +2081,32 @@ a:active {
     max-width: 100%;
 }
 @media screen and (max-width: 40em) {
+    .site-main-title-container,
     .site-main-title-box {
         display: none;
     }
 }
 @media screen and (min-width: 50em) {
+    .site-main-title-container {
+        top: 140px;
+    }
     .site-main-title-box {
-        top: 13em;
+        margin-top: 5.5em;
     }
 }
 @media screen and (min-width: 64em) {
     .site-main-title-box {
-        top: 15em;
+        margin-top: 7.5em;
     }
 }
 @media screen and (min-width: 75em) {
     .site-main-title-box {
-        top: 17em;
+        margin-top: 8.5em;
+    }
+}
+@media screen and (min-width: 82.5em) {
+    .site-main-title-box {
+        margin-top: 10.5em;
     }
 }
 
@@ -2124,7 +2137,7 @@ a:active {
     padding: 1.5em 2em;
     background: steelblue;
     display: none;
-    height: 86px;
+    /*height: 86px;*/
 }
 .thin-bar .search-toggle {
     display: block;
@@ -2137,15 +2150,16 @@ a:active {
 }
 .site-search .search-field {
     max-width: 100%;
-    padding: 1rem 1.25rem;
-    font-size: 1.2rem;
+    padding: 1em;
+    font-size: 1.4rem;
     background-color: transparent;
     border: 1px solid white;
     margin-bottom: 0;
     color: white;
 }
 .site-search input[type="search"] {
-    color: #777;
+    color: white;
+    font-weight: bold;
 }
 .error404 .search-submit,
 .search .search-submit,
@@ -2221,6 +2235,9 @@ a:active {
     }
 }
 @media screen and (min-width: 64em) {
+    #secondary .widget {
+        width: 33.33333333%;
+    }
     .sidebar-left #secondary .widget,
     .sidebar-right #secondary .widget {
         width: 100%!important;
@@ -2679,6 +2696,18 @@ a:active {
         overflow: hidden;
         padding-left: calc( 50vw - 50% );
         padding-right: calc( 50vw - 50% );
+    }
+}
+@media screen and (min-width: 64em) {
+    .sidebar-left .sticky,
+    .sidebar-right .sticky {
+        left: calc((-100vw + 40em) / 2);
+    }
+}
+@media screen and (min-width: 75em) {
+    .sidebar-left .sticky,
+    .sidebar-right .sticky {
+        left: calc((-100vw + 45em) / 2);
     }
 }
 .not-found .sticky {
