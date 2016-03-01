@@ -153,7 +153,7 @@
 	</header><!-- #masthead -->
         
         <div class="row site-header-image">
-                <?php if ( get_header_image() && !has_post_thumbnail() ) : ?>
+                <?php if ( get_header_image() && !has_post_thumbnail() && !is_front_page() ) : ?>
                     <div class="site-header-img small-12 columns" style="background-image: url(<?php header_image(); ?>)"></div><!-- .site-header-image -->
                         
                         <?php if ( !is_single() && !is_page() ) : ?>

@@ -1907,7 +1907,7 @@ a:active {
         overflow-y: hidden;
     }
     .full-navigation-menu ul {
-        padding: 0 1.9375em!important;
+        padding: 0 0.9375em!important;
     }
     .full-navigation-menu li {
         display: inline-block;
@@ -1927,6 +1927,9 @@ a:active {
         height: 45px;
         padding-left: 1em;
         padding-right: 1em;
+    }
+    .split-navigation-menu .nav-menu {
+        padding: 0;
     }
     #social-links-division {
         display: block!important;
@@ -2017,7 +2020,7 @@ a:active {
         padding: 0 calc((100vw - 80.5em) / 2);
     }
     .full-navigation-menu ul {
-        padding: 0 1em!important;
+        padding: 0!important;
     }
     #social-links-division {
         right: 46px!important;
@@ -2714,6 +2717,9 @@ a:active {
     padding-top: 2em;
     padding-bottom: 1.5em;
     margin-bottom: 3em!important;
+}
+.not-found .sticky:before {
+    display: none;
 }
 
 .hentry {
