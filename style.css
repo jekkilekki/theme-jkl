@@ -3050,16 +3050,19 @@ a:active {
     
     .no-sidebar .entry-meta {
         position: absolute;
-        width: 215px;
-        left: -215px;
+/*        width: 215px;
+        left: -215px;*/
+        max-width: 306px;
+        left: -306px;
         top: 0;
         text-align: right;
         /*width: calc(50vw - 22.5em);*/
         padding-left: 1em;
         padding-right: 1em;
         margin-top: -1em;
-        padding-bottom: 1.5em;
+        padding-bottom: 10em;
         background: transparent;
+        border-right: 1px solid #ededed;
     }
     .no-sidebar .has-avatar {
         text-align: right;
@@ -3233,17 +3236,17 @@ a:active {
 /*--------------------------------------------------------------
 ## Chats
 --------------------------------------------------------------*/
-.format-chat p {
+.single .format-chat p {
     padding: 0.5em 1em;
     margin: 0 -1em 2em;
 }
-.format-chat p:nth-child(even) {
+.single .format-chat p:nth-child(even) {
     background: whitesmoke;
     margin-left: 33%;
     border-radius: 10px;
     border: 1px solid #dcdcdc;
 }
-.format-chat p:nth-child(odd) {
+.single .format-chat p:nth-child(odd) {
     margin-right: 33%;
     border-radius: 10px;
     border: 1px solid #dcdcdc;
