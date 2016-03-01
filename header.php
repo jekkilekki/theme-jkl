@@ -21,7 +21,29 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="site <?php echo get_theme_mod( 'layout_setting', 'no-sidebar' ); ?>">
+    
+<?php if ( is_page_template( 'page-templates/page-sidebar-right.php' ) ) { ?>
+    
+    <div id="page" class="site sidebar-right">
+        
+<?php } else if ( is_page_template( 'page-templates/page-sidebar-left.php' ) ) { ?>
+        
+    <div id="page" class="site sidebar-left">
+        
+<?php } else if ( is_page_template( 'page-templates/page-no-sidebar.php' ) ) { ?>
+        
+    <div id="page" class="site no-sidebar">
+        
+<?php } else if ( is_page_template( 'page-templates/page-full-width.php' ) ) { ?>
+        
+    <div id="page" class="site no-sidebar page-full-width">
+        
+<?php } else { ?>   
+        
+    <div id="page" class="site <?php echo get_theme_mod( 'layout_setting', 'no-sidebar' ); ?>">
+        
+<?php } ?>
+        
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'jkl' ); ?></a>
         
 	<header id="masthead" class="site-header" role="banner">

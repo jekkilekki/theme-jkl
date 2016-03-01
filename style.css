@@ -4,7 +4,7 @@ Theme URI: https://github.com/jekkilekki/theme-jkl
 Author: Aaron Snowberger
 Author URI: http://www.aaronsnowberger.com
 Description: A simple black and white modern blog theme with left, right, or no sidebar options, a centered logo with split navigation, and some custom page templates.<!-- Can put in HTML here --> Template is fully responsive.
-Version: 1.0.1
+Version: 1.0.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: jkl
@@ -2532,6 +2532,28 @@ a:active {
     }
     #site-search-container {
         padding-left: 50%;
+    }
+    .page-full-width .site-main,
+    .page-full-width .widget-area {
+        max-width: 100%;
+        margin: 2.5em;
+    }
+}
+@media screen and (min-width: 82.5em) {
+    .page-full-width .site-main,
+    .page-full-width .widget-area {
+        max-width: 70em;
+        margin: 2.5em auto;
+    }
+    .page-full-width .featured-image,
+    .page-full-width .centered-image {
+        margin: 2em -1.5em;
+    }
+}
+@media screen and (min-width: 84.5em) {
+    .page-full-width .featured-image,
+    .page-full-width .centered-image {
+        margin: 2em -2.5em;
     }
 }
 
