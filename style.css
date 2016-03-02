@@ -3076,7 +3076,7 @@ a:active {
         left: calc((-100vw + 47.4em) / 2);
     }
     
-    .no-sidebar .entry-meta {
+    .single .no-sidebar .entry-meta {
         position: absolute;
 /*        width: 215px;
         left: -215px;*/
@@ -3092,7 +3092,7 @@ a:active {
         background: transparent;
         border-right: 1px solid #ededed;
     }
-    .no-sidebar .has-avatar {
+    .single .no-sidebar .has-avatar {
         text-align: right;
         display: block;
         width: 100%;
@@ -3260,6 +3260,67 @@ a:active {
 .blog .format-aside .entry-title,
 .archive .format-aside .entry-title {
 	display: none;
+}
+.blog .format-aside .hentry-index,
+.archive .format-aside .hentry-index {
+    border-top: 2px solid black;
+    padding: 0;
+    margin-top: 5em;
+    margin-bottom: 5em;
+    border-bottom: 0;
+}
+.blog .format-aside p,
+.archive .format-aside p {
+    font-size: 1.2em;
+    color: #404040;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.blog .format-aside .hentry-index:after,
+.archive .format-aside .hentry-index:after {
+    border: 0;
+}
+.blog .format-aside .index-content,
+.archive .format-aside .index-content {
+    border-width: 1px;
+}
+.blog .format-aside .entry-footer,
+.archive .format-aside .entry-footer {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    border-top: 0;
+}
+.blog .format-aside .footer-content,
+.archive .format-aside .footer-content {
+    padding: 0;
+    margin: 0 0 4px 0;
+    border-top: 0;
+    position: relative;
+}
+.blog .format-aside .meta-content-index,
+.archive .format-aside .meta-content-index {
+    padding-bottom: 0.5em;
+}
+.blog .format-aside .posted-on,
+.archive .format-aside .posted-on {
+    margin-left: -0.25em;
+    font-family: "Volkhov", serif;
+    color: #777;
+    font-size: 1em;
+}
+.blog .format-aside .posted-on a,
+.archive .format-aside .posted-on a {
+    color: black;
+    font-style: normal;
+}
+.blog .format-aside .permalink,
+.archive .format-aside .permalink {
+    position: absolute;
+    right: 0;
+    padding: 0.25em 0.75em 0.55em;
+    border-left: 1px solid #c3c3c3;
+    color: #aaa;
 }
 /*--------------------------------------------------------------
 ## Chats
@@ -3725,14 +3786,16 @@ img.alignleft {
 .site-footer .nav-menu li li {
     list-style-type: none;
     display: inline-block;
-    margin-right: 1em;
+}
+.site-footer .nav-menu li a {
+    color: #777;
     text-transform: uppercase;
     font-size: 0.9em;
     letter-spacing: 1px;
     font-weight: bold;
-}
-.site-footer .nav-menu li a {
-    color: #777;
+    padding: 0.5em 1em;
+    display: flex;
+    flex-wrap: wrap;
 }
 .site-footer .nav-menu li a:hover,
 .site-footer .nav-menu li a:focus {
@@ -3742,7 +3805,7 @@ img.alignleft {
 .site-info {
     background: black;
     padding: 1em;
-    color: #555;
+    color: #777;
 }
 @media screen and (max-width: 40em) {
     #secondary-footer {

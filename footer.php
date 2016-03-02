@@ -25,7 +25,7 @@
                
                 <?php 
                 if ( has_nav_menu( 'footer' ) ) : ?>
-                    <div class="footer-navigation large-12 columns">
+                    <div class="footer-navigation large-12">
                         <?php wp_nav_menu( array( 
                             'theme_location'    => 'footer', 
                             'menu_id'           => 'footer-menu', 
