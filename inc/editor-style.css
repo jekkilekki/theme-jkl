@@ -83,7 +83,7 @@ pre {
 	margin-bottom: 1.6em;
 	max-width: 100%;
 	overflow: auto;
-	padding: 1.6em;
+        padding: 0;
             color: white;
         background: #1d1f21;
 }
@@ -110,7 +110,7 @@ pre code {
     font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
     font-size: 0.9em;
     background: none;
-    padding: 15px;
+    padding: 1.5em;
     white-space: pre;
     overflow: auto;
     display: block;
@@ -149,16 +149,6 @@ big {
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
-html {
-	box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after { /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
-	box-sizing: inherit;
-}
-
 body {
 	background: #fff; /* Fallback for when there is no custom background color defined. */
 }
@@ -346,16 +336,14 @@ a:active:after {
     background: #444;
     background: linear-gradient(left, transparent 0%,#444 50%,transparent 100%);
 }
-.entry-content a,
-.entry-summary a {
+.content a {
     text-decoration: none;
     border-bottom: 2px solid #c3c3c3;
     font-style: italic;
     color: steelblue;
 }
 // Thank you CSS-Tricks gradients: https://css-tricks.com/snippets/css/gradient-underlines/
-.entry-content a:after,
-.entry-summary a:after {
+.content a:after {
     content: "";
     position: absolute;
     display: block;
@@ -366,10 +354,8 @@ a:active:after {
     background: #444;
     background: linear-gradient(left, transparent 0%,#444 50%,transparent 100%);
 }
-.entry-content a:hover,
-.entry-content a:focus,
-.entry-summary a:hover,
-.entry-summary a:focus {
+.content a:hover,
+.content a:focus {
     border-bottom: 3px solid #c3c3c3;
     /* box-shadow: inset 0 -3px 0 #c3c3c3; */
 }
@@ -426,11 +412,11 @@ a:active:after {
 /*--------------------------------------------------------------
 # Images
 --------------------------------------------------------------*/
-.entry-content a > img {
+.content a > img {
     border: 1px dotted black;
     background: white;
 }
-.entry-content a:hover > img {
+.content a:hover > img {
     border: 1px solid black;
 }
 
@@ -441,10 +427,6 @@ img.aligncenter {
 img.alignright,
 img.alignleft {
     margin-bottom: 1.5em;
-}
-.featured-image img {
-    margin: 0 auto;
-    display: block;
 }
 
 @media screen and (min-width: 50em) {
@@ -468,22 +450,15 @@ img.alignleft {
     }
 }
 
-.featured-image,
 .centered-image {
     max-width: calc(100% + 5em);
     margin: 2em -2.5em;
 }
 @media screen and (min-width: 50em) {
-    .featured-image,
     .centered-image {
         max-width: calc(100vw);
         /* margin-left: calc(-100vw - 50em); */
     }
-}
-
-.index-featured {
-    margin: 0 0 1.5em;
-    max-width: 100%;
 }
 
 /*--------------------------------------------------------------

@@ -349,7 +349,6 @@ pre {
 	margin-bottom: 1.6em;
 	max-width: 100%;
 	overflow: auto;
-	padding: 1.6em;
             color: white;
         background: #1d1f21;
 }
@@ -376,7 +375,7 @@ pre code {
     font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
     font-size: 0.9em;
     background: none;
-    padding: 15px;
+    padding: 1.5em;
     white-space: pre;
     overflow: auto;
     display: block;
@@ -2414,7 +2413,7 @@ a:active {
         overflow: hidden;
         width: 17em;
         padding: 0 1.5em;
-        border-left: 1px solid #ededed;
+        border-left: 1px solid #dedede;
     }
     
     /* Sidebar Left Layouts */
@@ -2430,7 +2429,7 @@ a:active {
         overflow: hidden;
         width: 17em;
         padding: 0 1.5em;
-        border-right: 1px solid #ededed;
+        border-right: 1px solid #dedede;
     }
     
     /* Unified styles */

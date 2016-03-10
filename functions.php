@@ -171,6 +171,9 @@ function jkl_scripts() {
         /* Add dynamic back to top button */
         wp_enqueue_script( 'jkl-topbutton', get_template_directory_uri() . '/js/topbutton-search-imgs.js', array( 'jquery' ), '20160211', true );        
         
+        /* Add Prism Syntax Highlighting */
+        wp_enqueue_script( 'jkl-prism-script', get_template_directory_uri() . '/js/prism.js', array(), '20160310', true );
+        wp_enqueue_style( 'jkl-prism-style', get_template_directory_uri() . '/css/prism.css' );
         
         /* Custom stylesheets for custom Page templates */
         
