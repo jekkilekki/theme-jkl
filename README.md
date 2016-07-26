@@ -46,6 +46,15 @@ Fonts used include:
 
 ## Changelog
 
+### 1.0.5
+
+* Add Prism syntax highlighting
+* Add Post Format Aside
+* Add Page templates
+* Finalize Customizer Options
+* Add editor styles
+* Clean up CSS styles and formatting
+
 ### 1.0.0
 
 * Initial release

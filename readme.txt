@@ -1,22 +1,62 @@
-=== jkl ===
+=== JKL ===
 
-Contributors: automattic
-Tags: translation-ready, custom-background, theme-options, custom-menu, post-formats, threaded-comments
+Contributors: jekkilekki
+Tags: black, white, light, one-column, two-columns, left-sidebar, right-sidebar, responsive-layout, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, sticky-post, theme-options, threaded-comments, translation-ready
 
 Requires at least: 4.0
-Tested up to: 4.4.2
-Stable tag: 1.0.0
+Tested up to: 4.5.3
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A starter theme called jkl, or underscores.
+A simple, modern theme called JKL.
 
 == Description ==
 
-Hi. I'm a starter theme called jkl, or underscores, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
+JKL is a simple, modern theme with great fonts (Volkhov and Source Sans Pro) developed by Aaron Snowberger specifically for http://justkeeplearning.xyz
+
+== Features ==
+
+= Post and Page Excerpts =
+
+Pages also have the ability to have excerpts as Posts do by default. This is because they are styled as a featured lead-in section of text before the auto and publication metadata. Simply add an excerpt to a Post or Page and watch the magic happen.
+
+= Customizer Options =
+
+1. Custom colors
+2. Custom logo and favicon
+3. Header background color
+4. Header text color
+5. Optional Header image
+6. Sidebar position: left, right, none (default) - this is also customizable on individual Pages
+
+= Featured Images =
+
+Featured Images default to take the place of the Header Image on any page as well as show up below the Post meta within the main content. In a later version, the Featured Image in this section may be able to be replaced with embedded media or turned off.
+
+= Widget Areas =
+
+1. Sidebar
+2. Footer
+
+= Blockquotes =
+
+Blockquotes can be aligned left or right (in a similar way that images are) using the `"alignleft"` or `"alignright"` classes.
+
+= License =
+
+JKL is licensed under the GPLv2 Open Source license.
+JKL is derived from the _s (http://underscores.me) theme developed by Automattic.
+
+Fonts used include:
+
+1. Source Sans Pro
+2. Source Code Pro
+3. Volkhov
+4. FontAwesome
 
 == Installation ==
-	
+
 1. In your admin panel, go to Appearance > Themes and click the Add New button.
 2. Click Upload and Choose File, then select the theme's .zip file. Click Install Now.
 3. Click Activate to use your new theme right away.
@@ -25,11 +65,19 @@ Hi. I'm a starter theme called jkl, or underscores, if you like. I'm a theme mea
 
 = Does this theme support any plugins? =
 
-jkl includes support for Infinite Scroll in Jetpack.
+JKL includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
 
-= 1.0 - May 12 2015 =
+= 1.0.5 - April 11 2016 =
+* Add Prism syntax highlighting
+* Add Post Format Aside
+* Add Page templates
+* Finalize Customizer Options
+* Add editor styles
+* Clean up CSS styles and formatting
+
+= 1.0.0 - Feb 27 2016 =
 * Initial release
 
 == Credits ==
