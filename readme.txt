@@ -5,7 +5,7 @@ Tags: black, white, light, one-column, two-columns, left-sidebar, right-sidebar,
 
 Requires at least: 4.0
 Tested up to: 4.5.3
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,7 +69,12 @@ JKL includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
 
-= 1.0.5 - April 11 2016 =
+= 1.0.6 - Aug 16 2016 =
+* Fix Header Image
+* Add support for Custom Logo
+* Minor code cleanup for WordPress.org
+
+= 1.0.5 - Apr 11 2016 =
 * Add Prism syntax highlighting
 * Add Post Format Aside
 * Add Page templates

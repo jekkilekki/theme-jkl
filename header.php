@@ -60,20 +60,21 @@
                 
                 <?php 
                 // Only create a shadow (outline) for the site icon IF there is an icon
-                if ( has_site_icon() ) { ?>
+                if ( has_custom_logo() ) { ?>
                     <div class="site-logo-shadow"></div>
                 <?php } ?>
                     
                     
                 <div class="site-logo-housing">
-                    <div class="site-branding top-bar-title small-6 medium-12 large-12 columns <?php echo has_site_icon() ? 'with-icon' : ''; ?> ">
+                    <div class="site-branding top-bar-title small-6 medium-12 large-12 columns <?php echo has_custom_logo() ? 'with-icon' : ''; ?> ">
 
                             <?php 
                             // Add logo (site icon)
-                            // BUT only show the site icon IF there is one, otherwise, show nothing
-                            if ( has_site_icon() ) : 
+                            // BUT only show the site logo IF there is one, otherwise, show nothing
+                            if ( has_custom_logo() ) : 
                                 $site_title = get_bloginfo( 'name' );
-                                $site_icon = esc_url( get_site_icon_url( 200 ) ); ?>
+                                //$site_icon = esc_url( get_site_icon_url( 200 ) ); 
+                                ?>
                             
                                 <div class="site-logo">
                                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
@@ -81,9 +82,9 @@
                                             <?php printf( esc_html( 'Go to the homepage of %1$s', 'jkl' ), $site_title ); ?>
                                         </div>
                                         <div class="site-icon-title">
-                                            <?php 
+                                            <?php if( function_exists( 'the_custom_logo' ) ) { the_custom_logo(); }
                                             /* if ( has_site_icon() ) : */ ?>
-                                                <img class="site-icon" src="<?php echo $site_icon; ?>" alt="">
+                                                 <!--<img class="site-icon" src="<?php // echo $site_logo[0]; ?>" alt="">-->
                                             <?php
                                             /* else : // We could use this LATER in v.2 if we want to the site title in place of the icon - styles exist EXCEPT for thin-bar and responsive ?>
                                                 <p><?php echo $site_title; ?></p>
@@ -126,8 +127,8 @@
 
                                     <?php 
 
-                                    // If the primary menu is set, and there's a site icon, obviously split the menu
-                                    if ( has_site_icon() ) :
+                                    // If the primary menu is set, and there's a site logo, obviously split the menu
+                                    if ( has_custom_logo() ) :
 
                                             // This is the split menu, only showing up on larger screens - custom menu output ?>
                                             <div class="split-navigation-menu show-for-large">
@@ -147,11 +148,12 @@
                                     // The next menu is the FULL navigation menu, original from Underscores, using TwentyFifteen toggles - shown on tablets and mobile devices 
                                     ?>
 
-                                    <div class="full-navigation-menu <?php echo has_site_icon() ? 'hide-for-large' : 'split-navigation-menu'; ?>">
+                                    <div class="full-navigation-menu <?php echo has_custom_logo() ? 'hide-for-large' : 'split-navigation-menu'; ?>">
                                         <?php wp_nav_menu( array( 
                                                     'theme_location' => 'primary', 
                                                     'menu_id' => 'primary-menu', 
-                                                    'menu_class' => 'nav-menu' 
+                                                    'menu_class' => 'nav-menu',
+                                                    'depth' => 2
                                             ) ); ?>
                                     </div>
 
@@ -175,7 +177,7 @@
 	</header><!-- #masthead -->
         
         <div class="row site-header-image">
-                <?php if ( get_header_image() && !has_post_thumbnail() && !is_front_page() ) : ?>
+                <?php if ( get_header_image() && !has_post_thumbnail() /* && !is_front_page() */ ) : ?>
                     <div class="site-header-img small-12 columns" style="background-image: url(<?php header_image(); ?>)"></div><!-- .site-header-image -->
                         
                         <?php if ( !is_single() && !is_page() ) : ?>
@@ -195,7 +197,7 @@
                         <?php endif; ?>
                        
                 <?php elseif ( has_post_thumbnail() ) : ?>
-                    <div class="site-header-img small-12 columns" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post, 'featured' ); ?>)"></div><!-- .site-header-image .featured-image -->
+                    <div class="site-header-img small-12 columns" style="background-image: url(<?php echo get_the_post_thumbnail_url( $post, 'jkl_featured' ); ?>)"></div><!-- .site-header-image .featured-image -->
                 <?php endif; // End header image check. ?>
             </div>
 

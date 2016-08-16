@@ -46,7 +46,12 @@ Fonts used include:
 
 ## Changelog
 
-### 1.0.5
+### 1.0.6 Aug 16 2016
+* Fix Header Image
+* Add support for Custom Logo
+* Minor code cleanup for WordPress.org
+
+### 1.0.5 Apr 11 2016
 
 * Add Prism syntax highlighting
 * Add Post Format Aside
@@ -55,6 +60,6 @@ Fonts used include:
 * Add editor styles
 * Clean up CSS styles and formatting
 
-### 1.0.0
+### 1.0.0 Feb 27 2016
 
 * Initial release

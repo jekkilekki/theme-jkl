@@ -49,7 +49,7 @@
 	} );
         wp.customize( 'menu_text_color', function( value ) {
 		value.bind( function( to ) {
-			$( '#main-nav-left li a, #main-nav-right li a' ).css( {
+			$( '#main-nav-left li a, #main-nav-right li a, #primary-menu li a' ).css( {
                             'color': to 
                         } );
 		} );

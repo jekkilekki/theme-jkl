@@ -33,7 +33,7 @@ function jkl_posted_on() {
 		esc_html_x( '%s', 'post author', 'jkl' ),
 		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
-        
+
         // Display the author avatar if the author has a Gravatar
         $author_id = get_the_author_meta( 'ID' );
         // if( jkl_validate_gravatar( $author_id ) ) {
@@ -52,14 +52,14 @@ function jkl_posted_on() {
 			printf( '<span class="cat-links">' . esc_html__( '%1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 		}
         }
-        
+
         // Add Comments Link
         if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
                 echo '<span class="comments-link">';
                 comments_popup_link( esc_html__( 'Leave a comment', 'jkl' ), esc_html__( '1 Comment', 'jkl' ), esc_html__( '% Comments', 'jkl' ) );
                 echo '</span>';
-        } 
-        
+        }
+
         echo '</div><!-- .meta-content -->';
         echo '</div><!-- .meta-content-text -->';
 }
@@ -147,12 +147,12 @@ add_action( 'edit_category', 'jkl_category_transient_flusher' );
 add_action( 'save_post',     'jkl_category_transient_flusher' );
 
 
-/* 
+/*
  * #############################################################################
- * 
+ *
  * Custom Template Tags
- * 
- * ############################################################################# 
+ *
+ * #############################################################################
  */
 
 /**
@@ -181,48 +181,48 @@ add_action( 'save_post',     'jkl_category_transient_flusher' );
  * @link: Courtesy: http://pateason.com/horizontal-split-nav/
  */
 function jkl_split_main_nav( $menu_name = null, $raw = false ) {
-    
+
     if ( $menu_name == null || !is_string( $menu_name ) ) {
         return false;
     }
     $output = new stdClass();
-    
+
     // Check if the menu exists and is set
     if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
-        
+
         $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
         $menu_items = wp_get_nav_menu_items( $menu->term_id );
-        
+
         // Create new array with only top level objects
         $newMenu = array();
         foreach( $menu_items as $item ) {
             if( $item->menu_item_parent != 0 ) continue;
-            
+
             // get subnav
             $parentID = $item->ID;
             $item->subnav = array_filter( $menu_items, function( $v ) use ( $parentID ) {
-                if ( $v->menu_item_parent == $parentID ) return $v; 
+                if ( $v->menu_item_parent == $parentID ) return $v;
             });
-            
+
             array_push( $newMenu, $item );
         }
-        
+
         // Split menu array in half
         $len = count( $newMenu );
         $firstThis = array_slice( $newMenu, 0, $len / 2 );
         $thenThat = array_slice( $newMenu, $len / 2 );
-        
-        
+
+
         if( $raw==true ) {
             $output->left_menu = $firstThis;
             $output->right_menu = $thenThat;
         } else {
-            
+
             // Create LEFT menu
             $menuMarkup = '';
             $menuMarkup .= '<div id="main-nav-left" class="medium-6">
                             <ul class="nav-menu">';
-            
+
                     foreach( $firstThis as $item ) {
 
                         // Add subnav if there is one
@@ -256,18 +256,18 @@ function jkl_split_main_nav( $menu_name = null, $raw = false ) {
                         $menuMarkup .= '</li>';
 
                     }
-                        
+
             $menuMarkup .= '</ul>
                             </div>';
-            
+
             $output->left_menu = $menuMarkup;
-            
-            
+
+
             // Create RIGHT menu
             $menuMarkup = '';
             $menuMarkup .= '<div id="main-nav-right" class="medium-6">
                             <ul class="nav-menu">';
-            
+
                     foreach( $thenThat as $item ) {
 
                         // Add subnav if there is one
@@ -301,30 +301,30 @@ function jkl_split_main_nav( $menu_name = null, $raw = false ) {
                         $menuMarkup .= '</li>';
 
                     }
-                        
+
             $menuMarkup .= '</ul>
                             </div>';
-            
+
             $output->right_menu = $menuMarkup;
         }
-        
+
         return $output;
-        
+
     }
-    
+
     else {
-        
+
         echo '<em>' . __( 'Please select a menu for your Split navigation.', 'jkl') . '</em>';
-        
+
     }
-    
+
 }
 
 /**
  * Social Menu
  */
 function jkl_social_menu() {
-    
+
     if ( has_nav_menu( 'social' ) ) {
         wp_nav_menu(
                 array(
@@ -341,7 +341,7 @@ function jkl_social_menu() {
                 )
         );
     }
-    
+
 }
 
 /*
@@ -395,7 +395,7 @@ function jkl_validate_gravatar($id_or_email) {
 		}
 	    wp_cache_set($hashkey, $data, $group = '', $expire = 60*5);
 
-	}		
+	}
 	if ($data == '200'){
 		return true;
 	} else {
@@ -408,7 +408,7 @@ function jkl_validate_gravatar($id_or_email) {
 if ( ! function_exists( 'jkl_post_nav' ) ) :
 /**
  * Display navigation to next/previous post when applicable.
- * 
+ *
  * Improve the post_nav() with post thumbnails. Help from this
  * @link: http://www.measureddesigns.com/adding-previous-next-post-wordpress-post/
  * @link: http://wpsites.net/web-design/add-featured-images-to-previous-next-post-nav-links/
@@ -426,37 +426,37 @@ function jkl_post_nav() {
 	?>
 	<nav class="navigation post-navigation clear" role="navigation">
 		<h2 class="screen-reader-text"><?php _e( 'Post navigation', 'jkl' ); ?></h2>
-                
+
                 <div class="nav-links">
                     <?php // My custom code below FIRST, then _s code
-                    
+
                     // PREVIOUS POST LINK
                     if ( ! empty( $previous ) ) { ?>
                     <div class="nav-previous">
                         <a href="<?php echo get_permalink( $prevID ); ?>" rel="prev">
-                    
+
                             <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) /* || ( has_post_thumbnail( $prevID ) && empty( $next ) )*/ ) { ?>
                                     <div class="post-nav-thumb">
-                                        <?php 
+                                        <?php
                                         $prev_thumb = get_the_post_thumbnail( $prevID, 'medium', array( 'class' => 'img-responsive' ) );
                                         echo $prev_thumb ? $prev_thumb : '<img src="' . get_header_image() . '" />';
                                         ?>
                                     </div>
                             <?php } ?>
-                    
+
                             <span class="meta-nav" aria-hidden="true"><?php _e( 'Previously', 'jkl' ); ?></span>
                             <span class="screen-reader-text"><?php _e( 'Previous Post', 'jkl' ); ?></span>
                             <span class="post-title"><?php echo $previous->post_title; ?></span>
-                            
+
                         </a>
                     </div>
-                    <?php } 
-                    
+                    <?php }
+
                     // NEXT POST LINK
                     if ( ! empty( $next ) ) { ?>
                     <div class="nav-next">
                         <a href="<?php echo get_permalink( $nextID ); ?>" rel="next">
-                    
+
                             <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) ) { ?>
                                     <div class="post-nav-thumb">
                                         <?php $next_thumb = get_the_post_thumbnail( $nextID, 'medium', array( 'class' => 'img-responsive' ) );
@@ -464,22 +464,22 @@ function jkl_post_nav() {
                                         ?>
                                     </div>
                             <?php } ?>
-                    
+
                             <span class="meta-nav" aria-hidden="true"><?php _e( 'Next time', 'jkl' ); ?></span>
                             <span class="screen-reader-text"><?php _e( 'Next Post', 'jkl' ); ?></span>
                             <span class="post-title"><?php echo $next->post_title; ?></span>
-                            
+
                         </a>
                     </div>
                     <?php } ?>
-                    
+
                 </div><!-- .nav-links -->
-                    
+
                         <?php /*
-				previous_post_link( '<div class="nav-previous large-6 columns">%link</div>', _x( '<span class="meta-nav">&larr;</span>&nbsp;%title', 'Previous post link', 'gojoseon' ) );
-				next_post_link( '<div class="nav-next large-6 columns">%link</div>', _x( '%title&nbsp;<span class="meta-nav">&rarr;</span>', 'Next post link', 'gojoseon' ) );
+				previous_post_link( '<div class="nav-previous large-6 columns">%link</div>', _x( '<span class="meta-nav">&larr;</span>&nbsp;%title', 'Previous post link', 'jkl' ) );
+				next_post_link( '<div class="nav-next large-6 columns">%link</div>', _x( '%title&nbsp;<span class="meta-nav">&rarr;</span>', 'Next post link', 'jkl' ) );
 			*/ ?>
-                
+
 	</nav><!-- .navigation -->
 	<?php
 }
@@ -521,7 +521,7 @@ function jkl_index_posted_on() {
 	);
 
         echo '<div class="meta-content-index">';
-	echo '<span class="posted-on">Date: ' . $posted_on . '</span>'; // WPCS: XSS OK. 
+	echo '<span class="posted-on">Date: ' . $posted_on . '</span>'; // WPCS: XSS OK.
         echo '</div><!-- .meta-content-index -->';
 }
 endif;
@@ -590,19 +590,19 @@ if ( ! function_exists( 'jkl_breadcrumbs' ) ) :
  * Display Post breadcrumbs when applicable.
  *
  * @since JKL 1.0
- * 
+ *
  * @link: https://www.thewebtaylor.com/articles/wordpress-creating-breadcrumbs-without-a-plugin
  */
 function jkl_breadcrumbs() {
-    
+
     if (!is_home()) {
-        
+
         // Settings
         $separator          = '<span class="breadcrumb-separator">&raquo;</span>';
         $breadcrumb_id      = 'breadcrumbs';
         $breadcrumb_class   = 'breadcrumbs';
         $post               = get_post();
-        
+
         if( is_category() || is_single() || ( is_page() && $post->post_parent ) ) {
         // Build the breadcrumbs
         echo "<div aria-label='You are here:' id='$breadcrumb_id' class='$breadcrumb_class'>";
@@ -612,13 +612,13 @@ function jkl_breadcrumbs() {
 		bloginfo('name');
 		echo "</span></a>$separator";
 		//if ( (is_category() || is_single()) ) {
-                
+
                 $categories = get_the_category(/* array(
                     'orderby' => 'name',
                     'parent'  => 0
                 ) */);
                 $categories = array_slice( $categories, 0, 5 );
-                
+
                 foreach ( $categories as $category ) {
                     printf( '<a href="%1$s">%2$s</a>',
                         esc_url( get_category_link( $category->term_id ) ),
@@ -644,63 +644,63 @@ function jkl_breadcrumbs() {
     $breadcrumb_id      = 'breadcrumbs';
     $breadcrumb_class   = 'breadcrumbs';
     $home_title         = 'Home';
-    
+
     // If there are custom taxonomies...
     $custom_tax         = 'taxonomy_name';
-    
+
     // Get the query and post info
     global $post, $wp_query;
-    
+
     // NOT on the homepage
     if ( !is_front_page() ) {
-        
+
         // Build the breadcrumbs
         echo '<nav aria-label="You are here:" role="navigation">';
         echo '<ul id="' . $breadcrumb_id . '" class="' . $breadcrumb_class . '">';
-        
+
         // Home page
         echo '<li class="item-home"><a class="bread-link bread-home" href="' . get_home_url() . '"title="' . $home_title . '">' . $home_title . '</a></li>';
         echo '<li class="separator separator-home"> ' . $separator . ' </li>';
-        
+
         if ( is_archive() && !is_tax() && !is_category() && !is_tag() ) {
-            
+
             echo '<li class="item-current item-archive"><strong class="bread-current bread-archive">' . post_type_archive_title( $prefix, false ) . '</strong></li>';
-      
+
         } else if ( is_archive() && is_tax() && !is_category() && !is_tag() ) {
-            
+
             // If a custom post type
             $post_type = get_post_type();
-            
+
             if ( $post_type != 'post' ) {
-                
+
                 $post_type_object = get_post_type_object( $post_type );
                 $post_type_archive = get_post_type_archive_link( $post_type );
-                
+
                 echo '<li class="item-cat item-custom-post-type-' . $post_type . '"><a class="bread-cat bread-custom-post-type-' . $post_type . '" href="' . $post_type_archive . '" title="' . $post_type_object->labels->name . '">' . $post_type_object->labels->name . '</a></li>';
                 echo '<li class="separator"> ' . $separator . ' </li>';
-                
+
             }
-            
+
             // Get post category info
             $category = get_the_category();
-            
+
             if( !empty( $category ) || empty( $category ) ) {
-                
+
                 // Get last category post is in
                 $last_category = end( array_values( $category ) );
-                
+
                 // Get parent categories and create array
                 $get_cat_parents = rtrim( get_category_parents( $last_category->term_id, true, ',' ), ',');
                 $cat_parents = explode( ',', $get_cat_parents );
-                
+
                 // Loop through parent categories and store in variable $cat_display
                 $cat_display = '';
                 foreach( $cat_parents as $parents ) {
                     $cat_display .= '<li class="item-cat">' . $parents . '</li>';
                     $cat_display .= '<li class="separator"> ' . $separator . ' </li>';
-                    
+
                 }
-                
+
                 // If it's a custom post type within a custom taxonomy
                 $taxonomy_exists = taxonomy_exists($custom_taxonomy);
                 if(empty($last_category) && !empty($custom_taxonomy) && $taxonomy_exists) {
@@ -726,52 +726,52 @@ function jkl_breadcrumbs() {
                     echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '" title="' . get_the_title() . '">' . get_the_title() . '</strong></li>';
 
                 } else {
-                  
+
                     echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '" title="' . get_the_title() . '">' . get_the_title() . '</strong></li>';
-                  
+
                 }
-                
+
             }
-            
+
         } else if ( is_category() ) {
-               
+
             // Category page
             echo '<li class="item-current item-cat"><strong class="bread-current bread-cat">' . single_cat_title('', false) . '</strong></li>';
-               
+
         } else if ( is_page() ) {
-               
+
             // Standard page
             if( $post->post_parent ){
-                   
-                // If child page, get parents 
+
+                // If child page, get parents
                 $anc = get_post_ancestors( $post->ID );
-                   
+
                 // Get parents in the right order
                 $anc = array_reverse($anc);
-                   
+
                 // Parent page loop
                 foreach ( $anc as $ancestor ) {
                     $parents .= '<li class="item-parent item-parent-' . $ancestor . '"><a class="bread-parent bread-parent-' . $ancestor . '" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a></li>';
                     $parents .= '<li class="separator separator-' . $ancestor . '"> ' . $separator . ' </li>';
                 }
-                   
+
                 // Display parent pages
                 echo $parents;
-                   
+
                 // Current page
                 echo '<li class="item-current item-' . $post->ID . '"><strong title="' . get_the_title() . '"> ' . get_the_title() . '</strong></li>';
-                   
+
             } else {
-                   
+
                 // Just display current page if not parents
                 echo '<li class="item-current item-' . $post->ID . '"><strong class="bread-current bread-' . $post->ID . '"> ' . get_the_title() . '</strong></li>';
-                   
+
             }
-               
+
         } else if ( is_tag() ) {
-               
+
             // Tag page
-               
+
             // Get tag information
             $term_id        = get_query_var('tag_id');
             $taxonomy       = 'post_tag';
@@ -780,71 +780,71 @@ function jkl_breadcrumbs() {
             $get_term_id    = $terms[0]->term_id;
             $get_term_slug  = $terms[0]->slug;
             $get_term_name  = $terms[0]->name;
-               
+
             // Display the tag name
             echo '<li class="item-current item-tag-' . $get_term_id . ' item-tag-' . $get_term_slug . '"><strong class="bread-current bread-tag-' . $get_term_id . ' bread-tag-' . $get_term_slug . '">' . $get_term_name . '</strong></li>';
-           
+
         } elseif ( is_day() ) {
-               
+
             // Day archive
-               
+
             // Year link
             echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a class="bread-year bread-year-' . get_the_time('Y') . '" href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . ' Archives</a></li>';
             echo '<li class="separator separator-' . get_the_time('Y') . '"> ' . $separator . ' </li>';
-               
+
             // Month link
             echo '<li class="item-month item-month-' . get_the_time('m') . '"><a class="bread-month bread-month-' . get_the_time('m') . '" href="' . get_month_link( get_the_time('Y'), get_the_time('m') ) . '" title="' . get_the_time('M') . '">' . get_the_time('M') . ' Archives</a></li>';
             echo '<li class="separator separator-' . get_the_time('m') . '"> ' . $separator . ' </li>';
-               
+
             // Day display
             echo '<li class="item-current item-' . get_the_time('j') . '"><strong class="bread-current bread-' . get_the_time('j') . '"> ' . get_the_time('jS') . ' ' . get_the_time('M') . ' Archives</strong></li>';
-               
+
         } else if ( is_month() ) {
-               
+
             // Month Archive
-               
+
             // Year link
             echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a class="bread-year bread-year-' . get_the_time('Y') . '" href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . ' Archives</a></li>';
             echo '<li class="separator separator-' . get_the_time('Y') . '"> ' . $separator . ' </li>';
-               
+
             // Month display
             echo '<li class="item-month item-month-' . get_the_time('m') . '"><strong class="bread-month bread-month-' . get_the_time('m') . '" title="' . get_the_time('M') . '">' . get_the_time('M') . ' Archives</strong></li>';
-               
+
         } else if ( is_year() ) {
-               
+
             // Display year archive
             echo '<li class="item-current item-current-' . get_the_time('Y') . '"><strong class="bread-current bread-current-' . get_the_time('Y') . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . ' Archives</strong></li>';
-               
+
         } else if ( is_author() ) {
-               
+
             // Auhor archive
-               
+
             // Get the author information
             global $author;
             $userdata = get_userdata( $author );
-               
+
             // Display author name
             echo '<li class="item-current item-current-' . $userdata->user_nicename . '"><strong class="bread-current bread-current-' . $userdata->user_nicename . '" title="' . $userdata->display_name . '">' . 'Author: ' . $userdata->display_name . '</strong></li>';
-           
+
         } else if ( get_query_var('paged') ) {
-               
+
             // Paginated archives
             echo '<li class="item-current item-current-' . get_query_var('paged') . '"><strong class="bread-current bread-current-' . get_query_var('paged') . '" title="Page ' . get_query_var('paged') . '">'.__('Page') . ' ' . get_query_var('paged') . '</strong></li>';
-               
+
         } else if ( is_search() ) {
-           
+
             // Search results page
             echo '<li class="item-current item-current-' . get_search_query() . '"><strong class="bread-current bread-current-' . get_search_query() . '" title="Search results for: ' . get_search_query() . '">Search results for: ' . get_search_query() . '</strong></li>';
-           
+
         } elseif ( is_404() ) {
-               
+
             // 404 page
             echo '<li>' . 'Error 404' . '</li>';
         }
-       
+
         echo '</ul></nav>';
-           
+
     }*/
-       
+
 }
 endif;

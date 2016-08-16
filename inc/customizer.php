@@ -153,7 +153,8 @@ function jkl_customizer_css() {
             background: <?php echo $menu_color; ?>;
         }
         #main-nav-left li a,
-        #main-nav-right li a {
+        #main-nav-right li a,
+        #primary-menu li a {
             color: <?php echo $menu_text_color; ?>;
         }
         a,

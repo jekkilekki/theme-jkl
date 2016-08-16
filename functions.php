@@ -49,7 +49,7 @@ function jkl_setup() {
 	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 	 */
 	add_theme_support( 'post-thumbnails' );
-        add_image_size( 'featured', 1600, 600, array( 'center', 'center' ) ); // or could set the arry to "true" and it does that, but wanted to remember, x_crop_position, y_crop_position
+        add_image_size( 'jkl_featured', 1600, 600, array( 'center', 'center' ) ); // or could set the arry to "true" and it does that, but wanted to remember, x_crop_position, y_crop_position
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
