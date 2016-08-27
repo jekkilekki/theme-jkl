@@ -46,6 +46,9 @@ Fonts used include:
 
 ## Changelog
 
+### 1.0.7 Aug 19 2016
+* Fix dropdown menus
+
 ### 1.0.6 Aug 16 2016
 * Fix Header Image
 * Add support for Custom Logo

@@ -4,8 +4,8 @@ Contributors: jekkilekki
 Tags: black, white, light, one-column, two-columns, left-sidebar, right-sidebar, responsive-layout, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, sticky-post, theme-options, threaded-comments, translation-ready
 
 Requires at least: 4.0
-Tested up to: 4.5.3
-Stable tag: 1.0.6
+Tested up to: 4.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,9 @@ Fonts used include:
 JKL includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
+
+= 1.0.7 - Aug 19 2016 =
+* Fix dropdown menus
 
 = 1.0.6 - Aug 16 2016 =
 * Fix Header Image

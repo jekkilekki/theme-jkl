@@ -153,7 +153,7 @@
                                                     'theme_location' => 'primary', 
                                                     'menu_id' => 'primary-menu', 
                                                     'menu_class' => 'nav-menu',
-                                                    'depth' => 2
+                                                    // 'depth' => 2
                                             ) ); ?>
                                     </div>
 
