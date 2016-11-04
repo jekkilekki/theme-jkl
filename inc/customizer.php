@@ -64,6 +64,28 @@ function jkl_customize_register( $wp_customize ) {
                         )
         ) );
         
+        /* 
+         * Body Text Color 
+         */
+        // Body Text Color Setting
+        $wp_customize->add_setting( 'body_text_color', array(
+            'default'           => '#000000',
+            'type'              => 'theme_mod',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'transport'         => 'postMessage'
+        ) );
+        
+        // Body Text Color Control
+        $wp_customize->add_control( 
+                new WP_Customize_Color_Control(
+                        $wp_customize,
+                        'body_text_color', array(
+                            'label'         => __( 'Body Text Color', 'jkl' ),
+                            'description'   => __( 'Change the text color of the content.', 'jkl' ),
+                            'section'       => 'colors',
+                        )
+        ) );
+        
         /*
          * Highlight Color
          */
@@ -75,7 +97,7 @@ function jkl_customize_register( $wp_customize ) {
             'transport'         => 'postMessage'
         ) );
         
-        // Highligh Color Control
+        // Highlight Color Control
         $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                         $wp_customize,
@@ -145,10 +167,26 @@ function jkl_sanitize_layout ( $value ) {
 function jkl_customizer_css() {
     $menu_color = get_theme_mod( 'menu_color' );
     $menu_text_color = get_theme_mod( 'menu_text_color' );
+    $body_text_color = get_theme_mod( 'body_text_color' );
     $highlight_color = get_theme_mod( 'highlight_color' );
     
     ?>
     <style>
+        body,
+        input,
+        input:hover,
+        input:active,
+        input:focus,
+        button,
+        button:hover,
+        button:active,
+        button:focus,
+        textarea,
+        #secondary,
+        .entry-title,
+        a {
+            color: <?php echo esc_attr( $body_text_color ); ?>;
+        }
         .split-navigation-menu {
             background: <?php echo esc_attr( $menu_color ); ?>;
         }
@@ -157,7 +195,6 @@ function jkl_customizer_css() {
         #primary-menu li a {
             color: <?php echo esc_attr( $menu_text_color ); ?>;
         }
-        a,
         a:visited,
         a:hover,
         a:focus,
@@ -167,7 +204,8 @@ function jkl_customizer_css() {
             color: <?php echo esc_attr( $highlight_color ); ?>;
         }
         .search-toggle,
-        .search-box-wrapper {
+        .search-box-wrapper,
+        .sticky:before {
             background-color: <?php echo esc_attr( $highlight_color ); ?>;
         }
     </style>

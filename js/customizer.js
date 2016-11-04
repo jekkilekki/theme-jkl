@@ -55,6 +55,15 @@
 		} );
 	} );
         
+        // Body (content) color
+        wp.customize( 'body_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( 'body, .entry-title' ).css( {
+                            'color': to 
+                        } );
+		} );
+	} );
+        
         // Highlight colors
         wp.customize( 'highlight_color', function( value ) {
 		value.bind( function( to ) {
@@ -64,6 +73,21 @@
                         $( '.search-toggle, .search-box-wrapper' ).css( {
                             'background-color': to
                         } );
+                        
+                        // For Sticky Posts headers (using :before pseudo-class)
+                        // @see http://wpgothemes.com/add-customizer-color-pickers-for-hover-styles/
+                        var style, el;
+                        
+                        style = '<style class="sticky-post-label">.sticky:before { background: ' + to + '; }</style>';
+                        el = $( '.sticky-post-label' ); // look for a matching style element
+                        
+                        // add the style element into the DOM or replace the matching style element
+                        if( el.length ) {
+                            el.replaceWith( style );
+                        } else {
+                            $( 'head' ).append( style ); // style element doesn't exist so add it
+                        }
+                        
 		} );
 	} );
         

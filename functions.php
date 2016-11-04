@@ -17,13 +17,6 @@ if ( ! function_exists( 'jkl_setup' ) ) :
  */
 function jkl_setup() {
     
-        /*
-         * @Todo - ADD Editor styles here.
-         * This theme styles the visual editor to resemble the theme style.
-         */
-        // $font_url = 'http://fonts.googleapis.com/css?family=Khula:300,400,600,700,800';
-        // add_editor_style( array( 'inc/editor-style.css', str_replace( ',', '%2C', $font_url ) ) );
-    
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
@@ -75,7 +68,8 @@ function jkl_setup() {
 	 * See https://developer.wordpress.org/themes/functionality/post-formats/
 	 */
 	add_theme_support( 'post-formats', array(
-		'aside',
+		'aside',    // style added
+                'chat',     // style added
                 'gallery',
 		'image',
 		'video',
@@ -85,8 +79,9 @@ function jkl_setup() {
 
 	// Set up the WordPress core custom background feature.
 	add_theme_support( 'custom-background', apply_filters( 'jkl_custom_background_args', array(
-		'default-color' => 'ffffff',
-		'default-image' => '',
+		'default-color'     => 'ffffff',
+		'default-image'     => '',
+                'wp-head-callback'  => 'jkl_custom_background_cb'
 	) ) );
         
         /**
@@ -222,10 +217,24 @@ require get_template_directory() . '/inc/jetpack.php';
  * =============================================================================
  */
 
-/*
+/**
  * Add Excerpts to Pages
  */
 function jkl_add_excerpt_to_pages() {
     add_post_type_support( 'page', 'excerpt' );
 }
 add_action( 'init', 'jkl_add_excerpt_to_pages' );
+
+/**
+ * Custom Background Callback to make the .site-logo-housing (above the menu) match
+ * the chosen custom background color in body.custom-background
+ * 
+ * @link    http://wordpress.stackexchange.com/questions/189361/add-custom-background-to-div-in-home-page
+ */
+function jkl_custom_background_cb() {
+    ob_start();
+    _custom_background_cb(); // Default handler
+    $style = ob_get_clean();
+    $style = str_replace( 'body.custom-background', 'body.custom-background, .site-logo-housing, .site-logo', $style );
+    echo $style;
+}

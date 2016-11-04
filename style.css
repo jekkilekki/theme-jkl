@@ -279,7 +279,7 @@ table tfoot {
     border-color: gainsboro;
 }
 table tbody tr:nth-child(even) {
-    background: whitesmoke;
+    background: rgba( 0,0,0,0.05 ); // whitesmoke alpha = 0.05
 }
 
 td,
@@ -385,6 +385,7 @@ var {
 	font-size: 0.9375rem;
 
         /* from CSS-Tricks.com */
+        background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
         background: #efefef;
         padding: 2px 5px;
         border-radius: 4px;
@@ -850,8 +851,8 @@ a:active {
 }
 
 .dropdown-toggle:focus {
-	outline: 1px solid #c1c1c1;
 	outline: 1px solid rgba(51, 51, 51, 0.8);
+        outline: 1px solid #c1c1c1;
 }
 
 .dropdown-toggle:focus:after,
@@ -1313,6 +1314,7 @@ a:active {
 .post-navigation {
     text-align: left;
     overflow: hidden;
+    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
     background: #efefef;
     padding: 2em 2.5em;
     margin: 4em -2.5em;
@@ -1331,6 +1333,7 @@ a:active {
 .comment-pagination {
     text-align: center;
     padding: 2em;
+    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
     background: #efefef;
 }
 .comment-pagination .nav-links {
@@ -1779,7 +1782,7 @@ a:active {
 
 .site-title a:hover,
 .site-title a:focus {
-    color: midnightblue;
+    color: inherit;
 }
 
 .site-description {
@@ -2210,6 +2213,7 @@ a:active {
 
 #secondary {
     margin: 0;
+    color: rgba( 0,0,0,0.7 );
 }
 #secondary-footer .widget {
     width: 100%;
@@ -2242,6 +2246,7 @@ a:active {
 }
 .widget-area {
     max-width: 100%!important;
+    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
     background: #efefef;
     margin-top: 0;
     margin-bottom: 0;
@@ -2466,7 +2471,7 @@ a:active {
     /* Unified styles */
     .sidebar-right #secondary,
     .sidebar-left #secondary {
-        background-color: white;
+        background-color: transparent;
         padding: 2em 0 0;
         margin: 0;
     }
@@ -2518,8 +2523,8 @@ a:active {
     width: 30px;
     height: 30px;
     background: white;
-    border: 1px solid #ccc;
-    box-shadow: 0px 2px 2px #ccc;
+    border: 1px solid rgba( 204,204,204, 0.8 ); // #ccc
+    box-shadow: 0px 2px 2px rgba( 204,204,204, 0.8 ); // #ccc
     border-radius: 50%;
     left: 50%;
     margin-left: -15px;
@@ -2701,7 +2706,7 @@ a:active {
 
 .sticky {
 	display: block;
-        background: whitesmoke;
+        background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
         background: #efefef;
         padding: 3em 2em 1em;
         margin: -2em -2em 4em!important;
@@ -2775,7 +2780,11 @@ a:active {
 }
 
 .hentry {
-	margin: 0 0 1.5em;
+    margin: 0 0 1.5em;
+}
+.blog .hentry,
+.archive .hentry {
+    margin: 0 0 5em;
 }
 .entry-title {
     margin-left: -0.5em;
@@ -2832,7 +2841,7 @@ a:active {
 .entry-meta {
     font-size: 95%;
     text-align: left;
-    background: whitesmoke;
+    background: rgba( 0,0,0,0.05 ); // whitesmoke alpha = 0.05
     background: #efefef;
     padding: 1em 2.10526315789em;
     margin: 0 -2.10526315789em;
@@ -3163,7 +3172,7 @@ a:active {
 --------------------------------------------------------------*/
 .hentry-index {
     /*margin-bottom: 4em;*/
-    padding: 3em 0 2em;
+    /*padding: 3em 0 2em;*/
 }
 .hentry-index:after {
     border-bottom: 1px solid #c3c3c3;
@@ -3221,6 +3230,7 @@ a:active {
 .continue-reading a:hover,
 .continue-reading a:focus {
     border-color: black;
+    color: black;
 }
 @media screen and (min-width: 40em) {
     .index-header {
@@ -3289,14 +3299,22 @@ a:active {
 --------------------------------------------------------------*/
 .blog .format-aside .entry-title,
 .archive .format-aside .entry-title {
-	display: none;
+    display: none;
+}
+.blog .format-aside,
+.arhive .format-aside {
+    margin-left: -1em;
+    margin-right: -1em;
 }
 .blog .format-aside .hentry-index,
 .archive .format-aside .hentry-index {
     border-top: 2px solid black;
+    background: rgba( 0,0,0,0.05 ); // whitesmoke alpha = 0.05
     padding: 0;
     margin-top: 5em;
     margin-bottom: 5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     border-bottom: 0;
 }
 .blog .format-aside p,
@@ -3313,13 +3331,17 @@ a:active {
 .blog .format-aside .index-content,
 .archive .format-aside .index-content {
     border-width: 1px;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 .blog .format-aside .entry-footer,
 .archive .format-aside .entry-footer {
     margin-top: 0;
-    margin-right: 0;
-    margin-left: 0;
+    margin-right: -0.5em;
+    margin-left: -0.5em;
     border-top: 0;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
 }
 .blog .format-aside .footer-content,
 .archive .format-aside .footer-content {
@@ -3331,10 +3353,12 @@ a:active {
 .blog .format-aside .meta-content-index,
 .archive .format-aside .meta-content-index {
     padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
 }
 .blog .format-aside .posted-on,
 .archive .format-aside .posted-on {
-    margin-left: -0.25em;
     font-family: "Volkhov", serif;
     color: #777;
     font-size: 1em;
@@ -3347,7 +3371,7 @@ a:active {
 .blog .format-aside .permalink,
 .archive .format-aside .permalink {
     position: absolute;
-    right: 0;
+    right: 0.25em;
     padding: 0.25em 0.75em 0.55em;
     border-left: 1px solid #c3c3c3;
     color: #aaa;
@@ -3360,7 +3384,7 @@ a:active {
     margin: 0 -1em 2em;
 }
 .single .format-chat p:nth-child(even) {
-    background: whitesmoke;
+    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
     margin-left: 33%;
     border-radius: 10px;
     border: 1px solid #dcdcdc;
@@ -3465,7 +3489,7 @@ a:active {
 
 .bypostauthor {
     display: block;
-    /* background: whitesmoke; */
+    /* background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05 */
     border-top: 2px solid black;
     margin: calc(-3em - 1px) -0.5em 3em;
     padding-top: 4px;
@@ -3696,6 +3720,7 @@ img.alignleft {
     margin-bottom: 2em;
     padding-bottom: 4px;
     border-bottom: 2px solid black;
+    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
     background: #efefef;
 }
 .wp-caption .wp-caption-text {
@@ -3787,6 +3812,7 @@ img.alignleft {
 # Footer
 --------------------------------------------------------------*/
 .site-footer-content {
+    background: rgba( 29,31,33, 0.8 );
     background: #1d1f21;
     color: #aaa;
     padding: 1em 2.5em;
