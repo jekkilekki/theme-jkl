@@ -40,7 +40,7 @@
         
 <?php } else { ?>   
         
-    <div id="page" class="site <?php echo get_theme_mod( 'layout_setting', 'no-sidebar' ); ?>">
+    <div id="page" class="site <?php echo esc_attr( get_theme_mod( 'layout_setting', 'no-sidebar' ) ); ?>">
         
 <?php } ?>
         
@@ -73,7 +73,6 @@
                             // BUT only show the site logo IF there is one, otherwise, show nothing
                             if ( has_custom_logo() ) : 
                                 $site_title = get_bloginfo( 'name' );
-                                //$site_icon = esc_url( get_site_icon_url( 200 ) ); 
                                 ?>
                             
                                 <div class="site-logo">
@@ -82,14 +81,7 @@
                                             <?php printf( esc_html( 'Go to the homepage of %1$s', 'jkl' ), $site_title ); ?>
                                         </div>
                                         <div class="site-icon-title">
-                                            <?php if( function_exists( 'the_custom_logo' ) ) { the_custom_logo(); }
-                                            /* if ( has_site_icon() ) : */ ?>
-                                                 <!--<img class="site-icon" src="<?php // echo $site_logo[0]; ?>" alt="">-->
-                                            <?php
-                                            /* else : // We could use this LATER in v.2 if we want to the site title in place of the icon - styles exist EXCEPT for thin-bar and responsive ?>
-                                                <p><?php echo $site_title; ?></p>
-                                            <?php
-                                            endif; */ ?>
+                                            <?php if( function_exists( 'the_custom_logo' ) ) { the_custom_logo(); } ?>
                                         </div>
                                     </a>
                                 </div>

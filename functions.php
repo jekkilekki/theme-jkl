@@ -156,23 +156,18 @@ function jkl_scripts() {
         /* Add Foundation JS */
         wp_enqueue_script( 'foundation-js', get_template_directory_uri() . '/foundation/js/foundation.min.js', array( 'jquery' ), '20160211', true );
         
-        /* @Todo - Add Custom Fonts */
-        // wp_enqueue_style( 'gfonts', 'https://fonts.googleapis.com/css?family=Volkhov' );
+        /* Add Custom Fonts */
         wp_enqueue_style( 'jkl-local-fonts', get_template_directory_uri() . '/fonts/custom-fonts.css' );
-        wp_enqueue_style( 'jkl-fawesome', get_template_directory_uri() . '/fonts/font-awesome.css' );  
-        
+        wp_enqueue_style( 'jkl-fawesome', get_template_directory_uri() . '/fonts/font-awesome.css' );    
         
         /* Run Foundation */
         wp_enqueue_script( 'foundation-init', get_template_directory_uri() . '/js/foundation.js', array( 'jquery' ), '20160211', true );
-        
-        /* Masonry settings for Footer widgets */ // @TODO - not quite working - overflows 1-2em on the right and doesn't resize properly
-        // wp_enqueue_script( 'jkl-masonry', get_template_directory_uri() . '/js/masonry-settings.js', array( 'masonry' ), '20160226', true );
         
         /* Add dynamic back to top button */
         wp_enqueue_script( 'jkl-topbutton', get_template_directory_uri() . '/js/topbutton-search-imgs.js', array( 'jquery' ), '20160211', true );        
         
         /* Add Prism Syntax Highlighting */
-        wp_enqueue_script( 'jkl-prism-script', get_template_directory_uri() . '/js/prism.js', array(), '20160310', true );
+        wp_enqueue_script( 'jkl-prism-script', get_template_directory_uri() . '/js/prism.min.js', array(), '20161104', true );
         wp_enqueue_style( 'jkl-prism-style', get_template_directory_uri() . '/css/prism.css' );
         
         /* Custom stylesheets for custom Page templates */
@@ -191,8 +186,7 @@ function jkl_scripts() {
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
-	}
-        
+	}        
         
 }
 add_action( 'wp_enqueue_scripts', 'jkl_scripts' );
@@ -223,8 +217,9 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/jetpack.php';
 
 
-/*
+/**
  * My Custom Functions here
+ * =============================================================================
  */
 
 /*

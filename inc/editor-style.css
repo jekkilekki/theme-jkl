@@ -32,7 +32,6 @@ textarea {
 
 .site-content {
     font-size: 1.125em;
-    /* line-height: 1.6; */
 }
 
 h1,
@@ -143,8 +142,6 @@ var {
 }
 
 tt, kbd {
-/*    border: 1px solid #c3c3c3;
-    border-radius: 0;*/
     color: #777;
 }
 abbr,
@@ -374,7 +371,6 @@ a:active:after {
 .content a:hover,
 .content a:focus {
     border-bottom: 3px solid #c3c3c3;
-    /* box-shadow: inset 0 -3px 0 #c3c3c3; */
 }
 
 /* Lead in */
@@ -393,7 +389,6 @@ a:active:after {
     border-bottom: 1px solid black;
     padding: 1em 0;
     margin-bottom: 0;
-    /* New styles */
     padding: 2em;
     font-style: italic;
     font-weight: 300;

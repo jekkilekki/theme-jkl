@@ -48,10 +48,6 @@ pre[class*="language-"],
 
 /* Code blocks */
 pre[class*="language-"] {
-/*	border-radius: .5em;
-	border: .3em solid hsl(0, 0%, 33%);  #282A2B */
-	/*box-shadow: 1px 1px .5em black inset;*/
-	/*margin: .5em 0;*/
 	overflow: auto;
 	padding: 1em;
 }
@@ -315,10 +311,6 @@ div.prism-show-language > div.prism-show-language-label {
 	background-color: steelblue;
 	display: block;
 	position: relative;
-/*	bottom: auto;
-	left: auto;
-	top: 0;
-	right: 0;*/
 	width: 100%;
 	height: auto;
 	font-size: 0.8em;

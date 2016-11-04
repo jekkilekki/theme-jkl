@@ -150,12 +150,12 @@ function jkl_customizer_css() {
     ?>
     <style>
         .split-navigation-menu {
-            background: <?php echo $menu_color; ?>;
+            background: <?php echo esc_attr( $menu_color ); ?>;
         }
         #main-nav-left li a,
         #main-nav-right li a,
         #primary-menu li a {
-            color: <?php echo $menu_text_color; ?>;
+            color: <?php echo esc_attr( $menu_text_color ); ?>;
         }
         a,
         a:visited,
@@ -164,11 +164,11 @@ function jkl_customizer_css() {
         a:active,
         .entry-content a,
         .entry-summary a {
-            color: <?php echo $highlight_color; ?>;
+            color: <?php echo esc_attr( $highlight_color ); ?>;
         }
         .search-toggle,
         .search-box-wrapper {
-            background-color: <?php echo $highlight_color; ?>;
+            background-color: <?php echo esc_attr( $highlight_color ); ?>;
         }
     </style>
     <?php

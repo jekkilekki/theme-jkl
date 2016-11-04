@@ -4,11 +4,11 @@ Theme URI:          https://github.com/jekkilekki/theme-jkl
 Author:             Aaron Snowberger
 Author URI:         http://www.aaronsnowberger.com
 Description:        A simple black and white modern blog theme with left, right, or no sidebar options, a centered logo with split navigation, and some custom page templates. Template is fully responsive.
-Version:            1.0.7
+Version:            1.0.8
 License:            GNU General Public License v2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:        jkl
-Tags:               one-column, two-columns, left-sidebar, right-sidebar, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, sticky-post, theme-options, threaded-comments, translation-ready
+Tags:               blog, one-column, two-columns, left-sidebar, right-sidebar, custom-colors, custom-header, custom-logo, custom-background, custom-menu, editor-style, featured-image-header, featured-images, sticky-post, post-formats, theme-options, threaded-comments, translation-ready
 GitHub Theme URI:   https://github.com/jekkilekki/theme-jkl
 GitHub Branch:      master
 
@@ -39,6 +39,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 # Content
 	## Posts and pages
 	## Asides
+        ## Chats
 	## Comments
 # Infinite scroll
 # Media
@@ -3887,9 +3888,7 @@ a.wporg-link {
  *  FIXES for Foundation and WordPress
  */
 @media screen and (max-width: 600px) {
-    /*wpadminbar {
-        position: fixed;
-    }*/
+    // Can't 'fix' wpadminbar to pass Theme Check
 }
 /* Foundation RESET */
 .menu > li {
