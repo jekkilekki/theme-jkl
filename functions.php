@@ -229,7 +229,7 @@ add_action( 'init', 'jkl_add_excerpt_to_pages' );
  * Custom Background Callback to make the .site-logo-housing (above the menu) match
  * the chosen custom background color in body.custom-background
  * 
- * @link    http://wordpress.stackexchange.com/questions/189361/add-custom-background-to-div-in-home-page
+ * @link http://wordpress.stackexchange.com/questions/189361/add-custom-background-to-div-in-home-page
  */
 function jkl_custom_background_cb() {
     ob_start();
@@ -238,3 +238,38 @@ function jkl_custom_background_cb() {
     $style = str_replace( 'body.custom-background', 'body.custom-background, .site-logo-housing, .site-logo', $style );
     echo $style;
 }
+
+/**
+ * Filter added to the content for Asides, Links, Quotes, and Statuses to append
+ * an infinity sign to the end of that content
+ * 
+ * @link http://justintadlock.com/archives/2012/09/06/post-formats-aside
+ */
+function jkl_infinity_link( $content ) {
+    if( (   has_post_format( 'aside' ) ||
+            has_post_format( 'link' ) ||
+            has_post_format( 'quote' ) ||
+            has_post_format( 'status' ) ) && !is_singular() ) {
+        $content .= '<a class="infinity-link" href="' .get_permalink() . '">&#8734;</a>';
+    }
+    return $content;
+}
+add_filter( 'the_content', 'jkl_infinity_link', 9 ); // run before wpautop
+
+/**
+ * Filter a Quote Post Format to add <blockquote> around the whole thing if 
+ * no existing tag is found
+ * 
+ * @link https://github.com/justintadlock/hybrid-core/blob/master/inc/functions-formats.php
+ */
+function jkl_quote_blockquote( $content ) {
+    if( has_post_format( 'quote' ) ) {
+        preg_match( '/<blockquote.*?>/', $content, $matches );
+        
+        if( empty( $matches ) ) {
+            $content = "<blockquote>{$content}</blockquote>";
+        }
+    }
+    return $content;
+}
+add_filter( 'the_content', 'jkl_quote_blockquote', 9 ); // run before wpautop

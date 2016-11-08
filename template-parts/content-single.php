@@ -32,7 +32,11 @@
                             </figure>
                         <?php }
 
-		if ( 'post' === get_post_type() && !is_front_page() ) : ?>
+		if ( 'post' === get_post_type() && !is_front_page() && 
+                     'aside' !== get_post_format() &&
+                     'status' !== get_post_format() && 
+                     'link' !== get_post_format() &&
+                     'quote' !== get_post_format() ) : ?>
 		<div class="entry-meta">
 			<?php jkl_posted_on(); ?>
 		</div><!-- .entry-meta -->

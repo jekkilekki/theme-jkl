@@ -40,6 +40,13 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 	## Posts and pages
 	## Asides
         ## Chats
+        ## Galleries
+        ## Links
+        ## Images
+        ## Quotes
+        ## Statuses
+        ## Videos
+        ## Audios
 	## Comments
 # Infinite scroll
 # Media
@@ -279,7 +286,7 @@ table tfoot {
     border-color: gainsboro;
 }
 table tbody tr:nth-child(even) {
-    background: rgba( 0,0,0,0.05 ); // whitesmoke alpha = 0.05
+    background: rgba( 0,0,0,0.05 ); /* whitesmoke alpha = 0.05 */
 }
 
 td,
@@ -385,7 +392,7 @@ var {
 	font-size: 0.9375rem;
 
         /* from CSS-Tricks.com */
-        background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
+        background: rgba( 0,0,0,0.1 ); /* whitesmoke alpha = 0.05 */
         background: #efefef;
         padding: 2px 5px;
         border-radius: 4px;
@@ -1314,7 +1321,7 @@ a:active {
 .post-navigation {
     text-align: left;
     overflow: hidden;
-    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
+    background: rgba( 0,0,0,0.1 ); /* whitesmoke alpha = 0.05 */
     background: #efefef;
     padding: 2em 2.5em;
     margin: 4em -2.5em;
@@ -1333,7 +1340,7 @@ a:active {
 .comment-pagination {
     text-align: center;
     padding: 2em;
-    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
+    background: rgba( 0,0,0,0.1 ); /* whitesmoke alpha = 0.05 */
     background: #efefef;
 }
 .comment-pagination .nav-links {
@@ -2246,7 +2253,7 @@ a:active {
 }
 .widget-area {
     max-width: 100%!important;
-    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
+    background: rgba( 0,0,0,0.1 ); /* whitesmoke alpha = 0.05 */
     background: #efefef;
     margin-top: 0;
     margin-bottom: 0;
@@ -2306,11 +2313,44 @@ a:active {
     color: #404040;
 }
 .widget_categories .children {
-    padding-top: 0.3em;
-    margin-bottom: -0.3em;
+/*    padding-top: 0.3em;
+    margin-bottom: -0.3em;*/
+    position: relative;
+}
+.widget_categories .children:before {
+    font-family: "FontAwesome";
+    content: "\f196";
+    display: block;
+    position: absolute;
+    font-size: 0.7em;
+    top: -2.25em;
+    left: -1.25em;
+    color: #777;
+    opacity: 0.7;
 }
 .widget_categories .children li {
+    position: relative;
     padding-left: 0.6em;
+}
+.widget_categories .children li:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -0.65em;
+    top: -1em;
+    border-left: 1px dotted gray;
+    opacity: 0.5;
+    height: 100%;
+}
+.widget_categories .children li:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -0.65em;
+    top: 1.1em;
+    border-bottom: 1px dotted gray;
+    opacity: 0.5;
+    width: 1em;
 }
 
 /* Search widget */
@@ -2337,7 +2377,7 @@ a:active {
 
 .site-content .widget_pages li:last-child,
 .site-content .widget_nav_menu li:last-child {
-    margin-bottom: 0.5em;
+    /*margin-bottom: 0.5em;*/
 }
 
 /* Meta Widget */
@@ -2523,9 +2563,9 @@ a:active {
     width: 30px;
     height: 30px;
     background: white;
-    border: 1px solid rgba( 204,204,204, 0.8 ); // #ccc
-    box-shadow: 0px 2px 2px rgba( 204,204,204, 0.8 ); // #ccc
-    border-radius: 50%;
+    border: 1px solid rgba( 204,204,204, 0.8 ); /* #ccc */
+    /*box-shadow: 0px 2px 2px rgba( 204,204,204, 0.8 );  #ccc */
+    /*border-radius: 50%;*/
     left: 50%;
     margin-left: -15px;
     display: none;
@@ -2625,7 +2665,7 @@ a:active {
     font-style: italic;
     background: white;
     padding: 5px;
-    max-width: 80%;
+    max-width: 90%;
     border: 2px solid black;
 }
 .taxonomy-description p {
@@ -2672,29 +2712,33 @@ a:active {
 .entry-content a,
 .entry-summary a {
     text-decoration: none;
-    border-bottom: 2px solid #c3c3c3;
+    /*border-bottom: 2px solid #c3c3c3;*/
     font-style: italic;
     color: steelblue;
 }
-// Thank you CSS-Tricks gradients: https://css-tricks.com/snippets/css/gradient-underlines/
+/* Thank you CSS-Tricks gradients: https://css-tricks.com/snippets/css/gradient-underlines/ */
 .entry-content a:after,
 .entry-summary a:after {
     content: "";
     position: absolute;
     display: block;
-    bottom: 2px;
+    bottom: 0px;
     left: 0;
-    height: 1px;
+    height: 2px;
     width: 100%;
-    background: #444;
-    background: linear-gradient(left, transparent 0%,#444 50%,transparent 100%);
+    /*background: #444;*/
+    background: -webkit-linear-gradient(left, transparent 0%,rgba(119,119,119,0.8) 50%,transparent 100%);
+    background: -moz-linear-gradient(left, transparent 0%,rgba(119,119,119,0.8) 50%,transparent 100%);
+    background: -o-linear-gradient(left, transparent 0%,rgba(119,119,119,0.8) 50%,transparent 100%);
+    background: linear-gradient(left, transparent 0%,rgba(119,119,119,0.8) 50%,transparent 100%);
 }
-.entry-content a:hover,
-.entry-content a:focus,
-.entry-summary a:hover,
-.entry-summary a:focus {
-    border-bottom: 3px solid #c3c3c3;
+.entry-content a:hover:after,
+.entry-content a:focus:after,
+.entry-summary a:hover:after,
+.entry-summary a:focus:after {
+    /*border-bottom: 3px solid #444;*/
     /* box-shadow: inset 0 -3px 0 #c3c3c3; */
+    background: #c3c3c3;
 }
 .entry-meta a:hover,
 .entry-meta a:focus,
@@ -2706,7 +2750,7 @@ a:active {
 
 .sticky {
 	display: block;
-        background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
+        background: rgba( 0,0,0,0.1 ); /* whitesmoke alpha = 0.05 */
         background: #efefef;
         padding: 3em 2em 1em;
         margin: -2em -2em 4em!important;
@@ -2841,7 +2885,7 @@ a:active {
 .entry-meta {
     font-size: 95%;
     text-align: left;
-    background: rgba( 0,0,0,0.05 ); // whitesmoke alpha = 0.05
+    background: rgba( 0,0,0,0.05 ); /* whitesmoke alpha = 0.05 */
     background: #efefef;
     padding: 1em 2.10526315789em;
     margin: 0 -2.10526315789em;
@@ -3295,6 +3339,77 @@ a:active {
 }
 
 /*--------------------------------------------------------------
+## Post Formats
+--------------------------------------------------------------*/
+.blog .format-aside .entry-title:before,
+.archive .format-aside .entry-title:before,
+.blog .format-chat .entry-title:before,
+.archive .format-chat .entry-title:before,
+.blog .format-gallery .entry-title:before,
+.archive .format-gallery .entry-title:before,
+.blog .format-link .entry-title:before,
+.archive .format-link .entry-title:before,
+.blog .format-image .entry-title:before,
+.archive .format-image .entry-title:before,
+.blog .format-quote .entry-title:before,
+.archive .format-quote .entry-title:before,
+.blog .format-status .entry-title:before,
+.archive .format-status .entry-title:before,
+.blog .format-video .entry-title:before,
+.archive .format-video .entry-title:before,
+.blog .format-audio .entry-title:before,
+.archive .format-audio .entry-title:before {
+    font-family: "FontAwesome";
+    color: #c3c3c3;
+    margin-right: 0.5em;
+    font-size: 0.6em;
+    display: block;
+    float: left;
+}
+.infinity-link {
+    margin: 0.5em;
+}
+.infinity-link:after {
+    display: none!important;
+}
+.blog .format-aside .meta-content-index,
+.archive .format-aside .meta-content-index,
+.blog .format-status .meta-content-index,
+.archive .format-status .meta-content-index,
+.blog .format-link .meta-content-index,
+.archive .format-link .meta-content-index,
+.blog .format-quote .meta-content-index,
+.archive .format-quote .meta-content-index {
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    text-align: center;
+}
+.blog .format-aside .posted-on,
+.archive .format-aside .posted-on,
+.blog .format-status .posted-on,
+.archive .format-status .posted-on,
+.blog .format-link .posted-on,
+.archive .format-link .posted-on,
+.blog .format-quote .posted-on,
+.archive .format-quote .posted-on {
+    font-family: "Volkhov", serif;
+    color: #777;
+    font-size: 1em;
+}
+.blog .format-aside .posted-on a,
+.archive .format-aside .posted-on a,
+.blog .format-status .posted-on a,
+.archive .format-status .posted-on a,
+.blog .format-link .posted-on a,
+.archive .format-link .posted-on a,
+.blog .format-quote .posted-on a,
+.archive .format-quote .posted-on a {
+    color: black;
+    font-style: normal;
+}
+/*--------------------------------------------------------------
 ## Asides
 --------------------------------------------------------------*/
 .blog .format-aside .entry-title,
@@ -3309,7 +3424,7 @@ a:active {
 .blog .format-aside .hentry-index,
 .archive .format-aside .hentry-index {
     border-top: 2px solid black;
-    background: rgba( 0,0,0,0.05 ); // whitesmoke alpha = 0.05
+    background: rgba( 0,0,0,0.05 ); /* whitesmoke alpha = 0.05 */
     padding: 0;
     margin-top: 5em;
     margin-bottom: 5em;
@@ -3325,7 +3440,9 @@ a:active {
     padding-right: 1em;
 }
 .blog .format-aside .hentry-index:after,
-.archive .format-aside .hentry-index:after {
+.archive .format-aside .hentry-index:after,
+.blog .format-status .hentry-index:after,
+.archive .format-status .hentry-index:after {
     border: 0;
 }
 .blog .format-aside .index-content,
@@ -3350,24 +3467,6 @@ a:active {
     border-top: 0;
     position: relative;
 }
-.blog .format-aside .meta-content-index,
-.archive .format-aside .meta-content-index {
-    padding-bottom: 0.5em;
-    padding-left: 1em;
-    padding-right: 1em;
-    width: 100%;
-}
-.blog .format-aside .posted-on,
-.archive .format-aside .posted-on {
-    font-family: "Volkhov", serif;
-    color: #777;
-    font-size: 1em;
-}
-.blog .format-aside .posted-on a,
-.archive .format-aside .posted-on a {
-    color: black;
-    font-style: normal;
-}
 .blog .format-aside .permalink,
 .archive .format-aside .permalink {
     position: absolute;
@@ -3379,20 +3478,118 @@ a:active {
 /*--------------------------------------------------------------
 ## Chats
 --------------------------------------------------------------*/
+.blog .format-chat .entry-title:before,
+.archive .format-chat .entry-title:before {
+    content: "\f0e6";
+}
 .single .format-chat p {
     padding: 0.5em 1em;
     margin: 0 -1em 2em;
+    position: relative;
 }
 .single .format-chat p:nth-child(even) {
-    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
-    margin-left: 33%;
+    background: rgba( 0,0,0,0.1 ); /* whitesmoke alpha = 0.05 */
+    margin-left: 25%!important;
     border-radius: 10px;
     border: 1px solid #dcdcdc;
 }
 .single .format-chat p:nth-child(odd) {
-    margin-right: 33%;
+    margin-right: 25%!important;
     border-radius: 10px;
     border: 1px solid #dcdcdc;
+}
+.single .format-chat p:nth-child(odd):before,
+.single .format-chat p:nth-child(odd):after,
+.single .format-chat p:nth-child(even):before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -21px;
+}
+.single .format-chat p:nth-child(odd):before {
+    left: 20px;
+    border-top: 20px solid gainsboro;
+    border-right: 20px solid transparent;
+}
+.single .format-chat p:nth-child(odd):after {
+    left: 21px;
+    bottom: -19px;
+    border-top: 21px solid white;
+    border-right: 21px solid transparent;
+}
+.single .format-chat p:nth-child(even):before {
+    right: 20px;
+    border-top: 20px solid rgba( 0,0,0,0.1 );
+    border-left: 20px solid transparent;
+}
+/*--------------------------------------------------------------
+## Galleries
+--------------------------------------------------------------*/
+.blog .format-gallery .entry-title:before,
+.archive .format-gallery .entry-title:before {
+    content: "\f03e";
+}
+/*--------------------------------------------------------------
+## Links
+--------------------------------------------------------------*/
+.blog .format-link .entry-title:before,
+.archive .format-link .entry-title:before {
+    content: "\f0c1";
+}
+/*--------------------------------------------------------------
+## Images
+--------------------------------------------------------------*/
+.blog .format-image .entry-title:before,
+.archive .format-image .entry-title:before {
+    content: "\f03e";
+}
+/*--------------------------------------------------------------
+## Quotes
+--------------------------------------------------------------*/
+.blog .format-quote .entry-title:before,
+.archive .format-quote .entry-title:before {
+    content: "\f10d";
+}
+.single .format-quote .entry-content {
+    position: relative;
+}
+.single .format-quote blockquote:first-child {
+    background: rgba(0,0,0,0.8);
+    color: #dcdcdc;
+    font-size: 2em;
+    border: none;
+    left: calc((-100vw + 42.4em) / 2);
+    position: relative;
+    width: 100vw;
+    overflow: hidden;
+    padding-left: calc( 50vw - 50% );
+    padding-right: calc( 50vw - 50% );
+}
+.single .format-quote blockquote:first-child p {
+    border: none;
+    color: inherit;
+    font-size: 1em;
+}
+/*--------------------------------------------------------------
+## Statuses
+--------------------------------------------------------------*/
+.blog .format-status .entry-title:before,
+.archive .format-status .entry-title:before {
+    content: "\f006";
+}
+/*--------------------------------------------------------------
+## Videos
+--------------------------------------------------------------*/
+.blog .format-video .entry-title:before,
+.archive .format-video .entry-title:before {
+    content: "\f008";
+}
+/*--------------------------------------------------------------
+## Audios
+--------------------------------------------------------------*/
+.blog .format-audio .entry-title:before,
+.archive .format-audio .entry-title:before {
+    content: "\f025";
 }
 
 /*--------------------------------------------------------------
@@ -3489,7 +3686,7 @@ a:active {
 
 .bypostauthor {
     display: block;
-    /* background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05 */
+    /* background: rgba( 0,0,0,0.1 ); /* whitesmoke alpha = 0.05 */
     border-top: 2px solid black;
     margin: calc(-3em - 1px) -0.5em 3em;
     padding-top: 4px;
@@ -3636,11 +3833,13 @@ object {
 # Images
 --------------------------------------------------------------*/
 .entry-content a > img {
-    border: 1px dotted black;
+    border: 1px solid transparent;
     background: white;
+    box-shadow: 0px 0px 5px #c3c3c3;
 }
 .entry-content a:hover > img {
     border: 1px solid black;
+    box-shadow: none;
 }
 
 img.aligncenter {
@@ -3720,7 +3919,7 @@ img.alignleft {
     margin-bottom: 2em;
     padding-bottom: 4px;
     border-bottom: 2px solid black;
-    background: rgba( 0,0,0,0.1 ); // whitesmoke alpha = 0.05
+    background: rgba( 0,0,0,0.1 ); /* whitesmoke alpha = 0.05 */
     background: #efefef;
 }
 .wp-caption .wp-caption-text {
@@ -3914,14 +4113,14 @@ a.wporg-link {
  *  FIXES for Foundation and WordPress
  */
 @media screen and (max-width: 600px) {
-    // Can't 'fix' wpadminbar to pass Theme Check
+    /* Can't 'fix' wpadminbar to pass Theme Check */
 }
 /* Foundation RESET */
 .menu > li {
-    display: block; // instead of table-cell - which made it overflow
+    display: block; /* instead of table-cell - which made it overflow */
 }
 input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"] {
-    box-sizing: border-box; // padding: 3px was making input type search overflow
+    box-sizing: border-box; /* padding: 3px was making input type search overflow */
 }
 .row.display {
     background: #eee;
