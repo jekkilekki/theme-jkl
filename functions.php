@@ -272,4 +272,4 @@ function jkl_quote_blockquote( $content ) {
     }
     return $content;
 }
-add_filter( 'the_content', 'jkl_quote_blockquote', 9 ); // run before wpautop
+add_filter( 'the_content', 'jkl_quote_blockquote', 8 ); // run before wpautop

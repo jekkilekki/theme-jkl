@@ -38,7 +38,7 @@
                 
                 elseif ( is_404() ) : ?>
                         
-                        <p><?php esc_html_e( 'Are you lost? Maybe one of the Latest Posts below or a Search will help.', 'jkl' ); ?></p>
+                        <p><?php esc_html_e( 'Are you lost? Maybe one of the a Search or one of the Latest Posts (below) will help.', 'jkl' ); ?></p>
                         <?php
                                 get_search_form();
 

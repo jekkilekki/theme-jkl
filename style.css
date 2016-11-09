@@ -2643,8 +2643,10 @@ a:active {
     text-align: center;
     letter-spacing: 2px;
 }
-.page-header {
-    margin-bottom: 2em;
+.page-header,
+.error404 .secondary-title,
+.search .secondary-title {
+    margin-bottom: 4em;
 }
 .page-header:after,
 .secondary-title:before,
@@ -2827,8 +2829,10 @@ a:active {
     margin: 0 0 1.5em;
 }
 .blog .hentry,
-.archive .hentry {
-    margin: 0 0 5em;
+.archive .hentry,
+.error404 .hentry,
+.search .hentry {
+    margin: 0 0 6em;
 }
 .entry-title {
     margin-left: -0.5em;
@@ -3368,6 +3372,7 @@ a:active {
 }
 .infinity-link {
     margin: 0.5em;
+    font-weight: bold;
 }
 .infinity-link:after {
     display: none!important;
@@ -3388,8 +3393,6 @@ a:active {
 }
 .blog .format-aside .posted-on,
 .archive .format-aside .posted-on,
-.blog .format-status .posted-on,
-.archive .format-status .posted-on,
 .blog .format-link .posted-on,
 .archive .format-link .posted-on,
 .blog .format-quote .posted-on,
@@ -3400,8 +3403,6 @@ a:active {
 }
 .blog .format-aside .posted-on a,
 .archive .format-aside .posted-on a,
-.blog .format-status .posted-on a,
-.archive .format-status .posted-on a,
 .blog .format-link .posted-on a,
 .archive .format-link .posted-on a,
 .blog .format-quote .posted-on a,
@@ -3550,6 +3551,46 @@ a:active {
 .archive .format-quote .entry-title:before {
     content: "\f10d";
 }
+.blog .format-quote .entry-meta,
+.archive .format-quote .entry-meta {
+    background: rgba(0,0,0,0.7);
+}
+.blog .format-quote .entry-content,
+.archive .format-quote .entry-content {
+    margin: 0;
+    padding: 0;
+}
+.blog .format-quote .hentry-index:after,
+.archive .format-quote .hentry-index:after {
+    border: none;
+}
+.blog .format-quote blockquote,
+.archive .format-quote blockquote {
+    color: #dcdcdc;
+    font-size: 1.5em;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.blog .format-quote blockquote:before,
+.archive .format-quote blockquote:before {
+    left: -1em;
+    opacity: 0.3;
+}
+.blog .format-quote blockquote:after,
+.archive .format-quote blockquote:after {
+    right: -1em;
+    opacity: 0.3;
+}
+.blog .format-quote blockquote p,
+.archive .format-quote blockquote p {
+    color: inherit;
+}
+.blog .format-quote blockquote cite,
+.archive .format-quote blockquote cite {
+    text-align: center;
+    font-size: 0.6em;
+}
 .single .format-quote .entry-content {
     position: relative;
 }
@@ -3576,6 +3617,62 @@ a:active {
 .blog .format-status .entry-title:before,
 .archive .format-status .entry-title:before {
     content: "\f006";
+}
+.blog .format-status .index-content,
+.archive .format-status .index-content {
+    border: 1px solid gainsboro;
+    border-radius: 20px;
+    padding: 1.5em 2em;
+}
+.blog .format-status .author-avatar,
+.archive .format-status .author-avatar {
+    margin-bottom: 1em;
+    margin-right: 1em;
+    margin-top: 0;
+    margin-left: 0;
+}
+.blog .format-status .meta-content,
+.archive .format-status .meta-content {
+    font-size: 0.9em;
+}
+.blog .format-status .meta-content:after,
+.archive .format-status .meta-content:after {
+    font-size: 0.9em;
+}
+.blog .format-status .meta-content a:after,
+.archive .format-status .meta-content a:after {
+    display: none;
+}
+.blog .format-status .byline,
+.archive .format-status .byline {
+    margin-right: 5px;
+    margin-top: 0.5em;
+    font-weight: bold;
+    display: block;
+    line-height: 1;
+}
+.blog .format-status .posted-on a,
+.archive .format-status .posted-on a {
+    color: #aaa;
+}
+@media screen and ( max-width: 400px ) {
+    .blog .format-status .author-avatar,
+    .archive .format-status .author-avatar,
+    .blog .format-status .meta-content-text,
+    .archive .format-status .meta-content-text {
+        float: left;
+        text-align: left;
+    }
+    .blog .format-status .byline,
+    .archive .format-status .byline {
+        padding-top: 0;
+    }
+}
+@media screen and ( min-width: 40em ) {
+    .blog .format-status .meta-content-text,
+    .archive .format-status .meta-content-text {
+        margin-top: 1em;
+    }
 }
 /*--------------------------------------------------------------
 ## Videos

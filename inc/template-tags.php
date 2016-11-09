@@ -41,11 +41,23 @@ function jkl_posted_on() {
             echo '<div class="author-avatar">' . get_avatar( $author_id ) . '</div>';
         // } else {
             echo '<div class="meta-content-text">';
+            
+        // Byline
+	echo '<span class="byline">';
+        if( 'status' !== get_post_format() ) {
+            echo __( 'by', 'jkl' );
+        }
+        echo ' ' . $byline . '</span>';
+        
+        // Posted on date
+        echo '<span class="posted-on">';
+        if( 'status' !== get_post_format() ) {
+            echo __( 'on', 'jkl' );
+        }
+        echo ' ' . $posted_on . '</span>'; // WPCS: XSS OK.
 
-	echo '<span class="byline">by ' . $byline . '</span><span class="posted-on">on ' . $posted_on . '</span>'; // WPCS: XSS OK.
-
-        // Add Category list below
-        if ( 'post' === get_post_type() ) {
+        // Add Category list below (except on Status Post Formats)
+        if ( 'post' === get_post_type() && 'status' !== get_post_format() ) {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
 		if ( $categories_list && jkl_categorized_blog() ) {
@@ -53,8 +65,8 @@ function jkl_posted_on() {
 		}
         }
 
-        // Add Comments Link
-        if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+        // Add Comments Link (except on Status Post Formats)
+        if ( ! post_password_required() && ( comments_open() || get_comments_number() ) && 'status' !== get_post_format() ) {
                 echo '<span class="comments-link">';
                 comments_popup_link( esc_html__( 'Leave a comment', 'jkl' ), esc_html__( '1 Comment', 'jkl' ), esc_html__( '% Comments', 'jkl' ) );
                 echo '</span>';
