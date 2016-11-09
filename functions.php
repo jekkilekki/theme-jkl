@@ -247,11 +247,14 @@ function jkl_custom_background_cb() {
  */
 function jkl_infinity_link( $content ) {
     if( (   has_post_format( 'aside' ) ||
-            has_post_format( 'link' ) ||
             has_post_format( 'quote' ) ||
+            has_post_format( 'link' ) ||
             has_post_format( 'status' ) ) && !is_singular() ) {
         $content .= '<a class="infinity-link" href="' .get_permalink() . '">&#8734;</a>';
-    }
+    } 
+//    elseif( has_post_format( 'link' ) && !is_singular() ) {
+//        $content = '<a class="infinity-link" href="' .get_permalink() . '">&#8734;</a>' . $content;
+//    }
     return $content;
 }
 add_filter( 'the_content', 'jkl_infinity_link', 9 ); // run before wpautop

@@ -3391,25 +3391,6 @@ a:active {
     width: 100%;
     text-align: center;
 }
-.blog .format-aside .posted-on,
-.archive .format-aside .posted-on,
-.blog .format-link .posted-on,
-.archive .format-link .posted-on,
-.blog .format-quote .posted-on,
-.archive .format-quote .posted-on {
-    font-family: "Volkhov", serif;
-    color: #777;
-    font-size: 1em;
-}
-.blog .format-aside .posted-on a,
-.archive .format-aside .posted-on a,
-.blog .format-link .posted-on a,
-.archive .format-link .posted-on a,
-.blog .format-quote .posted-on a,
-.archive .format-quote .posted-on a {
-    color: black;
-    font-style: normal;
-}
 /*--------------------------------------------------------------
 ## Asides
 --------------------------------------------------------------*/
@@ -3421,6 +3402,17 @@ a:active {
 .arhive .format-aside {
     margin-left: -1em;
     margin-right: -1em;
+}
+.blog .format-aside .posted-on,
+.archive .format-aside .posted-on {
+    font-family: "Volkhov", serif;
+    color: #777;
+    font-size: 1em;
+}
+.blog .format-aside .posted-on a,
+.archive .format-aside .posted-on a {
+    color: black;
+    font-style: normal;
 }
 .blog .format-aside .hentry-index,
 .archive .format-aside .hentry-index {
@@ -3533,10 +3525,42 @@ a:active {
 /*--------------------------------------------------------------
 ## Links
 --------------------------------------------------------------*/
-.blog .format-link .entry-title:before,
-.archive .format-link .entry-title:before {
+.blog .format-link .entry-content:before,
+.archive .format-link .entry-content:before {
+    font-family: "FontAwesome";
+    color: #c3c3c3;
+    margin-right: 0.75em;
+    font-size: 0.9em;
+    display: block;
+    float: left;
     content: "\f0c1";
 }
+.blog .format-link .entry-meta,
+.archive .format-link .entry-meta {
+    margin-top: 0;
+}
+.blog .format-link .meta-content-index,
+.archive .format-link .meta-content-index {
+    margin-top: 1.5em;
+    margin-bottom: -2em;
+}
+.blog .format-link .meta-content-index a:after,
+.archive .format-link .meta-content-index a:after {
+    display: none;
+}
+/*.blog .format-link .infinity-link,
+.archive .format-link .infinity-link {
+    height: 100%;
+    background: steelblue;
+    margin: 0 1em 0 0;
+    padding: 1.15em 1.25em 1.35em;
+    color: white;
+    font-size: 1.5em;
+}
+.blog .format-link .infinity-link a,
+.archive .format-link .infinity-link a {
+    color: white!important;
+}*/
 /*--------------------------------------------------------------
 ## Images
 --------------------------------------------------------------*/
@@ -3551,14 +3575,38 @@ a:active {
 .archive .format-quote .entry-title:before {
     content: "\f10d";
 }
+.blog .format-quote .infinity-link,
+.archive .format-quote .infinity-link {
+    position: relative;
+    left: 50%;
+    margin-left: -7px;
+    bottom: 30px;
+}
+.blog .format-quote .index-content,
+.archive .format-quote .index-content {
+    border: none;
+}
 .blog .format-quote .entry-meta,
 .archive .format-quote .entry-meta {
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.blog .format-link .meta-content-index,
+.archive .format-link .meta-content-index,
+.blog .format-quote .meta-content-index,
+.archive .format-quote .meta-content-index {
+    font-size: 0.9em;
+    text-align: left;
+    font-style: oblique;
+    padding-left: 0;
 }
 .blog .format-quote .entry-content,
 .archive .format-quote .entry-content {
     margin: 0;
     padding: 0;
+    position: relative;
 }
 .blog .format-quote .hentry-index:after,
 .archive .format-quote .hentry-index:after {
@@ -3570,6 +3618,7 @@ a:active {
     font-size: 1.5em;
     border: none;
     margin: 0;
+    margin-top: 0.5em;
     padding: 0;
 }
 .blog .format-quote blockquote:before,
@@ -3585,11 +3634,24 @@ a:active {
 .blog .format-quote blockquote p,
 .archive .format-quote blockquote p {
     color: inherit;
+    border: none;
 }
 .blog .format-quote blockquote cite,
 .archive .format-quote blockquote cite {
     text-align: center;
     font-size: 0.6em;
+    padding-bottom: 0;
+    margin-bottom: -0.5em;
+}
+.blog .format-quote blockquote cite a,
+.archive .format-quote blockquote cite a {
+    color: #aaa;
+}
+.blog .format-quote blockquote cite a:after,
+.archive .format-quote blockquote cite a:after,
+.blog .format-quote .posted-on a:after,
+.archive .format-quote .posted-on a:after {
+    display: none;
 }
 .single .format-quote .entry-content {
     position: relative;

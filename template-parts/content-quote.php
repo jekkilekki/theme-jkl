@@ -10,11 +10,11 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+    <?php jkl_index_posted_on(); ?>
     <div class="hentry-index entry-meta">
 
 	<div class="entry-content index-content">		
             <?php the_content(); ?>
-            <?php jkl_index_posted_on(); ?>
 	</div><!-- .entry-content -->
         
     </div><!-- .hentry-index -->

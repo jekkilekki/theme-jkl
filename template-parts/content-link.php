@@ -14,7 +14,7 @@
 
 	<div class="entry-content index-content">		
             <?php the_content(); ?>
-            <?php jkl_index_posted_on(); ?>
+            <?php // jkl_index_posted_on(); ?>
 	</div><!-- .entry-content -->
         
     </div><!-- .hentry-index -->
