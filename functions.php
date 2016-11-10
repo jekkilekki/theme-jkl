@@ -287,9 +287,7 @@ function jkl_quote_excerpt( $text, $raw_excerpt ) {
     if( 'quote' === get_post_format() && !$raw_excerpt ) {
         $content = apply_filters( 'the_content', get_the_content() );
         $text = substr( $content, 0, strpos( $content, '</blockquote>') + 13 );
-        // Add infinity link
-        $text .= '<a class="infinity-link" href="' . get_permalink() . '">';
     }
     return $text;
 }
-add_filter( 'wp_trim_excerpt', 'jkl_quote_excerpt', 10, 2 );
+add_filter( 'wp_trim_excerpt', 'jkl_quote_excerpt', 5, 2 );
