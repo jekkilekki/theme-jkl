@@ -41,6 +41,11 @@
 			<?php jkl_posted_on(); ?>
 		</div><!-- .entry-meta -->
 		<?php
+                elseif ( 'quote' === get_post_format() ||
+                         'link' === get_post_format() ||
+                         'aside' === get_post_format() ) : ?>
+		<?php jkl_index_posted_on(); 
+                
 		endif; ?>
 	</header><!-- .entry-header -->
 

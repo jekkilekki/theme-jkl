@@ -250,7 +250,7 @@ function jkl_infinity_link( $content ) {
             has_post_format( 'quote' ) ||
             has_post_format( 'link' ) ||
             has_post_format( 'status' ) ) && !is_singular() ) {
-        $content .= '<a class="infinity-link" href="' .get_permalink() . '">&#8734;</a>';
+        $content .= '<a class="infinity-link" href="' . get_permalink() . '">&#8734;</a>';
     } 
 //    elseif( has_post_format( 'link' ) && !is_singular() ) {
 //        $content = '<a class="infinity-link" href="' .get_permalink() . '">&#8734;</a>' . $content;
@@ -266,7 +266,7 @@ add_filter( 'the_content', 'jkl_infinity_link', 9 ); // run before wpautop
  * @link https://github.com/justintadlock/hybrid-core/blob/master/inc/functions-formats.php
  */
 function jkl_quote_blockquote( $content ) {
-    if( has_post_format( 'quote' ) ) {
+    if( 'quote' === get_post_format() ) {
         preg_match( '/<blockquote.*?>/', $content, $matches );
         
         if( empty( $matches ) ) {
@@ -276,3 +276,20 @@ function jkl_quote_blockquote( $content ) {
     return $content;
 }
 add_filter( 'the_content', 'jkl_quote_blockquote', 8 ); // run before wpautop
+
+/**
+ * Only get the first <blockquote> from a Post Format quote (no additional writing) 
+ * for the index and archive pages.
+ * 
+ * @link http://www.codecheese.com/2013/11/get-the-first-paragraph-as-an-excerpt-for-wordpress/
+ */
+function jkl_quote_excerpt( $text, $raw_excerpt ) {
+    if( 'quote' === get_post_format() && !$raw_excerpt ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        $text = substr( $content, 0, strpos( $content, '</blockquote>') + 13 );
+        // Add infinity link
+        $text .= '<a class="infinity-link" href="' . get_permalink() . '">';
+    }
+    return $text;
+}
+add_filter( 'wp_trim_excerpt', 'jkl_quote_excerpt', 10, 2 );

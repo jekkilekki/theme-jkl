@@ -3595,12 +3595,13 @@ a:active {
 }
 .blog .format-link .meta-content-index,
 .archive .format-link .meta-content-index,
-.blog .format-quote .meta-content-index,
-.archive .format-quote .meta-content-index {
+.format-quote .meta-content-index,
+.format-quote .meta-content-index {
     font-size: 0.9em;
-    text-align: left;
+    text-align: left!important;
     font-style: oblique;
     padding-left: 0;
+    color: #777;
 }
 .blog .format-quote .entry-content,
 .archive .format-quote .entry-content {
@@ -3653,20 +3654,25 @@ a:active {
 .archive .format-quote .posted-on a:after {
     display: none;
 }
+.single .format-quote .meta-content-index {
+    margin-top: 3em;
+}
 .single .format-quote .entry-content {
     position: relative;
+    margin: 0;
 }
 .single .format-quote blockquote:first-child {
     background: rgba(0,0,0,0.8);
     color: #dcdcdc;
-    font-size: 2em;
+    font-size: 1.5em;
     border: none;
-    left: calc((-100vw + 42.4em) / 2);
+    left: calc((-100vw + 28.266666667em) / 2);
     position: relative;
     width: 100vw;
     overflow: hidden;
     padding-left: calc( 50vw - 50% );
     padding-right: calc( 50vw - 50% );
+    margin: 0.5em 0 2em;
 }
 .single .format-quote blockquote:first-child p {
     border: none;

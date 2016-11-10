@@ -14,7 +14,7 @@
     <div class="hentry-index entry-meta">
 
 	<div class="entry-content index-content">		
-            <?php the_content(); ?>
+            <?php the_excerpt(); ?>
 	</div><!-- .entry-content -->
         
     </div><!-- .hentry-index -->
