@@ -521,11 +521,19 @@ function jkl_index_posted_on() {
 		esc_attr( get_the_modified_date( 'c' ) ),
 		esc_html( get_the_modified_date() )
 	);
-
-	$posted_on = sprintf(
+        if( 'chat' === get_post_format() ||
+            'image' === get_post_format() ||
+            'gallery' === get_post_format() ||
+            'audio' === get_post_format() ||
+            'video' === get_post_format() ) {
+            $string = ucwords( get_post_format() );
+            $posted_on = $string . ': <a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>';
+        } else {
+            $posted_on = sprintf(
 		esc_html_x( 'Date: %s', 'post date', 'jkl' ),
 		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-	);
+            );
+        }
 
         echo '<div class="meta-content-index">';
 	echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.

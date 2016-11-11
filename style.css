@@ -2719,8 +2719,8 @@ a:active {
     color: steelblue;
 }
 /* Thank you CSS-Tricks gradients: https://css-tricks.com/snippets/css/gradient-underlines/ */
-.entry-content a:after,
-.entry-summary a:after {
+.entry-content p a:after,
+.entry-summary p a:after {
     content: "";
     position: absolute;
     display: block;
@@ -3521,6 +3521,10 @@ a:active {
 .blog .format-gallery .entry-title:before,
 .archive .format-gallery .entry-title:before {
     content: "\f03e";
+}
+.gallery-count {
+    margin-top: 1em;
+    color: #777;
 }
 /*--------------------------------------------------------------
 ## Links

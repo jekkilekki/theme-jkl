@@ -291,3 +291,59 @@ function jkl_quote_excerpt( $text, $raw_excerpt ) {
     return $text;
 }
 add_filter( 'wp_trim_excerpt', 'jkl_quote_excerpt', 5, 2 );
+
+/**
+ * Retrieve the IDs for images in a gallery.
+ *
+ * @uses get_post_galleries() First, if available. Falls back to shortcode parsing,
+ *                            then as last option uses a get_posts() call.
+ *
+ * @since Twenty Ten 1.6.
+ *
+ * @return array List of image IDs from the post gallery.
+ */
+function jkl_get_gallery_images() {
+    $images = array();
+
+    $galleries = get_post_galleries( get_the_ID(), false );
+    if( isset( $galleries[0]['ids'] ) )
+        $images = explode( ',', $galleries[0]['ids'] );
+    
+    if( !$images ) {
+        $images = get_posts( array(
+                'fields'        => 'ids',
+                'numberposts'   => 999,
+                'order'         => 'ASC',
+                'orderby'       => 'menu_order',
+                'post_mime_type'=> 'image',
+                'post_parent'   => get_the_ID(),
+                'post_type'     => 'attachment',
+        ) );
+    }
+    return $images;
+}
+
+/**
+ * Get first image in a post
+ * https://codex.wordpress.org/Function_Reference/get_children
+ */
+function jkl_get_first_image( $postID ) {
+    $args = array(
+		'numberposts' => 1,
+		'order' => 'ASC',
+		'post_mime_type' => 'image',
+		'post_parent' => $postID,
+		'post_status' => null,
+		'post_type' => 'attachment',
+	);
+
+	$attachments = get_children( $args );
+
+	if ( $attachments ) {
+		foreach ( $attachments as $attachment ) {
+			$image_attributes = wp_get_attachment_image_src( $attachment->ID, 'thumbnail' )  ? wp_get_attachment_image_src( $attachment->ID, 'thumbnail' ) : wp_get_attachment_image_src( $attachment->ID, 'full' );
+
+			echo '<img src="' . wp_get_attachment_thumb_url( $attachment->ID ) . '" class="current">';
+		}
+	}
+}
