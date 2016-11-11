@@ -1758,6 +1758,7 @@ a:active {
 }
 .site-header-img {
     background-size: 100%;
+    background-position: 50%;
     padding-top: 37%;
     /*margin-bottom: 2em;*/
 }
@@ -2093,22 +2094,32 @@ a:active {
 /*--------------------------------------------------------------
 # Front Page Title Box
 --------------------------------------------------------------*/
+.site-main-row {
+    position: relative;
+    margin: 0 auto;
+}
 .site-main-title-container {
     position: absolute;
-    top: 100px;
-    width: 300px;
+/*    top: 100px; */
+    width: auto;
+    max-width: 500px;
     left: 50%;
-    margin-left: -150px;
+    transform: translateX( -50% );
+    /*margin-left: -150px;*/
+    height: 1px;
+    padding-top: 18.5%;
 }
 .site-main-title-box {
     /*position: absolute;*/
     padding: 5px!important;
     background: white;
-    margin-top: 3.5em;
+    /*margin-top: 3.5em;*/
+    top: 50%;
+    transform: translateY( -50% );
 }
 .site-main-title-box hgroup {
     border: 1px solid black;
-    padding: 2em;
+    padding: 3em;
 }
 .site-main-title-box .site-title {
     font-size: 2em;
@@ -2131,25 +2142,25 @@ a:active {
 }
 @media screen and (min-width: 50em) {
     .site-main-title-container {
-        top: 140px;
+        /*top: 140px;*/
     }
     .site-main-title-box {
-        margin-top: 5.5em;
+        /*margin-top: 5.5em;*/
     }
 }
 @media screen and (min-width: 64em) {
     .site-main-title-box {
-        margin-top: 7.5em;
+        /*margin-top: 7.5em;*/
     }
 }
 @media screen and (min-width: 75em) {
     .site-main-title-box {
-        margin-top: 8.5em;
+        /*margin-top: 8.5em;*/
     }
 }
 @media screen and (min-width: 82.5em) {
     .site-main-title-box {
-        margin-top: 10.5em;
+        /*margin-top: 10.5em;*/
     }
 }
 
@@ -2310,7 +2321,7 @@ a:active {
 
 /* Archive and Categories widgets */
 .widget_archive li {
-    color: #404040;
+    color: inherit;
 }
 .widget_categories .children {
 /*    padding-top: 0.3em;
@@ -2362,7 +2373,21 @@ a:active {
 .widget_pages .children,
 .widget_nav_menu .sub-menu {
     padding-top: 0;
-    padding-left: 0.6em;
+    padding-left: 0.5em;
+}
+.widget_pages .children li:before {
+    content: "\f105";
+    display: inline;
+    float: left;
+    margin-right: 0.4em;
+    color: #777;
+    opacity: 0.7;
+    padding-top: 0.4em;
+    font-family: FontAwesome;
+    font-size: 0.8em;
+}
+.widget_pages .children .children li:before {
+    content: "\f101";
 }
 .widget_pages a,
 .widget_nav_menu a {

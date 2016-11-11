@@ -325,25 +325,10 @@ function jkl_get_gallery_images() {
 
 /**
  * Get first image in a post
- * https://codex.wordpress.org/Function_Reference/get_children
+ * Requires WordPress 3.6.0
+ * @link https://developer.wordpress.org/reference/functions/get_post_gallery_images/
  */
-function jkl_get_first_image( $postID ) {
-    $args = array(
-		'numberposts' => 1,
-		'order' => 'ASC',
-		'post_mime_type' => 'image',
-		'post_parent' => $postID,
-		'post_status' => null,
-		'post_type' => 'attachment',
-	);
-
-	$attachments = get_children( $args );
-
-	if ( $attachments ) {
-		foreach ( $attachments as $attachment ) {
-			$image_attributes = wp_get_attachment_image_src( $attachment->ID, 'thumbnail' )  ? wp_get_attachment_image_src( $attachment->ID, 'thumbnail' ) : wp_get_attachment_image_src( $attachment->ID, 'full' );
-
-			echo '<img src="' . wp_get_attachment_thumb_url( $attachment->ID ) . '" class="current">';
-		}
-	}
+function jkl_get_first_image_url() {
+    $img_url = get_post_gallery_images();
+    return !empty( $img_url ) ? $img_url[0] : ''; 
 }

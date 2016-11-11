@@ -19,9 +19,6 @@
         <footer class="entry-footer">
             <div class="footer-content group">
 		<?php jkl_index_posted_on(); ?>
-<!--                <a class="permalink" href="<?php //echo esc_url( get_permalink() ); ?>" rel="bookmark">
-                    <i class="fa fa-link"></i>
-                </a>-->
             </div>
 	</footer><!-- .entry-footer -->
         

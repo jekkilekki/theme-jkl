@@ -173,6 +173,7 @@
                     <div class="site-header-img small-12 columns" style="background-image: url(<?php header_image(); ?>)"></div><!-- .site-header-image -->
                         
                         <?php if ( !is_single() && !is_page() ) : ?>
+                        <div class="site-main-row">
                         <div class="site-main-title-container">
                             <div class="site-main-title-box">
                                 <hgroup>
@@ -186,6 +187,7 @@
                                 </hgroup>
                             </div><!-- .site-main-title-box -->
                         </div><!-- .site-main-title-container -->
+                        </div>
                         <?php endif; ?>
                        
                 <?php elseif ( has_post_thumbnail() ) : ?>

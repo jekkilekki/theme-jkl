@@ -26,7 +26,8 @@
                         }
                         
                         // Add Featured Image after the Lead-in (if there is one)
-                        if ( has_post_thumbnail() ) { ?>
+                        if ( has_post_thumbnail() &&
+                                'quote' !== get_post_format() ) { ?>
                             <figure class="featured-image">
                                 <?php the_post_thumbnail(); ?>
                             </figure>

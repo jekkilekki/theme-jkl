@@ -42,19 +42,9 @@
                         <?php 
                         // Or else, find the first image in the Post and use that
                         else :
-                            $img_exists = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
-                            $img_url = $matches[1][0];
+                            $media = get_attached_media( 'video' );
+                            var_dump( $media );
 
-                            // Be sure there IS an image
-                            if( $img_exists ) { ?>
-            
-                                <figure class="featured-image index-featured">
-                                    <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
-                                        <img src="<?php echo $img_url; ?>">
-                                    </a>
-                                </figure>
-            
-                            <?php }
                         endif;
                         
                         the_excerpt();
