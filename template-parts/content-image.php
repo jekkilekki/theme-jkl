@@ -43,7 +43,7 @@
                         // Or else, find the first image in the Post and use that
                         else :
                             $img_exists = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
-                            $img_url = $matches[1][0];
+                            $img_url = !empty( $matches[1][0] ) ? $matches[1][0] : '';
 
                             // Be sure there IS an image
                             if( $img_exists ) { ?>
@@ -73,6 +73,10 @@
                 ?>
             </a>
         </div><!-- .continue-reading -->
+        
+        <div class="entry-footer-index">
+            <?php jkl_entry_footer(); ?>
+        </div>
         
     </div><!-- .hentry-index -->
 </article><!-- #post-## -->

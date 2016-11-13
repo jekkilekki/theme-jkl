@@ -41,13 +41,6 @@
                 
                         the_excerpt();
 
-			/*
-                         * wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'jkl' ),
-				'after'  => '</div>',
-			) );
-                         * 
-                         */
 		?>
 	</div><!-- .entry-content -->
         
@@ -62,6 +55,10 @@
                 ?>
             </a>
         </div><!-- .continue-reading -->
+        
+        <div class="entry-footer-index">
+            <?php jkl_entry_footer(); ?>
+        </div>
         
     </div><!-- .hentry-index -->
 </article><!-- #post-## -->

@@ -371,7 +371,6 @@ address {
 }
 
 pre {
-	background: #eee;
 	font-family: "Source Code Pro", "Courier 10 Pitch", Courier, monospace;
 	font-size: 15px;
 	font-size: 1rem;
@@ -381,6 +380,14 @@ pre {
 	overflow: auto;
             color: white;
         background: #1d1f21;
+        padding: 1.5em;
+}
+pre code {
+    background: transparent;
+    font-size: 0.9em;
+    white-space: pre;
+    display: block;
+    color: white;
 }
 
 code,
@@ -402,7 +409,7 @@ var {
         border: none;
 }
 
-pre code {
+/*pre code {
     font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
     font-size: 0.9em;
     background: none;
@@ -411,7 +418,7 @@ pre code {
     overflow: auto;
     display: block;
     color: white;
-}
+}*/
 
 var {
     background: none;
@@ -2964,7 +2971,7 @@ a:active {
 }
 .entry-meta .cat-links:before {
     font-family: "FontAwesome";
-    content: '\f101';
+    content: '\f115';
     margin-right: 0.5em;
     color: silver;
 }
@@ -3013,6 +3020,22 @@ a:active {
 .page-links a:hover,
 .page-links a:focus {
     border: 2px solid black;
+}
+.entry-footer-index {
+    font-size: 0.8em;
+    color: #aaa;
+    margin-top: -2em;
+    font-style: oblique;
+    float: left;
+}
+.entry-footer-index a {
+    color: #777;
+    /*font-style: normal;*/
+}
+.entry-footer-index .cat-links,
+.entry-footer-index .tags-links,
+.entry-footer-index .comments-link {
+    margin-right: 1.5em;
 }
 .entry-footer {
     margin: 3em -1em;
@@ -3370,6 +3393,8 @@ a:active {
 /*--------------------------------------------------------------
 ## Post Formats
 --------------------------------------------------------------*/
+.blog .format-standard .entry-title:before,
+.archive .format-standard .entry-title:before,
 .blog .format-aside .entry-title:before,
 .archive .format-aside .entry-title:before,
 .blog .format-chat .entry-title:before,
@@ -3417,8 +3442,22 @@ a:active {
     text-align: center;
 }
 /*--------------------------------------------------------------
+## Standard
+--------------------------------------------------------------*/
+.blog .format-standard .entry-title:before,
+.archive .format-standard .entry-title:before {
+    content: "\f0f6";
+}
+/*--------------------------------------------------------------
 ## Asides
 --------------------------------------------------------------*/
+.format-aside .entry-title {
+    font-size: 2em;
+}
+.format-aside .entry-footer-index {
+    margin-top: 0;
+    width: 100%;
+}
 .blog .format-aside .entry-title,
 .archive .format-aside .entry-title {
     display: none;
@@ -3500,45 +3539,53 @@ a:active {
 .archive .format-chat .entry-title:before {
     content: "\f0e6";
 }
-.single .format-chat p {
+.format-chat p {
+    font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
     padding: 0.5em 1em;
-    margin: 0 -1em 2em;
+    margin: 0 0 1.5em;
     position: relative;
 }
-.single .format-chat p:nth-child(even) {
-    background: rgba( 0,0,0,0.1 ); /* whitesmoke alpha = 0.05 */
-    margin-left: 25%!important;
+.format-chat p:nth-child(even) {
+    background: #f7f7f7;  /* whitesmoke alpha = 0.05 */
+    margin-left: 5%!important;
     border-radius: 10px;
-    border: 1px solid #dcdcdc;
+    border: 1px solid black;
 }
-.single .format-chat p:nth-child(odd) {
-    margin-right: 25%!important;
+.format-chat p:nth-child(odd) {
+    margin-right: 5%!important;
     border-radius: 10px;
-    border: 1px solid #dcdcdc;
+    border: 1px solid #aaa;
 }
-.single .format-chat p:nth-child(odd):before,
-.single .format-chat p:nth-child(odd):after,
-.single .format-chat p:nth-child(even):before {
+.format-chat p:nth-child(odd):before,
+.format-chat p:nth-child(odd):after,
+.format-chat p:nth-child(even):before,
+.format-chat p:nth-child(even):after {
     content: "";
     display: block;
     position: absolute;
     bottom: -21px;
 }
-.single .format-chat p:nth-child(odd):before {
+.format-chat p:nth-child(odd):before {
     left: 20px;
-    border-top: 20px solid gainsboro;
+    border-top: 20px solid #aaa;
     border-right: 20px solid transparent;
 }
-.single .format-chat p:nth-child(odd):after {
+.format-chat p:nth-child(odd):after {
     left: 21px;
     bottom: -19px;
     border-top: 21px solid white;
     border-right: 21px solid transparent;
 }
-.single .format-chat p:nth-child(even):before {
+.format-chat p:nth-child(even):before {
     right: 20px;
-    border-top: 20px solid rgba( 0,0,0,0.1 );
+    border-top: 20px solid black;
     border-left: 20px solid transparent;
+}
+.format-chat p:nth-child(even):after {
+    right: 21px;
+    bottom: -19px;
+    border-top: 21px solid #f7f7f7;
+    border-left: 21px solid transparent;
 }
 /*--------------------------------------------------------------
 ## Galleries
@@ -3547,13 +3594,33 @@ a:active {
 .archive .format-gallery .entry-title:before {
     content: "\f03e";
 }
+.blog .format-gallery .featured-image,
+.archive .format-gallery .featured-image {
+    margin-bottom: 0.5em;
+}
+.gallery-image-index {
+    float: left;
+    margin-right: 1%;
+    max-width: 48%;
+}
+.gallery-image-index img {
+    max-width: 100%;
+}
 .gallery-count {
     margin-top: 1em;
+    margin-bottom: 1em;
     color: #777;
 }
 /*--------------------------------------------------------------
 ## Links
 --------------------------------------------------------------*/
+.format-link .entry-title {
+    font-size: 2em;
+}
+.format-link .entry-footer-index {
+    margin-top: 0;
+    width: 100%;
+}
 .blog .format-link .entry-content:before,
 .archive .format-link .entry-content:before {
     font-family: "FontAwesome";
@@ -3717,59 +3784,55 @@ a:active {
 .archive .format-status .entry-title:before {
     content: "\f006";
 }
-.blog .format-status .index-content,
-.archive .format-status .index-content {
+.format-status .hentry-index {
+    margin-top: 4em;
+}
+.format-status .index-content {
     border: 1px solid gainsboro;
     border-radius: 20px;
     padding: 1.5em 2em;
 }
-.blog .format-status .author-avatar,
-.archive .format-status .author-avatar {
+.format-status .author-avatar {
     margin-bottom: 1em;
     margin-right: 1em;
     margin-top: 0;
     margin-left: 0;
 }
-.blog .format-status .meta-content,
-.archive .format-status .meta-content {
+.format-status .meta-content {
     font-size: 0.9em;
 }
-.blog .format-status .meta-content:after,
-.archive .format-status .meta-content:after {
+.format-status .meta-content:after {
     font-size: 0.9em;
 }
-.blog .format-status .meta-content a:after,
-.archive .format-status .meta-content a:after {
+.format-status .meta-content a:after,
+.format-status .hentry-index:after {
     display: none;
 }
-.blog .format-status .byline,
-.archive .format-status .byline {
+.format-status .entry-footer-index {
+    margin-top: 1em;
+}
+.format-status .byline {
     margin-right: 5px;
     margin-top: 0.5em;
     font-weight: bold;
     display: block;
     line-height: 1;
 }
-.blog .format-status .posted-on a,
-.archive .format-status .posted-on a {
+.format-status .posted-on a {
     color: #aaa;
 }
 @media screen and ( max-width: 400px ) {
-    .blog .format-status .author-avatar,
-    .archive .format-status .author-avatar,
-    .blog .format-status .meta-content-text,
-    .archive .format-status .meta-content-text {
+    .format-status .author-avatar
+    .format-status .meta-content-text {
         float: left;
         text-align: left;
     }
-    .blog .format-status .byline,
-    .archive .format-status .byline {
+    .format-status .byline {
         padding-top: 0;
     }
 }
 @media screen and ( min-width: 40em ) {
-    .blog .format-status .meta-content-text,
-    .archive .format-status .meta-content-text {
+    .format-status .meta-content-text {
         margin-top: 1em;
     }
 }
@@ -3779,6 +3842,27 @@ a:active {
 .blog .format-video .entry-title:before,
 .archive .format-video .entry-title:before {
     content: "\f008";
+}
+.blog .format-video .index-content,
+.archive .format-video .index-content {
+    padding-bottom: 0;
+}
+.blog .format-video .entry-meta,
+.archive .format-video .entry-meta {
+    margin-top: 0;
+}
+.entry-meta .jetpack-video-wrapper {
+    margin-bottom: 0;
+}
+.blog .format-video iframe,
+.archive .format-video iframe {
+    box-shadow: 0px 5px 30px black;
+}
+.video-backdrop {
+    background: rgba( 0,0,0,0.8 );
+    margin-top: 0;
+    padding-top: 3em;
+    padding-bottom: 3em;
 }
 /*--------------------------------------------------------------
 ## Audios

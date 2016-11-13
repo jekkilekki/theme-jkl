@@ -13,8 +13,15 @@
     <div class="hentry-index">
 
 	<div class="entry-content index-content">
+            
             <?php jkl_posted_on(); ?>
+            
             <?php the_content(); ?>
+            
+            <div class="entry-footer-index">
+                <?php jkl_entry_footer(); ?>
+            </div>
+            
 	</div><!-- .entry-content -->
         
     </div><!-- .hentry-index -->

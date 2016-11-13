@@ -39,17 +39,12 @@
                                 </a>
                             </figure>
             
-                        <?php 
-                        // Or else, find the first image in the Post and use that
-                        else :
-                            $media = get_attached_media( 'video' );
-                            var_dump( $media );
-
-                        endif;
+                        <?php endif; ?>
+            
+                        <div class="entry-meta">
+                            <?php the_excerpt(); ?>
+                        </div>
                         
-                        the_excerpt();
-                        
-		?>
 	</div><!-- .entry-content -->
         
         <div class="continue-reading">
@@ -63,6 +58,10 @@
                 ?>
             </a>
         </div><!-- .continue-reading -->
+        
+        <div class="entry-footer-index">
+            <?php jkl_entry_footer(); ?>
+        </div>
         
     </div><!-- .hentry-index -->
 </article><!-- #post-## -->

@@ -35,21 +35,26 @@
             
                             <figure class="featured-image index-featured">
                                 <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
-                                    <?php the_post_thumbnail(); ?>
+                                    <?php the_post_thumbnail( 'large' ); ?>
                                 </a>
                             </figure>
             
-                        <?php } else {
+                        <?php } 
                             $img_url = get_post_gallery_images();
-                            if( !empty( $img_url ) ) { ?>
+                            if( !empty( $img_url ) ) { 
+                                $size = count( $img_url ) > 2 ? 2 : count( $img_url );
+                                // if( has_post_thumbnail() ) $size--;
+                                
+                                for( $i = 0; $i < $size; $i++ ) :
+                                ?>
             
-                                <figure class="featured-image index-featured">
+                                <figure class="gallery-image-index">
                                     <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
-                                        <img src="<?php echo $img_url[0]; ?>">
+                                        <img class="attachment-thumbnail size-thumbnail" src="<?php echo $img_url[$i]; ?>">
                                     </a>
                                 </figure>
             
-                        <?php }
+                        <?php endfor; 
                         }
                         
                         // Count the number of images in the Gallery (or Galleries)
@@ -60,7 +65,11 @@
                             $image = reset( $images );
                         endif;
                         
-                        the_excerpt();
+                        ?>
+            
+                        <div class="clear"></div>
+
+                        <?php
                         
                         if( $total_galleries === 1 ) : ?>
                         <p class="gallery-count"><em><?php printf( _n( 'There is %1$s photo in this gallery.', 'There are %1$s photos in this gallery.', $total_images, 'jkl' ), 
@@ -73,6 +82,8 @@
                                         number_format_i18n( $total_galleries )
                                 ); ?></em></p>
                         <?php endif; ?>
+                        
+                        <?php the_excerpt(); ?>
 
 	</div><!-- .entry-content -->
         
@@ -87,6 +98,10 @@
                 ?>
             </a>
         </div><!-- .continue-reading -->
+        
+        <div class="entry-footer-index">
+            <?php jkl_entry_footer(); ?>
+        </div>
         
     </div><!-- .hentry-index -->
 </article><!-- #post-## -->

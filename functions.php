@@ -226,6 +226,74 @@ function jkl_add_excerpt_to_pages() {
 add_action( 'init', 'jkl_add_excerpt_to_pages' );
 
 /**
+ * Better Post Excerpts
+ * 
+ * Based on Post Format, it trims the excerpt in various ways and returns various pieces of content
+ */
+function jkl_better_excerpts( $text, $raw_excerpt ) {
+    
+    /**
+     * Post Format: Quote
+     * 
+     * Only get the first <blockquote> from a Post Format quote (no additional writing) 
+     * for the index and archive pages.
+     * 
+     * @link http://www.codecheese.com/2013/11/get-the-first-paragraph-as-an-excerpt-for-wordpress/
+     */
+    if( 'quote' === get_post_format() && !$raw_excerpt ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        $text = substr( $content, 0, strpos( $content, '</blockquote>' ) + 13 );
+    }
+    
+    /**
+     * Post Format: Video
+     * 
+     * Only get the first 'video' element from a Post for index and archive pages.
+     */
+    else if( 'video' === get_post_format() && !$raw_excerpt ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        
+        if( strpos( $content, '</iframe>' ) === false ) {
+            $text = $content;
+        } else {
+            $text = substr( $content, 0, strpos( $content, '</iframe>' ) + 9 );
+        }
+    }
+    
+    /**
+     * Post Format: Chat
+     * 
+     * Retrieve the first 100 characters of the chat as styled post content (not the unstyled excerpt)
+     */
+    else if( 'chat' === get_post_format() && !$raw_excerpt ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        $text = substr( $content, 0, 500 ) . '…';
+    }
+    
+    /**
+     * Post Format: Audio
+     * 
+     * Find the audio and make sure it shows up on the index page
+     * 
+     * @link https://www.youtube.com/watch?v=HXLviEusCyE WP Theme Dev - Audio Post Format
+     */
+    else if( 'audio' === get_post_format() && !$raw_excerpt ) {
+        if( !is_singular() ) {
+            $content = do_shortcode( apply_filters( 'the_content', get_the_content() ) );
+            $embed = get_media_embedded_in_content( $content, array( 'audio', 'iframe' ) );
+
+            // 2nd widget type for SoundCloud in any case
+            $text = str_replace( '?visual=true', '?visual=false', $embed[0] );
+        }
+    }
+    
+    // Return the result
+    return $text;
+    
+}
+add_filter( 'wp_trim_excerpt', 'jkl_better_excerpts', 5, 2 );
+
+/**
  * Custom Background Callback to make the .site-logo-housing (above the menu) match
  * the chosen custom background color in body.custom-background
  * 
@@ -273,24 +341,83 @@ function jkl_quote_blockquote( $content ) {
             $content = "<blockquote>{$content}</blockquote>";
         }
     }
+    
     return $content;
 }
 add_filter( 'the_content', 'jkl_quote_blockquote', 8 ); // run before wpautop
 
 /**
+ * Filter a Video Post to add an 'entry-meta' <div> around the <iframe> video to
+ * give the video a bit of a darker backdrop for viewing
+ * 
+ * @param   string  $content
+ * @return  string  $content    Updated $content string with 'entry-meta' <div> surrounding the <iframe> video
+ */
+function jkl_video_backdrop( $content ) {
+    if( 'video' === get_post_format() ) {
+        $vid_start = strpos( $content, '<iframe>' );
+        $vid_end = strpos( $content, '</iframe>' ) + 9;
+        
+        if( $vid_end > 9 ) { // Be sure that the end of the video is after the beginning
+            $before_video = substr( $content, 0, $vid_start );
+            $video = substr( $content, $vid_start, $vid_end - $vid_start );
+            $after_video = substr( $content, $vid_end );
+
+            $content = $before_video . '<div class="entry-meta video-backdrop">' . $video . '</div>' . $after_video;
+        }
+    }
+    return $content;
+}
+add_filter( 'the_content', 'jkl_video_backdrop' );
+
+/**
+ * Post Format: Quote
+ * 
  * Only get the first <blockquote> from a Post Format quote (no additional writing) 
  * for the index and archive pages.
  * 
  * @link http://www.codecheese.com/2013/11/get-the-first-paragraph-as-an-excerpt-for-wordpress/
- */
+ 
 function jkl_quote_excerpt( $text, $raw_excerpt ) {
     if( 'quote' === get_post_format() && !$raw_excerpt ) {
         $content = apply_filters( 'the_content', get_the_content() );
-        $text = substr( $content, 0, strpos( $content, '</blockquote>') + 13 );
+        $text = substr( $content, 0, strpos( $content, '</blockquote>' ) + 13 );
     }
     return $text;
 }
 add_filter( 'wp_trim_excerpt', 'jkl_quote_excerpt', 5, 2 );
+
+/**
+ * Post Format: Video
+ * 
+ * Only get the first 'video' element from a Post for index and archive pages.
+ 
+function jkl_video_excerpt( $text, $raw_excerpt ) {
+    if( 'video' === get_post_format() && !$raw_excerpt ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        if( strpos( $content, '</iframe>' ) === false ) {
+            $text = $content;
+        } else {
+            $text = substr( $content, 0, strpos( $content, '</iframe>' ) + 9 );
+        }
+    }
+    return $text;
+}
+add_filter( 'wp_trim_excerpt', 'jkl_video_excerpt', 5, 2 );
+
+/**
+ * Post Format: Chat
+ * 
+ * Retrieve the first 100 characters of the chat as styled post content (not the unstyled excerpt)
+ 
+function jkl_chat_excerpt( $text, $raw_excerpt ) {
+    if( 'chat' === get_post_format() && !$raw_excerpt ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        $text = substr( $content, 0, 500 ) . '…';
+    }
+    return $text;
+}
+add_filter( 'wp_trim_excerpt', 'jkl_chat_excerpt', 5, 2 );
 
 /**
  * Retrieve the IDs for images in a gallery.
@@ -301,7 +428,7 @@ add_filter( 'wp_trim_excerpt', 'jkl_quote_excerpt', 5, 2 );
  * @since Twenty Ten 1.6.
  *
  * @return array List of image IDs from the post gallery.
- */
+ 
 function jkl_get_gallery_images() {
     $images = array();
 
@@ -327,8 +454,10 @@ function jkl_get_gallery_images() {
  * Get first image in a post
  * Requires WordPress 3.6.0
  * @link https://developer.wordpress.org/reference/functions/get_post_gallery_images/
- */
+ 
 function jkl_get_first_image_url() {
     $img_url = get_post_gallery_images();
     return !empty( $img_url ) ? $img_url[0] : ''; 
 }
+ *
+ */

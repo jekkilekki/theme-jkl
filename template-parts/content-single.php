@@ -37,14 +37,16 @@
                      'aside' !== get_post_format() &&
                      'status' !== get_post_format() && 
                      'link' !== get_post_format() &&
-                     'quote' !== get_post_format() ) : ?>
+                     'quote' !== get_post_format() &&
+                     'chat' !== get_post_format() ) : ?>
 		<div class="entry-meta">
 			<?php jkl_posted_on(); ?>
 		</div><!-- .entry-meta -->
 		<?php
                 elseif ( 'quote' === get_post_format() ||
                          'link' === get_post_format() ||
-                         'aside' === get_post_format() ) : ?>
+                         'aside' === get_post_format() || 
+                         'chat' === get_post_format() ) : ?>
 		<?php jkl_index_posted_on(); 
                 
 		endif; ?>
@@ -64,10 +66,18 @@
 			) );
 		?>
 	</div><!-- .entry-content -->
-
+        
+        <?php 
+        if ( 'aside' !== get_post_format() &&
+             'link' !== get_post_format() ) : ?>
 	<footer class="entry-footer">
             <div class="footer-content group">
 		<?php jkl_entry_footer(); ?>
             </div>
 	</footer><!-- .entry-footer -->
+        <?php else : ?>
+            <div class="entry-footer-index">
+                <?php jkl_entry_footer(); ?>
+            </div>
+        <?php endif; ?>
 </article><!-- #post-## -->
