@@ -2497,6 +2497,24 @@ a:active {
     overflow-x: hidden;
     margin-top: 2em;
 }
+.single .meta-content {
+    position: relative;
+}
+.single .meta-content:after {
+    position: absolute;
+    content: "\f0f6";
+    display: inline;
+    top: 33%;
+    right: 1em;
+    color: gainsboro;
+    font-size: 2em;
+    font-family: FontAwesome;
+}
+@media screen and ( max-width: 42.5em ) {
+    .single .meta-content:after {
+        display: none;
+    }
+}
 
 /* Rules for sidebar left and sidebar right. */
 @media screen and (min-width: 64em) {
@@ -2760,11 +2778,11 @@ a:active {
     left: 0;
     height: 2px;
     width: 100%;
-    /*background: #444;*/
-    background: -webkit-linear-gradient(left, transparent 0%,rgba(119,119,119,0.8) 50%,transparent 100%);
-    background: -moz-linear-gradient(left, transparent 0%,rgba(119,119,119,0.8) 50%,transparent 100%);
-    background: -o-linear-gradient(left, transparent 0%,rgba(119,119,119,0.8) 50%,transparent 100%);
-    background: linear-gradient(left, transparent 0%,rgba(119,119,119,0.8) 50%,transparent 100%);
+    background: #444;
+    background: -webkit-linear-gradient(left, rgba(119,119,119,0.4) 0%,rgba(119,119,119,0.8) 50%, rgba(119,119,119,0.4) 100%);
+    background: -moz-linear-gradient(left, rgba(119,119,119,0.4) 0%,rgba(119,119,119,0.8) 50%, rgba(119,119,119,0.4) 100%);
+    background: -o-linear-gradient(left, rgba(119,119,119,0.4) 0%,rgba(119,119,119,0.8) 50%, rgba(119,119,119,0.4) 100%);
+    background: linear-gradient(left, rgba(119,119,119,0.4) 0%,rgba(119,119,119,0.8) 50%, rgba(119,119,119,0.4) 100%);
 }
 .entry-content a:hover:after,
 .entry-content a:focus:after,
@@ -2815,6 +2833,16 @@ a:active {
 }
 .sticky .index-header .entry-title {
     padding-left: 1em;
+}
+.blog .single-sticky .entry-title:before,
+.archive .single-sticky .entry-title:before {
+    content: "\f08d"!important;
+    position: absolute;
+    left: 0;
+}
+.single-sticky .meta-content:after,
+.single-sticky .meta-content-text:before {
+    content: "\f08d"!important;
 }
 @media screen and (min-width: 30em) {
     .sticky {
@@ -2912,7 +2940,7 @@ a:active {
 
 .single .byline,
 .group-blog .byline {
-	display: inline-block;
+	display: inline;
 }
 
 .entry-header {
@@ -2954,6 +2982,13 @@ a:active {
 .has-avatar .meta-content-text {
     padding-left: 66px;
     position: relative;
+}
+.meta-content-text:before {
+    font-family: FontAwesome;
+    content: "\f0f6"; /* Other Post Format icons declared in Post Format CSS section */
+    margin-right: 0.75em;
+    color: #c3c3c3;
+    display: inline;
 }
 
 .byline,
@@ -3090,7 +3125,11 @@ a:active {
         border: none;
     }
 }
-
+@media screen and ( max-width: 30em ) {
+    .author-avatar {
+        margin-top: 0;
+    }
+}
 @media screen and (max-width: 400px) {
     .has-avatar {
         text-align: center;
@@ -3306,7 +3345,7 @@ a:active {
     margin: 4px 0;
     padding: 1.5em 0;
 }
-.index-content p {
+.index-content p:last-child {
     margin-bottom: 0;
 }
 .continue-reading {
@@ -3444,6 +3483,8 @@ a:active {
 /*--------------------------------------------------------------
 ## Standard
 --------------------------------------------------------------*/
+.single .format-standard .meta-content:after,
+.single .format-standard .meta-content-text:before,
 .blog .format-standard .entry-title:before,
 .archive .format-standard .entry-title:before {
     content: "\f0f6";
@@ -3451,6 +3492,12 @@ a:active {
 /*--------------------------------------------------------------
 ## Asides
 --------------------------------------------------------------*/
+.single .format-aside .meta-content:after,
+.single .format-aside .meta-content-text:before,
+.blog .format-aside .entry-title:before,
+.archive .format-aside .entry-title:before {
+    content: "\f08d";
+}
 .format-aside .entry-title {
     font-size: 2em;
 }
@@ -3535,6 +3582,8 @@ a:active {
 /*--------------------------------------------------------------
 ## Chats
 --------------------------------------------------------------*/
+.single .format-chat .meta-content:after,
+.single .format-chat .meta-content-text:before,
 .blog .format-chat .entry-title:before,
 .archive .format-chat .entry-title:before {
     content: "\f0e6";
@@ -3590,6 +3639,8 @@ a:active {
 /*--------------------------------------------------------------
 ## Galleries
 --------------------------------------------------------------*/
+.single .format-gallery .meta-content:after,
+.single .format-gallery .meta-content-text:before,
 .blog .format-gallery .entry-title:before,
 .archive .format-gallery .entry-title:before {
     content: "\f03e";
@@ -3614,6 +3665,10 @@ a:active {
 /*--------------------------------------------------------------
 ## Links
 --------------------------------------------------------------*/
+.single .format-link .meta-content:after,
+.single .format-link .meta-content-text:before{
+    content: "\f0c1";
+}
 .format-link .entry-title {
     font-size: 2em;
 }
@@ -3660,6 +3715,8 @@ a:active {
 /*--------------------------------------------------------------
 ## Images
 --------------------------------------------------------------*/
+.single .format-image .meta-content:after,
+.single .format-image .meta-content-text:before,
 .blog .format-image .entry-title:before,
 .archive .format-image .entry-title:before {
     content: "\f03e";
@@ -3667,6 +3724,8 @@ a:active {
 /*--------------------------------------------------------------
 ## Quotes
 --------------------------------------------------------------*/
+.single .format-quote .meta-content:after,
+.single .format-quote .meta-content-text:before,
 .blog .format-quote .entry-title:before,
 .archive .format-quote .entry-title:before {
     content: "\f10d";
@@ -3780,6 +3839,8 @@ a:active {
 /*--------------------------------------------------------------
 ## Statuses
 --------------------------------------------------------------*/
+.single .format-status .meta-content:after,
+.single .format-status .meta-content-text:before,
 .blog .format-status .entry-title:before,
 .archive .format-status .entry-title:before {
     content: "\f006";
@@ -3839,6 +3900,8 @@ a:active {
 /*--------------------------------------------------------------
 ## Videos
 --------------------------------------------------------------*/
+.single .format-video .meta-content:after,
+.single .format-video .meta-content-text:before,
 .blog .format-video .entry-title:before,
 .archive .format-video .entry-title:before {
     content: "\f008";
@@ -3867,6 +3930,8 @@ a:active {
 /*--------------------------------------------------------------
 ## Audios
 --------------------------------------------------------------*/
+.single .format-audio .meta-content:after,
+.single .format-audio .meta-content-text:before,
 .blog .format-audio .entry-title:before,
 .archive .format-audio .entry-title:before {
     content: "\f025";

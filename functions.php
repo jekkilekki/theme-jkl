@@ -279,11 +279,12 @@ function jkl_better_excerpts( $text, $raw_excerpt ) {
      */
     else if( 'audio' === get_post_format() && !$raw_excerpt ) {
         if( !is_singular() ) {
-            $content = do_shortcode( apply_filters( 'the_content', get_the_content() ) );
-            $embed = get_media_embedded_in_content( $content, array( 'audio', 'iframe' ) );
+            $content = apply_filters( 'the_content', get_the_content() );
+            $shortcode_content = do_shortcode( $content );
+            $embed = get_media_embedded_in_content( $shortcode_content, array( 'audio', 'iframe' ) );
 
             // 2nd widget type for SoundCloud in any case
-            $text = str_replace( '?visual=true', '?visual=false', $embed[0] );
+            $text = !empty( $embed ) ? str_replace( '?visual=true', '?visual=false', $embed[0] ) : $content;
         }
     }
     
@@ -354,7 +355,7 @@ add_filter( 'the_content', 'jkl_quote_blockquote', 8 ); // run before wpautop
  * @return  string  $content    Updated $content string with 'entry-meta' <div> surrounding the <iframe> video
  */
 function jkl_video_backdrop( $content ) {
-    if( 'video' === get_post_format() ) {
+    if( 'video' === get_post_format() && is_singular() ) {
         $vid_start = strpos( $content, '<iframe>' );
         $vid_end = strpos( $content, '</iframe>' ) + 9;
         

@@ -43,7 +43,7 @@
                             $img_url = get_post_gallery_images();
                             if( !empty( $img_url ) ) { 
                                 $size = count( $img_url ) > 2 ? 2 : count( $img_url );
-                                // if( has_post_thumbnail() ) $size--;
+                                if( has_post_thumbnail() ) $size--;
                                 
                                 for( $i = 0; $i < $size; $i++ ) :
                                 ?>

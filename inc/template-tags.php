@@ -83,7 +83,7 @@ if ( ! function_exists( 'jkl_entry_footer' ) ) :
  */
 function jkl_entry_footer() {
 	// Hide category and tag text for pages.
-	if ( 'post' === get_post_type() && !is_archive() ) {
+	if ( 'post' === get_post_type() && ! is_archive() ) {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
 		if ( $categories_list && jkl_categorized_blog() ) {
@@ -97,7 +97,7 @@ function jkl_entry_footer() {
 		}
 	}
 
-	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+	if ( ! is_home() && ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 		echo '<span class="comments-link">';
 		comments_popup_link( esc_html__( 'Leave a comment', 'jkl' ), esc_html__( '1 Comment', 'jkl' ), esc_html__( '% Comments', 'jkl' ) );
 		echo '</span>';

@@ -7,9 +7,10 @@
  * @package jkl
  */
 
+$sticky_class = is_sticky() ? 'single-sticky' : '';
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( $sticky_class ); ?>>
 	<header class="entry-header">
 		<?php
 			if ( is_single() ) {
