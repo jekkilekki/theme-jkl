@@ -288,6 +288,35 @@ function jkl_better_excerpts( $text, $raw_excerpt ) {
         }
     }
     
+    /**
+     * Post Format: Link
+     * 
+     * Find the first link, extract its data, grab a screenshot and display it
+     * 
+     * @link https://code.tutsplus.com/articles/how-to-generate-website-screenshots-for-your-wordpress-site--wp-22888
+     */
+    else if( 'link' === get_post_format() && !raw_excerpt ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        
+        if( strpos( $content, '</a>' ) === false ) {
+            $text = $content;
+        } else {
+
+            $first_link = substr( $content, strpos( $content, '<a>' ), strpos( $content, '</a>' ) + 4 );
+            preg_match_all( '/<a[^>]+href=([\'"])(.+?)\1[^>]*>/i', $first_link, $site );
+            
+            //if( !empty( $site ) ) {
+                $query_url = 'http://s.wordpress.com/mshots/v1/';
+                $site_url = $site[2][0]; // something like www.example.com
+                $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="150" src="http://' . $site_url . '">';
+            
+                $text = '<a class="link-screenshot" href="http://' . $site_url . '">' . $image_tag . '</a>' . $first_link;
+            //} else {
+                //$text = $content;
+            //}
+        }
+    }
+    
     // Return the result
     return $text;
     
@@ -370,6 +399,19 @@ function jkl_video_backdrop( $content ) {
     return $content;
 }
 add_filter( 'the_content', 'jkl_video_backdrop' );
+
+/**
+ * Show thumbnail image sizes in galleries on index/archive pages
+ * 
+ * @link http://wordpress.stackexchange.com/questions/125781/changing-gallery-images-size
+ */
+function jkl_gallery_thumbnails( $output, $pairs, $atts ) {
+    if( !is_singular() ) {
+        $output[ 'size' ] = 'thumbnail';
+    }
+    return $output;
+}
+add_filter( 'shortcode_atts_gallery', 'jkl_gallery_thumbnails', 10, 3 );
 
 /**
  * Post Format: Quote

@@ -3590,6 +3590,7 @@ a:active {
 }
 .format-chat p {
     font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
+    font-size: 0.9em;
     padding: 0.5em 1em;
     margin: 0 0 1.5em;
     position: relative;
@@ -3839,11 +3840,12 @@ a:active {
 /*--------------------------------------------------------------
 ## Statuses
 --------------------------------------------------------------*/
-.single .format-status .meta-content:after,
-.single .format-status .meta-content-text:before,
+.format-status .meta-content:after,
+.format-status .meta-content-text:before,
 .blog .format-status .entry-title:before,
 .archive .format-status .entry-title:before {
     content: "\f006";
+    display: none;
 }
 .format-status .hentry-index {
     margin-top: 4em;
@@ -3852,6 +3854,9 @@ a:active {
     border: 1px solid gainsboro;
     border-radius: 20px;
     padding: 1.5em 2em;
+}
+.single .format-status .index-content {
+    margin-top: 5em;
 }
 .format-status .author-avatar {
     margin-bottom: 1em;
@@ -3870,7 +3875,7 @@ a:active {
     display: none;
 }
 .format-status .entry-footer-index {
-    margin-top: 1em;
+    margin-top: -1em;
 }
 .format-status .byline {
     margin-right: 5px;
@@ -4269,8 +4274,9 @@ img.alignleft {
 }
 .wp-caption .wp-caption-text {
     margin: 0 0.5em;
-    color: #404040;
+    color: #777;
     font-size: 85%;
+    font-style: oblique;
     border-bottom: 1px solid black;
     padding: 0.5em;
     line-height: 1.6em;
