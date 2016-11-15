@@ -213,6 +213,7 @@ require get_template_directory() . '/inc/jetpack.php';
 
 
 /**
+ * =============================================================================
  * My Custom Functions here
  * =============================================================================
  */
@@ -224,6 +225,26 @@ function jkl_add_excerpt_to_pages() {
     add_post_type_support( 'page', 'excerpt' );
 }
 add_action( 'init', 'jkl_add_excerpt_to_pages' );
+
+/**
+ * Better Title Filter
+ * 
+ * Rather than using 'the_title_rss' which has 'strip_tags' hooked to it (removes all title markup),
+ * use a different filter called 'the_title_export' which wraps the output in CDATA tags
+ * Works like `the_content_export` and `the_excerpt_export`
+ * 
+ * @see https://core.trac.wordpress.org/ticket/29621
+ * @see https://core.trac.wordpress.org/attachment/ticket/29621/29621.2.diff
+ */
+//function jkl_better_post_title() {
+//    remove_filter( 'the_title_rss', 'strip_tags' );
+//    remove_filter( 'the_title_rss', 'ent2ncr', 8 );
+//    remove_filter( 'the_title_rss', 'esc_html' );
+//    
+//    add_filter( 'the_title_rss', 'wxr_cdata' );
+//    
+//    remove_filter( 'the_title_rss', '')
+//}
 
 /**
  * Better Post Excerpts
@@ -295,7 +316,7 @@ function jkl_better_excerpts( $text, $raw_excerpt ) {
      * 
      * @link https://code.tutsplus.com/articles/how-to-generate-website-screenshots-for-your-wordpress-site--wp-22888
      */
-    else if( 'link' === get_post_format() && !raw_excerpt ) {
+    else if( 'link' === get_post_format() && !$raw_excerpt ) {
         $content = apply_filters( 'the_content', get_the_content() );
         
         if( strpos( $content, '</a>' ) === false ) {

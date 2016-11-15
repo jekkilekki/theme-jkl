@@ -39,10 +39,22 @@ if ( post_password_required() ) {
 				wp_list_comments( array(
 					'style'         => 'ol',
 					'short_ping'    => true,
-                                        'avatar_size'   => '96'
+                                        'avatar_size'   => '96',
+                                        'type'          => 'comment'
 				) );
 			?>
 		</ol><!-- .comment-list -->
+                
+                <h5 class="pings-list-title"><?php esc_attr_e( 'Pings', 'jkl' ); ?></h5>
+                <ol class="pings-list">
+			<?php
+				wp_list_comments( array(
+					'style'         => 'ol',
+					'short_ping'    => true,
+                                        'type'          => 'pings'
+				) );
+			?>
+		</ol><!-- .pings-list -->
 
 		<?php 
                 // Paginate comments

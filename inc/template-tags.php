@@ -83,7 +83,7 @@ if ( ! function_exists( 'jkl_entry_footer' ) ) :
  */
 function jkl_entry_footer() {
 	// Hide category and tag text for pages.
-	if ( 'post' === get_post_type() && ! is_archive() ) {
+	if ( 'post' === get_post_type() && ! is_archive() && ! is_home() ) {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
 		if ( $categories_list && jkl_categorized_blog() ) {
@@ -644,3 +644,19 @@ function jkl_breadcrumbs() {
 
 }
 endif;
+
+function jkl_link_screenshot( $width = 150 ) {
+    global $post;
+    $first_link = substr( $post->post_content, strpos( $post->post_content, '<a>' ), strpos( $post->post_content, '</a>' ) + 4 );
+ 
+    preg_match_all( '/<a[^>]+href=([\'"])(.+?)\1[^>]*>/i', $first_link, $site );
+            
+    //if( !empty( $site ) ) {
+        $query_url = 'http://s.wordpress.com/mshots/v1/';
+        $site_url = $site[2][0]; // something like www.example.com
+        $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="' . $width . '" src="' . $query_url . urlencode(  $site_url ) . '?w=' . $width .'">';
+
+        $text = '<figure class="featured-image"><a class="link-screenshot" href="http://' . $site_url . '">' . $image_tag . '<figcaption class="wp-caption-text">' . $first_link . '</figcaption></a></figure>';
+        
+        echo $text;
+}
