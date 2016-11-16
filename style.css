@@ -1405,8 +1405,10 @@ a:active {
 
 .post-nav-thumb {
     margin: -1em -1em 1em;
-    max-height: 120px;
-    overflow: hidden;
+    height: 120px;
+    width: calc( 100% + 2em );
+    background-size: cover;
+    background-position: 50%;
     position: relative;
 }
 .post-nav-thumb img {
@@ -1468,6 +1470,7 @@ a:active {
         float: right;
         text-align: right;
         width: 48%;
+        margin-left: auto;
     }
 }
 
@@ -2514,7 +2517,8 @@ a:active {
     content: "\f0f6";
     display: inline;
     top: 30%;
-    right: 1em;
+    /*right: 1em;*/
+    right: 0;
     color: gainsboro;
     font-size: 2em;
     font-family: FontAwesome;
@@ -2770,7 +2774,7 @@ a:active {
 }
 
 .cat-links,
-.tags-links {
+.tags.entry-links {
   background: transparent;
   position: relative;
 }
@@ -2815,8 +2819,8 @@ a:active {
   /*font-weight: 600;*/
 }
 
-.cat-links .jkl-cat-switch,
-.tags-links .jkl-cat-switch {
+.cat-links .jkl-tax-switch,
+.tags-links .jkl-tax-switch {
   padding: 0 0 0 5px;
 }
 
@@ -3063,6 +3067,8 @@ a:active {
 .byline,
 .entry-meta .cat-links {
     margin-right: 1em;
+    margin-bottom: 0;
+    margin-top: 0.125em;
 }
 .entry-meta .cat-links:before {
     font-family: "FontAwesome";
@@ -3120,9 +3126,9 @@ a:active {
 .entry-footer-index {
     font-size: 0.8em;
     color: #aaa;
-    margin-top: -2em;
     font-style: oblique;
     float: left;
+    position: relative;
 }
 .entry-footer-index a {
     color: #777;
@@ -3132,6 +3138,15 @@ a:active {
 .entry-footer-index .tags-links,
 .entry-footer-index .comments-link {
     margin-right: 1.5em;
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    display: inline;
+}
+.entry-footer-index .edit-link {
+    position: absolute;
+    left: 0;
+    top: -2em;
 }
 .entry-footer {
     margin: 3em -1em;
@@ -3546,6 +3561,11 @@ a:active {
     width: 100%;
     text-align: center;
 }
+.format-aside .entry-footer-index .edit-link,
+.format-status .entry-footer-index .edit-link,
+.format-link .entry-footer-index .edit-link {
+    position: static;
+}
 /*--------------------------------------------------------------
 ## Standard
 --------------------------------------------------------------*/
@@ -3648,6 +3668,9 @@ a:active {
 /*--------------------------------------------------------------
 ## Chats
 --------------------------------------------------------------*/
+.single .format-chat .featured-image {
+    margin-top: -1em;
+}
 .single .format-chat .meta-content:after,
 .single .format-chat .meta-content-text:before,
 .blog .format-chat .entry-title:before,
@@ -3702,6 +3725,43 @@ a:active {
     bottom: -19px;
     border-top: 21px solid #f7f7f7;
     border-left: 21px solid transparent;
+}
+.format-chat .lead,
+.format-chat .lead-in {
+    margin: 2.5em -1.5em;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 4px 0.5em;
+}
+.format-chat .lead p,
+.format-chat .lead-in p {
+    font-size: 1.2em;
+    font-weight: 600;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    padding: 1em 0;
+    margin-bottom: 0;
+    margin-right: 0!important;
+    /* New styles */
+    padding: 2em;
+    font-style: italic;
+    font-weight: 300;
+    font-family: "Volkhov", serif;
+}
+.format-chat .lead {
+    padding: 1em 1.5em;
+    font-style: italic;
+    font-weight: 300;
+    font-family: "Volkhov", serif;
+}
+.format-chat .lead p:before,
+.format-chat .lead p:after,
+.format-chat .lead-in p:before,
+.format-chat .lead-in p:after {
+    display: none;
 }
 /*--------------------------------------------------------------
 ## Galleries
@@ -3861,21 +3921,21 @@ a:active {
     color: inherit;
     border: none;
 }
-.blog .format-quote blockquote cite,
-.archive .format-quote blockquote cite {
+.format-quote blockquote cite,
+.format-quote blockquote cite {
     text-align: center;
     font-size: 0.6em;
     padding-bottom: 0;
     margin-bottom: -0.5em;
 }
-.blog .format-quote blockquote cite a,
-.archive .format-quote blockquote cite a {
+.format-quote blockquote cite a,
+.format-quote blockquote cite a {
     color: #aaa;
 }
-.blog .format-quote blockquote cite a:after,
-.archive .format-quote blockquote cite a:after,
-.blog .format-quote .posted-on a:after,
-.archive .format-quote .posted-on a:after {
+.format-quote blockquote cite a:after,
+.format-quote blockquote cite a:after,
+.format-quote .posted-on a:after,
+.format-quote .posted-on a:after {
     display: none;
 }
 .blog .format-quote .entry-footer-index,
@@ -3925,6 +3985,16 @@ a:active {
     border-radius: 20px;
     padding: 1.5em 2em;
 }
+.format-status .featured-image {
+    max-width: 100%;
+    margin: 0.5em auto 2em;
+}
+.blog .format-status .featured-image,
+.archive .format-status .featured-image {
+    width: 200px;
+    float: left;
+    margin-right: 1.5em;
+}
 .single .format-status .index-content {
     margin-top: 5em;
 }
@@ -3945,7 +4015,7 @@ a:active {
     display: none;
 }
 .format-status .entry-footer-index {
-    margin-top: -1em;
+    margin-top: -0.5em;
 }
 .format-status .byline {
     margin-right: 5px;

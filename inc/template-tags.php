@@ -66,7 +66,9 @@ function jkl_posted_on() {
 //        }
         
         // Categories
-        jkl_better_taxonomy_listing( 'category', 1 );
+        if( 'status' !== get_post_format() ) {
+            jkl_better_taxonomy_listing( 'category', 1 );
+        }
 
         // Add Comments Link (except on Status Post Formats)
         if ( ! post_password_required() && ( comments_open() || get_comments_number() ) && 'status' !== get_post_format() ) {
@@ -96,7 +98,7 @@ function jkl_entry_footer() {
                 jkl_better_taxonomy_listing( 'category', 4 );
                 
 		/* translators: used between list items, there is a space after the comma */
-                jkl_better_taxonomy_listing( 'tag' );
+                jkl_better_taxonomy_listing( 'tag', 12 );
                 
 //		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
 //		if ( $tags_list ) {
@@ -587,12 +589,12 @@ function jkl_post_nav() {
                     <div class="nav-previous">
                         <a href="<?php echo get_permalink( $prevID ); ?>" rel="prev">
 
-                            <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) /* || ( has_post_thumbnail( $prevID ) && empty( $next ) )*/ ) { ?>
-                                    <div class="post-nav-thumb">
-                                        <?php
-                                        $prev_thumb = get_the_post_thumbnail( $prevID, 'medium', array( 'class' => 'img-responsive' ) );
-                                        echo $prev_thumb ? $prev_thumb : '<img src="' . get_header_image() . '" />';
-                                        ?>
+                            <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) /* || ( has_post_thumbnail( $prevID ) && empty( $next ) )*/ ) { 
+                                    $prev_thumb = get_the_post_thumbnail_url( $prevID, 'medium' );
+                                    $prev_thumb = $prev_thumb ? $prev_thumb : get_header_image();
+                                    ?>
+                                    <div class="post-nav-thumb" style="background-image: url( <?php echo $prev_thumb; ?> )">
+                                        <!-- Placeholder for image -->
                                     </div>
                             <?php } ?>
 
@@ -609,11 +611,12 @@ function jkl_post_nav() {
                     <div class="nav-next">
                         <a href="<?php echo get_permalink( $nextID ); ?>" rel="next">
 
-                            <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) ) { ?>
-                                    <div class="post-nav-thumb">
-                                        <?php $next_thumb = get_the_post_thumbnail( $nextID, 'medium', array( 'class' => 'img-responsive' ) );
-                                        echo $next_thumb ? $next_thumb : '<img src="' . get_header_image() . '" />';
-                                        ?>
+                            <?php if ( ( has_post_thumbnail( $prevID ) && has_post_thumbnail( $nextID ) ) ) { 
+                                    $next_thumb = get_the_post_thumbnail_url( $nextID, 'medium' );
+                                    $next_thumb = $next_thumb ? $next_thumb : get_header_image();
+                                    ?>
+                                    <div class="post-nav-thumb"style="background-image: url( <?php echo $next_thumb; ?> )">
+                                        <!-- Placeholder for image -->
                                     </div>
                             <?php } ?>
 
@@ -790,8 +793,8 @@ function jkl_link_screenshot( $width = 150 ) {
     $first_link = substr( $post->post_content, strpos( $post->post_content, '<a>' ), strpos( $post->post_content, '</a>' ) + 4 );
  
     preg_match_all( '/<a[^>]+href=([\'"])(.+?)\1[^>]*>/i', $first_link, $site );
-            
-    //if( !empty( $site ) ) {
+
+    if( !empty( $site[2] ) ) {
         $query_url = 'http://s.wordpress.com/mshots/v1/';
         $site_url = $site[2][0]; // something like www.example.com
         $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="' . $width . '" src="' . $query_url . urlencode(  $site_url ) . '?w=' . $width .'">';
@@ -799,4 +802,5 @@ function jkl_link_screenshot( $width = 150 ) {
         $text = '<figure class="featured-image"><a class="link-screenshot" href="http://' . $site_url . '">' . $image_tag . '<figcaption class="wp-caption-text">' . $first_link . '</figcaption></a></figure>';
         
         echo $text;
+    }
 }

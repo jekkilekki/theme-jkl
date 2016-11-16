@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying Asides.
+ * Template part for displaying Statuses.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -15,6 +15,12 @@
 	<div class="entry-content index-content">
             
             <?php jkl_posted_on(); ?>
+            
+            <?php if( has_post_thumbnail() ) { ?>
+                <div class="featured-image">
+                    <?php the_post_thumbnail( 'large' ); ?>
+                </div>
+            <?php } ?>
             
             <?php the_content(); ?>
             

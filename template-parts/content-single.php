@@ -27,7 +27,7 @@ $sticky_class = is_sticky() ? 'single-sticky' : '';
                         }
                         
                         // Add Featured Image after the Lead-in (if there is one)
-                        if ( has_post_thumbnail() &&
+                        if ( has_post_thumbnail() && !has_excerpt( $post->ID ) &&
                                 'quote' !== get_post_format() ) { ?>
                             <figure class="featured-image">
                                 <?php the_post_thumbnail(); ?>
@@ -55,6 +55,14 @@ $sticky_class = is_sticky() ? 'single-sticky' : '';
 
 	<div class="entry-content">
 		<?php
+                        // Add Featured Image after the Lead-in (if there is one)
+                        if ( has_post_thumbnail() && has_excerpt( $post->ID ) &&
+                                'quote' !== get_post_format() ) { ?>
+                            <figure class="featured-image">
+                                <?php the_post_thumbnail(); ?>
+                            </figure>
+                        <?php }
+                
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */
 				wp_kses( __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'jkl' ), array( 'span' => array( 'class' => array() ) ) ),
