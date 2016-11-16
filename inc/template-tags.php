@@ -56,14 +56,17 @@ function jkl_posted_on() {
         }
         echo ' ' . $posted_on . '</span>'; // WPCS: XSS OK.
 
-        // Add Category list below (except on Status Post Formats)
-        if ( 'post' === get_post_type() && 'status' !== get_post_format() ) {
-		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
-		if ( $categories_list && jkl_categorized_blog() ) {
-			printf( '<span class="cat-links">' . esc_html( '%1$s' ) . '</span>', $categories_list ); // WPCS: XSS OK.
-		}
-        }
+//        // Add Category list below (except on Status Post Formats)
+//        if ( 'post' === get_post_type() && 'status' !== get_post_format() ) {
+//		/* translators: used between list items, there is a space after the comma */
+//		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
+//		if ( $categories_list && jkl_categorized_blog() ) {
+//			printf( '<span class="cat-links">' . esc_html( '%1$s' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+//		}
+//        }
+        
+        // Categories
+        jkl_better_taxonomy_listing( 'category', 1 );
 
         // Add Comments Link (except on Status Post Formats)
         if ( ! post_password_required() && ( comments_open() || get_comments_number() ) && 'status' !== get_post_format() ) {
@@ -83,19 +86,23 @@ if ( ! function_exists( 'jkl_entry_footer' ) ) :
  */
 function jkl_entry_footer() {
 	// Hide category and tag text for pages.
-	if ( 'post' === get_post_type() && ! is_archive() && ! is_home() ) {
+//	if ( 'post' === get_post_type() && ! is_archive() && ! is_home() ) {
+//		/* translators: used between list items, there is a space after the comma */
+//		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
+//		if ( $categories_list && jkl_categorized_blog() ) {
+//			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+//		}
+//
+                jkl_better_taxonomy_listing( 'category', 4 );
+                
 		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
-		if ( $categories_list && jkl_categorized_blog() ) {
-			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
-		}
-
-		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
-		if ( $tags_list ) {
-			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'jkl' ) . '</span>', $tags_list ); // WPCS: XSS OK.
-		}
-	}
+                jkl_better_taxonomy_listing( 'tag' );
+                
+//		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
+//		if ( $tags_list ) {
+//			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'jkl' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+//		}
+//	}
 
 	if ( ! is_home() && ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 		echo '<span class="comments-link">';
@@ -166,6 +173,139 @@ add_action( 'save_post',     'jkl_category_transient_flusher' );
  *
  * #############################################################################
  */
+
+/**
+ * Better Categories (displays them as a dropdown menu)
+ */
+function jkl_better_taxonomy_listing( $taxonomy_type, $length = -1 ) {
+    if ( 'post' === get_post_type() ) {
+        
+        // If the taxonomy type is 'category'
+        if( 'category' === $taxonomy_type ) {
+            
+            /* translators: used between list items <li> */
+            $list = get_the_category_list( __( '</li><li>', 'jkl' ) );
+            $search = '</a>';
+            $separator = ', ';
+            $test = $list && jkl_categorized_blog();
+            $class = 'cat-links';
+            $string = esc_attr__( 'Filed under: ', 'jkl' );
+            
+        } 
+        
+        // If the taxonomy type is 'tag'
+        else if( 'tag' === $taxonomy_type ) {
+            
+            /* translators: used between list items, there is a space after the comma */
+            $list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
+            $search = ',';
+            $separator = '';
+            $test = $list;
+            $class = 'tags-links';
+            $string = esc_attr__( 'Tagged: ', 'jkl' );
+            
+        }
+                
+                if ( $test ) {
+                        echo '<ul class="' . $class . '">';
+                        echo $string;
+                        
+                        // So long as the Category list contains more items than our specified length, 
+                        // we'll display the number of items specified, followed by a dropdown menu
+                        // that houses the rest of the Categories
+                        // Also note: -1 means we show ALL the categories without a dropdown
+                        if( substr_count( $list, $search ) > $length && $length !== -1 ) {
+                            
+                            // For the number of specified items
+                            for( $i = 1; $i <= $length; $i++ ) {
+                                
+                                // The Category will be the substring from the beginning of the string to the end of the first link </a> tag
+                                $item = substr( $list, 0, ( strpos( $list, $search ) + strlen( $search ) ) );
+                                
+                                // If the NEXT item is the last item, give it a special CSS class to specify that
+                                // just in case we want to style that one individually
+                                if( $i == $length ) {
+                                    echo str_replace( '<a ', '<a class="final-tax-link" ', $item );
+                                } else {
+                                    // otherwise, separate every Category with a comma
+                                    echo $item . $separator;
+                                }
+                                // Now, remove that first category from the list (string) and continue the loop
+                                $list = substr( $list, ( strpos( $list, $search ) + strlen( $search ) ) );
+                            }
+                            
+                            // After looping through our specified number of Categories, output the rest of them in a dropdown menu
+                            if( ! empty( $list ) ) {
+                                echo '<span class="jkl-tax-switch"><i class="fa fa-angle-down"></i></span>';
+                                printf( '<ul class="submenu dropdown">' . $list . '</ul>', $list ); // WPCS: XSS OK.     
+                            }
+                            
+                        }
+                            
+                        // Else, in the case that our Category list is shorter than the specified $length
+                        // OR  if we've specified -1 as the $length (to show all values)
+                        else {
+                            
+                            // So long as we have Categories left in the string
+                            while( $list !== '' ) {
+                                
+                                // Do the same as above, find the first Category and get ready to output it
+                                $item = substr( $list, 0, ( strpos( $list, $search ) + strlen( $search ) ) );
+                                
+                                // If the Category list has only ONE Category (we check for a single </a> tag)
+                                if( substr_count( $list, $search ) == 1 ) {
+                                    // Output it without a comma
+                                    echo $item;
+                                } else {
+                                    // Otherwise, separate the Categories with commas
+                                    echo $item . $separator;
+                                }
+                                // Now, remove that first category from the list (string) and continue the loop
+                                $list = substr( $list, ( strpos( $list, $search ) + strlen( $search ) ) );
+                            }
+                        }
+                        
+                        // Close the links list
+                        echo '</ul>';
+                        
+		}
+                
+        } // END taxonomy list
+        
+        // If the taxonomy type is 'tag'
+//        else if ( 'tag' === $taxonomy_type ) {
+//                /* translators: used between list items, there is a space after the comma */
+//                $tags_list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
+//                
+//                if( substr_count( $categories_list, '</a>' ) > $length && $length !== -1 ) {
+//                if ( $tags_list ) {
+//                    printf( '<span class="tags-links">' . esc_html__( 'Tagged: %1$s', 'jkl' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+//                }
+//                
+//        }
+                
+//                $first = strpos( $categories_list, '</a>' );
+//                $first_cat = substr( $categories_list, 0, ( $first + 4 ) );
+//                $replaced = str_replace( '<a ', '<a class="first-cat-link" ', $first_cat );
+//                $the_rest = substr( $categories_list, ( $first + 4 ) );
+//
+//		if ( $categories_list && jkl_categorized_blog() ) {
+//                        echo '<span class="cat-links">';
+//                        
+//                        esc_attr_e( 'Filed under: ', 'jkl' );
+//                        
+//                        echo $replaced;
+//                        if( ! empty( $the_rest ) ) {
+//                            echo '<span class="jkl-cat-switch"><i class="fa fa-angle-down"></i></span>';
+//                            printf( '<ul class="submenu dropdown">' . $the_rest . '</ul>', $the_rest ); // WPCS: XSS OK.     
+//                        }
+//                        echo '</span>';
+//		}
+	
+            
+        
+//    }
+}
 
 /**
  * DYNAMIC Copyright for the footer

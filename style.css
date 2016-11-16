@@ -2513,7 +2513,7 @@ a:active {
     position: absolute;
     content: "\f0f6";
     display: inline;
-    top: 33%;
+    top: 30%;
     right: 1em;
     color: gainsboro;
     font-size: 2em;
@@ -2769,6 +2769,57 @@ a:active {
     display: inline-block;
 }
 
+.cat-links,
+.tags-links {
+  background: transparent;
+  position: relative;
+}
+
+.cat-links ul,
+.tags-links ul {
+  position: absolute;
+  z-index: 9999;
+  top: 100%;
+  right: 0;
+  margin-top: 6px;
+  background-color: #fafafb;
+  border: 0.05rem solid white;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.15);
+  /*color: #9e9e9e;*/
+  /*float: left;*/
+  /*width: 33.33333%;*/
+  /*margin-left: .9375rem;*/
+  /*margin-right: .9375rem;*/
+  display: none;
+}
+
+.cat-links ul a, .cat-links ul a:visited, .cat-links ul a:active,
+.tags-links ul a, .tags-links ul a:visited, .tags-links ul a:active {
+  color: inherit;
+}
+
+.cat-links ul.childopen,
+.tags-links ul.childopen {
+  display: block;
+}
+
+.cat-links li,
+.tags-links li {
+  list-style: none;
+  display: block;
+  padding: 0.75rem 1.5rem;
+}
+
+.cat-links a,
+.tags-links a {
+  /*font-weight: 600;*/
+}
+
+.cat-links .jkl-cat-switch,
+.tags-links .jkl-cat-switch {
+  padding: 0 0 0 5px;
+}
+
 
 .entry-content a,
 .entry-summary a {
@@ -3021,6 +3072,7 @@ a:active {
 }
 .entry-meta .cat-links {
     margin-right: 2em;
+    margin-left: 0;
 }
 .entry-meta .comments-link {
     padding: 0px 12px;
@@ -3105,7 +3157,12 @@ a:active {
     width: 33.33333333333%;
     margin-top: -5px;
     margin-bottom: -5px;
+    margin-left: 0;
     padding: 1.5em 1em;
+}
+.cat-links > li {
+    display: inline;
+    padding: 0;
 }
 .entry-footer .tags-links {
     width: 66.6666666666%;
@@ -3820,6 +3877,10 @@ a:active {
 .blog .format-quote .posted-on a:after,
 .archive .format-quote .posted-on a:after {
     display: none;
+}
+.blog .format-quote .entry-footer-index,
+.archive .format-quote .entry-footer-index {
+    margin-top: 0;
 }
 .single .format-quote .meta-content-index {
     margin-top: 3em;

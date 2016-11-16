@@ -45,16 +45,24 @@ if ( post_password_required() ) {
 			?>
 		</ol><!-- .comment-list -->
                 
-                <h5 class="pings-list-title"><?php esc_attr_e( 'Pings', 'jkl' ); ?></h5>
-                <ol class="pings-list">
-			<?php
-				wp_list_comments( array(
-					'style'         => 'ol',
-					'short_ping'    => true,
-                                        'type'          => 'pings'
-				) );
-			?>
-		</ol><!-- .pings-list -->
+                <?php
+                $comments = get_comments( 'status=approve&type=ping&post_id=' . get_the_ID() );
+                $comments = separate_comments( $comments );
+                
+                if( 0 < count( $comments[ 'pings' ] ) ) : ?>
+                
+                    <h5 class="pings-list-title"><?php esc_attr_e( 'Pings', 'jkl' ); ?></h5>
+                    <ol class="pings-list">
+                            <?php
+                                    wp_list_comments( array(
+                                            'style'         => 'ol',
+                                            'short_ping'    => true,
+                                            'type'          => 'pings'
+                                    ) );
+                            ?>
+                    </ol><!-- .pings-list -->
+                    
+                <?php endif; ?>
 
 		<?php 
                 // Paginate comments
