@@ -69,12 +69,14 @@ function jkl_setup() {
 	 */
 	add_theme_support( 'post-formats', array(
 		'aside',    // style added
-                'chat',     // style added
-                'gallery',
-		'image',
-		'video',
-		'quote',
-		'link',
+                'status',   // style added
+                'quote',    // style added
+                'link',     // style added
+                'image',    // style added
+                'gallery',  // style added
+                'video',    // style added
+                'audio',    // style added
+                'chat',     // style added	
 	) );
 
 	// Set up the WordPress core custom background feature.
@@ -262,8 +264,12 @@ function jkl_better_excerpts( $text, $raw_excerpt ) {
      * @link http://www.codecheese.com/2013/11/get-the-first-paragraph-as-an-excerpt-for-wordpress/
      */
     if( 'quote' === get_post_format() && !$raw_excerpt ) {
-        $content = apply_filters( 'the_content', get_the_content() );
-        $text = substr( $content, 0, strpos( $content, '</blockquote>' ) + 13 );
+        if( !$raw_excerpt ) {
+            $content = apply_filters( 'the_content', get_the_content() );
+            $text = substr( $content, 0, strpos( $content, '</blockquote>' ) + 13 );
+        } else {
+            $text = apply_filters( 'the_excerpt', get_the_excerpt() );
+        } 
     }
     
     /**
@@ -384,18 +390,18 @@ add_filter( 'the_content', 'jkl_infinity_link', 9 ); // run before wpautop
  * 
  * @link https://github.com/justintadlock/hybrid-core/blob/master/inc/functions-formats.php
  */
-function jkl_quote_blockquote( $content ) {
+function jkl_quote_blockquote( $excerpt ) {
     if( 'quote' === get_post_format() ) {
-        preg_match( '/<blockquote.*?>/', $content, $matches );
+        preg_match( '/<blockquote.*?>/', $excerpt, $matches );
         
         if( empty( $matches ) ) {
-            $content = "<blockquote>{$content}</blockquote>";
+            $excerpt = "<blockquote>{$excerpt}</blockquote>";
         }
     }
     
-    return $content;
+    return $excerpt;
 }
-add_filter( 'the_content', 'jkl_quote_blockquote', 8 ); // run before wpautop
+add_filter( 'the_excerpt', 'jkl_quote_blockquote', 8 ); // run before wpautop
 
 /**
  * Filter a Video Post to add an 'entry-meta' <div> around the <iframe> video to

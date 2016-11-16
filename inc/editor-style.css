@@ -4,9 +4,9 @@
  */
 
 html {
-    padding: 0 2em;
+    /*padding: 0 2em;*/
 }
-body {
+.mce-content-body {
     max-width: 40em;
     margin: 0 auto;
     color: black;
@@ -18,7 +18,7 @@ body {
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
-body,
+.mce-content-body,
 button,
 input,
 select,
@@ -163,7 +163,7 @@ big {
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
-body {
+.mce-content-body {
 	background: #fff; /* Fallback for when there is no custom background color defined. */
 }
 

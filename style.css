@@ -3751,8 +3751,8 @@ a:active {
 .archive .format-quote .index-content {
     border: none;
 }
-.blog .format-quote .entry-meta,
-.archive .format-quote .entry-meta {
+.format-quote .entry-meta,
+.format-quote .entry-meta {
     background: rgba(0,0,0,0.8);
     background-size: cover!important;
     margin-top: 0;
@@ -3770,18 +3770,18 @@ a:active {
     padding-left: 0;
     color: #777;
 }
-.blog .format-quote .entry-content,
-.archive .format-quote .entry-content {
+.format-quote .entry-content,
+.format-quote .entry-content {
     margin: 0;
     padding: 0;
     position: relative;
 }
-.blog .format-quote .hentry-index:after,
-.archive .format-quote .hentry-index:after {
+.format-quote .hentry-index:after,
+.format-quote .hentry-index:after {
     border: none;
 }
-.blog .format-quote blockquote,
-.archive .format-quote blockquote {
+.format-quote blockquote:first-child,
+.format-quote blockquote:first-child {
     color: #dcdcdc;
     font-size: 1.5em;
     border: none;
@@ -3789,13 +3789,13 @@ a:active {
     margin-top: 0.5em;
     padding: 0;
 }
-.blog .format-quote blockquote:before,
-.archive .format-quote blockquote:before {
+.format-quote blockquote:first-child:before,
+.format-quote blockquote:first-child:before {
     left: -1em;
     opacity: 0.3;
 }
-.blog .format-quote blockquote:after,
-.archive .format-quote blockquote:after {
+.format-quote blockquote:first-child:after,
+.format-quote blockquote:first-child:after {
     right: -1em;
     opacity: 0.3;
 }
