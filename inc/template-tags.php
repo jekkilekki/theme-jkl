@@ -664,6 +664,12 @@ function jkl_index_posted_on() {
 		esc_attr( get_the_modified_date( 'c' ) ),
 		esc_html( get_the_modified_date() )
 	);
+        
+        $byline = sprintf(
+		esc_html( '%s' ),
+		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">@' . esc_html( get_the_author() ) . '</a></span>'
+	);
+        
         if( 'chat' === get_post_format() ||
             'image' === get_post_format() ||
             'gallery' === get_post_format() ||
@@ -677,9 +683,16 @@ function jkl_index_posted_on() {
 		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
             );
         }
-
-        echo '<div class="meta-content-index">';
+        
+        $meta_class = is_single() ? 'format-small-meta' : 'meta-content-index';
+        echo '<div class="' . $meta_class . '">';
 	echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
+        if( is_single() ) {
+            //echo '<span class="entry-footer-index">';
+            echo '<span class="byline">' . $byline . '</span>';
+            jkl_better_taxonomy_listing('category', 1);
+            //echo '</span>';
+        }
         echo '</div><!-- .meta-content-index -->';
 }
 endif;

@@ -2324,7 +2324,7 @@ a:active {
 }
 .widget > ul,
 .widget > ol {
-    overflow: auto;
+    /*overflow: auto;*/
 }
 .site-content .widget li,
 #secondary-footer .widget li {
@@ -3123,20 +3123,27 @@ a:active {
 .page-links a:focus {
     border: 2px solid black;
 }
-.entry-footer-index {
+.entry-footer-index,
+.format-small-meta {
     font-size: 0.8em;
     color: #aaa;
     font-style: oblique;
     float: left;
     position: relative;
 }
-.entry-footer-index a {
+.entry-footer-index a,
+.format-small-meta a {
     color: #777;
     /*font-style: normal;*/
 }
 .entry-footer-index .cat-links,
 .entry-footer-index .tags-links,
-.entry-footer-index .comments-link {
+.entry-footer-index .comments-link,
+.format-small-meta .cat-links,
+.format-small-meta .tags-links,
+.format-small-meta .comments-link,
+.format-small-meta .posted-on,
+.format-small-meta .byline {
     margin-right: 1.5em;
     margin-left: 0;
     margin-bottom: 0;
@@ -3147,6 +3154,9 @@ a:active {
     position: absolute;
     left: 0;
     top: -2em;
+}
+.format-small-meta {
+    margin-top: -0.5em;
 }
 .entry-footer {
     margin: 3em -1em;
@@ -3293,8 +3303,8 @@ a:active {
     }
     .entry-meta .comments-link {
         position: absolute;
-        top: -1em;
-        right: 0;
+        top: 0.5em;
+        right: 4.5em;
         font-size: 75%;
         padding: 3px 23px;
     }
@@ -3513,6 +3523,14 @@ a:active {
 /*--------------------------------------------------------------
 ## Post Formats
 --------------------------------------------------------------*/
+.single .format-aside .entry-title,
+.single .format-status .entry-title,
+.single .format-quote .entry-title,
+.single .format-link .entry-title,
+.single .format-chat .entry-title {
+    font-size: 1.8em;
+}
+
 .blog .format-standard .entry-title:before,
 .archive .format-standard .entry-title:before,
 .blog .format-aside .entry-title:before,
@@ -3847,6 +3865,9 @@ a:active {
 .blog .format-image .entry-title:before,
 .archive .format-image .entry-title:before {
     content: "\f03e";
+}
+.single-format-image .site-header-img {
+    padding-top: 70%; /* @TODO - test with vertical image, portrait, responsive, etc */
 }
 /*--------------------------------------------------------------
 ## Quotes
