@@ -23,7 +23,7 @@ get_header(); ?>
 		while ( have_posts() ) : the_post();
 
                         //get_template_part( 'template-parts/content', get_post_format() );
-                       if( 'status' === get_post_format() || 'link' === get_post_format() ) {
+                       if( has_post_format( array( 'aside', 'chat', 'link', 'quote', 'image', 'gallery', 'video', 'audio', 'status' ) ) ) {
                             get_template_part( 'template-parts/content', get_post_format() );
                        } else {
                             get_template_part( 'template-parts/content', 'single' /* get_post_format() */ );

@@ -3867,7 +3867,7 @@ a:active {
     content: "\f03e";
 }
 .single-format-image .site-header-img {
-    padding-top: 70%; /* @TODO - test with vertical image, portrait, responsive, etc */
+    padding-top: 60%; /* @TODO - test with vertical image, portrait, responsive, etc */
 }
 /*--------------------------------------------------------------
 ## Quotes
@@ -3897,6 +3897,16 @@ a:active {
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
+}
+.format-quote .entry-meta:before {
+    content: "";
+    background: rgba(0,0,0,0.6);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    top: 0;
+    left: 0;
 }
 .blog .format-link .meta-content-index,
 .archive .format-link .meta-content-index,

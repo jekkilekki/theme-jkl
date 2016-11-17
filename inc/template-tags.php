@@ -67,7 +67,7 @@ function jkl_posted_on() {
         
         // Categories
         if( 'status' !== get_post_format() ) {
-            jkl_better_taxonomy_listing( 'category', 1 );
+            //jkl_better_taxonomy_listing( 'category', 1 );
         }
 
         // Add Comments Link (except on Status Post Formats)
@@ -95,10 +95,10 @@ function jkl_entry_footer() {
 //			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 //		}
 //
-                jkl_better_taxonomy_listing( 'category', 4 );
+                //jkl_better_taxonomy_listing( 'category', 4 );
                 
 		/* translators: used between list items, there is a space after the comma */
-                jkl_better_taxonomy_listing( 'tag', 12 );
+                //jkl_better_taxonomy_listing( 'tag', 12 );
                 
 //		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
 //		if ( $tags_list ) {
@@ -690,7 +690,7 @@ function jkl_index_posted_on() {
         if( is_single() ) {
             //echo '<span class="entry-footer-index">';
             echo '<span class="byline">' . $byline . '</span>';
-            jkl_better_taxonomy_listing('category', 1);
+            //jkl_better_taxonomy_listing('category', 1);
             //echo '</span>';
         }
         echo '</div><!-- .meta-content-index -->';
