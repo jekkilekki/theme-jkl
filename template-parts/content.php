@@ -30,7 +30,7 @@
 	<div class="entry-content index-content">
 		<?php
                 
-                        // Add Featured Image after the Lead-in (if there is one)
+                        // Add Featured Image (if there is one)
                         if ( has_post_thumbnail() ) { ?>
                             <figure class="featured-image index-featured">
                                 <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">

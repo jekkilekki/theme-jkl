@@ -23,8 +23,8 @@ get_header(); ?>
 		while ( have_posts() ) : the_post();
 
                         //get_template_part( 'template-parts/content', get_post_format() );
-                       if( has_post_format( array( 'aside', 'chat', 'link', 'quote', 'image', 'gallery', 'video', 'audio', 'status' ) ) ) {
-                            get_template_part( 'template-parts/content', get_post_format() );
+                       if( has_post_format( array( 'aside', 'chat', 'link', 'quote', 'status' ) ) ) {
+                            get_template_part( 'template-parts/content', 'single-small' );
                        } else {
                             get_template_part( 'template-parts/content', 'single' /* get_post_format() */ );
                        }
