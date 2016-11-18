@@ -1,5 +1,6 @@
 <?php
 /**
+ * Post Format: Gallery
  * Template part for displaying Gallery post formats on index pages.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
@@ -32,44 +33,44 @@
                         
                         // Add Featured Image after the Lead-in (if there is one)
                         if ( has_post_thumbnail() ) { ?>
-            
-                            <figure class="featured-image index-featured">
-                                <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
-                                    <?php the_post_thumbnail( 'large' ); ?>
-                                </a>
-                            </figure>
-            
-                        <?php } 
-                            $img_url = get_post_gallery_images();
-                            if( !empty( $img_url ) ) { 
-                                $size = count( $img_url ) > 2 ? 2 : count( $img_url );
-                                if( has_post_thumbnail() ) $size--;
-                                
-                                for( $i = 0; $i < $size; $i++ ) :
-                                ?>
-            
-                                <figure class="gallery-image-index">
+                            <ul class="index-gallery">
+                                <li>
                                     <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
-                                        <img class="attachment-thumbnail size-thumbnail" src="<?php echo $img_url[$i]; ?>">
+                                        <figure class="gallery-image-index" style="background-image: url( <?php the_post_thumbnail_url( 'large' ); ?> )">
+                                        </figure>
                                     </a>
-                                </figure>
+                                </li>
             
-                        <?php endfor; 
-                        }
-                        
-                        // Count the number of images in the Gallery (or Galleries)
-                        $images = get_post_galleries_images();  // from WordPress 3.6.0
-                        if( $images ) :
-                            $total_images = count( $images, COUNT_RECURSIVE ) - count( $images );
-                            $total_galleries = count( $images );
-                            $image = reset( $images );
-                        endif;
+                        <?php }  else { ?>
+                            <ul class="index-gallery">
+                        <?php }
+                            
+                            // Get the remainder of the gallery images
+                            $images = jkl_get_gallery_images( 3 );
+                            if( !empty( $images ) ) { 
+                                
+                                for( $i = 0; $i < count( $images ); $i++ ) {
+                                ?>
+                                
+                                <li>
+                                    <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+                                        <figure class="gallery-image-index" style="background-image: url( <?php echo $images[$i]; ?> )">
+                                        </figure>
+                                    </a>
+                                </li>
+            
+                                <?php } // end for
+                            } // end if
                         
                         ?>
+                            </ul>
             
                         <div class="clear"></div>
 
                         <?php
+                        $total = jkl_get_gallery_count();
+                        $total_galleries = $total[0];
+                        $total_images = $total[1];
                         
                         if( $total_galleries === 1 ) : ?>
                         <p class="gallery-count"><em><?php printf( _n( 'There is %1$s photo in this gallery.', 'There are %1$s photos in this gallery.', $total_images, 'jkl' ), 

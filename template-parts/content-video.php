@@ -1,5 +1,6 @@
 <?php
 /**
+ * Post Format: Video
  * Template part for displaying posts.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
@@ -13,11 +14,7 @@
     <div class="hentry-index">
 	<header class="entry-header index-header group">
 		<?php
-			if ( is_single() ) {
-				the_title( '<h1 class="entry-title">', '</h1>' );
-			} else {
-				the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-			}
+		the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 
 		if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta index-meta">
@@ -28,24 +25,34 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-content index-content">
-		<?php
-                
-                        // Add Featured Image after the Lead-in (if there is one)
-                        if ( has_post_thumbnail() ) : ?>
             
-                            <figure class="featured-image index-featured">
-                                <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
-                                    <?php the_post_thumbnail(); ?>
-                                </a>
-                            </figure>
+            <div class="entry-meta">
+                <?php jkl_get_the_video(); ?>
+            </div>
             
-                        <?php endif; ?>
-            
-                        <div class="entry-meta">
-                            <?php the_excerpt(); ?>
-                        </div>
+        </div>
+        
+        <?php 
+            // Add Featured Image
+            if ( has_post_thumbnail() ) : ?>
+
+                <figure class="featured-image-index">
+                    <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+                        <?php the_post_thumbnail( 'thumbnail' ); ?>
+                    </a>
+                </figure>
+                <div class="excerpt-has-image">
                         
-	</div><!-- .entry-content -->
+            <?php else : ?>
+                <div class="excerpt-no-image">
+
+            <?php endif; ?>
+                    
+                        <?php the_excerpt(); ?>
+                    
+                </div><!-- END excerpt div -->
+
+        <div class="clear"></div>
         
         <div class="continue-reading">
             <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">

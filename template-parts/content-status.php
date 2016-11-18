@@ -1,5 +1,6 @@
 <?php
 /**
+ * Post Format: Status
  * Template part for displaying Statuses.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
@@ -17,8 +18,16 @@
             <?php jkl_posted_on(); ?>
             
             <?php if( has_post_thumbnail() ) { ?>
-                <div class="featured-image">
-                    <?php the_post_thumbnail( 'large' ); ?>
+                <div class="featured-image<?php echo !is_single() ? '-index' : ''; ?>">
+                    
+                    <?php 
+                    if( is_single() ) {
+                        the_post_thumbnail( 'large' ); 
+                    } else {
+                        the_post_thumbnail( 'thumbnail' );
+                    }
+                    ?>
+                    
                 </div>
             <?php } ?>
             

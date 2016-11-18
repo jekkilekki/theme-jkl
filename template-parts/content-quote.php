@@ -1,5 +1,6 @@
 <?php
 /**
+ * Post Format: Quote
  * Template part for displaying Quotes.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy

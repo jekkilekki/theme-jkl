@@ -1,5 +1,6 @@
 <?php
 /**
+ * Post Format: Aside
  * Template part for displaying Asides.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy

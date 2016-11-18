@@ -3519,6 +3519,14 @@ a:active {
         margin-bottom: 2em;
     }
 }
+.featured-image-index {
+    float: left;
+    margin-right: 2em;
+}
+.excerpt-has-image,
+.excerpt-no-image {
+    margin-bottom: 2em;
+}
 
 /*--------------------------------------------------------------
 ## Post Formats
@@ -3581,7 +3589,7 @@ a:active {
 }
 .format-aside .entry-footer-index .edit-link,
 .format-status .entry-footer-index .edit-link,
-.format-link .entry-footer-index .edit-link {
+.format-quote .entry-footer-index .edit-link {
     position: static;
 }
 /*--------------------------------------------------------------
@@ -3781,6 +3789,16 @@ a:active {
 .format-chat .lead-in p:after {
     display: none;
 }
+.blog .format-chat .excerpt-has-image p,
+.archive .format-chat .excerpt-has-image p {
+    width: calc( 100% - 155px - 2em);
+    float: right;
+    margin: 0!important;
+}
+.blog .format-chat .featured-image-index,
+.archive .format-chat .featured-image-index {
+    margin-bottom: 0;
+}
 /*--------------------------------------------------------------
 ## Galleries
 --------------------------------------------------------------*/
@@ -3794,14 +3812,52 @@ a:active {
 .archive .format-gallery .featured-image {
     margin-bottom: 0.5em;
 }
-.gallery-image-index {
+.index-gallery {
+    list-style: none;
+    margin: 0 1.5em 4em;
+    height: 350px;
+    width: 100%;
+    position: relative;
+}
+.index-gallery li {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.index-gallery li:nth-child(1) {
+    top: 3em;
+    left: -3em;
+    z-index: 1;
+}
+.index-gallery li:nth-child(2) {
+    top: 1.5em;
+    left: -1.5em;
+    z-index: 0;
+}
+.index-gallery li:nth-child(3) {
+    z-index: -1;
+}
+.index-gallery figure {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 5px solid white;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.5);
+    background-size: cover;
+    background-position: 50%;
+}
+.index-gallery img {
+    width: 100%;
+}
+/*.gallery-image-index {
     float: left;
     margin-right: 1%;
     max-width: 48%;
 }
 .gallery-image-index img {
     max-width: 100%;
-}
+}*/
 .gallery-count {
     margin-top: 1em;
     margin-bottom: 1em;
@@ -3817,12 +3873,14 @@ a:active {
 .format-link .entry-title {
     font-size: 2em;
 }
-.format-link .entry-footer-index {
-    margin-top: 0;
-    width: 100%;
+.blog .format-link .entry-title, 
+.archive .format-link .entry-title {
+    font-size: 1em;
+    margin: -1em 0 0;
+    text-align: left;
 }
-.blog .format-link .entry-content:before,
-.archive .format-link .entry-content:before {
+.blog .format-link .entry-title:before,
+.archive .format-link .entry-title:before {
     font-family: "FontAwesome";
     color: #c3c3c3;
     margin-right: 0.75em;
@@ -3830,6 +3888,10 @@ a:active {
     display: block;
     float: left;
     content: "\f0c1";
+}
+.format-link .entry-footer-index {
+    margin-top: 0;
+    width: 100%;
 }
 .blog .format-link .entry-meta,
 .archive .format-link .entry-meta {
@@ -3884,6 +3946,8 @@ a:active {
     left: 50%;
     margin-left: -7px;
     bottom: 30px;
+    font-size: 2em;
+    line-height: 1;
 }
 .blog .format-quote .index-content,
 .archive .format-quote .index-content {
@@ -3939,11 +4003,13 @@ a:active {
 }
 .format-quote blockquote:first-child:before,
 .format-quote blockquote:first-child:before {
+    top: 0;
     left: -1em;
     opacity: 0.3;
 }
 .format-quote blockquote:first-child:after,
 .format-quote blockquote:first-child:after {
+    top: 0;
     right: -1em;
     opacity: 0.3;
 }
@@ -3951,6 +4017,8 @@ a:active {
 .archive .format-quote blockquote p {
     color: inherit;
     border: none;
+    margin: 1.5em;
+    padding: 0;
 }
 .format-quote blockquote cite,
 .format-quote blockquote cite {
@@ -4111,6 +4179,9 @@ a:active {
 .blog .format-audio .entry-title:before,
 .archive .format-audio .entry-title:before {
     content: "\f025";
+}
+.format-audio iframe {
+    margin-bottom: 1em;
 }
 
 /*--------------------------------------------------------------

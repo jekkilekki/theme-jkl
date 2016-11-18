@@ -1,5 +1,6 @@
 <?php
 /**
+ * Post Format: Image
  * Template part for displaying posts.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
@@ -13,11 +14,8 @@
     <div class="hentry-index">
 	<header class="entry-header index-header group">
 		<?php
-			if ( is_single() ) {
-				the_title( '<h1 class="entry-title">', '</h1>' );
-			} else {
-				the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-			}
+			
+		the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 
 		if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta index-meta">
@@ -30,7 +28,7 @@
 	<div class="entry-content index-content">
 		<?php
                 
-                        // Add Featured Image after the Lead-in (if there is one)
+                        // Add Featured Image
                         if ( has_post_thumbnail() ) : ?>
             
                             <figure class="featured-image index-featured">

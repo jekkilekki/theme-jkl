@@ -273,21 +273,6 @@ function jkl_better_excerpts( $text, $raw_excerpt ) {
     }
     
     /**
-     * Post Format: Video
-     * 
-     * Only get the first 'video' element from a Post for index and archive pages.
-     */
-    else if( 'video' === get_post_format() && !$raw_excerpt ) {
-        $content = apply_filters( 'the_content', get_the_content() );
-        
-        if( strpos( $content, '</iframe>' ) === false ) {
-            $text = $content;
-        } else {
-            $text = substr( $content, 0, strpos( $content, '</iframe>' ) + 9 );
-        }
-    }
-    
-    /**
      * Post Format: Chat
      * 
      * Retrieve the first 100 characters of the chat as styled post content (not the unstyled excerpt)
@@ -295,24 +280,6 @@ function jkl_better_excerpts( $text, $raw_excerpt ) {
     else if( 'chat' === get_post_format() && !$raw_excerpt ) {
         $content = apply_filters( 'the_content', get_the_content() );
         $text = substr( $content, 0, 500 ) . '…';
-    }
-    
-    /**
-     * Post Format: Audio
-     * 
-     * Find the audio and make sure it shows up on the index page
-     * 
-     * @link https://www.youtube.com/watch?v=HXLviEusCyE WP Theme Dev - Audio Post Format
-     */
-    else if( 'audio' === get_post_format() && !$raw_excerpt ) {
-        if( !is_singular() ) {
-            $content = apply_filters( 'the_content', get_the_content() );
-            $shortcode_content = do_shortcode( $content );
-            $embed = get_media_embedded_in_content( $shortcode_content, array( 'audio', 'iframe' ) );
-
-            // 2nd widget type for SoundCloud in any case
-            $text = !empty( $embed ) ? str_replace( '?visual=true', '?visual=false', $embed[0] ) : $content;
-        }
     }
     
     /**
@@ -351,6 +318,19 @@ function jkl_better_excerpts( $text, $raw_excerpt ) {
 add_filter( 'wp_trim_excerpt', 'jkl_better_excerpts', 5, 2 );
 
 /**
+ * Get 'Large' Gallery image sizes on index and archive pages
+ * 
+ * @link http://mekshq.com/change-image-thumbnail-size-in-wordpress-gallery/
+ */
+function jkl_large_gallery_images( $output, $pairs, $atts ) {
+    //if( !is_singular() && 'gallery' === get_post_format() ) {
+        $output[ 'size' ] = 'large';
+    //} 
+    return $output;
+}
+add_filter( 'shortcode_atts_gallery', 'jkl_large_gallery_images', 10, 3 );
+
+/**
  * Custom Background Callback to make the .site-logo-housing (above the menu) match
  * the chosen custom background color in body.custom-background
  * 
@@ -383,6 +363,7 @@ function jkl_infinity_link( $content ) {
     return $content;
 }
 add_filter( 'the_content', 'jkl_infinity_link', 9 ); // run before wpautop
+add_filter( 'the_excerpt', 'jkl_infinity_link', 9 );
 
 /**
  * Filter a Quote Post Format to add <blockquote> around the whole thing if 

@@ -331,6 +331,120 @@ function jkl_better_taxonomy_listing( $taxonomy_type, $length = -1 ) {
 }
 
 /**
+ * Get video from a Post Format: Video
+ */
+function jkl_get_the_video() {
+    /**
+     * Post Format: Video
+     * 
+     * Only get the first 'video' element from a Post for index and archive pages.
+     */
+    $output = '';
+    if( 'video' === get_post_format() ) {
+        $content = apply_filters( 'the_content', get_the_content() );
+        
+        if( strpos( $content, '</iframe>' ) === false ) {
+            $output = $content;
+        } else {
+            $output = substr( $content, strpos( $content, '<iframe>' ), strpos( $content, '</iframe>' ) + 9 );
+        }
+    }
+    echo $output;
+}
+
+/**
+ * Get audio from a Post Format: Audio
+ */
+function jkl_get_the_audio() {
+    /**
+     * Post Format: Audio
+     * 
+     * Find the audio and make sure it shows up on the index page
+     * 
+     * @link https://www.youtube.com/watch?v=HXLviEusCyE WP Theme Dev - Audio Post Format
+     */
+    $output = '';
+    if( 'audio' === get_post_format() ) {
+        if( !is_singular() ) {
+            $content = apply_filters( 'the_content', get_the_content() );
+            $shortcode_content = do_shortcode( $content );
+            $embed = get_media_embedded_in_content( $shortcode_content, array( 'audio', 'iframe' ) );
+
+            // 2nd widget type for SoundCloud in any case
+            $output = !empty( $embed ) ? str_replace( '?visual=true', '?visual=false', $embed[0] ) : $content;
+        }
+    }
+    echo $output;
+}
+
+/**
+ * Post Format: Gallery
+ * Get specified number of Gallery images from the first Gallery in a post
+ * Used primarily on index and archive pages
+ */
+function jkl_get_gallery_images( $num = 3 ) {
+    
+    // Array to hold all the images we retrieve
+    $images = get_post_gallery_images();
+    if( !empty( $images ) ) { 
+        $size = count( $images ) > $num ? $num : count( $images );
+        if( has_post_thumbnail() ) $size--;
+
+        $images = array_slice( $images, 0, $size );
+        
+    }
+    return $images;
+
+}
+
+/**
+ * Post Format: Gallery
+ * Count the number of images in the Gallery (or Galleries)
+ */
+function jkl_get_gallery_count() {
+    
+    $images = get_post_galleries_images();  // from WordPress 3.6.0
+    //if( $images ) {
+        $total_galleries[] = count( $images );
+        $total_galleries[] = count( $images, COUNT_RECURSIVE ) - $total_galleries[0];
+        $image = reset( $images );
+    //}
+    return $total_galleries;
+}
+
+/**
+ * Post Format: Link
+ * Get a screenshot of the first link in a post
+ * 
+ * @global type $post
+ * @param type $width
+ */
+function jkl_link_screenshot( $width = 150, $url = false ) {
+    global $post;
+    $first_link = substr( $post->post_content, strpos( $post->post_content, '<a>' ), strpos( $post->post_content, '</a>' ) + 4 );
+ 
+    preg_match_all( '/<a[^>]+href=([\'"])(.+?)\1[^>]*>/i', $first_link, $site );
+
+    if( !empty( $site[2] ) ) {
+        $site_url = $site[2][0]; // something like www.example.com
+        
+        // Return the whole screenshot in an image tag
+        if( !$url ) { 
+            
+            $query_url = 'http://s.wordpress.com/mshots/v1/';
+            $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="' . $width . '" src="' . $query_url . urlencode(  $site_url ) . '?w=' . $width .'">';
+            $text = '<a class="link-screenshot" href="http://' . $site_url . '">' . $image_tag . '<figcaption class="wp-caption-text">' . $site_url . '</figcaption></a>';
+        
+         // Return only the url
+        } else {
+            $text = '<a class="link-screenshot" href="http://' . $site_url . '">' . $site_url . '</a>';
+        }
+        
+        echo $text;
+    }
+}
+
+/**
  * Attempting to split the main nav menu with the logo
  * @link: Courtesy: http://pateason.com/horizontal-split-nav/
  */
@@ -800,20 +914,3 @@ function jkl_breadcrumbs() {
 
 }
 endif;
-
-function jkl_link_screenshot( $width = 150 ) {
-    global $post;
-    $first_link = substr( $post->post_content, strpos( $post->post_content, '<a>' ), strpos( $post->post_content, '</a>' ) + 4 );
- 
-    preg_match_all( '/<a[^>]+href=([\'"])(.+?)\1[^>]*>/i', $first_link, $site );
-
-    if( !empty( $site[2] ) ) {
-        $query_url = 'http://s.wordpress.com/mshots/v1/';
-        $site_url = $site[2][0]; // something like www.example.com
-        $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="' . $width . '" src="' . $query_url . urlencode(  $site_url ) . '?w=' . $width .'">';
-
-        $text = '<figure class="featured-image"><a class="link-screenshot" href="http://' . $site_url . '">' . $image_tag . '<figcaption class="wp-caption-text">' . $first_link . '</figcaption></a></figure>';
-        
-        echo $text;
-    }
-}
