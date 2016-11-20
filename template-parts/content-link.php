@@ -1,6 +1,7 @@
 <?php
 /**
- * Template part for displaying Asides.
+ * Post Format: Link
+ * Template part for displaying Links.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -11,11 +12,11 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <div class="hentry-index entry-meta">
-        <?php if( has_post_thumbnail() ) { ?>
+        <?php //if( has_post_thumbnail() ) { ?>
             <div class="entry-title">
                 <?php jkl_link_screenshot( 150, true ); ?>
             </div>
-        <?php } ?>
+        <?php //} ?>
 
 	<div class="entry-content index-content">
             
@@ -31,9 +32,9 @@
             
 	</div><!-- .entry-content -->
         
-        <div class="entry-footer-index">
-            <?php jkl_entry_footer(); ?>
-        </div>
-        
     </div><!-- .hentry-index -->
+    
+    <div class="entry-footer-index">
+        <?php jkl_entry_footer(); ?>
+    </div>
 </article><!-- #post-## -->

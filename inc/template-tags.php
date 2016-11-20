@@ -35,12 +35,14 @@ function jkl_posted_on() {
 	);
 
         // Display the author avatar if the author has a Gravatar
-        $author_id = get_the_author_meta( 'ID' );
-        // if( jkl_validate_gravatar( $author_id ) ) {
-            echo '<div class="meta-content has-avatar">';
-            echo '<div class="author-avatar">' . get_avatar( $author_id ) . '</div>';
-        // } else {
-            echo '<div class="meta-content-text">';
+        if( !has_post_format( array( 'aside', 'chat', 'quote', 'link' ) ) ) {
+            $author_id = get_the_author_meta( 'ID' );
+            // if( jkl_validate_gravatar( $author_id ) ) {
+                echo '<div class="meta-content has-avatar">';
+                echo '<div class="author-avatar">' . get_avatar( $author_id ) . '</div>';
+        }
+            // } else {
+        echo '<div class="meta-content-text">';
             
         // Byline
 	echo '<span class="byline">';
@@ -66,18 +68,20 @@ function jkl_posted_on() {
 //        }
         
         // Categories
-        if( 'status' !== get_post_format() ) {
-            //jkl_better_taxonomy_listing( 'category', 1 );
+        if( !has_post_format( array( 'status', 'aside', 'chat', 'quote', 'link' ) ) ) {
+            jkl_better_taxonomy_listing( 'category', 1 );
         }
 
         // Add Comments Link (except on Status Post Formats)
-        if ( ! post_password_required() && ( comments_open() || get_comments_number() ) && 'status' !== get_post_format() ) {
+        if ( ! post_password_required() && ( comments_open() || get_comments_number() ) && 'status' !== get_post_format() && !has_post_format( array( 'status', 'aside', 'chat', 'quote', 'link' ) ) ) {
                 echo '<span class="comments-link">';
                 comments_popup_link( esc_html__( 'Leave a comment', 'jkl' ), esc_html__( '1 Comment', 'jkl' ), esc_html__( '% Comments', 'jkl' ) );
                 echo '</span>';
         }
 
-        echo '</div><!-- .meta-content -->';
+        if( !has_post_format( array( 'status', 'aside', 'chat', 'quote', 'link' ) ) ) {
+            echo '</div><!-- .meta-content -->';
+        }
         echo '</div><!-- .meta-content-text -->';
 }
 endif;
@@ -87,6 +91,10 @@ if ( ! function_exists( 'jkl_entry_footer' ) ) :
  * Prints HTML with meta information for the categories, tags and comments.
  */
 function jkl_entry_footer() {
+    
+        if( is_single() && has_post_format( array( 'aside', 'quote', 'link', 'chat' ) ) ) {
+            jkl_posted_on();
+        }
 	// Hide category and tag text for pages.
 //	if ( 'post' === get_post_type() && ! is_archive() && ! is_home() ) {
 //		/* translators: used between list items, there is a space after the comma */
@@ -95,10 +103,10 @@ function jkl_entry_footer() {
 //			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 //		}
 //
-                //jkl_better_taxonomy_listing( 'category', 4 );
+                jkl_better_taxonomy_listing( 'category', 4 );
                 
 		/* translators: used between list items, there is a space after the comma */
-                //jkl_better_taxonomy_listing( 'tag', 12 );
+                jkl_better_taxonomy_listing( 'tag', 12 );
                 
 //		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
 //		if ( $tags_list ) {
@@ -344,7 +352,7 @@ function jkl_get_the_video() {
         $content = apply_filters( 'the_content', get_the_content() );
         
         if( strpos( $content, '</iframe>' ) === false ) {
-            $output = $content;
+            $output = esc_attr__( 'No video found in post.', 'jkl' );
         } else {
             $output = substr( $content, strpos( $content, '<iframe>' ), strpos( $content, '</iframe>' ) + 9 );
         }
@@ -365,14 +373,15 @@ function jkl_get_the_audio() {
      */
     $output = '';
     if( 'audio' === get_post_format() ) {
-        if( !is_singular() ) {
+        //if( !is_singular() ) {
             $content = apply_filters( 'the_content', get_the_content() );
             $shortcode_content = do_shortcode( $content );
             $embed = get_media_embedded_in_content( $shortcode_content, array( 'audio', 'iframe' ) );
 
             // 2nd widget type for SoundCloud in any case
-            $output = !empty( $embed ) ? str_replace( '?visual=true', '?visual=false', $embed[0] ) : $content;
-        }
+            //$output = !empty( $embed ) ? str_replace( '?visual=true', '?visual=false', $embed[0] ) : $content;
+            $output = $embed[0];
+        //}
     }
     echo $output;
 }
@@ -413,6 +422,24 @@ function jkl_get_gallery_count() {
 }
 
 /**
+ * Post Format: Quote
+ * Get the first <blockquote> from the content, assume this is the quote we want
+ */
+function jkl_get_the_quote() {
+    
+    $content = apply_filters( 'the_content', get_the_content() );
+    preg_match( '/<blockquote.*?>/', $content, $matches );
+
+    if( empty( $matches ) ) {
+        $content = "<blockquote>{$content}</blockquote>";
+    } else {
+        $content = substr( $content, strpos( $content, '<blockquote>' ), strpos( $content, '</blockquote>' ) + 13 );
+    }
+    
+    echo $content;
+}
+
+/**
  * Post Format: Link
  * Get a screenshot of the first link in a post
  * 
@@ -433,7 +460,7 @@ function jkl_link_screenshot( $width = 150, $url = false ) {
             
             $query_url = 'http://s.wordpress.com/mshots/v1/';
             $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="' . $width . '" src="' . $query_url . urlencode(  $site_url ) . '?w=' . $width .'">';
-            $text = '<a class="link-screenshot" href="http://' . $site_url . '">' . $image_tag . '<figcaption class="wp-caption-text">' . $site_url . '</figcaption></a>';
+            $text = '<a class="link-screenshot" href="' . $site_url . '">' . $image_tag . '<figcaption class="wp-caption-text">' . str_replace( 'http://', '', $site_url ) . '</figcaption></a>';
         
          // Return only the url
         } else {
@@ -804,7 +831,9 @@ function jkl_index_posted_on() {
         if( is_single() ) {
             //echo '<span class="entry-footer-index">';
             echo '<span class="byline">' . $byline . '</span>';
-            //jkl_better_taxonomy_listing('category', 1);
+            if( !has_post_format( 'quote' ) ) {
+                jkl_better_taxonomy_listing('category', 1);
+            }
             //echo '</span>';
         }
         echo '</div><!-- .meta-content-index -->';

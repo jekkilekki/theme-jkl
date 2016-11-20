@@ -20,10 +20,16 @@ $sticky_class = is_sticky() ? 'single-sticky' : '';
 			}
                         
                         // Add a Lead-in (from the Excerpt) if there is one
-                        if ( is_single() && 'post' === get_post_type() && has_excerpt( $post->ID ) ) {
+                        if ( is_single() && 'post' === get_post_type() && has_excerpt( $post->ID ) && 'video' !== get_post_format() ) {
                             echo '<div class="lead-in">';
                             echo '<p>' . get_the_excerpt() . '</p>';
                             echo '</div><!-- .lead-in -->';
+                        }
+                        
+                        if( 'video' === get_post_format() ) {
+                            echo '<div class="single-featured-video">';
+                            jkl_get_the_video();
+                            echo '</div>';
                         }
                         
                         // Add Featured Image after the Lead-in (if there is one)
@@ -34,12 +40,7 @@ $sticky_class = is_sticky() ? 'single-sticky' : '';
                             </figure>
                         <?php }
 
-		if ( 'post' === get_post_type() && !is_front_page() && 
-                     'aside' !== get_post_format() &&
-                     'status' !== get_post_format() && 
-                     'link' !== get_post_format() &&
-                     'quote' !== get_post_format() &&
-                     'chat' !== get_post_format() ) : ?>
+		if ( 'post' === get_post_type() && !is_front_page() && 'video' !== get_post_format() ) : ?>
 		<div class="entry-meta">
 			<?php jkl_posted_on(); ?>
 		</div><!-- .entry-meta -->
@@ -55,9 +56,20 @@ $sticky_class = is_sticky() ? 'single-sticky' : '';
 
 	<div class="entry-content">
 		<?php
+                        
+                        // Add a Lead-in (from the Excerpt) if there is one
+                        if ( is_single() && 'post' === get_post_type() && has_excerpt( $post->ID ) && 'video' === get_post_format() ) { ?>
+                            <div class="entry-meta">
+                                <?php jkl_posted_on(); ?>
+                            </div><!-- .entry-meta -->
+                            <div class="lead-in">
+                                <?php echo '<p>' . get_the_excerpt() . '</p>'; ?>
+                            </div><!-- .lead-in -->
+                        <?php }
+
                         // Add Featured Image after the Lead-in (if there is one)
                         if ( has_post_thumbnail() && has_excerpt( $post->ID ) &&
-                                'quote' !== get_post_format() ) { ?>
+                                'video' !== get_post_format() ) { ?>
                             <figure class="featured-image">
                                 <?php the_post_thumbnail(); ?>
                             </figure>

@@ -289,27 +289,27 @@ function jkl_better_excerpts( $text, $raw_excerpt ) {
      * 
      * @link https://code.tutsplus.com/articles/how-to-generate-website-screenshots-for-your-wordpress-site--wp-22888
      */
-    else if( 'link' === get_post_format() && !$raw_excerpt ) {
-        $content = apply_filters( 'the_content', get_the_content() );
+    //else if( 'link' === get_post_format() && !$raw_excerpt ) {
+        //$content = apply_filters( 'the_content', get_the_content() );
         
-        if( strpos( $content, '</a>' ) === false ) {
-            $text = $content;
-        } else {
-
-            $first_link = substr( $content, strpos( $content, '<a>' ), strpos( $content, '</a>' ) + 4 );
-            preg_match_all( '/<a[^>]+href=([\'"])(.+?)\1[^>]*>/i', $first_link, $site );
-            
-            //if( !empty( $site ) ) {
-                $query_url = 'http://s.wordpress.com/mshots/v1/';
-                $site_url = $site[2][0]; // something like www.example.com
-                $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="150" src="http://' . $site_url . '">';
-            
-                $text = '<a class="link-screenshot" href="http://' . $site_url . '">' . $image_tag . '</a>' . $first_link;
-            //} else {
-                //$text = $content;
-            //}
-        }
-    }
+        //if( strpos( $content, '</a>' ) === false ) {
+            //$text = $content;
+//        } else {
+//
+//            $first_link = substr( $content, strpos( $content, '<a>' ), strpos( $content, '</a>' ) + 4 );
+//            preg_match_all( '/<a[^>]+href=([\'"])(.+?)\1[^>]*>/i', $first_link, $site );
+//            
+//            //if( !empty( $site ) ) {
+//                $query_url = 'http://s.wordpress.com/mshots/v1/';
+//                $site_url = $site[2][0]; // something like www.example.com
+//                $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="150" src="http://' . $site_url . '">';
+//            
+//                $text = '<a class="link-screenshot" href="http://' . $site_url . '">' . $image_tag . '</a>' . $first_link;
+//            //} else {
+//                //$text = $content;
+//            //}
+//        }
+    //}
     
     // Return the result
     return $text;
@@ -350,20 +350,22 @@ function jkl_custom_background_cb() {
  * 
  * @link http://justintadlock.com/archives/2012/09/06/post-formats-aside
  */
-function jkl_infinity_link( $content ) {
+function jkl_infinity_link_content( $content ) {
     if( (   has_post_format( 'aside' ) ||
-            has_post_format( 'quote' ) ||
-            has_post_format( 'link' ) ||
             has_post_format( 'status' ) ) && !is_singular() ) {
         $content .= '<a class="infinity-link" href="' . get_permalink() . '">&#8734;</a>';
     } 
-//    elseif( has_post_format( 'link' ) && !is_singular() ) {
-//        $content = '<a class="infinity-link" href="' .get_permalink() . '">&#8734;</a>' . $content;
-//    }
     return $content;
 }
-add_filter( 'the_content', 'jkl_infinity_link', 9 ); // run before wpautop
-add_filter( 'the_excerpt', 'jkl_infinity_link', 9 );
+function jkl_infinity_link_excerpt( $excerpt ) {
+    if( (   has_post_format( 'quote' ) ||
+            has_post_format( 'link' ) ) && !is_singular() ) {
+        $excerpt .= '<a class="infinity-link" href="' . get_permalink() . '">&#8734;</a>';
+    } 
+    return $excerpt;
+}
+add_filter( 'the_content', 'jkl_infinity_link_content', 9 ); // run before wpautop
+add_filter( 'the_excerpt', 'jkl_infinity_link_excerpt', 9 );
 
 /**
  * Filter a Quote Post Format to add <blockquote> around the whole thing if 
@@ -420,6 +422,16 @@ function jkl_gallery_thumbnails( $output, $pairs, $atts ) {
     return $output;
 }
 add_filter( 'shortcode_atts_gallery', 'jkl_gallery_thumbnails', 10, 3 );
+
+/**
+ * Filter out certain content types based on the Post Format
+ */
+//function jkl_remove_featured_content( $content ) {
+//    if( 'quote' === get_post_format() ) {
+//        $content = substr( $content, 0, strpos( $content, '<blockquote>' ) ) . substr( $content, strpos( $content, '</blockquote>' ) + 13 );
+//    }
+//}
+//add_filter( 'the_content', 'jkl_remove_featured_content' );
 
 /**
  * Post Format: Quote

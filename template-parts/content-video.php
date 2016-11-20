@@ -24,35 +24,37 @@
 		endif; ?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content index-content">
+	<div class="index-content video-content">
             
             <div class="entry-meta">
                 <?php jkl_get_the_video(); ?>
             </div>
             
-        </div>
+        </div><!-- .index-content -->
         
-        <?php 
-            // Add Featured Image
-            if ( has_post_thumbnail() ) : ?>
+        <div class="entry-content">
+        
+            <?php 
+                // Add Featured Image
+                if ( has_post_thumbnail() ) : ?>
 
-                <figure class="featured-image-index">
-                    <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
-                        <?php the_post_thumbnail( 'thumbnail' ); ?>
-                    </a>
-                </figure>
-                <div class="excerpt-has-image">
-                        
-            <?php else : ?>
-                <div class="excerpt-no-image">
+                    <figure class="featured-image-index">
+                        <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+                            <?php the_post_thumbnail( 'thumbnail' ); ?>
+                        </a>
+                    </figure>
+                    <div class="excerpt-has-image">
 
-            <?php endif; ?>
-                    
-                        <?php the_excerpt(); ?>
-                    
-                </div><!-- END excerpt div -->
+                <?php else : ?>
+                    <div class="excerpt-no-image">
 
-        <div class="clear"></div>
+                <?php endif; ?>
+
+                            <?php the_excerpt(); ?>
+
+                    </div><!-- END excerpt div -->
+
+        </div><!-- .entry-content -->
         
         <div class="continue-reading">
             <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">

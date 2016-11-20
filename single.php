@@ -22,12 +22,25 @@ get_header(); ?>
 		<?php
 		while ( have_posts() ) : the_post();
 
-                        //get_template_part( 'template-parts/content', get_post_format() );
-                       if( has_post_format( array( 'aside', 'chat', 'link', 'quote', 'status' ) ) ) {
-                            get_template_part( 'template-parts/content', 'single-small' );
-                       } else {
-                            get_template_part( 'template-parts/content', 'single' /* get_post_format() */ );
-                       }
+                        // Statuses and Quotes - use their own Post Format designs
+                        if( has_post_format( array( 'status', 'quote' ) ) ) {
+                            get_template_part( 'template-parts/content', get_post_format() );
+                        } 
+                        
+                        // Video, Audio, Images, and Galleries - have a special Media Post Format design (media content above meta info)
+                        else if( has_post_format( array( 'video', 'audio', 'image', 'gallery' ) ) ) {
+                            get_template_part( 'template-parts/content', 'single-media' );
+                        }
+                        
+                        // Asides, Chats, and Links - get a smaller title and meta
+                        else if( has_post_format( array( 'aside', 'chat', 'link', 'quote' ) ) ) {
+                             get_template_part( 'template-parts/content', 'single-small' );
+                        } 
+                        
+                        // Everything else gets the standard Single Post design
+                        else {
+                             get_template_part( 'template-parts/content', 'single' );
+                        }
                         
                         jkl_post_nav();
                         

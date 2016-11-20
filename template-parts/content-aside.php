@@ -20,6 +20,17 @@
         <footer class="entry-footer">
             <div class="footer-content group">
 		<?php jkl_index_posted_on(); ?>
+                <?php
+                edit_post_link(
+                        sprintf(
+                                /* translators: %s: Name of current post */
+                                esc_html__( 'Edit %s', 'jkl' ),
+                                the_title( '<span class="screen-reader-text">"', '"</span>', false )
+                        ),
+                        '<span class="edit-link">',
+                        '</span>'
+                );
+                ?>
             </div>
 	</footer><!-- .entry-footer -->
         
