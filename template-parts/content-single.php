@@ -1,6 +1,7 @@
 <?php
 /**
- * Template part for displaying posts.
+ * Single Post Format: (Standard) posts
+ * Template part for displaying standard (default) posts.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *

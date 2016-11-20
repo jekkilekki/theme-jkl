@@ -1,7 +1,11 @@
 JKL
 ===
 
+Version: `1.1.0`
+
 JKL is a simple, modern theme with great fonts (Volkhov and Source Sans Pro) developed by Aaron Snowberger specifically for http://justkeeplearning.xyz
+
+![screenshot](https://cloud.githubusercontent.com/assets/6644259/20467043/3b7b8b5e-afc2-11e6-9ccb-bc44b765ef1a.png)
 
 ## Features
 
@@ -89,11 +93,19 @@ Images used in the screenshot:
 
 ## Changelog
 
+### 1.1.0 Nov 20 2016
+* Add styling for Post Formats: Audio, Video, Quote, Status, Link, Gallery, Image
+* Add developer functions for retrieving the main audio, video, blockquote, link screenshot, gallery and gallery image count
+* Update Font Awesome to v.4.7.0
+* Clean up code - unnecessary code comments
+* Clean up code - add additional code documentation
+
 ### 1.0.8 Nov 4 2016
-* Code cleanup for Theme repository
+* Clean up code - for Theme repository
 * Add explicit license details
 * Remove unused files and lines of code
 * Properly escape all output
+* Update Prism.js syntax highlighter
 
 ### 1.0.7 Aug 19 2016
 * Fix dropdown menus
@@ -106,7 +118,7 @@ Images used in the screenshot:
 ### 1.0.5 Apr 11 2016
 
 * Add Prism syntax highlighting
-* Add Post Format Aside
+* Add Post Format Aside and Chat styling
 * Add Page templates
 * Finalize Customizer Options
 * Add editor styles

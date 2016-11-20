@@ -1,7 +1,7 @@
 <?php
 /**
  * Post Format: Audio
- * Template part for displaying Audio.
+ * Template part for displaying Audio posts.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *

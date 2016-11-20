@@ -1,5 +1,6 @@
 <?php
 /**
+ * Single Post Formats: Audio, Video, Image, Gallery posts
  * Template part for displaying Media posts.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy

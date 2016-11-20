@@ -12,11 +12,11 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <div class="hentry-index entry-meta">
-        <?php //if( has_post_thumbnail() ) { ?>
+
             <div class="entry-title">
                 <?php jkl_link_screenshot( 150, true ); ?>
             </div>
-        <?php //} ?>
+
 
 	<div class="entry-content index-content">
             

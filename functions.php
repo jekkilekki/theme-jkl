@@ -175,8 +175,8 @@ function jkl_scripts() {
 
 	wp_enqueue_script( 'jkl-navigation', get_template_directory_uri() . '/js/navigation.js', array( 'jquery' ), '20120206', true );
         wp_localize_script( 'jkl-navigation', 'screenReaderText', array(
-		'expand'   => '<span class="screen-reader-text">' . __( 'expand child menu', 'jkl' ) . '</span>',
-		'collapse' => '<span class="screen-reader-text">' . __( 'collapse child menu', 'jkl' ) . '</span>',
+		'expand'   => '<span class="screen-reader-text">' . esc_html__( 'expand child menu', 'jkl' ) . '</span>',
+		'collapse' => '<span class="screen-reader-text">' . esc_html__( 'collapse child menu', 'jkl' ) . '</span>',
 	) );
         
 	wp_enqueue_script( 'jkl-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
@@ -229,26 +229,6 @@ function jkl_add_excerpt_to_pages() {
 add_action( 'init', 'jkl_add_excerpt_to_pages' );
 
 /**
- * Better Title Filter
- * 
- * Rather than using 'the_title_rss' which has 'strip_tags' hooked to it (removes all title markup),
- * use a different filter called 'the_title_export' which wraps the output in CDATA tags
- * Works like `the_content_export` and `the_excerpt_export`
- * 
- * @see https://core.trac.wordpress.org/ticket/29621
- * @see https://core.trac.wordpress.org/attachment/ticket/29621/29621.2.diff
- */
-//function jkl_better_post_title() {
-//    remove_filter( 'the_title_rss', 'strip_tags' );
-//    remove_filter( 'the_title_rss', 'ent2ncr', 8 );
-//    remove_filter( 'the_title_rss', 'esc_html' );
-//    
-//    add_filter( 'the_title_rss', 'wxr_cdata' );
-//    
-//    remove_filter( 'the_title_rss', '')
-//}
-
-/**
  * Better Post Excerpts
  * 
  * Based on Post Format, it trims the excerpt in various ways and returns various pieces of content
@@ -281,36 +261,7 @@ function jkl_better_excerpts( $text, $raw_excerpt ) {
         $content = apply_filters( 'the_content', get_the_content() );
         $text = substr( $content, 0, 500 ) . '…';
     }
-    
-    /**
-     * Post Format: Link
-     * 
-     * Find the first link, extract its data, grab a screenshot and display it
-     * 
-     * @link https://code.tutsplus.com/articles/how-to-generate-website-screenshots-for-your-wordpress-site--wp-22888
-     */
-    //else if( 'link' === get_post_format() && !$raw_excerpt ) {
-        //$content = apply_filters( 'the_content', get_the_content() );
         
-        //if( strpos( $content, '</a>' ) === false ) {
-            //$text = $content;
-//        } else {
-//
-//            $first_link = substr( $content, strpos( $content, '<a>' ), strpos( $content, '</a>' ) + 4 );
-//            preg_match_all( '/<a[^>]+href=([\'"])(.+?)\1[^>]*>/i', $first_link, $site );
-//            
-//            //if( !empty( $site ) ) {
-//                $query_url = 'http://s.wordpress.com/mshots/v1/';
-//                $site_url = $site[2][0]; // something like www.example.com
-//                $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="150" src="http://' . $site_url . '">';
-//            
-//                $text = '<a class="link-screenshot" href="http://' . $site_url . '">' . $image_tag . '</a>' . $first_link;
-//            //} else {
-//                //$text = $content;
-//            //}
-//        }
-    //}
-    
     // Return the result
     return $text;
     
@@ -323,9 +274,7 @@ add_filter( 'wp_trim_excerpt', 'jkl_better_excerpts', 5, 2 );
  * @link http://mekshq.com/change-image-thumbnail-size-in-wordpress-gallery/
  */
 function jkl_large_gallery_images( $output, $pairs, $atts ) {
-    //if( !is_singular() && 'gallery' === get_post_format() ) {
-        $output[ 'size' ] = 'large';
-    //} 
+    $output[ 'size' ] = 'large';
     return $output;
 }
 add_filter( 'shortcode_atts_gallery', 'jkl_large_gallery_images', 10, 3 );
@@ -350,6 +299,7 @@ function jkl_custom_background_cb() {
  * 
  * @link http://justintadlock.com/archives/2012/09/06/post-formats-aside
  */
+// Add infinity link to content - where required
 function jkl_infinity_link_content( $content ) {
     if( (   has_post_format( 'aside' ) ||
             has_post_format( 'status' ) ) && !is_singular() ) {
@@ -357,6 +307,7 @@ function jkl_infinity_link_content( $content ) {
     } 
     return $content;
 }
+// Add infinity link to excerpt - where required
 function jkl_infinity_link_excerpt( $excerpt ) {
     if( (   has_post_format( 'quote' ) ||
             has_post_format( 'link' ) ) && !is_singular() ) {
@@ -364,6 +315,7 @@ function jkl_infinity_link_excerpt( $excerpt ) {
     } 
     return $excerpt;
 }
+// There are two separate function calls for each filter to avoid doubling up the infinity link in some cases where the excerpt IS the content
 add_filter( 'the_content', 'jkl_infinity_link_content', 9 ); // run before wpautop
 add_filter( 'the_excerpt', 'jkl_infinity_link_excerpt', 9 );
 
@@ -422,105 +374,3 @@ function jkl_gallery_thumbnails( $output, $pairs, $atts ) {
     return $output;
 }
 add_filter( 'shortcode_atts_gallery', 'jkl_gallery_thumbnails', 10, 3 );
-
-/**
- * Filter out certain content types based on the Post Format
- */
-//function jkl_remove_featured_content( $content ) {
-//    if( 'quote' === get_post_format() ) {
-//        $content = substr( $content, 0, strpos( $content, '<blockquote>' ) ) . substr( $content, strpos( $content, '</blockquote>' ) + 13 );
-//    }
-//}
-//add_filter( 'the_content', 'jkl_remove_featured_content' );
-
-/**
- * Post Format: Quote
- * 
- * Only get the first <blockquote> from a Post Format quote (no additional writing) 
- * for the index and archive pages.
- * 
- * @link http://www.codecheese.com/2013/11/get-the-first-paragraph-as-an-excerpt-for-wordpress/
- 
-function jkl_quote_excerpt( $text, $raw_excerpt ) {
-    if( 'quote' === get_post_format() && !$raw_excerpt ) {
-        $content = apply_filters( 'the_content', get_the_content() );
-        $text = substr( $content, 0, strpos( $content, '</blockquote>' ) + 13 );
-    }
-    return $text;
-}
-add_filter( 'wp_trim_excerpt', 'jkl_quote_excerpt', 5, 2 );
-
-/**
- * Post Format: Video
- * 
- * Only get the first 'video' element from a Post for index and archive pages.
- 
-function jkl_video_excerpt( $text, $raw_excerpt ) {
-    if( 'video' === get_post_format() && !$raw_excerpt ) {
-        $content = apply_filters( 'the_content', get_the_content() );
-        if( strpos( $content, '</iframe>' ) === false ) {
-            $text = $content;
-        } else {
-            $text = substr( $content, 0, strpos( $content, '</iframe>' ) + 9 );
-        }
-    }
-    return $text;
-}
-add_filter( 'wp_trim_excerpt', 'jkl_video_excerpt', 5, 2 );
-
-/**
- * Post Format: Chat
- * 
- * Retrieve the first 100 characters of the chat as styled post content (not the unstyled excerpt)
- 
-function jkl_chat_excerpt( $text, $raw_excerpt ) {
-    if( 'chat' === get_post_format() && !$raw_excerpt ) {
-        $content = apply_filters( 'the_content', get_the_content() );
-        $text = substr( $content, 0, 500 ) . '…';
-    }
-    return $text;
-}
-add_filter( 'wp_trim_excerpt', 'jkl_chat_excerpt', 5, 2 );
-
-/**
- * Retrieve the IDs for images in a gallery.
- *
- * @uses get_post_galleries() First, if available. Falls back to shortcode parsing,
- *                            then as last option uses a get_posts() call.
- *
- * @since Twenty Ten 1.6.
- *
- * @return array List of image IDs from the post gallery.
- 
-function jkl_get_gallery_images() {
-    $images = array();
-
-    $galleries = get_post_galleries( get_the_ID(), false );
-    if( isset( $galleries[0]['ids'] ) )
-        $images = explode( ',', $galleries[0]['ids'] );
-    
-    if( !$images ) {
-        $images = get_posts( array(
-                'fields'        => 'ids',
-                'numberposts'   => 999,
-                'order'         => 'ASC',
-                'orderby'       => 'menu_order',
-                'post_mime_type'=> 'image',
-                'post_parent'   => get_the_ID(),
-                'post_type'     => 'attachment',
-        ) );
-    }
-    return $images;
-}
-
-/**
- * Get first image in a post
- * Requires WordPress 3.6.0
- * @link https://developer.wordpress.org/reference/functions/get_post_gallery_images/
- 
-function jkl_get_first_image_url() {
-    $img_url = get_post_gallery_images();
-    return !empty( $img_url ) ? $img_url[0] : ''; 
-}
- *
- */

@@ -1,6 +1,7 @@
 <?php
 /**
- * Template part for displaying posts.
+ * Post Format: fallback (Standard posts)
+ * Template part for displaying posts (fallback).
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *

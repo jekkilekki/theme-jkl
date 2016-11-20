@@ -1,6 +1,7 @@
 <?php
 /**
- * Template part for displaying posts.
+ * Single Post Formats: Asides, Chats, Links, Quotes
+ * Template part for displaying posts with a smaller title, and smaller meta info in the footer.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -13,7 +14,6 @@ $sticky_class = is_sticky() ? 'single-sticky' : '';
 <article id="post-<?php the_ID(); ?>" <?php post_class( array( $sticky_class, 'format-single-small' ) ); ?>>
 	<header class="entry-header">
 		<?php
-                    //if( 'aside' !== get_post_format() ) {
                         if ( 'link' === get_post_format() ) {
                             echo '<h1 class="entry-title">';
                             jkl_link_screenshot(150, true);
@@ -23,7 +23,6 @@ $sticky_class = is_sticky() ? 'single-sticky' : '';
 			} else {
 				the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 			}
-                    //}
                 ?>                                
 	</header><!-- .entry-header -->
 

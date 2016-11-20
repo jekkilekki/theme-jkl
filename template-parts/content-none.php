@@ -1,6 +1,7 @@
 <?php
 /**
- * Template part for displaying a message that posts cannot be found.
+ * Post Format: None
+ * Template part for displaying a message that posts cannot be found (no posts, error 404, or search).
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *

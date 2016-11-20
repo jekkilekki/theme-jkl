@@ -282,39 +282,6 @@ function jkl_better_taxonomy_listing( $taxonomy_type, $length = -1 ) {
                 
         } // END taxonomy list
         
-        // If the taxonomy type is 'tag'
-//        else if ( 'tag' === $taxonomy_type ) {
-//                /* translators: used between list items, there is a space after the comma */
-//                $tags_list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
-//                
-//                if( substr_count( $categories_list, '</a>' ) > $length && $length !== -1 ) {
-//                if ( $tags_list ) {
-//                    printf( '<span class="tags-links">' . esc_html__( 'Tagged: %1$s', 'jkl' ) . '</span>', $tags_list ); // WPCS: XSS OK.
-//                }
-//                
-//        }
-                
-//                $first = strpos( $categories_list, '</a>' );
-//                $first_cat = substr( $categories_list, 0, ( $first + 4 ) );
-//                $replaced = str_replace( '<a ', '<a class="first-cat-link" ', $first_cat );
-//                $the_rest = substr( $categories_list, ( $first + 4 ) );
-//
-//		if ( $categories_list && jkl_categorized_blog() ) {
-//                        echo '<span class="cat-links">';
-//                        
-//                        esc_attr_e( 'Filed under: ', 'jkl' );
-//                        
-//                        echo $replaced;
-//                        if( ! empty( $the_rest ) ) {
-//                            echo '<span class="jkl-cat-switch"><i class="fa fa-angle-down"></i></span>';
-//                            printf( '<ul class="submenu dropdown">' . $the_rest . '</ul>', $the_rest ); // WPCS: XSS OK.     
-//                        }
-//                        echo '</span>';
-//		}
-	
-            
-        
-//    }
 }
 
 /**
@@ -339,14 +306,13 @@ function jkl_better_taxonomy_listing( $taxonomy_type, $length = -1 ) {
 }
 
 /**
- * Get video from a Post Format: Video
+ * Post Format: Video
+ * 
+ * Get video from a Video
+ * Only get the first 'video' element from a Post for index and archive pages.
  */
 function jkl_get_the_video() {
-    /**
-     * Post Format: Video
-     * 
-     * Only get the first 'video' element from a Post for index and archive pages.
-     */
+
     $output = '';
     if( 'video' === get_post_format() ) {
         $content = apply_filters( 'the_content', get_the_content() );
@@ -358,36 +324,34 @@ function jkl_get_the_video() {
         }
     }
     echo $output;
+    
 }
 
 /**
- * Get audio from a Post Format: Audio
+ * Post Format: Audio
+ * 
+ * Get audio from an Audio
+ * Find the audio and make sure it shows up on the index page
+ * 
+ * @link https://www.youtube.com/watch?v=HXLviEusCyE WP Theme Dev - Audio Post Format
  */
 function jkl_get_the_audio() {
-    /**
-     * Post Format: Audio
-     * 
-     * Find the audio and make sure it shows up on the index page
-     * 
-     * @link https://www.youtube.com/watch?v=HXLviEusCyE WP Theme Dev - Audio Post Format
-     */
+
     $output = '';
     if( 'audio' === get_post_format() ) {
-        //if( !is_singular() ) {
-            $content = apply_filters( 'the_content', get_the_content() );
-            $shortcode_content = do_shortcode( $content );
-            $embed = get_media_embedded_in_content( $shortcode_content, array( 'audio', 'iframe' ) );
+        $content = apply_filters( 'the_content', get_the_content() );
+        $shortcode_content = do_shortcode( $content );
+        $embed = get_media_embedded_in_content( $shortcode_content, array( 'audio', 'iframe' ) );
 
-            // 2nd widget type for SoundCloud in any case
-            //$output = !empty( $embed ) ? str_replace( '?visual=true', '?visual=false', $embed[0] ) : $content;
-            $output = $embed[0];
-        //}
+        $output = $embed[0];
     }
     echo $output;
+    
 }
 
 /**
  * Post Format: Gallery
+ * 
  * Get specified number of Gallery images from the first Gallery in a post
  * Used primarily on index and archive pages
  */
@@ -407,22 +371,24 @@ function jkl_get_gallery_images( $num = 3 ) {
 }
 
 /**
- * Post Format: Gallery
+ * Post Format: Gallery (Count)
+ * 
  * Count the number of images in the Gallery (or Galleries)
  */
 function jkl_get_gallery_count() {
     
     $images = get_post_galleries_images();  // from WordPress 3.6.0
-    //if( $images ) {
-        $total_galleries[] = count( $images );
-        $total_galleries[] = count( $images, COUNT_RECURSIVE ) - $total_galleries[0];
-        $image = reset( $images );
-    //}
+
+    $total_galleries[] = count( $images );
+    $total_galleries[] = count( $images, COUNT_RECURSIVE ) - $total_galleries[0];
+    $image = reset( $images );
+
     return $total_galleries;
 }
 
 /**
  * Post Format: Quote
+ * 
  * Get the first <blockquote> from the content, assume this is the quote we want
  */
 function jkl_get_the_quote() {
@@ -441,6 +407,7 @@ function jkl_get_the_quote() {
 
 /**
  * Post Format: Link
+ * 
  * Get a screenshot of the first link in a post
  * 
  * @global type $post
@@ -462,7 +429,7 @@ function jkl_link_screenshot( $width = 150, $url = false ) {
             $image_tag = '<img class="link-screenshot-img" alt="' . $site_url . '" width="' . $width . '" src="' . $query_url . urlencode(  $site_url ) . '?w=' . $width .'">';
             $text = '<a class="link-screenshot" href="' . $site_url . '">' . $image_tag . '<figcaption class="wp-caption-text">' . str_replace( 'http://', '', $site_url ) . '</figcaption></a>';
         
-         // Return only the url
+        // Return only the url
         } else {
             $text = '<a class="link-screenshot" href="http://' . $site_url . '">' . $site_url . '</a>';
         }
@@ -829,12 +796,12 @@ function jkl_index_posted_on() {
         echo '<div class="' . $meta_class . '">';
 	echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
         if( is_single() ) {
-            //echo '<span class="entry-footer-index">';
+
             echo '<span class="byline">' . $byline . '</span>';
             if( !has_post_format( 'quote' ) ) {
                 jkl_better_taxonomy_listing('category', 1);
             }
-            //echo '</span>';
+
         }
         echo '</div><!-- .meta-content-index -->';
 }

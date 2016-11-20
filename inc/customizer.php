@@ -36,8 +36,8 @@ function jkl_customize_register( $wp_customize ) {
                 new WP_Customize_Color_Control(
                         $wp_customize,
                         'menu_color', array(
-                            'label'         => __( 'Menu Background Color', 'jkl' ),
-                            'description'   => __( 'Change the background color of the menu.', 'jkl' ),
+                            'label'         => esc_html__( 'Menu Background Color', 'jkl' ),
+                            'description'   => esc_html__( 'Change the background color of the menu.', 'jkl' ),
                             'section'       => 'colors',
                         )
         ) );
@@ -58,8 +58,8 @@ function jkl_customize_register( $wp_customize ) {
                 new WP_Customize_Color_Control(
                         $wp_customize,
                         'menu_text_color', array(
-                            'label'         => __( 'Menu Text Color', 'jkl' ),
-                            'description'   => __( 'Change the text color of the menu.', 'jkl' ),
+                            'label'         => esc_html__( 'Menu Text Color', 'jkl' ),
+                            'description'   => esc_html__( 'Change the text color of the menu.', 'jkl' ),
                             'section'       => 'colors',
                         )
         ) );
@@ -80,8 +80,8 @@ function jkl_customize_register( $wp_customize ) {
                 new WP_Customize_Color_Control(
                         $wp_customize,
                         'body_text_color', array(
-                            'label'         => __( 'Body Text Color', 'jkl' ),
-                            'description'   => __( 'Change the text color of the content.', 'jkl' ),
+                            'label'         => esc_html__( 'Body Text Color', 'jkl' ),
+                            'description'   => esc_html__( 'Change the text color of the content.', 'jkl' ),
                             'section'       => 'colors',
                         )
         ) );
@@ -102,8 +102,8 @@ function jkl_customize_register( $wp_customize ) {
                 new WP_Customize_Color_Control(
                         $wp_customize,
                         'highlight_color', array(
-                            'label'         => __( 'Highlight Color', 'jkl' ),
-                            'description'   => __( 'Change the color of site highlights, inluding links.', 'jkl' ),
+                            'label'         => esc_html__( 'Highlight Color', 'jkl' ),
+                            'description'   => esc_html__( 'Change the color of site highlights, inluding links.', 'jkl' ),
                             'section'       => 'colors',
                         )
         ) );
@@ -113,9 +113,9 @@ function jkl_customize_register( $wp_customize ) {
          */
         // Add Sidebar Layout Section
         $wp_customize->add_section( 'jkl-options', array(
-            'title'         => __( 'Theme Options', 'jkl' ),
+            'title'         => esc_html__( 'Theme Options', 'jkl' ),
             'capability'    => 'edit_theme_options',
-            'description'   => __( 'Change the default display options for the theme.', 'jkl' ),
+            'description'   => esc_html__( 'Change the default display options for the theme.', 'jkl' ),
         ) );
         
         // Sidebar Layout setting
@@ -132,11 +132,11 @@ function jkl_customize_register( $wp_customize ) {
                 array(
                     'settings'          => 'layout_setting',
                     'type'              => 'radio',
-                    'label'             => __( 'Sidebar position', 'jkl' ),
+                    'label'             => esc_html__( 'Sidebar position', 'jkl' ),
                     'choices'           => array(
-                            'no-sidebar'    => __( 'No sidebar (default)', 'jkl' ),
-                            'sidebar-right' => __( 'Sidebar right', 'jkl' ),
-                            'sidebar-left'  => __( 'Sidebar left', 'jkl' ),
+                            'no-sidebar'    => esc_html__( 'No sidebar (default)', 'jkl' ),
+                            'sidebar-right' => esc_html__( 'Sidebar right', 'jkl' ),
+                            'sidebar-left'  => esc_html__( 'Sidebar left', 'jkl' ),
                     ),
                     'section'           => 'jkl-options'
                 ) );

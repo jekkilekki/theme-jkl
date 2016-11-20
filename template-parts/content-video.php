@@ -1,7 +1,7 @@
 <?php
 /**
  * Post Format: Video
- * Template part for displaying posts.
+ * Template part for displaying Video posts.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *

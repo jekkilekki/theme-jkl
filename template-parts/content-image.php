@@ -1,7 +1,7 @@
 <?php
 /**
  * Post Format: Image
- * Template part for displaying posts.
+ * Template part for displaying Image posts.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
