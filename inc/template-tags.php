@@ -35,7 +35,7 @@ function jkl_posted_on() {
 	);
 
         // Display the author avatar if the author has a Gravatar
-        if( !has_post_format( array( 'aside', 'chat', 'quote', 'link' ) ) ) {
+if( ( !is_archive() && !has_post_format( array( 'aside', 'chat', 'quote', 'link' ) ) ) || has_post_format( 'status' ) ) {
             $author_id = get_the_author_meta( 'ID' );
             // if( jkl_validate_gravatar( $author_id ) ) {
                 echo '<div class="meta-content has-avatar">';
@@ -47,29 +47,24 @@ function jkl_posted_on() {
         // Byline
 	echo '<span class="byline">';
         if( 'status' !== get_post_format() ) {
-            echo __( 'by', 'jkl' );
+            esc_html_e( 'by', 'jkl' );
         }
         echo ' ' . $byline . '</span>';
         
         // Posted on date
         echo '<span class="posted-on">';
         if( 'status' !== get_post_format() ) {
-            echo __( 'on', 'jkl' );
+            esc_html_e( 'on', 'jkl' );
         }
         echo ' ' . $posted_on . '</span>'; // WPCS: XSS OK.
 
-//        // Add Category list below (except on Status Post Formats)
-//        if ( 'post' === get_post_type() && 'status' !== get_post_format() ) {
-//		/* translators: used between list items, there is a space after the comma */
-//		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
-//		if ( $categories_list && jkl_categorized_blog() ) {
-//			printf( '<span class="cat-links">' . esc_html( '%1$s' ) . '</span>', $categories_list ); // WPCS: XSS OK.
-//		}
-//        }
-        
-        // Categories
-        if( !has_post_format( array( 'status', 'aside', 'chat', 'quote', 'link' ) ) ) {
-            jkl_better_taxonomy_listing( 'category', 1 );
+        // Add Category list below (except on Status Post Formats)
+        if ( 'post' === get_post_type() && !has_post_format( array( 'status', 'aside', 'chat', 'quote', 'link' ) ) ) {
+		/* translators: used between list items, there is a space after the comma */
+		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
+		if ( $categories_list && jkl_categorized_blog() ) {
+			printf( '<span class="cat-links">' . esc_html__( 'Filed under: %1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+		}
         }
 
         // Add Comments Link (except on Status Post Formats)
@@ -86,35 +81,86 @@ function jkl_posted_on() {
 }
 endif;
 
+
+
+/*
+ * Special Index Posted On Meta info for Index pages only
+ */
+if ( ! function_exists( 'jkl_index_posted_on' ) ) :
+/**
+ * Prints HTML with meta information for the current post-date/time and author.
+ */
+function jkl_index_posted_on() {
+	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+	}
+
+	$time_string = sprintf( $time_string,
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() ),
+		esc_attr( get_the_modified_date( 'c' ) ),
+		esc_html( get_the_modified_date() )
+	);
+        
+        $byline = sprintf(
+		esc_html( '%s' ),
+		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">@' . esc_html( get_the_author() ) . '</a></span>'
+	);
+        
+        if( 'chat' === get_post_format() ||
+            'image' === get_post_format() ||
+            'gallery' === get_post_format() ||
+            'audio' === get_post_format() ||
+            'video' === get_post_format() ) {
+            $string = ucwords( get_post_format() );
+            $posted_on = $string . ': <a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>';
+        } else {
+            $posted_on = sprintf(
+		esc_html_x( 'Date: %s', 'post date', 'jkl' ),
+		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+            );
+        }
+        
+        $meta_class = is_single() ? 'format-small-meta' : 'meta-content-index';
+        echo '<div class="' . $meta_class . '">';
+	echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
+        if( is_single() ) {
+
+            echo '<span class="byline">' . $byline . '</span>';
+            if( !has_post_format( 'quote' ) ) {
+                jkl_better_taxonomy_listing('category', 1);
+            }
+
+        }
+        echo '</div><!-- .meta-content-index -->';
+}
+endif;
+
+
+
 if ( ! function_exists( 'jkl_entry_footer' ) ) :
 /**
  * Prints HTML with meta information for the categories, tags and comments.
  */
 function jkl_entry_footer() {
     
-        if( is_single() && has_post_format( array( 'aside', 'quote', 'link', 'chat' ) ) ) {
-            jkl_posted_on();
-        }
 	// Hide category and tag text for pages.
-//	if ( 'post' === get_post_type() && ! is_archive() && ! is_home() ) {
-//		/* translators: used between list items, there is a space after the comma */
-//		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
-//		if ( $categories_list && jkl_categorized_blog() ) {
-//			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
-//		}
-//
-                jkl_better_taxonomy_listing( 'category', 4 );
-                
+	if ( 'post' === get_post_type() ) {
 		/* translators: used between list items, there is a space after the comma */
-                jkl_better_taxonomy_listing( 'tag', 12 );
+		$categories_list = get_the_category_list( esc_html__( ', ', 'jkl' ) );
+		if ( $categories_list && jkl_categorized_blog() ) {
+			printf( '<span class="cat-links">' . esc_html__( 'Filed under: %1$s', 'jkl' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+		}
                 
-//		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
-//		if ( $tags_list ) {
-//			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'jkl' ) . '</span>', $tags_list ); // WPCS: XSS OK.
-//		}
-//	}
+		/* translators: used between list items, there is a space after the comma */               
+		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
+		if ( $tags_list ) {
+			printf( '<span class="tags-links">' . esc_html__( 'Tagged: %1$s', 'jkl' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+		}
+	}
 
-	if ( ! is_home() && ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 		echo '<span class="comments-link">';
 		comments_popup_link( esc_html__( 'Leave a comment', 'jkl' ), esc_html__( '1 Comment', 'jkl' ), esc_html__( '% Comments', 'jkl' ) );
 		echo '</span>';
@@ -177,112 +223,10 @@ add_action( 'save_post',     'jkl_category_transient_flusher' );
 
 
 /*
- * #############################################################################
- *
- * Custom Template Tags
- *
- * #############################################################################
+ * =============================================================================
+ * My Custom Template Tags
+ * =============================================================================
  */
-
-/**
- * Better Categories (displays them as a dropdown menu)
- */
-function jkl_better_taxonomy_listing( $taxonomy_type, $length = -1 ) {
-    if ( 'post' === get_post_type() ) {
-        
-        // If the taxonomy type is 'category'
-        if( 'category' === $taxonomy_type ) {
-            
-            /* translators: used between list items <li> */
-            $list = get_the_category_list( __( '</li><li>', 'jkl' ) );
-            $search = '</a>';
-            $separator = ', ';
-            $test = $list && jkl_categorized_blog();
-            $class = 'cat-links';
-            $string = esc_attr__( 'Filed under: ', 'jkl' );
-            
-        } 
-        
-        // If the taxonomy type is 'tag'
-        else if( 'tag' === $taxonomy_type ) {
-            
-            /* translators: used between list items, there is a space after the comma */
-            $list = get_the_tag_list( '', esc_html__( ', ', 'jkl' ) );
-            $search = ',';
-            $separator = '';
-            $test = $list;
-            $class = 'tags-links';
-            $string = esc_attr__( 'Tagged: ', 'jkl' );
-            
-        }
-                
-                if ( $test ) {
-                        echo '<ul class="' . $class . '">';
-                        echo $string;
-                        
-                        // So long as the Category list contains more items than our specified length, 
-                        // we'll display the number of items specified, followed by a dropdown menu
-                        // that houses the rest of the Categories
-                        // Also note: -1 means we show ALL the categories without a dropdown
-                        if( substr_count( $list, $search ) > $length && $length !== -1 ) {
-                            
-                            // For the number of specified items
-                            for( $i = 1; $i <= $length; $i++ ) {
-                                
-                                // The Category will be the substring from the beginning of the string to the end of the first link </a> tag
-                                $item = substr( $list, 0, ( strpos( $list, $search ) + strlen( $search ) ) );
-                                
-                                // If the NEXT item is the last item, give it a special CSS class to specify that
-                                // just in case we want to style that one individually
-                                if( $i == $length ) {
-                                    echo str_replace( '<a ', '<a class="final-tax-link" ', $item );
-                                } else {
-                                    // otherwise, separate every Category with a comma
-                                    echo $item . $separator;
-                                }
-                                // Now, remove that first category from the list (string) and continue the loop
-                                $list = substr( $list, ( strpos( $list, $search ) + strlen( $search ) ) );
-                            }
-                            
-                            // After looping through our specified number of Categories, output the rest of them in a dropdown menu
-                            if( ! empty( $list ) ) {
-                                echo '<span class="jkl-tax-switch"><i class="fa fa-angle-down"></i></span>';
-                                printf( '<ul class="submenu dropdown">' . $list . '</ul>', $list ); // WPCS: XSS OK.     
-                            }
-                            
-                        }
-                            
-                        // Else, in the case that our Category list is shorter than the specified $length
-                        // OR  if we've specified -1 as the $length (to show all values)
-                        else {
-                            
-                            // So long as we have Categories left in the string
-                            while( $list !== '' ) {
-                                
-                                // Do the same as above, find the first Category and get ready to output it
-                                $item = substr( $list, 0, ( strpos( $list, $search ) + strlen( $search ) ) );
-                                
-                                // If the Category list has only ONE Category (we check for a single </a> tag)
-                                if( substr_count( $list, $search ) == 1 ) {
-                                    // Output it without a comma
-                                    echo $item;
-                                } else {
-                                    // Otherwise, separate the Categories with commas
-                                    echo $item . $separator;
-                                }
-                                // Now, remove that first category from the list (string) and continue the loop
-                                $list = substr( $list, ( strpos( $list, $search ) + strlen( $search ) ) );
-                            }
-                        }
-                        
-                        // Close the links list
-                        echo '</ul>';
-                        
-		}
-                
-        } // END taxonomy list
-        
-}
 
 /**
  * DYNAMIC Copyright for the footer
@@ -751,61 +695,6 @@ function jkl_excerpt_more( $more ) {
     return " …";
 }
 add_filter( 'excerpt_more', 'jkl_excerpt_more' );
-
-
-/*
- * Special Index Posted On Meta info for Index pages only
- */
-if ( ! function_exists( 'jkl_index_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post-date/time and author.
- */
-function jkl_index_posted_on() {
-	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
-	}
-
-	$time_string = sprintf( $time_string,
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
-		esc_attr( get_the_modified_date( 'c' ) ),
-		esc_html( get_the_modified_date() )
-	);
-        
-        $byline = sprintf(
-		esc_html( '%s' ),
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">@' . esc_html( get_the_author() ) . '</a></span>'
-	);
-        
-        if( 'chat' === get_post_format() ||
-            'image' === get_post_format() ||
-            'gallery' === get_post_format() ||
-            'audio' === get_post_format() ||
-            'video' === get_post_format() ) {
-            $string = ucwords( get_post_format() );
-            $posted_on = $string . ': <a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>';
-        } else {
-            $posted_on = sprintf(
-		esc_html_x( 'Date: %s', 'post date', 'jkl' ),
-		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-            );
-        }
-        
-        $meta_class = is_single() ? 'format-small-meta' : 'meta-content-index';
-        echo '<div class="' . $meta_class . '">';
-	echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
-        if( is_single() ) {
-
-            echo '<span class="byline">' . $byline . '</span>';
-            if( !has_post_format( 'quote' ) ) {
-                jkl_better_taxonomy_listing('category', 1);
-            }
-
-        }
-        echo '</div><!-- .meta-content-index -->';
-}
-endif;
 
 
 if ( ! function_exists( 'jkl_paging_nav' ) ) :

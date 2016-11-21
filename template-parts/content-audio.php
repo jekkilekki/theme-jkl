@@ -26,7 +26,7 @@ $sticky_class = is_sticky() ? 'single-sticky' : '';
 		endif; ?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content index-content">
+	<div class="index-content">
 		<?php
                 
                         jkl_get_the_audio();

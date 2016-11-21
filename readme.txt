@@ -43,6 +43,31 @@ Featured Images default to take the place of the Header Image on any page as wel
 
 Blockquotes can be aligned left or right (in a similar way that images are) using the `"alignleft"` or `"alignright"` classes.
 
+= Post Formats =
+
+1. Aside - only styled with a date (no title)
+2. Audio - highlights the featured audio above the Post content
+3. Chat - each paragraph is presented as a dialogue bubble (use blockquote for plain text)
+4. Gallery - highlights 3 layered gallery pictures and the count of number of pictures in the galleries
+5. Image - highlights the Featured Image (or first image) prominently
+6. Link - grabs a screenshot from the first link and features it prominently
+7. Quote - oversized blockquote on a dark background (with Featured Image as background)
+8. Status - styled to look slightly like a Twitter update
+9. Video - highlights the featured video above the Post content
+
+= Custom Page Templates =
+
+1. Sidebar Left
+2. Sidebar Right
+3. No sidebar (narrow width)
+4. No sidebar (full width)
+
+== Development Roadmap ==
+
+1. Add taxonomy dropdown capability for long lists of Categories or Tags
+2. Add Customizer option to control this
+3. Colorize (to identify) code headings created by Prism.js
+
 = License =
 
 JKL WordPress Theme, Copyright (C) 2016 Aaron Snowberger
@@ -119,6 +144,8 @@ JKL includes support for Infinite Scroll in Jetpack.
 * Update Font Awesome to v.4.7.0
 * Clean up code - unnecessary code comments
 * Clean up code - add additional code documentation
+* Clean up code - remove taxonomy dropdowns (for now)
+* Separate Pings from Comments
 
 = 1.0.8 - Nov 4 2016 =
 * Clean up code - for Theme repository

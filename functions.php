@@ -161,7 +161,10 @@ function jkl_scripts() {
         wp_enqueue_script( 'foundation-init', get_template_directory_uri() . '/js/foundation.js', array( 'jquery' ), '20160211', true );
         
         /* Add dynamic back to top button */
-        wp_enqueue_script( 'jkl-topbutton', get_template_directory_uri() . '/js/topbutton-search-imgs.js', array( 'jquery' ), '20160211', true );        
+        wp_enqueue_script( 'jkl-topbutton', get_template_directory_uri() . '/js/topbutton-search-imgs.js', array( 'jquery' ), '20160211', true );  
+        
+        /* Add taxonomy dropdown switch JS */
+        wp_enqueue_script( 'jkl-tax-switch-js', get_template_directory_uri() . '/js/taxonomy-dropdowns.js', array( 'jquery' ), '20161121', true );
         
         /* Add Prism Syntax Highlighting */
         wp_enqueue_script( 'jkl-prism-script', get_template_directory_uri() . '/js/prism.min.js', array(), '20161104', true );

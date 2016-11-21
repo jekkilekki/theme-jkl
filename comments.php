@@ -47,10 +47,9 @@ if ( post_password_required() ) {
 		</ol><!-- .comment-list -->
                 
                 <?php
-                //$comments = get_comments( 'status=approve&type=ping&post_id=' . get_the_ID() );
-                //$comments = separate_comments( $comments );
-                
-                //if( 0 < count( $comments[ 'pings' ] ) ) : ?>
+                $comments = get_comments( 'status=approve&type=pings&post_id=' . $post->ID );
+                $comments = separate_comments( $comments );
+                if( 0 < count( $comments[ 'pings' ] ) ) : ?>
                 
                     <ol class="pings-list">
                         <h5 class="pings-list-title"><?php esc_attr_e( 'Pings', 'jkl' ); ?></h5>
@@ -63,7 +62,7 @@ if ( post_password_required() ) {
                             ?>
                     </ol><!-- .pings-list -->
                     
-                <?php //endif; ?>
+                <?php endif; ?>
 
 		<?php 
                 // Paginate comments
