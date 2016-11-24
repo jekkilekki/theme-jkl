@@ -5,7 +5,7 @@ Tags: blog, one-column, two-columns, left-sidebar, right-sidebar, custom-colors,
 
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,11 @@ Images used in the screenshot:
 JKL includes support for Infinite Scroll in Jetpack.
 
 == Changelog ==
+
+= 1.1.1 - Nov 25 2016 =
+* Escape infinity link permalinks
+* Remove unnecessary Foundation files
+* Remove Foundation CSS from editor styles
 
 = 1.1.0 - Nov 20 2016 =
 * Add styling for Post Formats: Audio, Video, Quote, Status, Link, Gallery, Image

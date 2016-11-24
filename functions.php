@@ -90,7 +90,6 @@ function jkl_setup() {
          * Add editor styles
          */
         add_editor_style( array( 
-            'foundation/css/foundation.css',
             'inc/editor-style.css', 
             'fonts/custom-fonts.css',
             'fonts/font-awesome.css',
@@ -306,7 +305,7 @@ function jkl_custom_background_cb() {
 function jkl_infinity_link_content( $content ) {
     if( (   has_post_format( 'aside' ) ||
             has_post_format( 'status' ) ) && !is_singular() ) {
-        $content .= '<a class="infinity-link" href="' . get_permalink() . '">&#8734;</a>';
+        $content .= '<a class="infinity-link" href="' . esc_url( get_permalink() ) . '">&#8734;</a>';
     } 
     return $content;
 }
@@ -314,7 +313,7 @@ function jkl_infinity_link_content( $content ) {
 function jkl_infinity_link_excerpt( $excerpt ) {
     if( (   has_post_format( 'quote' ) ||
             has_post_format( 'link' ) ) && !is_singular() ) {
-        $excerpt .= '<a class="infinity-link" href="' . get_permalink() . '">&#8734;</a>';
+        $excerpt .= '<a class="infinity-link" href="' . esc_url( get_permalink() ) . '">&#8734;</a>';
     } 
     return $excerpt;
 }

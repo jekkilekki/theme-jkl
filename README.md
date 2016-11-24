@@ -1,7 +1,7 @@
 JKL
 ===
 
-Version: `1.1.0`
+Version: `1.1.1`
 
 JKL is a simple, modern theme with great fonts (Volkhov and Source Sans Pro) developed by Aaron Snowberger specifically for http://justkeeplearning.xyz
 
@@ -117,6 +117,11 @@ Images used in the screenshot:
 * Image Beach at Big Sur, CA (header) : Copyright public domain by Jaycee Barratt, http://www.burningwell.org/gallery2/v/Landscapes/ocean/michelle_049.jpg.html
 
 ## Changelog
+
+### 1.1.1 - Nov 25 2016
+* Escape infinity link permalinks
+* Remove unnecessary Foundation files
+* Remove Foundation CSS from editor styles
 
 ### 1.1.0 Nov 20 2016
 * Add styling for Post Formats: Audio, Video, Quote, Status, Link, Gallery, Image
